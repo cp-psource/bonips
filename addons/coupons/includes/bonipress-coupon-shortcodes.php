@@ -57,8 +57,12 @@ if ( ! function_exists( 'bonipress_render_shortcode_load_coupon' ) ) :
 				// Success!
 				else {
 
-					$message = $bonipress->template_tags_amount( $bonipress->coupons['success'], $coupon->value );
-					$message = str_replace( '%amount%', $bonipress->format_creds( $coupon->value ), $message );
+					//$message = $bonipress->template_tags_amount( $bonipress->coupons['success'], $coupon->value );
+					$updated_coupon_value=$coupon->value;
+					$updated_coupon_value=apply_filters('bonipress_show_custom_coupon_value',$updated_coupon_value);
+					$coupon_settings = bonipress_get_addon_settings( 'coupons' ,  $coupon->point_type  );
+					$message = $bonipress->template_tags_amount( $coupon_settings['success'], $updated_coupon_value );   // without filter
+					$message = str_replace( '%amount%', $bonipress->format_creds( $updated_coupon_value ), $message );
 					$output .= '<div class="alert alert-success">' . $message . '</div>';
 
 				}

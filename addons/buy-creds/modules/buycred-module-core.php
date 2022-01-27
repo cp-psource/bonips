@@ -61,6 +61,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			add_action( 'bonipress_after_core_prefs',     array( $this, 'after_general_settings' ) );
 			add_filter( 'bonipress_save_core_prefs',      array( $this, 'sanitize_extra_settings' ), 90, 3 );
 
+			add_action('pre_get_comments',             array( $this, 'hide_buycred_transactions' ) );
+
 		}
 
 		/**
@@ -237,8 +239,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				}
 				else {
 
-					if ( ! empty( $buycred_instance->gateway->errors ) )
+					if ( ! empty( $buycred_instance->gateway->errors ) ){
 						$buycred_instance->checkout = false;
+
+						if ( $buycred_instance->is_ajax )
+							die( json_encode( array( 'validationFail' => true , 'errors' => $buycred_instance->gateway->errors ) ) 
+						);
+					}
 
 				}
 
@@ -1381,6 +1388,17 @@ jQuery(function($) {
 				}
 
 			}
+
+		}
+
+		/**
+		 * Hide Comments
+		 * @since 1.8.9
+		 * @version 1.0
+		 */
+		public function hide_buycred_transactions( $query ) {
+
+		    $query->query_vars['type__not_in'] = 'buycred';
 
 		}
 

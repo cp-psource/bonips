@@ -90,16 +90,22 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 */
 		public $redirect_to       = '';
 
+		public $errors         = array();
+
 		/**
 		 * Toggle ID
 		 */
 		public $toggle_id         = '';
 
+		/**
+		 * Limit Setting
+		 */
+		public $buycred_limit     = array();
+
 		protected $response;
 		protected $request;
 		protected $status;
 
-		protected $errors         = array();
 		protected $processing_log = NULL;
 
 		/**
@@ -160,6 +166,8 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			if ( $this->point_type != BONIPRESS_DEFAULT_TYPE_KEY )
 				$this->core = bonipress( $this->point_type );
 
+			$this->buycred_limit  = bonipress_get_buycred_sale_setup( $this->point_type );
+
 			$this->transaction_id = ( isset( $_REQUEST['revisit'] ) ) ? strtoupper( sanitize_text_field( $_REQUEST['revisit'] ) ) : false;
 			$this->post_id        = ( $this->transaction_id !== false ) ? buycred_get_pending_payment_id( $this->transaction_id ) : false;
 			$this->buyer_id       = $this->current_user_id;
@@ -169,24 +177,36 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			$this->currency       = ( isset( $this->prefs['currency'] ) ) ? $this->prefs['currency'] : '';
 			$this->maximum        = -1;
 
-			if ( $this->core->exclude_user( $this->buyer_id ) )
+			if ( $this->core->exclude_user( $this->buyer_id ) ){
 				$valid = false;
+
+				$this->errors[] = __( 'Käufer sind von diesem Punktetyp ausgeschlossen.', 'bonipress' );
+			}
 
 			elseif ( $this->core->exclude_user( $this->recipient_id ) ) {
 				$valid          = false;
-				$this->errors[] = 'recipient';
+				$this->errors[] = __( 'Der Empfänger ist von diesem Punkttyp ausgeschlossen. ', 'bonipress' );
 			}
 
-			elseif ( $this->amount === false || $this->amount == 0 )
+			elseif ( $this->amount === false || $this->amount == 0 ){
 				$valid = false;
+				$this->errors[] = __( 'Ein Betragswert ist erforderlich.', 'bonipress' );
+			}
 
-			elseif ( $this->exceeds_limit() )
+			elseif ( ! empty( $this->bonipress_limit['max'] ) && $this->amount > floatval( $this->bonipress_limit['max'] ) ){
 				$valid = false;
+				$this->errors[] = sprintf( __( 'Der Betrag muss kleiner als %d sein.', 'bonipress' ), $this->bonipress_limit['max'] );
+			}
+
+			elseif ( $this->exceeds_limit() ){
+				$valid = false;
+				$this->errors[] = __( 'Du hast das Limit überschritten.', 'bonipress' );
+			}
 
 			if ( $valid )
 				$this->populate_transaction();
 
-			if ( ! empty( $this->errors ) )
+			if ( ! empty( $this->errors ) ) 
 				$valid = false;
 
 			return apply_filters( 'bonipress_valid_buycred_request', $valid, $this );
@@ -213,7 +233,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 					$this->point_type
 				) );
 
-				$this->transaction_id = bonipress_get_the_title( $this->post_id );
+				$this->transaction_id = get_the_title( $this->post_id );
 
 			}
 
@@ -277,7 +297,6 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			if ( $remaining === 0 ) {
 
 				$exceeds          = true;
-				$this->errors[] = 'maximum';
 				$this->maximum  = 0;
 
 			}
@@ -298,7 +317,6 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 
 					if ( $remaining < 0 ) {
 						$exceeds        = true;
-						$this->errors[] = 'maximum';
 						$this->maximum  = 0;
 					}
 					else {
@@ -418,7 +436,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 				$button = '<button type="button" id="checkout-action-button" data-act="toggle" data-value="' . esc_attr( $this->toggle_id ) . '" class="btn btn-default">' . esc_js( $button_label ) . '</button>';
 
 			elseif ( ! empty( $this->redirect_to ) )
-				$button = '<button type="button" id="checkout-action-button" data-act="redirect" data-value="' . $this->redirect_to . '" class="btn btn-default">' . esc_js( $button_label ) . '</button>';
+			$button = '<button type="button" id="checkout-action-button" data-act="redirect" data-value="' . $this->redirect_to . '" class="btn btn-default '. $this->id .'">' . esc_js( $button_label ) . '</button>';
 
 			$button   = apply_filters( 'bonipress_buycred_checkout_button', $button, $this );
 
@@ -734,9 +752,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 
 		/**
 		 * First Comment
-		 * Used to allow a gateway to adjust the first comment with pending payments. 
-		 * Used by Zombaio to remove the amount since that we do not know until the user completes
-		 * the payment.
+		 * Used to allow a gateway to adjust the first comment with pending payments.
 		 * @since 1.7.3
 		 * @version 1.0
 		 */
@@ -862,7 +878,11 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 * @since 1.3.2
 		 * @version 1.2
 		 */
-		public function get_cost( $amount = 0, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $raw = false ) {
+		public function get_cost( $amount = 0, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $raw = false, $custom_rate = 0 ) {
+
+			if(isset($_REQUEST['er_random']) && !empty($_REQUEST['er_random'])){
+				$custom_rate=base64_decode($_REQUEST['er_random']);
+			}
 
 			$setup = bonipress_get_buycred_sale_setup( $point_type );
 
@@ -877,6 +897,8 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 				$override = bonipress_get_user_meta( $this->current_user_id, 'bonipress_buycred_rates_' . $point_type, '', true );
 				if ( isset( $override[ $this->id ] ) && $override[ $this->id ] != '' )
 					$rate = $override[ $this->id ];
+				else if($custom_rate !=0 )
+					$rate = $custom_rate;
 				else
 					$rate = $this->prefs['exchange'][ $point_type ];
 

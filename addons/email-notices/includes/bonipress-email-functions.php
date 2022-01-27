@@ -363,7 +363,7 @@ if ( ! function_exists( 'bonipress_get_triggered_emails' ) ) :
 			}
 
             // check if trasfer trigger has notice id
-            if ( ! empty( $triggers['generic']['transfer_in'] ) ) {
+            if ( ! empty( $ref ) && $ref == 'transfer' && floatval( $amount ) > 0 && ! empty( $triggers['generic']['transfer_in'] ) ) {
                 foreach ( $triggers['generic']['transfer_in'] as $notice_id ) {
 
                     if ( ! in_array( $notice_id, $notices ) )
@@ -373,14 +373,13 @@ if ( ! function_exists( 'bonipress_get_triggered_emails' ) ) :
             }
 
             // check if trasfer trigger has notice ids
-            if ( ! empty( $triggers['generic']['transfer_out'] ) ) {
+            if ( ! empty( $ref ) && $ref == 'transfer' && floatval( $amount ) < 0 && ! empty( $triggers['generic']['transfer_out'] ) ) {
                 foreach ( $triggers['generic']['transfer_out'] as $notice_id ) {
                     if ( ! in_array( $notice_id, $notices ) )
                         $notices[] = $notice_id;
 
                 }
             }
-
 
             // Specific instances based on reference
 			if ( ! empty( $triggers['specific'] ) && array_key_exists( $ref, $triggers['specific'] ) && ! empty( $triggers['specific'][ $ref ] ) ) {
@@ -431,7 +430,7 @@ endif;
 if ( ! function_exists( 'bonipress_send_new_email' ) ) :
 	function bonipress_send_new_email( $notice_id = false, $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
 
-		if ( $notice_id === false ) return false;
+		if ( $notice_id === false || get_post_status ( $notice_id ) !== 'publish' ) return false;
 
 		$notice_id  = absint( $notice_id );
 		$email      = bonipress_get_email_notice( $notice_id );
@@ -516,3 +515,31 @@ if ( ! function_exists( 'bonipress_email_notice_cron_job' ) ) :
 
 	}
 endif;
+
+/**
+ * Get Email Settings
+ * @since 1.4
+ * @version 1.0
+ */
+if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
+	function bonipress_get_email_settings( $post_id ) {
+
+		$emailnotices  = bonipress_get_addon_settings( 'emailnotices' );
+		$settings      = (array) bonipress_get_post_meta( $post_id, 'bonipress_email_settings', true );
+
+		if ( $settings == '' || empty($settings) )
+			$settings = array();
+
+		// Defaults
+		$default = array(
+			'recipient'     => 'user',
+			'senders_name'  => $emailnotices['from']['name'],
+			'senders_email' => $emailnotices['from']['email'],
+			'reply_to'      => $emailnotices['from']['reply_to'],
+			'label'         => get_the_title($post_id)
+		);
+
+		$settings = bonipress_apply_defaults( $default, $settings );
+		return apply_filters( 'bonipress_email_notice_settings', $settings, $post_id );
+	}
+endif; 

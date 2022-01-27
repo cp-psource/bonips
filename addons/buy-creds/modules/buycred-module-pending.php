@@ -229,10 +229,10 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 			if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_BUY_KEY && isset( $_GET['credited'] ) ) {
 
 				if ( $_GET['credited'] == 1 )
-					echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'Pending payment successfully credited to account.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
+					echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'Ausstehende Zahlung wurde dem Konto erfolgreich gutgeschrieben.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
 
 				elseif ( $_GET['credited'] == 0 )
-					echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Failed to credit the pending payment to account.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
+					echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Die ausstehende Zahlung konnte dem Konto nicht gutgeschrieben werden.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
 
 			}
 
@@ -245,14 +245,10 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		 */
 		public function add_to_menu() {
 
-			// In case we are using the Master Template feautre on multisites, and this is not the main
-			// site in the network, bail.
-			if ( bonipress_override_settings() && ! bonipress_is_main_site() ) return;
-
 			add_submenu_page(
 				BONIPRESS_SLUG,
-				__( 'Pending Payments', 'bonipress' ),
-				__( 'Pending Payments', 'bonipress' ),
+				__( 'Ausstehende Zahlungen', 'bonipress' ),
+				__( 'Ausstehende Zahlungen', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
 				'edit.php?post_type=' . BONIPRESS_BUY_KEY
 			);

@@ -21,10 +21,12 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 			'login'   => $settings['login']
 		), $atts, BONIPRESS_SLUG . '_buy' ) );
 
-		// If we are not logged in
-		if ( ! is_user_logged_in() ) return $content;
+		$bonipress = bonipress( $ctype );
 
-		global $bonipress_modules, $buycred_sale;
+		// If we are not logged in
+		if ( ! is_user_logged_in() ) return $bonipress->template_tags_general( $login );
+
+		global $bonipress_modules, $buycred_sale, $post;
 
 		$buycred            = $bonipress_modules['solo']['buycred'];
 		$installed          = bonipress_get_buycred_gateways();
@@ -40,8 +42,6 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 		// Make sure we are trying to sell a point type that is allowed to be purchased
 		if ( ! in_array( $ctype, $settings['types'] ) )
 			$ctype = $settings['types'][0];
-
-		$bonipress             = bonipress( $ctype );
 
 		$args               = array();
 		$args['bonipress_buy'] = $gateway;
@@ -64,6 +64,7 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 		$button_label       = $bonipress->template_tags_general( $button_label );
 		$button_label       = $bonipress->template_tags_user( $button_label, $recipient_id );
 
+		$args['ctype']      = $ctype;
 		$args['amount']     = $amount;
 		$args['token']      = wp_create_nonce( 'bonipress-buy-creds' );
 
@@ -98,14 +99,15 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		$settings     = bonipress_get_buycred_settings();
 
 		extract( shortcode_atts( array(
-			'button'   => __( 'Buy Now', 'bonipress' ),
+			'button'   => __( 'Kaufe jetzt', 'bonipress' ),
 			'gateway'  => '',
 			'ctype'    => BONIPRESS_DEFAULT_TYPE_KEY,
 			'amount'   => '',
 			'excluded' => '',
 			'maxed'    => '',
 			'gift_to'  => '',
-			'gift_by'  => __( 'Username', 'bonipress' ),
+			'e_rate'   => '',
+			'gift_by'  => __( 'Benutzername', 'bonipress' ),
 			'inline'   => 0
 		), $atts, BONIPRESS_SLUG . '_buy_form' ) );
 
@@ -122,8 +124,8 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		$gifting      = false;
 
 		// Make sure we have a gateway we can use
-		if ( ( ! empty( $gateway ) && ! bonipress_buycred_gateway_is_usable( $gateway_id ) ) || ( empty( $gateway ) && empty( $buycred_instance->active ) ) )
-			return 'No gateway available.';
+		if ( ( ! empty( $gateway ) && ! bonipress_buycred_gateway_is_usable( $gateway ) ) || ( empty( $gateway ) && empty( $buycred_instance->active ) ) )
+			return 'Kein Gateway verfügbar.';
 
 		// Make sure we are trying to sell a point type that is allowed to be purchased
 		if ( ! in_array( $ctype, $settings['types'] ) )
@@ -170,16 +172,16 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		$button_label = $bonipress->template_tags_general( $button );
 
 		if ( ! empty( $gateway ) ) {
-			$gateway_name = explode( ' ', $installed[ $gateway ]['title'] );
+			$gateway_name = explode( ' ', $buycred_instance->active[ $gateway ]['title'] );
 			$button_label = str_replace( '%gateway%', $gateway_name[0], $button_label );
 			$classes[]    = $gateway_name[0];
 		}
 
 		ob_start();
 
-		if ( ! empty( $buycred_instance->errors ) ) {
+		if ( ! empty( $buycred_instance->gateway->errors ) ) {
 
-			foreach ( $buycred_instance->errors as $error )
+			foreach ( $buycred_instance->gateway->errors as $error )
 				echo '<div class="alert alert-warnng"><p>' . $error . '</p></div>';
 
 		}
@@ -190,6 +192,12 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		<form method="post" class="form<?php if ( $inline == 1 ) echo '-inline'; ?> <?php echo implode( ' ', $classes ); ?>" action="">
 			<input type="hidden" name="token" value="<?php echo wp_create_nonce( 'bonipress-buy-creds' ); ?>" />
 			<input type="hidden" name="ctype" value="<?php echo esc_attr( $ctype ); ?>" />
+
+			<?php if( isset($e_rate) && !empty($e_rate)){ 
+				$e_rate=base64_encode($e_rate);
+				?>
+			<input type="hidden" name="er_random" value="<?php echo esc_attr($e_rate); ?>" />
+			<?php } ?>
 
 			<div class="form-group">
 				<label><?php echo $bonipress->plural(); ?></label>
@@ -293,7 +301,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 				<div class="form-group">
 					<input type="submit" class="button btn btn-block btn-lg" value="<?php echo $button_label; ?>" />
 				</div>
-			</div>
+			
 
 		</form>
 	</div>

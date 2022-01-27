@@ -318,7 +318,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 					else {
 
-						if ( $coupon->expires < current_time( 'timestamp' ) ) {
+						if ( $coupon->expires_unix < current_time( 'timestamp' ) ) {
 
 							bonipress_trash_post( $post_id );
 

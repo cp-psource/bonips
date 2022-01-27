@@ -5,10 +5,11 @@ jQuery(function($){
 	var AddNewLevelButton         = $( '#badges-add-new-level' );
 	var AddNewRequirementButton   = $( '#badges-add-new-requirement' );
 	var ChangeDefaultImageButton  = $( '#badges-change-default-image' );
+	var RemoveDefaultImageButton  = $( '#badges-remove-default-image' );
 
 	var TotalBadgeLevels          = 1;
 	var TotalRequirements         = 1;
-	var UsedtoCompare             = 'AND';
+	var UsedtoCompare             = $( '#badge-requirement-compare a.selected' ).data( 'do' );
 
 	var PointTypeSelect           = $( 'select#badge-select-point-type' );
 	var ReferenceSelect           = $( 'select#badge-select-reference' );
@@ -48,8 +49,28 @@ jQuery(function($){
 			else
 				required_reference = required_reference.text();
 
+
+			//Specific
+			var required_reference_specific = $(this).find( '.specific' );
+			if( required_reference_specific[0] != undefined ) {
+				console.log(required_reference_specific[0].tagName);
+				if( required_reference_specific[0].tagName === 'INPUT' ) {
+					required_reference_specific = required_reference_specific.val();
+				}
+				else if( required_reference_specific[0].tagName === 'SELECT' ) {
+					var required_reference_specific = $(this).find( 'select.specific option:selected' );
+					if ( required_reference === undefined || required_reference == '' )
+						required_reference_specific = '-';
+					else
+						required_reference_specific = required_reference_specific.text();
+				}
+			}
+			else{
+				required_reference_specific = '';
+			}
+
 			// Amount
-			var required_amount = $(this).find( 'input.form-control' ).val();
+			var required_amount = $(this).find( '.form-inline input.form-control' ).val();
 
 			// Requirement type
 			var required_type = $(this).find( 'select.req-type option:selected' );
@@ -72,6 +93,7 @@ jQuery(function($){
 				level        : badgelevel,
 				reqlevel     : required_row_id,
 				selectedtype : required_point_type,
+				refspecific  : required_reference_specific,
 				selectedref  : required_reference,
 				reqamount    : required_amount,
 				selectedby   : required_type,
@@ -90,6 +112,18 @@ jQuery(function($){
 		TotalRequirements = $( '#bonipress-badge-setup .level-requirements .row-narrow' ).length;
 
 		console.log( 'Total levels detected: ' + TotalBadgeLevels );
+
+		if ( TotalBadgeLevels > 1 ) {
+
+			$( '#bonipress-badge-setup #badge-levels .badge-level' ).each(function(index){
+
+				var subrequirementrow = $(this).find( '.level-ref p:last' );
+				if ( subrequirementrow !== undefined ) {
+					subrequirementrow.empty().text( $( '#bonipress-badge-setup input.specific' ).val() );
+				}
+
+			});
+		}
 
 		// Change Requirement Compare Action
 		RequirementCompare.click(function(e){
@@ -267,14 +301,44 @@ jQuery(function($){
 
 		});
 
-		// Change Reference Requrirement Action
+		// Referenzanforderungsaktion ändern
 		$( '#bonipress-badge-setup' ).on( 'change', 'select.reference', function(e){
 
 			var refselectelement = $(this);
 
-			// Make sure something was selected
+			// Stellt sicher, dass etwas ausgewählt wurde
 			var selectedref = refselectelement.find( ':selected' );
 			if ( selectedref === undefined ) return;
+
+			// Stellt sicher, dass es mehr als eine Ebene gibt
+			var numberoflevels = $( '#bonipress-badge-setup #badge-levels .badge-level' ).length;
+			if ( numberoflevels == 1 ) return;
+
+			var requirementrow = refselectelement.data( 'row' );
+
+			// Schleife durch jedes Level
+			$( '#bonipress-badge-setup #badge-levels .badge-level' ).each(function(index){
+
+				var badgelevel = $(this).data( 'level' );
+				if ( badgelevel == 0 ) { return true; }
+
+				var subrequirementrow = $(this).find( '#level' + badgelevel + 'requirement' + requirementrow + ' .level-ref p:first' );
+				if ( subrequirementrow !== undefined ) {
+
+					subrequirementrow.fadeOut(function(){
+						subrequirementrow.empty().text( selectedref.text() ).fadeIn();
+						subrequirementrow.next().empty().fadeIn();
+					});
+
+				}
+
+			});
+
+		});
+
+		$( '#bonipress-badge-setup' ).on( 'blur', 'input.specific', function(e){
+
+			var refselectelement = $(this);
 
 			// Make sure there is more then one level
 			var numberoflevels = $( '#bonipress-badge-setup #badge-levels .badge-level' ).length;
@@ -288,13 +352,41 @@ jQuery(function($){
 				var badgelevel = $(this).data( 'level' );
 				if ( badgelevel == 0 ) { return true; }
 
-				var subrequirementrow = $(this).find( '#level' + badgelevel + 'requirement' + requirementrow + ' .level-ref p' );
+				var subrequirementrow = $(this).find( '#level' + badgelevel + 'requirement' + requirementrow + ' .level-ref p:last' );
 				if ( subrequirementrow !== undefined ) {
-
 					subrequirementrow.fadeOut(function(){
-						subrequirementrow.empty().text( selectedref.text() ).fadeIn();
+						subrequirementrow.empty().text( refselectelement.val() ).fadeIn();
 					});
+				}
 
+			});
+
+		});
+
+
+
+		$( '#bonipress-badge-setup' ).on( 'change', 'select.specific', function(e){
+
+			var refselectelement = $(this);
+			var selectedreftype = refselectelement.find( ':selected' );
+
+			// Make sure there is more then one level
+			var numberoflevels = $( '#bonipress-badge-setup #badge-levels .badge-level' ).length;
+			if ( numberoflevels == 1 ) return;
+
+			var requirementrow = refselectelement.data( 'row' );
+
+			// Loop through each level
+			$( '#bonipress-badge-setup #badge-levels .badge-level' ).each(function(index){
+
+				var badgelevel = $(this).data( 'level' );
+				if ( badgelevel == 0 ) { return true; }
+
+				var subrequirementrow = $(this).find( '#level' + badgelevel + 'requirement' + requirementrow + ' .level-ref p:last' );
+				if ( subrequirementrow !== undefined ) {
+					subrequirementrow.fadeOut(function(){
+						subrequirementrow.empty().text( selectedreftype.text() ).fadeIn();
+					});
 				}
 
 			});
@@ -440,6 +532,8 @@ jQuery(function($){
 						$( '#bonipress-badge-default .default-image-wrapper' ).empty().removeClass( 'empty dashicons' ).html( '<img src="' + attachment.url + '" alt="Badge default image" \/><input type="hidden" name="bonipress_badge[main_image]" value="' + attachment.id + '" \/><input type="hidden" name="bonipress_badge[main_image_url]" value="" \/>' ).fadeIn();
 						button.text( boniPRESSBadge.changeimage );
 
+						RemoveDefaultImageButton.removeClass('hidden');
+
 					});
 
 				}
@@ -448,6 +542,39 @@ jQuery(function($){
 
 			// Open the uploader dialog
 			DefaultImageSelector.open();
+
+		});
+
+		$(document).on('change', '.reference', function(){
+
+			var refrence_id = 'bonipress_badge_'+$(this).val();
+			var ele_name    = $(this).attr('name');
+			var row         = $(this).data('row');
+
+			if( window[refrence_id] !== undefined ) {
+
+				totalBadgeLevels  = $( '#bonipress-badge-setup #badge-levels .badge-level' ).length;
+				totalRequirements = $( '#bonipress-badge-setup .level-requirements .row-narrow' ).length;
+
+				var template = Mustache.render( window[refrence_id], {
+					element_name : ele_name.replace('reference', 'specific'),
+					reqlevel     : row
+				});
+				$(this).parent().next().remove();
+				$( this ).closest('.form').append( template );
+			}
+			else {
+				$(this).parent().next().remove();
+			}
+		});
+
+		RemoveDefaultImageButton.on( 'click', function(e){
+
+			$('.default-image-wrapper input').val('');
+			$('.default-image-wrapper img').remove();
+			$('.default-image-wrapper').addClass('empty').addClass('dashicons');
+			ChangeDefaultImageButton.text( boniPRESSBadge.setimage );
+			$(this).addClass('hidden');
 
 		});
 

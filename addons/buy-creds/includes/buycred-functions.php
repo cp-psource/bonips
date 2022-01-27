@@ -94,17 +94,6 @@ if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
 			'custom_rate'   => true
 		);
 
-		// Zombaio
-		$installed['zombaio'] = array(
-			'title'         => 'Zombaio',
-			'callback'      => array( 'boniPRESS_Zombaio' ),
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/zombaio/',
-			'icon'          => 'dashicons-admin-generic',
-			'sandbox'       => false,
-			'external'      => true,
-			'custom_rate'   => false
-		);
-
 		// Bank Transfers
 		$installed['bank'] = array(
 			'title'         => __( 'Bank Transfer', 'bonipress' ),
@@ -175,7 +164,6 @@ if ( ! function_exists( 'bonipress_get_buycred_gateway_refs' ) ) :
 		$references = array(
 			'buy_creds_with_paypal_standard',
 			'buy_creds_with_skrill',
-			'buy_creds_with_zombaio',
 			'buy_creds_with_netbilling',
 			'buy_creds_with_bitpay',
 			'buy_creds_with_bank'
@@ -195,10 +183,10 @@ if ( ! function_exists( 'bonipress_purchase_limit_dropdown' ) ) :
 	function bonipress_purchase_limit_dropdown( $name = '', $id = '', $selected = '' ) {
 
 		$options = apply_filters( 'bonipress_buycred_limit_dropdown', array(
-			''      => __( 'No limit', 'bonipress' ),
-			'day'   => __( '/ Day', 'bonipress' ),
-			'week'  => __( '/ Week', 'bonipress' ),
-			'month' => __( '/ Month', 'bonipress' )
+			''      => __( 'Kein Limit', 'bonipress' ),
+			'day'   => __( '/ Tag', 'bonipress' ),
+			'week'  => __( '/ Woche', 'bonipress' ),
+			'month' => __( '/ Monat', 'bonipress' )
 		) );
 
 		$output  = '<select name="' . $name . '" id="' . $id . '" class="form-control">';
@@ -486,7 +474,7 @@ if ( ! function_exists( 'buycred_add_pending_comment' ) ) :
 			'comment_author'       => $author,
 			'comment_author_email' => $author_email,
 			'comment_content'      => $comment,
-			'comment_type'         => 'comment',
+			'comment_type'         => 'buycred',
 			'comment_author_IP'    => $_SERVER['REMOTE_ADDR'],
 			'comment_date'         => $time,
 			'comment_approved'     => 1,
@@ -645,7 +633,7 @@ if ( ! function_exists( 'buycred_trash_pending_payment' ) ) :
 
 		bonipress_delete_user_meta( $pending_payment->buyer_id, 'buycred_pending_payments' );
 
-		return bonipress_trash_post( $pending_payment->payment_id );
+		return wp_trash_post( $pending_payment->payment_id );
 
 	}
 endif;

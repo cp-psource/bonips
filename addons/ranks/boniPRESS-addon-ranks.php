@@ -190,11 +190,19 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 * @since 1.8
 		 * @version 1.0
 		 */
-		public function is_manual_mode() {
+		public function is_manual_mode( $type_id ) {
 
 			$manual_mode = false;
-			if ( $this->rank['base'] == 'manual' )
-				$manual_mode = true;
+			$point_type = 'bonipress_pref_core';
+
+			if ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY ) {
+				$point_type = 'bonipress_pref_core_' . $type_id;
+			}
+
+			$setting = bonipress_get_option( $point_type );
+
+			if ( ! empty( $setting['rank']['base'] ) && $setting['rank']['base'] == 'manual' )
+				$manual_mode = $setting['rank']['base'];
 
 			return $manual_mode;
 
@@ -555,7 +563,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				// Get the total for each user with a balance
 				foreach ( $users as $user_id ) {
 
-					$total = bonipress_query_users_total( $user_id, $point_type );
+					$total = bonipress_calculate_users_total( $user_id, $point_type );
 					bonipress_update_user_meta( $user_id, $point_type, '_total', $total );
 					$count ++;
 
@@ -575,13 +583,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function balance_adjustment( $result, $request, $bonipress ) {
 
-			// Manual mode
-			if ( $this->is_manual_mode() ) return $result;
-
 			// If the result was declined
 			if ( $result === false ) return $result;
 
 			extract( $request );
+
+
+			// Manual mode
+			if ( $this->is_manual_mode() ) return $result;
 
 			// If ranks for this type is based on total and this is not a admin adjustment
 			if ( bonipress_rank_based_on_total( $type ) && $amount < 0 && $ref != 'manual' )
@@ -619,7 +628,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			}
 
-			if ( $this->is_manual_mode() ) return;
+			if ( $this->is_manual_mode( $point_type ) ) return;
 
 			// Publishing or trashing of ranks
 			if ( ( $new_status == 'publish' && $old_status != 'publish' ) || ( $new_status == 'trash' && $old_status != 'trash' ) ) {
@@ -627,7 +636,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				wp_cache_delete( 'ranks-published-' . $point_type, BONIPRESS_SLUG );
 				wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPRESS_SLUG );
 
-				bonipress_assign_ranks( $type );
+				bonipress_assign_ranks( $point_type );
 
 			}
 
@@ -739,6 +748,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				// Load type
 				$bonipress     = bonipress( $type_id );
 
+				//Nothing to do if we are excluded
+				if ( $bonipress->exclude_user( $user_id ) ) continue;
+
 				// No settings
 				if ( ! isset( $bonipress->rank['bb_location'] ) ) continue;
 
@@ -784,6 +796,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 				// Load type
 				$bonipress     = bonipress( $type_id );
+
+				//Nothing to do if we are excluded
+				if ( $bonipress->exclude_user( $user_id ) ) continue;
 
 				// No settings
 				if ( ! isset( $bonipress->rank['bb_location'] ) ) continue;
@@ -848,6 +863,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				// No settings
 				if ( ! isset( $bonipress->rank['bp_location'] ) ) continue;
 
+				//Nothing to do if we are excluded
+				if ( $bonipress->exclude_user( $user_id ) ) continue;
+
 				// Not shown
 				if ( ! in_array( $bonipress->rank['bp_location'], array( 'reply', 'both' ) ) || $bonipress->rank['bp_template'] == '' ) continue;
 
@@ -892,6 +910,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 				// No settings
 				if ( ! isset( $bonipress->rank['bp_location'] ) ) continue;
+
+				//Nothing to do if we are excluded
+				if ( $bonipress->exclude_user( $user_id ) ) continue;
 
 				// Not shown
 				if ( ! in_array( $bonipress->rank['bp_location'], array( 'profile', 'both' ) ) || $bonipress->rank['bp_template'] == '' ) continue;
@@ -996,7 +1017,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				$rank_title = $users_rank->title;
 
 			// In manual mode we want to show a dropdown menu so an admin can adjust a users rank
-			if ( $this->is_manual_mode() && bonipress_is_admin( NULL, $point_type ) ) {
+			if ( $this->is_manual_mode( $point_type ) && bonipress_is_admin( NULL, $point_type ) ) {
 
 				$ranks = bonipress_get_ranks( 'publish', '-1', 'DESC', $point_type );
 				echo '<div class="balance-desc current-rank"><select name="rank-' . $point_type . '" id="bonipress-rank">';
@@ -1007,8 +1028,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				echo '>' . __( 'No rank', 'bonipress' ) . '</option>';
 
 				foreach ( $ranks as $rank ) {
-					echo '<option value="' . $rank->rank_id . '"';
-					if ( $users_rank->rank_id == $rank->rank_id ) echo ' selected="selected"';
+					echo '<option value="' . $rank->post_id . '"';
+					if ( ! empty( $users_rank ) && $users_rank->post_id == $rank->post_id ) echo ' selected="selected"';
 					echo '>' . $rank->title . '</option>';
 				}
 
@@ -1030,10 +1051,10 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function save_manual_rank( $user_id ) {
 
-			if ( $this->is_manual_mode() ) {
+			$point_types = bonipress_get_types();
+			foreach ( $point_types as $type_key => $label ) {
 
-				$point_types = bonipress_get_types();
-				foreach ( $point_types as $type_key => $label ) {
+				if ( $this->is_manual_mode( $type_key ) ) {
 
 					if ( isset( $_POST[ 'rank-' . $type_key ] ) && bonipress_is_admin( NULL, $type_key ) ) {
 
@@ -1041,11 +1062,12 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 						$users_rank = bonipress_get_users_rank( $user_id, $type_key );
 
 						$rank       = false;
+
 						if ( $_POST[ 'rank-' . $type_key ] != '' )
 							$rank = absint( $_POST[ 'rank-' . $type_key ] );
 
 						// Save users rank if a valid rank id is provided and it differs from the users current one
-						if ( $rank !== false && $rank > 0 && $users_rank !== false && $users_rank->rank_id != $rank )
+						if ( $rank !== false && $rank > 0 && $users_rank->rank_id != $rank )
 							bonipress_save_users_rank( $user_id, $rank, $type_key );
 
 						// Delete users rank
@@ -1564,7 +1586,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			<h3><?php _e( 'Rank Post Type', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( 'public' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'public' ); ?>" id="<?php echo $this->field_id( 'public' ); ?>" <?php checked( $prefs['public'], 1 ); ?> value="1" /> <?php _e( 'Make Ranks Public', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'public' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'public' ); ?>" id="<?php echo $this->field_id( 'public' ); ?>" <?php checked( $prefs['public'], 1 ); ?> value="1" /> <?php _e( 'Ränge öffentlich machen', 'bonipress' ); ?></label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -1603,7 +1625,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="radio">
-					<label for="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"<?php checked( $prefs['base'], 'manual' ); ?> value="current" /> <?php _e( 'Manual Mode', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"<?php checked( $prefs['base'], 'manual' ); ?> value="manual" /> <?php _e( 'Manueller Modus', 'bonipress' ); ?></label>
 				</div>
 				<p><span class="description"><?php _e( 'Ranks are assigned manually for each user.', 'bonipress' ); ?></span></p>
 			</div>
@@ -1827,19 +1849,19 @@ jQuery(function($){
 				$rank_meta_key .= $bonipress->bonipress_type;
 
 ?>
-<label class="subheader"><?php _e( 'Ranks', 'bonipress' ); ?></label>
+<label class="subheader"><?php _e( 'Ränge', 'bonipress' ); ?></label>
 <ol id="boniPRESS-rank-actions" class="inline">
 	<li>
-		<label><?php _e( 'User Meta Key', 'bonipress' ); ?></label>
+		<label><?php _e( 'Benutzer-Metaschlüssel', 'bonipress' ); ?></label>
 		<div class="h2"><input type="text" id="bonipress-rank-post-type" disabled="disabled" value="<?php echo $rank_meta_key; ?>" class="readonly" /></div>
 	</li>
 	<li>
-		<label><?php _e( 'No. of ranks', 'bonipress' ); ?></label>
+		<label><?php _e( 'Anzahl der Ränge', 'bonipress' ); ?></label>
 		<div class="h2"><input type="text" id="bonipress-ranks-no-of-ranks" disabled="disabled" value="<?php echo $count; ?>" class="readonly short" /></div>
 	</li>
 	<li>
-		<label><?php _e( 'Actions', 'bonipress' ); ?></label>
-		<div class="h2"><input type="button" id="bonipress-manage-action-reset-ranks" data-type="<?php echo $bonipress->bonipress_type; ?>" value="<?php _e( 'Remove All Ranks', 'bonipress' ); ?>" class="button button-large large <?php if ( $reset_block ) echo '" disabled="disabled'; else echo 'button-primary'; ?>" /><?php if ( ! $this->is_manual_mode() ) : ?> <input type="button" id="bonipress-manage-action-assign-ranks" data-type="<?php echo $bonipress->bonipress_type; ?>" value="<?php _e( 'Assign Ranks to Users', 'bonipress' ); ?>" class="button button-large large <?php if ( $reset_block ) echo '" disabled="disabled'; ?>" /></div><?php endif; ?>
+		<label><?php _e( 'Aktionen', 'bonipress' ); ?></label>
+		<div class="h2"><input type="button" id="bonipress-manage-action-reset-ranks" data-type="<?php echo $bonipress->bonipress_type; ?>" value="<?php _e( 'Alle Ränge entfernen', 'bonipress' ); ?>" class="button button-large large <?php if ( $reset_block ) echo '" disabled="disabled'; else echo 'button-primary'; ?>" /><?php if ( ! $this->is_manual_mode( $bonipress->bonipress_type ) ) : ?> <input type="button" id="bonipress-manage-action-assign-ranks" data-type="<?php echo $bonipress->bonipress_type; ?>" value="<?php _e( 'Weise Benutzern Ränge zu', 'bonipress' ); ?>" class="button button-large large <?php if ( $reset_block ) echo '" disabled="disabled'; ?>" /></div><?php endif; ?>
 	</li>
 </ol>
 <?php
@@ -1909,7 +1931,7 @@ jQuery(function($){
 				$wpdb->query( "
 					DELETE FROM {$posts_table} 
 					WHERE post_type = '{$rank_key}' 
-					AND post_id IN ({$id_list});" );
+					AND ID IN ({$id_list});" );
 
 				// Remove post meta
 				$wpdb->query( "

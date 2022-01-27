@@ -83,6 +83,7 @@
 					$(this).attr( 'disabled', 'disabled' );
 				});
 
+				submitbutton.attr( 'disabled', 'disabled' );
 				submitbutton.val( boniPRESSTransfer.working );
 
 			},
@@ -94,6 +95,7 @@
 					$(this).removeAttr( 'disabled' );
 				});
 
+				submitbutton.removeAttr( 'disabled', 'disabled' );
 				submitbutton.val( buttonlabel );
 
 				if ( response.success !== undefined ) {

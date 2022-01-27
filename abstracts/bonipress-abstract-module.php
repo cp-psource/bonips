@@ -388,7 +388,7 @@ if ( ! class_exists( 'boniPRESS_Module' ) ) :
 
 			// In case we are using the Master Template feautre on multisites, and this is not the main
 			// site in the network, bail.
-			if ( bonipress_override_settings() && ! bonipress_is_main_site() ) return;
+			if ( $this->module_id != 'boniPRESS_Log_Module' && bonipress_override_settings() && ! bonipress_is_main_site() ) return;
 
 			// Minimum requirements
 			if ( ! empty( $this->labels ) && ! empty( $this->screen_id ) ) {

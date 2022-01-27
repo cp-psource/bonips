@@ -30,6 +30,8 @@ if ( ! function_exists( 'bonipress_render_my_rank' ) ) :
 		if ( $user_id === false ) return;
 
 		$account_object = bonipress_get_account( $user_id );
+		if( empty( $account_object->balance[ $ctype ]->rank ) ) return;
+
 		$rank_object    = $account_object->balance[ $ctype ]->rank;
 
 		if ( $rank_object !== false ) {
@@ -76,7 +78,7 @@ if ( ! function_exists( 'bonipress_render_my_ranks' ) ) :
 		if ( $user_id == '' && ! is_user_logged_in() ) return;
 
 		$user_id        = bonipress_get_user_id( $user_id );
-		if ( $user_id === false ) return;
+		if ( $user_id == false ) return;
 
 		$account_object = bonipress_get_account( $user_id );
 		$show           = array();
@@ -211,11 +213,11 @@ if ( ! function_exists( 'bonipress_render_users_of_all_ranks' ) ) :
 		extract( shortcode_atts( array(
 			'login'     => '',
 			'number'    => 10,
-			'ctype'     => NULL,
+			'ctype'     => BONIPRESS_DEFAULT_TYPE_KEY,
 			'show_logo' => 1,
 			'logo_size' => 'post-thumbnail',
 			'wrap'      => 'div',
-			'nothing'   => 'No users found with this rank'
+			'nothing'   => 'Keine Benutzer mit diesem Rang gefunden'
 		), $atts, BONIPRESS_SLUG . '_users_of_all_ranks' ) );
 
 		// Prep

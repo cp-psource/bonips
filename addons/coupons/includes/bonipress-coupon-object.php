@@ -262,8 +262,8 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 				// Min balance requirement
 				if ( $this->requires_min_type != $this->point_type ) {
 
-					$bonipress        = bonipress( $this->requires_min_type );
-					$users_balance = $bonipress->get_users_balance( $user_id, $this->requires_min_type );
+					$bonipress_min        = bonipress( $this->requires_min_type );
+					$users_balance = $bonipress_min->get_users_balance( $user_id, $this->requires_min_type );
 
 				}
 
@@ -275,8 +275,8 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 
 					if ( $this->requires_max_type != $this->point_type ) {
 
-						$bonipress        = bonipress( $this->requires_max_type );
-						$users_balance = $bonipress->get_users_balance( $user_id, $this->requires_max_type );
+						$bonipress_max        = bonipress( $this->requires_max_type );
+						$users_balance = $bonipress_max->get_users_balance( $user_id, $this->requires_max_type );
 
 					}
 
@@ -292,6 +292,8 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 
 			// Ready to use coupon!
 			if ( $can_use === true ) {
+
+				$this->settings['log'] = str_replace( '%coupon_code%', $this->code, $this->settings['log'] );
 
 				// Apply Coupon
 				$bonipress->add_creds(

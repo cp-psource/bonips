@@ -145,7 +145,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 
 			}
 
-			$option_id = 'bonipress_pref_hooks';
+			$option_id = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
 			if ( ! $this->is_main_type )
 				$option_id = $option_id . '_' . $this->bonipress_type;
 
@@ -285,6 +285,11 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 				// Put all wheres together into one string
 				$wheres   = implode( " AND ", $wheres );
 
+				$query = "SELECT COUNT(*) FROM {$bonipress_log_table} WHERE {$wheres};";
+
+				//Lets play for others
+				$query = apply_filters( 'bonipress_hook_limit_query', $query, $instance, $reference, $user_id, $ref_id, $wheres, $this );
+				
 				// Count
 				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$bonipress_log_table} WHERE {$wheres};" );
 				if ( $count === NULL ) $count = 0;

@@ -28,6 +28,7 @@ require_once BONIPRESS_BUYCRED_ABSTRACT_DIR . 'bonipress-abstract-payment-gatewa
 
 require_once BONIPRESS_BUYCRED_INCLUDES_DIR . 'buycred-functions.php';
 require_once BONIPRESS_BUYCRED_INCLUDES_DIR . 'buycred-shortcodes.php';
+require_once BONIPRESS_BUYCRED_INCLUDES_DIR . 'buycred-reward.php';
 
 /**
  * Load Built-in Gateways
@@ -38,7 +39,6 @@ require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'paypal-standard.php';
 require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'bitpay.php';
 require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'netbilling.php';
 require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'skrill.php';
-require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'zombaio.php';
 require_once BONIPRESS_BUYCRED_GATEWAYS_DIR . 'bank-transfer.php';
 
 do_action( 'bonipress_buycred_load_gateways' );

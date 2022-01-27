@@ -13,7 +13,7 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 
 		extract( shortcode_atts( array(
 			'success' => __( 'Settings Updated', 'bonipress' )
-		), $attr, BONIPRESS_SLUG . '_email_subscriptions' ) );
+		), $atts, BONIPRESS_SLUG . '_email_subscriptions' ) );
 
 		if ( ! is_user_logged_in() ) return $content;
 
@@ -70,9 +70,9 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 
 		<?php if ( ! empty( $email_notices ) ) : ?>
 		
-			<?php foreach ( $email_notices as $notice ) : $settings = $this->get_email_settings( $notice->ID ); ?>
+			<?php foreach ( $email_notices as $notice ) : $settings = bonipress_get_email_settings( $notice->ID ); ?>
 
-			<?php if ( $settings['label'] == '' ) continue; ?>
+			<?php if ( $settings['recipient'] == 'admin' ) continue; ?>
 
 			<tr>
 				<td class="check"><input type="checkbox" name="bonipress_email_unsubscribe[]"<?php if ( in_array( $notice->ID, $unsubscriptions ) ) echo ' checked="checked"'; ?> value="<?php echo $notice->ID; ?>" /></td>
@@ -98,7 +98,7 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 		$content = ob_get_contents();
 		ob_end_clean();
 
-		return apply_filters( 'bonipress_render_email_subscriptions', $content, $attr );
+		return apply_filters( 'bonipress_render_email_subscriptions', $content, $atts );
 
 	}
 endif;
