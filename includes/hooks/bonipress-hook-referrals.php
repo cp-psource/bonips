@@ -737,8 +737,8 @@ if ( ! function_exists( 'bonipress_load_referral_program' ) ) :
 	function bonipress_load_referral_program() {
 
 		// BuddyPress: Hook into user activation
-		if ( function_exists( 'buddypress' ) && apply_filters( 'bp_core_signup_send_activation_key', true ) === true )
-			add_action( 'bp_core_activated_user', 'bonipress_detect_bp_user_activation' );
+		if ( function_exists( 'buddypress' ) )
+		add_action( 'bp_core_activated_user', 'bonipress_detect_bp_user_activation' );
 
 		// Logged in users do not get points
 		if ( is_user_logged_in() && apply_filters( 'bonipress_affiliate_allow_members', false ) === false ) return;
