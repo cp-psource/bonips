@@ -882,7 +882,7 @@ jQuery(function($) {
 				$template = str_replace( '{{adnselected}}',       ( ( $setup['compare'] === 'AND' ) ? 'selected' : '' ), $template );
 				$template = str_replace( '{{orselected}}',        ( ( $setup['compare'] === 'OR' ) ? 'selected' : '' ), $template );
 
-				$template = str_replace( '{{badge_compare_andor}}',        ( ( isset($setup['compare']) && !empty($setup['compare']) ) ? $setup['compare'] : 'AND' ), $template );
+				$template = str_replace( '{{badge_compare_andor}}', ( ( isset($setup['compare']) && !empty($setup['compare']) ) ? $setup['compare'] : 'AND' ), $template );
 
 				//$requirement = $this->requirements_template( 1 );
 

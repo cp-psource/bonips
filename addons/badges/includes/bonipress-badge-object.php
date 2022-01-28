@@ -490,7 +490,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 					if ( ! empty( $results ) ) {
 						foreach ( $results as $row ) {
 
-							$badge_level_id          = 0;
+							$badge_level_id = 0;
 
 							foreach ( $this->levels as $level_id => $setup ) {
 								if ( $row->total >= $setup['requires'][0]['amount'] )
@@ -709,6 +709,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 			if ( $image_identification === false || strlen( $image_identification ) == 0 ) return false;
 
 			$image_url    = $image_identification;
+			
 			if ( is_numeric( $image_identification ) &&  strpos( '://', (string) $image_identification ) === false )
 				$image_url = bonipress_get_attachment_url( $image_identification );
 

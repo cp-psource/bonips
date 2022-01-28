@@ -74,7 +74,8 @@ if ( ! function_exists( 'bonipress_render_shortcode_link' ) ) :
 			if ( $atts['amount'] == 0 ) {
 
 				// Get hook settings
-				$hooks = bonipress_get_option( 'bonipress_pref_hooks', false );
+				$prf_hook = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
+				$hooks = bonipress_get_option( $prf_hook, false );
 				if ( $atts['ctype'] != BONIPRESS_DEFAULT_TYPE_KEY )
 					$hooks = bonipress_get_option( 'bonipress_pref_hooks_' . sanitize_key( $atts['ctype'] ), false );
 

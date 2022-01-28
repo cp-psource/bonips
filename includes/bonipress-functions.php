@@ -67,13 +67,13 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			$this->cred_id             = ( ( ! is_string( $point_type ) || sanitize_key( $point_type ) == '' || $point_type === NULL ) ? $this->default_cred_id : $point_type );
 			$this->is_main_type        = ( ( $this->cred_id == $this->default_cred_id ) ? true : false );
 
-			// Log table
-			$this->log_table           = $this->get_log_table();
-
 			// Multisite related
 			$this->is_multisite        = is_multisite();
 			$this->use_master_template = bonipress_override_settings();
 			$this->use_central_logging = bonipress_centralize_log();
+
+			// Log table
+			$this->log_table           = $this->get_log_table();
 
 			// Option ID
 			$this->option_id           = 'bonipress_pref_core';
@@ -151,7 +151,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		/**
 		 * Default Settings
 		 * @since 1.8
-		 * @version 1.0
+		 * @version 1.2
 		 */
 		public function get_log_table() {
 
@@ -162,14 +162,21 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			else
 				$wp_prefix = $wpdb->prefix;
 
-			$table_name = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wp_prefix . 'boniPRESS_log' ) );
+				$table_name = wp_cache_get('bonipress_log_table_name');
+				if( FALSE === $table_name ) {
+					$table_name = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wp_prefix . 'boniPRESS_log' ) );
+					if( $table_name !== NULL ) {
+						wp_cache_set('bonipress_log_table_name', $table_name);
+					}
+				}
 
-			if( $table_name == NULL ) {
-				$table_name = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wp_prefix . 'bonipress_log' ) );
-
-				if( $table_name == NULL )
-					$table_name = $wp_prefix . 'boniPRESS_log';
-			}
+				if( $table_name == NULL ) {
+					$table_name = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wp_prefix . 'bonipress_log' ) );
+					if( $table_name == NULL ) {
+						$table_name = $wp_prefix . 'boniPRESS_log';
+					}
+					wp_cache_set('bonipress_log_table_name', $table_name);
+				}
 
 			if ( defined( 'BONIPRESS_LOG_TABLE' ) )
 				$table_name = BONIPRESS_LOG_TABLE;
@@ -1441,7 +1448,11 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 				// Update total balance (if enabled)
 				if ( BONIPRESS_ENABLE_TOTAL_BALANCE && BONIPRESS_ENABLE_LOGGING && ( $run_this['amount'] > 0 || ( $run_this['amount'] < 0 && $run_this['ref'] == 'manual' ) ) ) {
 
-					$this->update_users_total_balance( (int) $run_this['user_id'], $run_this['amount'], $run_this['type'] );
+					$is_update_total_balance = apply_filters( 'bonipress_update_total_balance', true, $run_this );
+
+					if ( $is_update_total_balance ) {
+						$this->update_users_total_balance( (int) $run_this['user_id'], $run_this['amount'], $run_this['type'] );
+					}
 
 				}
 
@@ -2654,7 +2665,9 @@ if ( ! function_exists( 'bonipress_get_option' ) ) :
 
 		}
 
-		return get_option( $option_id, $default );
+		$get_option_id = apply_filters( 'bonipress_get_option_id', $option_id );
+
+		return get_option( $get_option_id, $default );
 
 	}
 endif;
@@ -3029,6 +3042,29 @@ if ( ! function_exists( 'bonipress_trash_post' ) ) :
 endif;
 
 /**
+ * Get Attachment URL
+ * @since 1.8.11
+ * @version 1.0
+ */
+if ( ! function_exists( 'bonipress_get_attachment_url' ) ) :
+	function bonipress_get_attachment_url( $post_id = NULL ) {
+
+		$override = ( bonipress_override_settings() && ! bonipress_is_main_site() );
+
+		if ( $override )
+			switch_to_blog( get_network()->site_id );
+
+		$results = wp_get_attachment_url( $post_id );
+
+		if ( $override )
+			restore_current_blog();
+
+		return $results;
+
+	}
+endif;
+
+/**
  * Delete Post
  * @since 1.8
  * @version 1.0
@@ -3258,7 +3294,6 @@ endif;
 /**
  * Subtract Creds
  * Subtracts creds from a given user. Works just as bonipress_add() but the creds are converted into a negative value.
- * @see http://codex.bonipress.me/functions/bonipress_subtract/
  * @uses bonipress_add()
  * @since 0.1
  * @version 1.1.1
@@ -3451,7 +3486,7 @@ endif;
  * @version 1.0.1
  */
 if ( ! function_exists( 'bonipress_translate_limit_code' ) ) :
-	function bonipress_translate_limit_code( $code = '' ) {
+	function bonipress_translate_limit_code( $code = '', $id, $bonipress ) {
 
 		if ( $code == '' ) return '-';
 
@@ -3482,7 +3517,7 @@ if ( ! function_exists( 'bonipress_translate_limit_code' ) ) :
 
 		}
 
-		return apply_filters( 'bonipress_translate_limit_code', $result, $code );
+		return apply_filters( 'bonipress_translate_limit_code', $result, $code, $id, $bonipress );
 
 	}
 endif;

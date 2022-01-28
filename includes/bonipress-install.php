@@ -104,7 +104,8 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 			) );
 
 			// Add hooks settings
-			add_option( 'bonipress_pref_hooks', array(
+			$option_id = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
+			add_option( $option_id, array(
 				'installed'  => array(),
 				'active'     => array(),
 				'hook_prefs' => array()
@@ -187,11 +188,12 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 
 			$bonipress_types = bonipress_get_types();
 
+			$option_id = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
 			// Options to delete
 			$options_to_delete = array(
 				'bonipress_setup_completed',
 				'bonipress_pref_core',
-				'bonipress_pref_hooks',
+				$option_id,
 				'bonipress_pref_addons',
 				'bonipress_pref_bank',
 				'bonipress_pref_remote',
