@@ -16,9 +16,9 @@ if ( ! class_exists( 'boniPRESS_Badge_Secondary' ) ) :
 		 * Construct
 		 */
 		function __construct() {
-			add_filter( 'bonipress_badge_requirement',    array( $this, 'bonipress_badge_specific_requirement'), 10, 5 );
+			add_filter( 'bonipress_badge_requirement',                   array( $this, 'bonipress_badge_specific_requirement'), 10, 5 );
 			add_filter( 'bonipress_badge_requirement_specific_template', array( $this, 'badge_specific_template'), 10, 5 );
-            add_action( 'admin_head',                  array( $this, 'admin_header' ) );
+            add_action( 'admin_head',                                    array( $this, 'admin_header' ) );
 		}
 
 		/**

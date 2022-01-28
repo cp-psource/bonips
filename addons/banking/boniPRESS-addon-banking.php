@@ -3,7 +3,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * Addon: Banking
- * Addon URI: http://codex.bonipress.me/chapter-iii/banking/
  * Version: 2.0
  */
 define( 'boniPRESS_BANK',              __FILE__ );

@@ -19,7 +19,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Transfer' ) ) :
 				sprintf( __( '(%s) Transfer', 'bonipress' ), bonipress_label( true ) ),
 				array(
 					'classname'   => 'widget-my-cred-transfer',
-					'description' => __( 'Allow transfers between users.', 'bonipress' )
+					'description' => __( 'Übertragungen zwischen Benutzern zulassen.', 'bonipress' )
 				)
 			);
 
@@ -88,41 +88,41 @@ if ( ! class_exists( 'boniPRESS_Widget_Transfer' ) ) :
 ?>
 <!-- Widget Options -->
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Titel', 'bonipress' ); ?>:</label>
 	<input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" placeholder="<?php _e( 'optional', 'bonipress' ); ?>" value="<?php echo esc_attr( $title ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'show_balance' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_balance' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_balance' ) ); ?>" value="1"<?php checked( $show_balance, true ); ?> class="checkbox" /> <?php _e( 'Show users balance', 'bonipress' ); ?></label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'show_balance' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_balance' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_balance' ) ); ?>" value="1"<?php checked( $show_balance, true ); ?> class="checkbox" /> <?php _e( 'Guthaben der Benutzer anzeigen', 'bonipress' ); ?></label>
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'show_limit' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_limit' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_limit' ) ); ?>" value="1"<?php checked( $show_balance, true ); ?> class="checkbox" /> <?php _e( 'Show users limit', 'bonipress' ); ?></label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'show_limit' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_limit' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_limit' ) ); ?>" value="1"<?php checked( $show_balance, true ); ?> class="checkbox" /> <?php _e( 'Benutzerlimit anzeigen', 'bonipress' ); ?></label>
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'button' ) ); ?>"><?php _e( 'Button Label', 'bonipress' ); ?>:</label>
-	<input id="<?php echo esc_attr( $this->get_field_id( 'button' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'button' ) ); ?>" type="text" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $button ); ?>" class="widefat" />
+	<label for="<?php echo esc_attr( $this->get_field_id( 'button' ) ); ?>"><?php _e( 'Schaltflächenbeschriftung', 'bonipress' ); ?>:</label>
+	<input id="<?php echo esc_attr( $this->get_field_id( 'button' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'button' ) ); ?>" type="text" placeholder="<?php _e( 'erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $button ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>"><?php _e( 'Amount', 'bonipress' ); ?>:</label>
-	<input id="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'amount' ) ); ?>" type="text" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $amount ); ?>" class="widefat" />
+	<label for="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>"><?php _e( 'Betrag', 'bonipress' ); ?>:</label>
+	<input id="<?php echo esc_attr( $this->get_field_id( 'amount' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'amount' ) ); ?>" type="text" placeholder="<?php _e( 'erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $amount ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'reference' ) ); ?>"><?php _e( 'Reference', 'bonipress' ); ?>:</label>
-	<input id="<?php echo esc_attr( $this->get_field_id( 'reference' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'reference' ) ); ?>" type="text" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $reference ); ?>" class="widefat" />
+	<label for="<?php echo esc_attr( $this->get_field_id( 'reference' ) ); ?>"><?php _e( 'Referenz', 'bonipress' ); ?>:</label>
+	<input id="<?php echo esc_attr( $this->get_field_id( 'reference' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'reference' ) ); ?>" type="text" placeholder="<?php _e( 'erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $reference ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'pay_to' ) ); ?>"><?php _e( 'Recipient', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'pay_to' ) ); ?>"><?php _e( 'Empfänger', 'bonipress' ); ?>:</label>
 	<input id="<?php echo esc_attr( $this->get_field_id( 'pay_to' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'pay_to' ) ); ?>" type="text" placeholder="<?php _e( 'optional', 'bonipress' ); ?>" value="<?php echo esc_attr( $recipient ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'placeholder' ) ); ?>"><?php _e( 'Recipient Placeholder', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'placeholder' ) ); ?>"><?php _e( 'Platzhalter für Empfänger', 'bonipress' ); ?>:</label>
 	<input id="<?php echo esc_attr( $this->get_field_id( 'placeholder' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'placeholder' ) ); ?>" type="text" placeholder="<?php _e( 'optional', 'bonipress' ); ?>" value="<?php echo esc_attr( $placeholder ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>"><?php _e( 'Point Types', 'bonipress' ); ?>:</label>
-	<input id="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'types' ) ); ?>" type="text" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $point_types ); ?>" class="widefat" />
+	<label for="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>"><?php _e( 'Punkttypen', 'bonipress' ); ?>:</label>
+	<input id="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'types' ) ); ?>" type="text" placeholder="<?php _e( 'erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $point_types ); ?>" class="widefat" />
 </p>
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'excluded' ) ); ?>"><?php _e( 'Message for Excluded Users', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'excluded' ) ); ?>"><?php _e( 'Nachricht für ausgeschlossene Benutzer', 'bonipress' ); ?>:</label>
 	<input id="<?php echo esc_attr( $this->get_field_id( 'excluded' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'excluded' ) ); ?>" placeholder="<?php _e( 'optional', 'bonipress' ); ?>" type="text" value="<?php echo esc_attr( $excluded ); ?>" class="widefat" />
 </p>
 <?php

@@ -13,7 +13,7 @@ if ( ! function_exists( 'bonipress_get_buycred_settings' ) ) :
 			'types'      => array( BONIPRESS_DEFAULT_TYPE_KEY ),
 			'checkout'   => 'page',
 			'log'        => '%plural% purchase',
-			'login'      => __( 'Please login to purchase %_plural%', 'bonipress' ),
+			'login'      => __( 'Bitte melde Dich an, um %_plural% zu kaufen', 'bonipress' ),
 			'custom_log' => 0,
 			'thankyou'   => array(
 				'use'        => 'page',
@@ -28,7 +28,7 @@ if ( ! function_exists( 'bonipress_get_buycred_settings' ) ) :
 			'gifting'    => array(
 				'members'    => 1,
 				'authors'    => 1,
-				'log'        => __( 'Gift purchase from %display_name%.', 'bonipress' )
+				'log'        => __( 'Geschenkkauf von %display_name%.', 'bonipress' )
 			)
 		);
 
@@ -463,7 +463,7 @@ if ( ! function_exists( 'buycred_add_pending_comment' ) ) :
 		$author       = 'buyCRED';
 		$gateway      = bonipress_get_post_meta( $post_id, 'gateway', true );
 		$gateways     = bonipress_get_buycred_gateways();
-		$author_url   = sprintf( 'buyCRED: %s %s', __( 'Unknown Gateway', 'bonipress' ), $gateway );
+		$author_url   = sprintf( 'buyCRED: %s %s', __( 'Unbekanntes Gateway', 'bonipress' ), $gateway );
 		$author_email = apply_filters( 'bonipress_buycred_comment_email', 'buycred-service@bonipress.me' );
 
 		if ( array_key_exists( $gateway, $gateways ) )

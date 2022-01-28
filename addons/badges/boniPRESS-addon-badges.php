@@ -1,7 +1,6 @@
 <?php
 /**
- * Addon: Badges
- * Addon URI: http://codex.bonipress.me/chapter-iii/badges/
+ * Addon: Abzeichen
  * Version: 1.3
  */
 if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
@@ -152,19 +151,19 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 		public function register_badges() {
 
 			$labels = array(
-				'name'               => __( 'Badges', 'bonipress' ),
-				'singular_name'      => __( 'Badge', 'bonipress' ),
-				'add_new'            => __( 'Add New', 'bonipress' ),
-				'add_new_item'       => __( 'Add New', 'bonipress' ),
-				'edit_item'          => __( 'Edit Badge', 'bonipress' ),
-				'new_item'           => __( 'New Badge', 'bonipress' ),
-				'all_items'          => __( 'Badges', 'bonipress' ),
-				'view_item'          => __( 'View Badge', 'bonipress' ),
-				'search_items'       => __( 'Search Badge', 'bonipress' ),
-				'not_found'          => __( 'No badges found', 'bonipress' ),
-				'not_found_in_trash' => __( 'No badges found in Trash', 'bonipress' ), 
+				'name'               => __( 'Abzeichen', 'bonipress' ),
+				'singular_name'      => __( 'Abzeichen', 'bonipress' ),
+				'add_new'            => __( 'Neues hinzufügen', 'bonipress' ),
+				'add_new_item'       => __( 'Neues hinzufügen', 'bonipress' ),
+				'edit_item'          => __( 'Abzeichen bearbeiten', 'bonipress' ),
+				'new_item'           => __( 'Neues Abzeichen', 'bonipress' ),
+				'all_items'          => __( 'Abzeichen', 'bonipress' ),
+				'view_item'          => __( 'Abzeichen anzeigen', 'bonipress' ),
+				'search_items'       => __( 'Abzeichen suchen', 'bonipress' ),
+				'not_found'          => __( 'Keine Abzeichen gefunden', 'bonipress' ),
+				'not_found_in_trash' => __( 'Keine Abzeichen im Papierkorb gefunden', 'bonipress' ), 
 				'parent_item_colon'  => '',
-				'menu_name'          => __( 'Badges', 'bonipress' )
+				'menu_name'          => __( 'Abzeichen', 'bonipress' )
 			);
 
 			$args = array(
@@ -315,16 +314,16 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 
 			$messages[ BONIPRESS_BADGE_KEY ] = array(
 				0  => '',
-				1  => __( 'Badge Updated.', 'bonipress' ),
-				2  => __( 'Badge Updated.', 'bonipress' ),
-				3  => __( 'Badge Updated.', 'bonipress' ),
-				4  => __( 'Badge Updated.', 'bonipress' ),
+				1  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
+				2  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
+				3  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
+				4  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
 				5  => false,
-				6  => __( 'Badge Enabled.', 'bonipress' ),
-				7  => __( 'Badge Saved.', 'bonipress' ),
-				8  => __( 'Badge Updated.', 'bonipress' ),
-				9  => __( 'Badge Updated.', 'bonipress' ),
-				10 => __( 'Badge Updated.', 'bonipress' )
+				6  => __( 'Abzeichen aktiviert.', 'bonipress' ),
+				7  => __( 'Abzeichen gespeichert.', 'bonipress' ),
+				8  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
+				9  => __( 'Abzeichen aktualisiert.', 'bonipress' ),
+				10 => __( 'Abzeichen aktualisiert.', 'bonipress' )
 			);
 
 			return $messages;
@@ -344,8 +343,8 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 
 			add_submenu_page(
 				BONIPRESS_SLUG,
-				__( 'Badges', 'bonipress' ),
-				__( 'Badges', 'bonipress' ),
+				__( 'Abzeichen', 'bonipress' ),
+				__( 'Abzeichen', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
 				'edit.php?post_type=' . BONIPRESS_BADGE_KEY
 			);
@@ -451,11 +450,11 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 			$columns['cb']                  = $defaults['cb'];
 
 			// Add / Adjust
-			$columns['title']               = __( 'Badge Name', 'bonipress' );
-			$columns['badge-default-image'] = __( 'Default Image', 'bonipress' );
-			$columns['badge-earned-image']  = __( 'First Level', 'bonipress' );
-			$columns['badge-reqs']          = __( 'Requirements', 'bonipress' );
-			$columns['badge-users']         = __( 'Users', 'bonipress' );
+			$columns['title']               = __( 'Abzeichenname', 'bonipress' );
+			$columns['badge-default-image'] = __( 'Standardbild', 'bonipress' );
+			$columns['badge-earned-image']  = __( 'Erster Level', 'bonipress' );
+			$columns['badge-reqs']          = __( 'Anforderungen', 'bonipress' );
+			$columns['badge-users']         = __( 'Benutzer', 'bonipress' );
 
 			// Return
 			return $columns;
@@ -540,7 +539,7 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 			global $post_type;
 
 			if ( $post_type == BONIPRESS_BADGE_KEY )
-				return __( 'Badge Name', 'bonipress' );
+				return __( 'Abzeichenname', 'bonipress' );
 
 			return $title;
 
@@ -570,16 +569,16 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 					'boniPRESSBadge',
 					array(
 						'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-						'addlevel'     => esc_js( __( 'Add Level', 'bonipress' ) ),
-						'removelevel'  => esc_js( __( 'Remove Level', 'bonipress' ) ),
-						'setimage'     => esc_js( __( 'Set Image', 'bonipress' ) ),
-						'changeimage'  => esc_js( __( 'Change Image', 'bonipress' ) ),
-						'remove'       => esc_js( esc_attr__( 'Are you sure you want to remove this level?', 'bonipress' ) ),
+						'addlevel'     => esc_js( __( 'Level hinzufügen', 'bonipress' ) ),
+						'removelevel'  => esc_js( __( 'Level entfernen', 'bonipress' ) ),
+						'setimage'     => esc_js( __( 'Bild einstellen', 'bonipress' ) ),
+						'changeimage'  => esc_js( __( 'Bild ändern', 'bonipress' ) ),
+						'remove'       => esc_js( esc_attr__( 'Möchtest Du diese Ebene wirklich entfernen?', 'bonipress' ) ),
 						'levellabel'   => esc_js( sprintf( '%s {{level}}', __( 'Level', 'bonipress' ) ) ),
-						'uploadtitle'  => esc_js( esc_attr__( 'Badge Image', 'bonipress' ) ),
-						'uploadbutton' => esc_js( esc_attr__( 'Use as Badge', 'bonipress' ) ),
-						'compareAND'   => esc_js( _x( 'AND', 'Comparison of badge requirements. A AND B', 'bonipress' ) ),
-						'compareOR'    => esc_js( _x( 'OR', 'Comparison of badge requirements. A OR B', 'bonipress' ) )
+						'uploadtitle'  => esc_js( esc_attr__( 'Abzeichen-Bild', 'bonipress' ) ),
+						'uploadbutton' => esc_js( esc_attr__( 'Als Abzeichen verwenden', 'bonipress' ) ),
+						'compareAND'   => esc_js( _x( 'AND', 'Vergleich der Badge-Anforderungen. A AND B', 'bonipress' ) ),
+						'compareOR'    => esc_js( _x( 'OR', 'Vergleich der Badge-Anforderungen. A OR B', 'bonipress' ) )
 					)
 				);
 
@@ -627,7 +626,7 @@ th#badge-users { width: 10%; }
 
 			add_meta_box(
 				'bonipress-badge-setup',
-				__( 'Badge Setup', 'bonipress' ),
+				__( 'Abzeichen Setup', 'bonipress' ),
 				array( $this, 'metabox_badge_setup' ),
 				BONIPRESS_BADGE_KEY,
 				'normal',
@@ -636,7 +635,7 @@ th#badge-users { width: 10%; }
 
 			add_meta_box(
 				'bonipress-badge-default',
-				__( 'Default Badge Image', 'bonipress' ),
+				__( 'Standardabzeichenbild', 'bonipress' ),
 				array( $this, 'metabox_badge_default' ),
 				BONIPRESS_BADGE_KEY,
 				'side',
@@ -754,7 +753,7 @@ jQuery(function($) {
 			dataType : "JSON",
 			url : ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', '<?php echo esc_js( esc_attr__( 'Processing...', 'bonipress' ) ); ?>' );
+				button.attr( 'value', '<?php echo esc_js( esc_attr__( 'Wird bearbeitet...', 'bonipress' ) ); ?>' );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success : function( response ) {
@@ -772,7 +771,7 @@ jQuery(function($) {
 
 </div>
 <div id="bonipress-manual-badge" class="seperate-bottom">
-	<label for="bonipress-badge-is-manual"><input type="checkbox" name="bonipress_badge[manual]" id="bonipress-badge-is-manual"<?php if ( $manual_badge ) echo ' checked="checked"'; ?> value="1" /> <?php _e( 'This badge is manually awarded.', 'bonipress' ); ?></label>
+	<label for="bonipress-badge-is-manual"><input type="checkbox" name="bonipress_badge[manual]" id="bonipress-badge-is-manual"<?php if ( $manual_badge ) echo ' checked="checked"'; ?> value="1" /> <?php _e( 'Dieses Abzeichen wird manuell vergeben.', 'bonipress' ); ?></label>
 </div>
 <?php
 
@@ -828,8 +827,8 @@ jQuery(function($) {
 			$point_types = bonipress_get_types( true );
 
 			$sums = apply_filters( 'bonipress_badge_requirement_sums', array(
-				'count' => esc_js( __( 'Time(s)', 'bonipress' ) ),
-				'sum'   => esc_js( __( 'In total', 'bonipress' ) )
+				'count' => esc_js( __( 'Mal', 'bonipress' ) ),
+				'sum'   => esc_js( __( 'Insgesamt', 'bonipress' ) )
 			), $badge );
 
 			// Badge rewards can no be used as a requirement
@@ -850,8 +849,8 @@ jQuery(function($) {
 
 				$level        = $level_counter;
 
-				$add_level    = '<button type="button" class="button button-seconary button-small top-right-corner" id="badges-add-new-level">' . esc_js( __( 'Add Level', 'bonipress' ) ) . '</button>';
-				$remove_level = '<button type="button" class="button button-seconary button-small top-right-corner remove-badge-level" data-level="' . $level . '">' . esc_js( __( 'Remove Level', 'bonipress' ) ) . '</button>';
+				$add_level    = '<button type="button" class="button button-seconary button-small top-right-corner" id="badges-add-new-level">' . esc_js( __( 'Level hinzufügen', 'bonipress' ) ) . '</button>';
+				$remove_level = '<button type="button" class="button button-seconary button-small top-right-corner remove-badge-level" data-level="' . $level . '">' . esc_js( __( 'Level entfernen', 'bonipress' ) ) . '</button>';
 
 				$level_image  = $this->get_level_image( $setup, $level );
 				$empty_level  = 'empty dashicons';
@@ -867,18 +866,18 @@ jQuery(function($) {
 				$js_level = str_replace( '{{removelevelbutton}}', $remove_level, $js_level );
 				$js_level = str_replace( '{{emptylevelimage}}',   $empty_level, $js_level );
 				$js_level = str_replace( '{{levelimage}}',        '', $js_level );
-				$js_level = str_replace( '{{levelimagebutton}}',  esc_js( __( 'Set Image', 'bonipress' ) ), $js_level );
+				$js_level = str_replace( '{{levelimagebutton}}',  esc_js( __( 'Bild einstellen', 'bonipress' ) ), $js_level );
 				$js_level = str_replace( '{{levelplaceholder}}',  esc_js( __( 'Level', 'bonipress' ) ) . ' {{levelone}}', $js_level );
 
 				$template = str_replace( '{{levelimage}}',        $level_image, $template );
 				$template = str_replace( '{{emptylevelimage}}',   $empty_level, $template );
-				$template = str_replace( '{{levelimagebutton}}',  ( ( $level_image === false ) ? esc_js( __( 'Set Image', 'bonipress' ) ) : esc_js( __( 'Change Image', 'bonipress' ) ) ), $template );
+				$template = str_replace( '{{levelimagebutton}}',  ( ( $level_image === false ) ? esc_js( __( 'Bild einstellen', 'bonipress' ) ) : esc_js( __( 'Bild ändern', 'bonipress' ) ) ), $template );
 
 				$template = str_replace( '{{levelplaceholder}}',  esc_js( sprintf( __( 'Level %d', 'bonipress' ), $level+1 ) ), $template );
 				$template = str_replace( '{{levellabel}}',        esc_js( $setup['label'] ), $template );
 
-				$template = str_replace( '{{requirementslabel}}', esc_js( __( 'Requirement', 'bonipress' ) ), $template );
-				$js_level = str_replace( '{{requirementslabel}}', esc_js( __( 'Requirement', 'bonipress' ) ), $js_level );
+				$template = str_replace( '{{requirementslabel}}', esc_js( __( 'Voraussetzung', 'bonipress' ) ), $template );
+				$js_level = str_replace( '{{requirementslabel}}', esc_js( __( 'Voraussetzung', 'bonipress' ) ), $js_level );
 
 				$template = str_replace( '{{adnselected}}',       ( ( $setup['compare'] === 'AND' ) ? 'selected' : '' ), $template );
 				$template = str_replace( '{{orselected}}',        ( ( $setup['compare'] === 'OR' ) ? 'selected' : '' ), $template );
@@ -900,7 +899,7 @@ jQuery(function($) {
 					$point_type_options  = '';
 					$point_type_options .= '<option value=""';
 					if ( $reqsetup['type'] == '' ) $point_type_options .= ' selected="selected"';
-					$point_type_options .= '>' . esc_js( __( 'Select Point Type', 'bonipress' ) ) . '</option>';
+					$point_type_options .= '>' . esc_js( __( 'Punkttyp auswählen', 'bonipress' ) ) . '</option>';
 					foreach ( $point_types as $type_id => $type_label ) {
 						$point_type_options .= '<option value="' . esc_attr( $type_id ) . '"';
 						if ( $reqsetup['type'] == $type_id ) $point_type_options .= ' selected="selected"';
@@ -914,7 +913,7 @@ jQuery(function($) {
 					$reference_options   = '';
 					$reference_options  .= '<option value=""';
 					if ( $reqsetup['reference'] == '' ) $reference_options .= ' selected="selected"';
-					$reference_options  .= '>' . esc_js( __( 'Select Reference', 'bonipress' ) ) . '</option>';
+					$reference_options  .= '>' . esc_js( __( 'Wähle Referenz', 'bonipress' ) ) . '</option>';
 					foreach ( $references as $ref_id => $ref_label ) {
 						$reference_options .= '<option value="' . esc_attr( $ref_id ) . '"';
 						if ( $reqsetup['reference'] == $ref_id ) $reference_options .= ' selected="selected"';
@@ -935,7 +934,7 @@ jQuery(function($) {
 					$by_options          = '';
 					$by_options         .= '<option value=""';
 					if ( $reqsetup['by'] == '' ) $by_options .= ' selected="selected"';
-					$by_options         .= '>' . __( 'Select', 'bonipress' ) . '</option>';
+					$by_options         .= '>' . __( 'Wählen', 'bonipress' ) . '</option>';
 					foreach ( $sums as $sum_id => $sum_label ) {
 						$by_options .= '<option value="' . $sum_id . '"';
 						if ( $reqsetup['by'] == $sum_id ) $by_options .= ' selected="selected"';
@@ -996,7 +995,7 @@ jQuery(function($) {
 				$js_level           = str_replace( '{{reqamount}}',     '', $js_level );
 
 				$rewards            = str_replace( '{{level}}',          $level, $rewards );
-				$rewards            = str_replace( '{{rewardlabel}}',    esc_js( __( 'Reward', 'bonipress' ) ), $rewards );
+				$rewards            = str_replace( '{{rewardlabel}}',    esc_js( __( 'Belohnung', 'bonipress' ) ), $rewards );
 
 				$point_type_options = '';
 				foreach ( $point_types as $type_id => $type_label ) {
@@ -1006,7 +1005,7 @@ jQuery(function($) {
 				}
 
 				$rewards            = str_replace( '{{pointtypes}}',     $point_type_options, $rewards );
-				$rewards            = str_replace( '{{logplaceholder}}', esc_js( __( 'Log template', 'bonipress' ) ), $rewards );
+				$rewards            = str_replace( '{{logplaceholder}}', esc_js( __( 'Protokollvorlage', 'bonipress' ) ), $rewards );
 				$rewards            = str_replace( '{{logtemplate}}',    esc_js( $setup['reward']['log'] ), $rewards );
 				$rewards            = str_replace( '{{rewardamount}}',   $setup['reward']['amount'], $rewards );
 
@@ -1188,10 +1187,10 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 			$psforum    = ( ( class_exists( 'PSForum' ) ) ? true : false ); 
 
 ?>
-<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Badges', 'bonipress' ); ?></h4>
+<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Abzeichen', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
-	<h3><?php _e( 'Third-party Integrations', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Integrationen von Drittanbietern', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
@@ -1201,10 +1200,10 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 <?php
 
 			$buddypress_options = array(
-				''        => __( 'Do not show', 'bonipress' ),
-				'header'  => __( 'Include in Profile Header', 'bonipress' ),
-				'profile' => __( 'Include under the "Profile" tab', 'bonipress' ),
-				'both'    => __( 'Include under the "Profile" tab and Profile Header', 'bonipress' )
+				''        => __( 'Nicht anzeigen', 'bonipress' ),
+				'header'  => __( 'In Profilkopfzeile anzeigen', 'bonipress' ),
+				'profile' => __( 'Unter der Registerkarte "Profil" anzeigen', 'bonipress' ),
+				'both'    => __( 'Auf der Registerkarte „Profil“ und im Profil-Header anzeigen', 'bonipress' )
 			);
 
 			foreach ( $buddypress_options as $location => $description ) { 
@@ -1219,11 +1218,11 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 			</div>
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( 'show_all_bp' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_all_bp' ); ?>" id="<?php echo $this->field_id( 'show_all_bp' ); ?>" <?php checked( $settings['show_all_bp'], 1 ); ?> value="1" /> <?php _e( 'Show all badges, including badges users have not yet earned.', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'show_all_bp' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_all_bp' ); ?>" id="<?php echo $this->field_id( 'show_all_bp' ); ?>" <?php checked( $settings['show_all_bp'], 1 ); ?> value="1" /> <?php _e( 'Alle Abzeichen anzeigen, einschließlich Abzeichen, die Benutzer noch nicht verdient haben.', 'bonipress' ); ?></label>
 				</div>
 				<?php else : ?>
 				<input type="hidden" name="<?php echo $this->field_name( 'buddypress' ); ?>" id="<?php echo $this->field_id( 'buddypress' ); ?>" value="" />
-				<p><span class="description"><?php _e( 'Not installed', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Nicht installiert', 'bonipress' ); ?></span></p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -1235,10 +1234,10 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 <?php
 
 			$psforum_options = array(
-				''        => __( 'Do not show', 'bonipress' ),
-				'profile' => __( 'Include in Profile', 'bonipress' ),
-				'reply'   => __( 'Include in Forum Replies', 'bonipress' ),
-				'both'    => __( 'Include in Profile and Forum Replies', 'bonipress' )
+				''        => __( 'Nicht anzeigen', 'bonipress' ),
+				'profile' => __( 'In Profil anzeigen', 'bonipress' ),
+				'reply'   => __( 'In Forumsantworten anzeigen', 'bonipress' ),
+				'both'    => __( 'In Profil- und Forumantworten anzeigen', 'bonipress' )
 			);
 
 			foreach ( $psforum_options as $location => $description ) { 
@@ -1253,20 +1252,20 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 			</div>
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( 'show_all_bb' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_all_bb' ); ?>" id="<?php echo $this->field_id( 'show_all_bb' ); ?>" <?php checked( $settings['show_all_bb'], 1 ); ?> value="1" /> <?php _e( 'Show all badges, including badges users have not yet earned.', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'show_all_bb' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_all_bb' ); ?>" id="<?php echo $this->field_id( 'show_all_bb' ); ?>" <?php checked( $settings['show_all_bb'], 1 ); ?> value="1" /> <?php _e( 'Alle Abzeichen anzeigen, einschließlich Abzeichen, die Benutzer noch nicht verdient haben.', 'bonipress' ); ?></label>
 				</div>
 				<?php else : ?>
 					<input type="hidden" name="<?php echo $this->field_name( 'psforum' ); ?>" id="<?php echo $this->field_id( 'psforum' ); ?>" value="" />
-					<p><span class="description"><?php _e( 'Not installed', 'bonipress' ); ?></span></p>
+					<p><span class="description"><?php _e( '<a href="https://n3rds.work/piestingtal_source/ps-forum-plugin/" target=“_blank”>PS Forum</a>ist nicht installiert', 'bonipress' ); ?></span></p>
 				<?php endif; ?>
 			</div>
 		</div>
 	</div>
 
-	<h3 style="margin-bottom: 0;"><?php _e( 'Available Shortcodes', 'bonipress' ); ?></h3>
+	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="http://codex.bonipress.me/shortcodes/bonipress_my_badges/" target="_blank">[bonipress_my_badges]</a>, <a href="http://codex.bonipress.me/shortcodes/bonipress_badges/" target="_blank">[bonipress_badges]</a></p>
+			<p><a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_my_badges/" target="_blank">[bonipress_my_badges]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_badges/" target="_blank">[bonipress_badges]</a></p>
 		</div>
 	</div>
 
@@ -1317,10 +1316,10 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 </style>
 <table class="form-table">
 	<tr>
-		<th scope="row"><?php _e( 'Badges', 'bonipress' ); ?></th>
+		<th scope="row"><?php _e( 'Abzeichen', 'bonipress' ); ?></th>
 		<td>
 			<fieldset id="bonipress-badge-list" class="badge-list">
-				<legend class="screen-reader-text"><span><?php _e( 'Badges', 'bonipress' ); ?></span></legend>
+				<legend class="screen-reader-text"><span><?php _e( 'Abzeichen', 'bonipress' ); ?></span></legend>
 <?php
 
 			if ( ! empty( $all_badges ) ) {
@@ -1344,7 +1343,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 						$level_select  = '<select name="bonipress_badge_manual[badges][' . $badge_id . '][level]">';
 						$level_select .= '<option value=""';
 						if ( ! $earned ) $level_select .= ' selected="selected"';
-						$level_select .= '>' . __( 'Select a level', 'bonipress' ) . '</option>';
+						$level_select .= '>' . __( 'Wähle einen Level aus', 'bonipress' ) . '</option>';
 
 						foreach ( $badge->levels as $level_id => $level ) {
 							$level_select .= '<option value="' . $level_id . '"';
@@ -1358,7 +1357,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 
 ?>
 				<div class="badge-wrapper color-option<?php if ( $earned === 1 ) echo ' selected'; ?>" id="bonipress-badge<?php echo $badge_id; ?>-wrapper">
-					<label for="bonipress-badge<?php echo $badge_id; ?>"><input type="checkbox" name="bonipress_badge_manual[badges][<?php echo $badge_id; ?>][has]" class="toggle-badge" id="bonipress-badge<?php echo $badge_id; ?>" <?php checked( $earned, 1 );?> value="1" /> <?php _e( 'Earned', 'bonipress' ); ?></label>
+					<label for="bonipress-badge<?php echo $badge_id; ?>"><input type="checkbox" name="bonipress_badge_manual[badges][<?php echo $badge_id; ?>][has]" class="toggle-badge" id="bonipress-badge<?php echo $badge_id; ?>" <?php checked( $earned, 1 );?> value="1" /> <?php _e( 'Verdient', 'bonipress' ); ?></label>
 					<div class="badge-image-wrap">
 
 						<div class="badge-image<?php if ( $badge_image == '' ) echo ' empty'; ?>"><?php echo $badge_image; ?></div>
@@ -1489,9 +1488,9 @@ jQuery(function($) {
 			$results = $badge->assign_all();
 
 			if ( $results > 0 )
-				wp_send_json_success( sprintf( __( 'A total of %d users have received this badge.', 'bonipress' ), $results ) );
+				wp_send_json_success( sprintf( __( 'Insgesamt %d Benutzer haben dieses Abzeichen erhalten.', 'bonipress' ), $results ) );
 
-			wp_send_json_error( __( 'No users has yet earned this badge.', 'bonipress' ) );
+			wp_send_json_error( __( 'Dieses Abzeichen hat sich noch kein Benutzer verdient.', 'bonipress' ) );
 
 		}
 
@@ -1516,9 +1515,9 @@ jQuery(function($) {
 			$results = $badge->divest_all();
 
 			if ( $results == 0 )
-				wp_send_json_success( __( 'No connections where removed.', 'bonipress' ) );
+				wp_send_json_success( __( 'Es wurden keine Verbindungen entfernt.', 'bonipress' ) );
 
-			wp_send_json_success( sprintf( __( '%s connections where removed.', 'bonipress' ), $results ) );
+			wp_send_json_success( sprintf( __( '%s Verbindungen wurden entfernt.', 'bonipress' ), $results ) );
 
 		}
 

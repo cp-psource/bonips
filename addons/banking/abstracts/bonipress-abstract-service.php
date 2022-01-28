@@ -348,7 +348,7 @@ if ( ! class_exists( 'boniPRESS_Service' ) ) :
 			echo '<select name="' . $this->field_name( $pref_id ) . '" id="' . $this->field_id( $pref_id ) . '" class="form-control">';
 
 			if ( $use_select )
-				echo '<option value="">' . __( 'Select', 'bonipress' ) . '</option>';
+				echo '<option value="">' . __( 'Wählen', 'bonipress' ) . '</option>';
 
 			$settings = '';
 			if ( is_array( $pref_id ) ) {

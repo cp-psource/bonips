@@ -31,7 +31,6 @@ endif;
 
 /**
  * Get Transfer
- * @see http://codex.bonipress.me/functions/bonipress_get_transfer/
  * @param $transfer_id (string) required transfer id to retreave.
  * @returns boniPRESS_Transfer object on success else false.
  * @since 1.8
@@ -59,7 +58,6 @@ endif;
 
 /**
  * New Transfer
- * @see http://codex.bonipress.me/functions/bonipress_new_transfer/
  * @param $request (array) the required transfer request array.
  * @param $post (array) optional posted data from the transfer form.
  * @returns error code if transfer failed else an array or transfer details.
@@ -84,7 +82,6 @@ endif;
 
 /**
  * Refund Transfer
- * @see http://codex.bonipress.me/functions/bonipress_refund_transfer/
  * @param $transfer_id (string) required transfer id to refund.
  * @returns error message (string) or true on success.
  * @since 1.8
@@ -112,7 +109,6 @@ endif;
 
 /**
  * Get Transfer Limits
- * @see http://codex.bonipress.me/functions/bonipress_get_transfer_limits/
  * @param $settings (array) optional transfer settings.
  * @returns array of limits.
  * @since 1.8
@@ -125,10 +121,10 @@ if ( ! function_exists( 'bonipress_get_transfer_limits' ) ) :
 			$settings = bonipress_get_addon_settings( 'transfers' );
 
 		$limits = array(
-			'none'    => __( 'No limits.', 'bonipress' ),
-			'daily'   => __( 'Impose daily limit.', 'bonipress' ),
-			'weekly'  => __( 'Impose weekly limit.', 'bonipress' ),
-			'monthly' => __( 'Impose monthly limit.', 'bonipress' )
+			'none'    => __( 'Keine Limits.', 'bonipress' ),
+			'daily'   => __( 'Tägliches Limit auferlegen.', 'bonipress' ),
+			'weekly'  => __( 'Wöchentliches Limit auferlegen.', 'bonipress' ),
+			'monthly' => __( 'Monatliches Limit auferlegen.', 'bonipress' )
 		);
 
 		return apply_filters( 'bonipress_transfer_limits', $limits, $settings );
@@ -138,7 +134,6 @@ endif;
 
 /**
  * Get Transfer Limits
- * @see http://codex.bonipress.me/functions/bonipress_get_transfer_autofill_by/
  * @param $settings (array) optional transfer settings.
  * @returns array of autofill options.
  * @since 1.8
@@ -151,8 +146,8 @@ if ( ! function_exists( 'bonipress_get_transfer_autofill_by' ) ) :
 			$settings = bonipress_get_addon_settings( 'transfers' );
 
 		$autofills = array(
-			'user_login' => __( 'User Login (user_login)', 'bonipress' ),
-			'user_email' => __( 'User Email (user_email)', 'bonipress' )
+			'user_login' => __( 'Benutzerlogin (user_login)', 'bonipress' ),
+			'user_email' => __( 'Benutzer Email (user_email)', 'bonipress' )
 		);
 
 		return apply_filters( 'bonipress_transfer_autofill_by', $autofills, $settings );
@@ -162,7 +157,6 @@ endif;
 
 /**
  * Get Transfer Recipient
- * @see http://codex.bonipress.me/functions/bonipress_get_transfer_recipient/
  * @param $value (int|string) a value that identifies a particular user in WordPress.
  * @returns false if no recipient was found else the users id (int).
  * @since 1.8
@@ -212,7 +206,6 @@ endif;
 
 /**
  * User Can Transfer
- * @see http://codex.bonipress.me/functions/bonipress_user_can_transfer/
  * @param $user_id (int) requred user id
  * @param $amount (int) optional amount to check against balance
  * @returns true if no limit is set, 'limit' (string) if user is over limit else the amount of creds left
@@ -305,7 +298,6 @@ endif;
 
 /**
  * Render Transfer Message
- * @see http://codex.bonipress.me/functions/bonipress_transfer_render_message/
  * @since 1.7.6
  * @version 1.0
  */

@@ -1,7 +1,6 @@
 <?php
 /**
  * Addon: Transfer
- * Addon URI: http://codex.bonipress.me/chapter-iii/transfers/
  * Version: 1.6
  */
 if ( ! defined( 'boniPRESS_VERSION' ) ) exit;

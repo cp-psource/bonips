@@ -4,7 +4,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 /**
  * Transfer Shortcode Render
  * Renders a transfer form that allows users to send points to other users.
- * @see http://codex.bonipress.me/functions/bonipress_transfer_render/
  * @since 0.1
  * @version 1.8
  */
@@ -26,10 +25,10 @@ if ( ! function_exists( 'bonipress_transfer_render' ) ) :
 			'placeholder'     => '',
 			'types'           => '',
 			'excluded'        => '',
-			'recipient_label' => __( 'Recipient', 'bonipress' ),
-			'amount_label'    => __( 'Amount', 'bonipress' ),
-			'balance_label'   => __( 'Balance', 'bonipress' ),
-			'message_label'   => __( 'Message', 'bonipress' )
+			'recipient_label' => __( 'Empfänger', 'bonipress' ),
+			'amount_label'    => __( 'Betrag', 'bonipress' ),
+			'balance_label'   => __( 'Guthaben', 'bonipress' ),
+			'message_label'   => __( 'Nachricht', 'bonipress' )
 		), $atts, BONIPRESS_SLUG . '_transfer' );
 
 		// Prep

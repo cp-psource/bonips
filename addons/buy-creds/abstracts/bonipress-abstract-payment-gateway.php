@@ -3,7 +3,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * boniPRESS_Payment_Gateway class
- * @see http://codex.bonipress.me/classes/bonipress_payment_gateway/
  * @since 0.1
  * @version 1.3
  */
@@ -400,7 +399,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			$content  = '';
 
 			if ( $this->sandbox_mode )
-				$content .= '<div class="checkout-header"><div class="warning">' . esc_js( esc_attr( __( 'Test Mode', 'bonipress' ) ) )  . '</div></div>';
+				$content .= '<div class="checkout-header"><div class="warning">' . esc_js( esc_attr( __( 'Test Modus', 'bonipress' ) ) )  . '</div></div>';
 
 			$content .= '<div class="checkout-body padded' . ( ( ! $this->sandbox_mode ) ? ' no-header' : '' ) . '">';
 
@@ -416,7 +415,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		public function checkout_footer( $button_label = '' ) {
 
 			if ( $button_label == '' )
-				$button_label = __( 'Continue', 'bonipress' );
+				$button_label = __( 'Weiter', 'bonipress' );
 
 			$content  = '';
 			if ( ! empty( $this->redirect_fields ) ) {
@@ -490,9 +489,9 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			$table_rows[] = '<tr><td class="item">' . esc_html( $this->core->plural() ) . '</td><td class="cost right">' . $this->amount . '</td></tr>';
 
 			if ( $this->gifting )
-				$table_rows[] = '<tr><td colspan="2"><strong>' . esc_js( esc_attr( __( 'Recipient', 'bonipress' ) ) ) . ':</strong> ' . esc_html( get_userdata( $this->recipient_id )->display_name ) . '</td></tr>';
+				$table_rows[] = '<tr><td colspan="2"><strong>' . esc_js( esc_attr( __( 'Empfänger', 'bonipress' ) ) ) . ':</strong> ' . esc_html( get_userdata( $this->recipient_id )->display_name ) . '</td></tr>';
 
-			$table_rows[] = '<tr class="total"><td class="item right">' . esc_js( esc_attr( __( 'Cost', 'bonipress' ) ) ) . '</td><td class="cost right">' . sprintf( '%s %s', $this->cost, $this->prefs['currency'] ) . '</td></tr>';
+			$table_rows[] = '<tr class="total"><td class="item right">' . esc_js( esc_attr( __( 'Kosten', 'bonipress' ) ) ) . '</td><td class="cost right">' . sprintf( '%s %s', $this->cost, $this->prefs['currency'] ) . '</td></tr>';
 
 			$table_rows   = apply_filters( 'bonipress_buycred_order_table_rows', $table_rows, $this );
 
@@ -501,8 +500,8 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <table class="table" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
-			<th class="item">' . esc_js( esc_attr( __( 'Item', 'bonipress' ) ) ) . '</td>
-			<th class="cost right">' . esc_js( esc_attr( __( 'Amount', 'bonipress' ) ) ) . '</td>
+			<th class="item">' . esc_js( esc_attr( __( 'Artikel', 'bonipress' ) ) ) . '</td>
+			<th class="cost right">' . esc_js( esc_attr( __( 'Betrag', 'bonipress' ) ) ) . '</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -521,7 +520,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 */
 		public function checkout_transaction_id() {
 
-			$content = '<h2><span class="text-mutted">' . esc_js( esc_attr( __( 'Transaction ID', 'bonipress' ) ) ) . '</span>' . esc_attr( $this->transaction_id ) . '</h2>';
+			$content = '<h2><span class="text-mutted">' . esc_js( esc_attr( __( 'Transaktions-ID', 'bonipress' ) ) ) . '</span>' . esc_attr( $this->transaction_id ) . '</h2>';
 
 			return apply_filters( 'bonipress_buycred_checkout_txtid', $content, $this );
 
@@ -534,7 +533,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 */
 		public function checkout_cancel() {
 
-			$content = '<hr /><div class="cancel"><a href="' . $this->get_cancelled( $this->transaction_id ) . '">' . esc_js( esc_attr( __( 'cancel purchase', 'bonipress' ) ) )  . '</a></div>';
+			$content = '<hr /><div class="cancel"><a href="' . $this->get_cancelled( $this->transaction_id ) . '">' . esc_js( esc_attr( __( 'Kauf abbrechen', 'bonipress' ) ) )  . '</a></div>';
 
 			return apply_filters( 'bonipress_buycred_checkout_cancel', $content, $this );
 
@@ -592,7 +591,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 
 
 		if ( isset( $this->prefs['currency'] ) )
-			$content .= '<span class="bonipress-gateway-' . $this->id . '-currency">' . ( ( $this->prefs['currency'] == '' ) ? __( 'Select currency', 'bonipress' ) : esc_attr( $this->prefs['currency'] ) ) . '</span>';
+			$content .= '<span class="bonipress-gateway-' . $this->id . '-currency">' . ( ( $this->prefs['currency'] == '' ) ? __( 'Währung wählen', 'bonipress' ) : esc_attr( $this->prefs['currency'] ) ) . '</span>';
 
 		else
 			$content .= '<span>' . esc_attr( $default ) . '</span>';
@@ -661,7 +660,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 
 					$bonipress    = bonipress( $point_type );
 
-					$log_entry = $this->first_comment( sprintf( _x( 'Received new request to purchase %s.', '%s is replaced with the point amount and name.', 'bonipress' ), $bonipress->format_number( $amount ) . ' ' . $bonipress->plural() ) );
+					$log_entry = $this->first_comment( sprintf( _x( 'Neue Anfrage zum Kauf von %s erhalten.', '%s wird durch die Punktzahl und den Namen ersetzt.', 'bonipress' ), $bonipress->format_number( $amount ) . ' ' . $bonipress->plural() ) );
 					$log_entry = apply_filters( 'bonipress_new_buycred_request_comment_' . $this->id, $log_entry, $data );
 
 					$this->log_call( $post_id, $log_entry );
@@ -1118,9 +1117,9 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 */
 		public function start_log() {
 
-			$this->new_log_entry( 'Incoming confirmation call detected' );
-			$this->new_log_entry( sprintf( 'Gateway identified itself as "%s"', $this->id ) );
-			$this->new_log_entry( 'Verifying caller' );
+			$this->new_log_entry( 'Eingehender Bestätigungsanruf erkannt' );
+			$this->new_log_entry( sprintf( 'Gateway hat sich als "%s" identifiziert', $this->id ) );
+			$this->new_log_entry( 'Anrufer verifizieren' );
 
 		}
 
@@ -1176,13 +1175,13 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 
 			// Set Title
 			if ( $this->sandbox_mode )
-				$title = __( 'Test Payment', 'bonipress' );
+				$title = __( 'Testzahlung', 'bonipress' );
 
 			elseif ( isset( $this->label ) )
 				$title = $this->label;
 
 			else
-				$title = __( 'Payment', 'bonipress' );
+				$title = __( 'Zahlung', 'bonipress' );
 
 			if ( ! isset( $this->transaction_id ) )
 				$this->transaction_id = '';
@@ -1210,7 +1209,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
 			<h2><?php echo $title; ?></h2>
-			<p><a href="<?php echo $this->get_cancelled( $this->transaction_id ); ?>" id="return-where-we-came-from"><?php _e( 'Cancel', 'bonipress' ); ?></a></p>
+			<p><a href="<?php echo $this->get_cancelled( $this->transaction_id ); ?>" id="return-where-we-came-from"><?php _e( 'Abbrechen', 'bonipress' ); ?></a></p>
 		</div>
 	</div>
 <?php
@@ -1307,13 +1306,13 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-first-name"><?php _e( 'First Name', 'bonipress' ); ?></label>
+			<label for="billing-first-name"><?php _e( 'Vorname', 'bonipress' ); ?></label>
 			<input type="text" name="billing[first_name]" id="billing-first-name" value="<?php echo $user_details['first_name']; ?>" class="form-control<?php if ( array_key_exists( 'first_name', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'first_name', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-last-name"><?php _e( 'Last Name', 'bonipress' ); ?></label>
+			<label for="billing-last-name"><?php _e( 'Nachname', 'bonipress' ); ?></label>
 			<input type="text" name="billing[last_name]" id="billing-last-name" value="<?php echo $user_details['last_name']; ?>" class="form-control<?php if ( array_key_exists( 'last_name', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'last_name', $required_fields ) ) echo $required; else echo $optional; ?>  autocomplete="off"  />
 		</div>
 	</div>
@@ -1321,7 +1320,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-address1"><?php _e( 'Address Line 1', 'bonipress' ); ?></label>
+			<label for="billing-address1"><?php _e( 'Adresszeile 1', 'bonipress' ); ?></label>
 			<input type="text" name="billing[address1]" id="billing-address1" value="<?php echo $user_details['address1']; ?>" class="form-control<?php if ( array_key_exists( 'address1', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'address1', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
@@ -1329,7 +1328,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-address2"><?php _e( 'Address Line 2', 'bonipress' ); ?></label>
+			<label for="billing-address2"><?php _e( 'Adresszeile 2', 'bonipress' ); ?></label>
 			<input type="text" name="billing[address2]" id="billing-address2" value="<?php echo $user_details['address2']; ?>" class="form-control<?php if ( array_key_exists( 'address2', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'address2', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
@@ -1337,13 +1336,13 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-city"><?php _e( 'City', 'bonipress' ); ?></label>
+			<label for="billing-city"><?php _e( 'Stadt', 'bonipress' ); ?></label>
 			<input type="text" name="billing[city]" id="billing-city" value="<?php echo $user_details['city']; ?>" class="form-control<?php if ( array_key_exists( 'city', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'city', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-zip"><?php _e( 'Zip', 'bonipress' ); ?></label>
+			<label for="billing-zip"><?php _e( 'Postleitzahl', 'bonipress' ); ?></label>
 			<input type="text" name="billing[zip]" id="billing-zip" value="<?php echo $user_details['postcode']; ?>" class="form-control<?php if ( array_key_exists( 'zip', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'zip', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
@@ -1351,7 +1350,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-state"><?php _e( 'State', 'bonipress' ); ?></label>
+			<label for="billing-state"><?php _e( 'Bundesland', 'bonipress' ); ?></label>
 			<input type="text" name="billing[state]" id="billing-state" value="<?php echo $user_details['state']; ?>" class="form-control<?php if ( array_key_exists( 'state', $this->errors ) ) { echo ' error'; } ?>" <?php if ( in_array( 'state', $required_fields ) ) echo $required; else echo $optional; ?> autocomplete="off"  />
 		</div>
 	</div>
@@ -1359,12 +1358,12 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="billing-country"><?php _e( 'Country', 'bonipress' ); ?></label>
+			<label for="billing-country"><?php _e( 'Land', 'bonipress' ); ?></label>
 
 			<?php if ( $country_dropdown !== false ) : ?>
 
 			<select name="billing[country]" id="billing-country" class="form-control">
-				<option value=""><?php _e( 'Choose Country', 'bonipress' ); ?></option>
+				<option value=""><?php _e( 'Land auswählen', 'bonipress' ); ?></option>
 
 				<?php $this->list_option_countries(); ?>
 
@@ -1487,8 +1486,8 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		<form name="bonipress_<?php echo $id; ?>_request" class="form text-center" action="<?php echo $location; ?>" method="post" id="redirect-form">
 			<?php foreach ( $hidden_fields as $name => $value ) echo '<input type="hidden" name="' . $name . '" value="' . $value . '" />' . "\n"; ?>
 			<img src="<?php echo plugins_url( 'assets/images/loading.gif', BONIPRESS_PURCHASE ); ?>" alt="Loading" />
-			<noscript><input type="submit" name="submit-form" value="<?php printf( __( 'Continue to %s', 'bonipress' ), $this->label ); ?>" /></noscript>
-			<p id="manual-continue"><a href="javascript:void(0);" onclick="document.bonipress_<?php echo $id; ?>_request.submit();return false;"><?php _e( 'Click here if you are not automatically redirected', 'bonipress' ); ?></a></p>
+			<noscript><input type="submit" name="submit-form" value="<?php printf( __( 'Weiter zu %s', 'bonipress' ), $this->label ); ?>" /></noscript>
+			<p id="manual-continue"><a href="javascript:void(0);" onclick="document.bonipress_<?php echo $id; ?>_request.submit();return false;"><?php _e( 'Klicke hier, wenn Du nicht automatisch weitergeleitet wirst', 'bonipress' ); ?></a></p>
 		</form>
 	</div>
 </div>
@@ -1678,7 +1677,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 				$js = ' data-update="' . $js . '"';
 
 			echo '<select name="' . $this->field_name( $name ) . '" id="' . $this->field_id( $name ) . '" class="currency form-control"' . $js . '>';
-			echo '<option value="">' . __( 'Select', 'bonipress' ) . '</option>';
+			echo '<option value="">' . __( 'Wählen', 'bonipress' ) . '</option>';
 			foreach ( $currencies as $code => $cname ) {
 				echo '<option value="' . $code . '"';
 				if ( isset( $this->prefs[ $name ] ) && $this->prefs[ $name ] == $code ) echo ' selected="selected"';
@@ -1696,14 +1695,14 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		public function item_types_dropdown( $name = '' ) {
 
 			$types = array(
-				'product'  => 'Product',
+				'product'  => 'Produkt',
 				'service'  => 'Service',
-				'donation' => 'Donation'
+				'donation' => 'Spende'
 			);
 			$types = apply_filters( 'bonipress_dropdown_item_types', $types );
 
 			echo '<select name="' . $this->field_name( $name ) . '" id="' . $this->field_id( $name ) . '">';
-			echo '<option value="">' . __( 'Select', 'bonipress' ) . '</option>';
+			echo '<option value="">' . __( 'Wählen', 'bonipress' ) . '</option>';
 			foreach ( $types as $code => $cname ) {
 				echo '<option value="' . $code . '"';
 				if ( isset( $this->prefs[ $name ] ) && $this->prefs[ $name ] == $code ) echo ' selected="selected"';
@@ -1735,7 +1734,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 				"AM"  =>  "ARMENIA",
 				"AW"  =>  "ARUBA",
 				"AU"  =>  "AUSTRALIA",
-				"AT"  =>  "AUSTRIA",
+				"AT"  =>  "ÖSTERREICH",
 				"AZ"  =>  "AZERBAIJAN",
 				"BS"  =>  "BAHAMAS",
 				"BH"  =>  "BAHRAIN",
@@ -1801,7 +1800,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 				"GA"  =>  "GABON",
 				"GM"  =>  "GAMBIA",
 				"GE"  =>  "GEORGIA",
-				"DE"  =>  "GERMANY",
+				"DE"  =>  "DEUTSCHLAND",
 				"GH"  =>  "GHANA",
 				"GI"  =>  "GIBRALTAR",
 				"GR"  =>  "GREECE",
@@ -2034,7 +2033,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			);
 			$states = apply_filters( 'bonipress_list_option_us', $states );
 
-			$outside = 'Outside US';
+			$outside = 'Outside US.';
 			if ( $non_us == 'top' ) echo '<option value="">' . $outside . '</option>';
 			foreach ( $states as $code => $cname ) {
 				echo '<option value="' . $code . '"';
@@ -2053,18 +2052,18 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		public function list_option_months( $selected = '' ) {
 
 			$months = array (
-				"01"  =>  __( 'January', 'bonipress' ),
-				"02"  =>  __( 'February', 'bonipress' ),
-				"03"  =>  __( 'March', 'bonipress' ),
+				"01"  =>  __( 'Jänner', 'bonipress' ),
+				"02"  =>  __( 'Februar', 'bonipress' ),
+				"03"  =>  __( 'März', 'bonipress' ),
 				"04"  =>  __( 'April', 'bonipress' ),
-				"05"  =>  __( 'May', 'bonipress' ),
-				"06"  =>  __( 'June', 'bonipress' ),
-				"07"  =>  __( 'July', 'bonipress' ),
+				"05"  =>  __( 'Mai', 'bonipress' ),
+				"06"  =>  __( 'Juni', 'bonipress' ),
+				"07"  =>  __( 'Juli', 'bonipress' ),
 				"08"  =>  __( 'August', 'bonipress' ),
 				"09"  =>  __( 'September', 'bonipress' ),
-				"10"  =>  __( 'October', 'bonipress' ),
+				"10"  =>  __( 'Oktober', 'bonipress' ),
 				"11"  =>  __( 'November', 'bonipress' ),
-				"12"  =>  __( 'December', 'bonipress' )
+				"12"  =>  __( 'Dezember', 'bonipress' )
 			);
 
 			foreach ( $months as $number => $text ) {

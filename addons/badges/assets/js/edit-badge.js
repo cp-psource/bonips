@@ -455,7 +455,7 @@ jQuery(function($){
 		// Set / Change Level Image Action
 		$( '#bonipress-badge-setup' ).on( 'click', 'button.change-level-image', function(e){
 
-			console.log( 'Change level image button' );
+			console.log( 'Schaltfläche zum Ändern des Levelbilds' );
 
 			var button       = $(this);
 			var currentlevel = button.data( 'level' );

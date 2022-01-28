@@ -280,33 +280,33 @@ if ( ! function_exists( 'bonipress_add_new_recurring_payout' ) ) :
 		// Validate first
 		$title = sanitize_text_field( $schedule_setup['job_title'] );
 		if ( $title == '' )
-			return new WP_Error( 'invalid', __( 'A title must be set.', 'bonipress' ) );
+			return new WP_Error( 'invalid', __( 'Es muss ein Titel festgelegt werden.', 'bonipress' ) );
 
 		$schedule_setup['job_title'] = $title;
 
 		$payout = sanitize_text_field( $schedule_setup['payout'] );
 		$payout = $bonipress->number( $payout );
 		if ( $payout == $bonipress->zero() )
-			return new WP_Error( 'invalid', __( 'The amount to payout can not be zero.', 'bonipress' ) );
+			return new WP_Error( 'invalid', __( 'Der Auszahlungsbetrag darf nicht Null sein.', 'bonipress' ) );
 
 		$schedule_setup['payout'] = $payout;
 
 		$last_run = absint( $schedule_setup['last_run'] );
 		if ( $last_run < time() )
-			return new WP_Error( 'invalid', __( 'Start date can not be in the past.', 'bonipress' ) );
+			return new WP_Error( 'invalid', __( 'Das Startdatum darf nicht in der Vergangenheit liegen.', 'bonipress' ) );
 
 		$schedule_setup['last_run'] = $last_run;
 
 		$total_runs = sanitize_text_field( $schedule_setup['total_runs'] );
 		if ( $total_runs < -1 ) $total_runs = -1;
 		if ( $total_runs == 0 )
-			return new WP_Error( 'invalid', __( 'Repeat can not be zero.', 'bonipress' ) );
+			return new WP_Error( 'invalid', __( 'Wiederholen kann nicht Null sein.', 'bonipress' ) );
 
 		$schedule_setup['total_runs'] = $total_runs;
 
 		$schedules = bonipress_get_recurring_payout_schedules( $point_type );
 		if ( array_key_exists( $new_id, $schedules ) )
-			return new WP_Error( 'invalid', __( 'Duplicate schedule.', 'bonipress' ) );
+			return new WP_Error( 'invalid', __( 'Zeitplan duplizieren.', 'bonipress' ) );
 
 		$schedule_setup['status']         = 0;
 		$schedule_setup['runs_remaining'] = $schedule_setup['total_runs'];

@@ -278,9 +278,9 @@ if ( ! function_exists( 'bonipress_display_badge_requirement' ) ) :
 						$requirement['amount'] = $level_value;
 
 					if ( $requirement['by'] == 'count' )
-						$rendered_row = sprintf( _x( '%s for "%s" x %d', '"Points" for "reference" x times', 'bonipress' ), $bonipress->plural(), $requirement['ref'], $requirement['amount'] );
+						$rendered_row = sprintf( _x( '%s für "%s" x %d', '"Punkte“ für "Referenz“ x mal', 'bonipress' ), $bonipress->plural(), $requirement['ref'], $requirement['amount'] );
 					else
-						$rendered_row = sprintf( _x( '%s %s for "%s"', '"Gained/Lost" "x points" for "reference"', 'bonipress' ), ( ( $requirement['amount'] < 0 ) ? __( 'Lost', 'bonipress' ) : __( 'Gained', 'bonipress' ) ), $bonipress->format_creds( $requirement['amount'] ), $requirement['ref'] );
+						$rendered_row = sprintf( _x( '%s %s für "%s"', '"Gewinnt/Verloren" "x Punkte" für "Referenz"', 'bonipress' ), ( ( $requirement['amount'] < 0 ) ? __( 'Lost', 'bonipress' ) : __( 'Gained', 'bonipress' ) ), $bonipress->format_creds( $requirement['amount'] ), $requirement['ref'] );
 
 					$compare = _x( 'OR', 'Comparison of badge requirements. A OR B', 'bonipress' );
 					if ( $setup['compare'] === 'AND' )
@@ -300,7 +300,7 @@ if ( ! function_exists( 'bonipress_display_badge_requirement' ) ) :
 			}
 
 			if ( (int) bonipress_get_post_meta( $badge_id, 'manual_badge', true ) === 1 )
-				$output[] = '<strong><small><em>' . __( 'This badge is manually awarded.', 'bonipress' ) . '</em></small></strong>';
+				$output[] = '<strong><small><em>' . __( 'Dieses Abzeichen wird manuell vergeben.', 'bonipress' ) . '</em></small></strong>';
 
 			$reply = implode( '', $output );
 

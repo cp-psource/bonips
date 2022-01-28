@@ -3,7 +3,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * boniPRESS_Rank class
- * @see http://codex.bonipress.me/objects/bonipress_transfer-2/
  * @since 1.8
  * @version 1.0
  */
@@ -148,17 +147,17 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 				$settings = array(
 					'types'      => array( BONIPRESS_DEFAULT_TYPE_KEY ),
 					'logs'       => array(
-						'sending'   => 'Transfer of %plural% to %display_name%',
-						'receiving' => 'Transfer of %plural% from %display_name%'
+						'sending'   => 'Übertragung von %plural% an %display_name%',
+						'receiving' => 'Übertragung von %plural% von %display_name%'
 					),
 					'errors'     => array(
-						'low'       => __( 'You do not have enough %plural% to send.', 'bonipress' ),
-						'over'      => __( 'You have exceeded your %limit% transfer limit.', 'bonipress' )
+						'low'       => __( 'Du hast nicht genug %plural% zum Senden.', 'bonipress' ),
+						'over'      => __( 'Du hast Dein Übertragungslimit von %limit% überschritten.', 'bonipress' )
 					),
 					'templates'  => array(
 						'login'     => '',
-						'balance'   => 'Your current balance is %balance%',
-						'limit'     => 'Your current %limit% transfer limit is %left%',
+						'balance'   => 'Dein aktuelles Guthaben beträgt %balance%',
+						'limit'     => 'Dein aktuelles Transferlimit von %limit% beträgt %left%',
 						'button'    => __( 'Transfer', 'bonipress' )
 					),
 					'autofill'   => 'user_login',
@@ -253,10 +252,10 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 		public function get_transfer_statuses() {
 
 			return apply_filters( 'bonipress_transfer_statuses', array(
-				''           => __( 'New', '' ),
-				'incomplete' => __( 'Incomplete', '' ),
-				'completed'  => __( 'Completed', '' ),
-				'refunded'   => __( 'Refunded', '' )
+				''           => __( 'Neu', '' ),
+				'incomplete' => __( 'Unvollständig', '' ),
+				'completed'  => __( 'Vollendet', '' ),
+				'refunded'   => __( 'Erstattet', '' )
 			) );
 
 		}
@@ -373,7 +372,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 			// We can't make a transfer
 			if ( empty( $this->transferable_types ) ) {
 
-				$this->errors['excluded'] = 'You do not have access to this point type.';
+				$this->errors['excluded'] = 'Du hast keinen Zugriff auf diesen Punkttyp.';
 
 				return false;
 
@@ -382,7 +381,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 			// Enforce minimum requirements
 			if ( ! $this->user_can_transfer_minimum() ) {
 
-				$this->errors['minimum'] = 'You do not have enough points to make a transfer.';
+				$this->errors['minimum'] = 'Du hast nicht genug Punkte, um eine Überweisung vorzunehmen.';
 
 				return false;
 
@@ -391,7 +390,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 			// Enforce limits (if used)
 			if ( $this->user_is_over_limit() ) {
 
-				$this->errors['limit'] = 'You have reached your transfer limit.';
+				$this->errors['limit'] = 'Du hast Dein Überweisungslimit erreicht.';
 
 				return false;
 
@@ -460,7 +459,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 
 				// Create a limit object, since we love objects
 				$limit         = new StdClass();
-				$limit->label  = __( 'Day', 'bonipress' );
+				$limit->label  = __( 'Tag', 'bonipress' );
 				$limit->amount = $this->settings['limit']['amount'];
 				$limit->period = $this->settings['limit']['limit'];
 				$limit->from   = 'today';
@@ -468,13 +467,13 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 
 				// Weekly limit
 				if ( $limit->period == 'weekly' ) {
-					$limit->label = __( 'Week', 'bonipress' );
+					$limit->label = __( 'Woche', 'bonipress' );
 					$limit->from  = mktime( 0, 0, 0, date( 'n', $this->now ), date( 'j', $this->now ) - date( 'n', $this->now ) + 1 );
 				}
 
 				// Monthly limit
 				elseif ( $limit->period == 'monthly' ) {
-					$limit->label = __( 'Month', 'bonipress' );
+					$limit->label = __( 'Monat', 'bonipress' );
 					$limit->from  = strtotime( date( 'Y-m-01' ) . ' midnight', $this->now );
 				}
 
@@ -491,7 +490,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 		 */
 		public function get_transfer_limit_desc( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
 
-			$description = __( 'No limit', 'bonipress' );
+			$description = __( 'Kein Limit', 'bonipress' );
 			if ( ! empty( $this->limits ) && array_key_exists( $point_type, $this->limits ) ) {
 
 				$limit       = $this->limits[ $point_type ];
@@ -819,10 +818,10 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 				'show_limit'      => 0,
 				'show_message'    => 1,
 				'placeholder'     => '',
-				'recipient_label' => __( 'Recipient', 'bonipress' ),
-				'amount_label'    => __( 'Amount', 'bonipress' ),
-				'balance_label'   => __( 'Balance', 'bonipress' ),
-				'message_label'   => __( 'Message', 'bonipress' )
+				'recipient_label' => __( 'Empfänger', 'bonipress' ),
+				'amount_label'    => __( 'Betrag', 'bonipress' ),
+				'balance_label'   => __( 'Guthaben', 'bonipress' ),
+				'message_label'   => __( 'Nachricht', 'bonipress' )
 			), $args );
 
 			if ( $this->args['button'] == '' )
@@ -912,12 +911,12 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 			if ( $this->args['placeholder'] == '' ) {
 
 				if ( $this->settings['autofill'] == 'user_login' )
-					$placeholder = __( 'username', 'bonipress' );
+					$placeholder = __( 'Nutzername', 'bonipress' );
 
 				elseif ( $this->settings['autofill'] == 'user_email' )
-					$placeholder = __( 'email', 'bonipress' );
+					$placeholder = __( 'Email', 'bonipress' );
 
-				$placeholder = sprintf( apply_filters( 'bonipress_transfer_to_placeholder', __( 'recipients %s', 'bonipress' ), $this->settings, $this->args ), $placeholder );
+				$placeholder = sprintf( apply_filters( 'bonipress_transfer_to_placeholder', __( 'Empfänger %s', 'bonipress' ), $this->settings, $this->args ), $placeholder );
 
 			}
 
