@@ -71,7 +71,7 @@ function bonipress_load_badgeos_hook() {
 		}
 
 		/**
-		 * Exclude bbPress Post Types
+		 * Exclude PSForum Post Types
 		 * @since 1.0.8
 		 * @version 1.0
 		 */

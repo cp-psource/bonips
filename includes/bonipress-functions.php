@@ -2051,9 +2051,9 @@ endif;
  * Supports:
  * - NULL / empty string - returns the current users ID.
  * - "current" string - returns the current users ID.
- * - "bbprofile" string - returns the BuddyPress profile ID. Requires use on BP profiles.
+ * - "psfrofile" string - returns the BuddyPress profile ID. Requires use on BP profiles.
  * - "author" string - returns the post authors user ID. Requires use inside the loop.
- * - "replyauthor" string - returns the bbPress reply authors ID. Requires use in bbPress forums topics.
+ * - "replyauthor" string - returns the PSForum reply authors ID. Requires use in PSForum forums topics.
  *
  * @since 1.7
  * @version 1.1
@@ -2078,7 +2078,7 @@ if ( ! function_exists( 'bonipress_get_user_id' ) ) :
 			}
 
 			// BuddyPress Profile ID
-			elseif ( $requested === 'bbprofile' ) {
+			elseif ( $requested === 'psfrofile' ) {
 
 				if ( function_exists( 'bp_displayed_user_id' ) )
 					$requested = bp_displayed_user_id();
@@ -2100,11 +2100,11 @@ if ( ! function_exists( 'bonipress_get_user_id' ) ) :
 
 			}
 
-			// bbPress reply author
+			// PSForum reply author
 			elseif ( $requested === 'replyauthor' ) {
 
-				if ( function_exists( 'bbp_get_reply_author_id' ) )
-					$user_id = bbp_get_reply_author_id( bbp_get_reply_id() );
+				if ( function_exists( 'psf_get_reply_author_id' ) )
+					$user_id = psf_get_reply_author_id( psf_get_reply_id() );
 
 			}
 

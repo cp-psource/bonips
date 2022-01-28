@@ -273,7 +273,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			// Supported plugins
 			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-affiliatewp.php' );
 			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-badgeOS.php' );
-			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-bbPress.php' );
+			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-PSForum.php' );
 			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-buddypress-media.php' );
 			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-buddypress.php' );
 			$this->file( boniPRESS_PLUGINS_DIR . 'bonipress-hook-contact-form7.php' );

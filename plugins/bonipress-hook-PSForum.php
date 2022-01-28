@@ -6,16 +6,16 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
  * @since 0.1
  * @version 1.1
  */
-add_filter( 'bonipress_setup_hooks', 'bonipress_register_bbpress_hook', 20 );
-function bonipress_register_bbpress_hook( $installed ) {
+add_filter( 'bonipress_setup_hooks', 'bonipress_register_psforum_hook', 20 );
+function bonipress_register_psforum_hook( $installed ) {
 
-	if ( ! class_exists( 'bbPress' ) ) return $installed;
+	if ( ! class_exists( 'PSForum' ) ) return $installed;
 
-	$installed['hook_bbpress'] = array(
-		'title'         => 'bbPress',
-		'description'   => __( 'Awards %_plural% for bbPress actions.', 'bonipress' ),
-		'documentation' => 'http://codex.bonipress.me/hooks/bbpress-actions/',
-		'callback'      => array( 'boniPRESS_bbPress' )
+	$installed['hook_psforum'] = array(
+		'title'         => 'PSForum',
+		'description'   => __( 'Awards %_plural% for PSForum actions.', 'bonipress' ),
+		'documentation' => 'http://codex.bonipress.me/hooks/psforum-actions/',
+		'callback'      => array( 'boniPRESS_PSForum' )
 	);
 
 	return $installed;
@@ -23,17 +23,17 @@ function bonipress_register_bbpress_hook( $installed ) {
 }
 
 /**
- * bbPress Hook
+ * PSForum Hook
  * @since 0.1
  * @version 1.4.4
  */
-add_action( 'bonipress_load_hooks', 'bonipress_load_bbpress_hook', 20 );
-function bonipress_load_bbpress_hook() {
+add_action( 'bonipress_load_hooks', 'bonipress_load_psforum_hook', 20 );
+function bonipress_load_psforum_hook() {
 
 	// If the hook has been replaced or if plugin is not installed, exit now
-	if ( class_exists( 'boniPRESS_bbPress' ) || ! class_exists( 'bbPress' ) ) return;
+	if ( class_exists( 'boniPRESS_PSForum' ) || ! class_exists( 'PSForum' ) ) return;
 
-	class boniPRESS_bbPress extends boniPRESS_Hook {
+	class boniPRESS_PSForum extends boniPRESS_Hook {
 
 		/**
 		 * Construct
@@ -41,7 +41,7 @@ function bonipress_load_bbpress_hook() {
 		public function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
-				'id'       => 'hook_bbpress',
+				'id'       => 'hook_psforum',
 				'defaults' => array(
 					'new_forum' => array(
 						'creds'    => 1,
@@ -95,71 +95,71 @@ function bonipress_load_bbpress_hook() {
 
 			// Insert Points balance in profile
 			if ( isset( $this->prefs['show_points_in_reply'] ) && $this->prefs['show_points_in_reply'] == 1 )
-				add_action( 'bbp_theme_after_reply_author_details', array( $this, 'insert_balance_reply' ) );
+				add_action( 'psf_theme_after_reply_author_details', array( $this, 'insert_balance_reply' ) );
 
 			if ( isset( $this->prefs['show_points_in_profile'] ) && $this->prefs['show_points_in_profile'] == 1 )
-				add_action( 'bbp_template_after_user_profile', array( $this, 'insert_balance_profile' ) );
+				add_action( 'psf_template_after_user_profile', array( $this, 'insert_balance_profile' ) );
 
 			// New Forum
 			if ( $this->prefs['new_forum']['creds'] != 0 )
-				add_action( 'bbp_new_forum',    array( $this, 'new_forum' ), 20 );
+				add_action( 'psf_new_forum',    array( $this, 'new_forum' ), 20 );
 
 			// Delete Forum
 			if ( $this->prefs['delete_forum']['creds'] != 0 )
-				add_action( 'bbp_delete_forum', array( $this, 'delete_forum' ) );
+				add_action( 'psf_delete_forum', array( $this, 'delete_forum' ) );
 
 			// New Topic
 			if ( $this->prefs['new_topic']['creds'] != 0 )
-				add_action( 'bbp_new_topic',    array( $this, 'new_topic' ), 20, 4 );
+				add_action( 'psf_new_topic',    array( $this, 'new_topic' ), 20, 4 );
 
 			// Delete Topic
 			if ( $this->prefs['delete_topic']['creds'] != 0 )
-				add_action( 'bbp_delete_topic', array( $this, 'delete_topic' ) );
+				add_action( 'psf_delete_topic', array( $this, 'delete_topic' ) );
 
 			// Fave Topic
 			if ( $this->prefs['fav_topic']['creds'] != 0 )
-				add_action( 'bbp_add_user_favorite', array( $this, 'fav_topic' ), 10, 2 );
+				add_action( 'psf_add_user_favorite', array( $this, 'fav_topic' ), 10, 2 );
 
 			// New Reply
 			if ( $this->prefs['new_reply']['creds'] != 0 )
-				add_action( 'bbp_new_reply',    array( $this, 'new_reply' ), 20, 5 );
+				add_action( 'psf_new_reply',    array( $this, 'new_reply' ), 20, 5 );
 
 			// Delete Reply
 			if ( $this->prefs['delete_reply']['creds'] != 0 )
-				add_action( 'bbp_delete_reply', array( $this, 'delete_reply' ) );
+				add_action( 'psf_delete_reply', array( $this, 'delete_reply' ) );
 
 		}
 
 		/**
-		 * Exclude bbPress Post Types
+		 * Exclude PSForum Post Types
 		 * @since 0.1
 		 * @version 1.0
 		 */
 		public function exclude_post_type( $excludes ) {
 
-			$excludes[] = bbp_get_forum_post_type();
-			$excludes[] = bbp_get_topic_post_type();
-			$excludes[] = bbp_get_reply_post_type();
+			$excludes[] = psf_get_forum_post_type();
+			$excludes[] = psf_get_topic_post_type();
+			$excludes[] = psf_get_reply_post_type();
 
 			return $excludes;
 
 		}
 
 		/**
-		 * Insert Balance in bbPress Profiles
+		 * Insert Balance in PSForum Profiles
 		 * @since 1.1.1
 		 * @version 1.2
 		 */
 		public function insert_balance_profile() {
 
-			$user_id = bbp_get_displayed_user_id();
+			$user_id = psf_get_displayed_user_id();
 
 			if ( $this->core->exclude_user( $user_id ) || $user_id == 0 ) return;
 
 			$balance = $this->core->get_users_balance( $user_id, $this->bonipress_type );
 			$layout  = $this->core->plural() . ': ' . $this->core->format_creds( $balance );
 
-			echo apply_filters( 'bonipress_bbp_profile_balance', '<div class="users-bonipress-balance">' . $layout . '</div>', $layout, $user_id, $this );
+			echo apply_filters( 'bonipress_psf_profile_balance', '<div class="users-bonipress-balance">' . $layout . '</div>', $layout, $user_id, $this );
 
 		}
 
@@ -170,13 +170,13 @@ function bonipress_load_bbpress_hook() {
 		 */
 		public function insert_balance_reply() {
 
-			$reply_id = bbp_get_reply_id();
+			$reply_id = psf_get_reply_id();
 
 			// Skip Anonymous replies
-			if ( bbp_is_reply_anonymous( $reply_id ) ) return;
+			if ( psf_is_reply_anonymous( $reply_id ) ) return;
 
 			// Get reply author
-			$user_id = bbp_get_reply_author_id( $reply_id );
+			$user_id = psf_get_reply_author_id( $reply_id );
 
 			// Check for exclusions and guests
 			if ( $this->core->exclude_user( $user_id ) || $user_id == 0 ) return;
@@ -184,7 +184,7 @@ function bonipress_load_bbpress_hook() {
 			$balance = $this->core->get_users_balance( $user_id, $this->bonipress_type );
 			$layout  = $this->core->plural() . ': ' . $this->core->format_creds( $balance );
 
-			echo apply_filters( 'bonipress_bbp_reply_balance', '<div class="users-bonipress-balance">' . $layout . '</div>', $layout, $user_id, $this );
+			echo apply_filters( 'bonipress_psf_reply_balance', '<div class="users-bonipress-balance">' . $layout . '</div>', $layout, $user_id, $this );
 
 		}
 
@@ -231,7 +231,7 @@ function bonipress_load_bbpress_hook() {
 		public function delete_forum( $forum_id ) {
 
 			// Get Author
-			$forum_author = bbp_get_forum_author_id( $forum_id );
+			$forum_author = psf_get_forum_author_id( $forum_id );
 
 			// If gained, points, deduct
 			if ( $this->has_entry( 'new_forum', $forum_id, $forum_author ) ) {
@@ -263,7 +263,7 @@ function bonipress_load_bbpress_hook() {
 
 			// Check if forum author is allowed to get points for their own topics
 			if ( (bool) $this->prefs['new_topic']['author'] == false ) {
-				if ( bbp_get_forum_author_id( $forum_id ) == $topic_author ) return;
+				if ( psf_get_forum_author_id( $forum_id ) == $topic_author ) return;
 			}
 
 			// Limit
@@ -293,7 +293,7 @@ function bonipress_load_bbpress_hook() {
 		public function delete_topic( $topic_id ) {
 
 			// Get Author
-			$topic_author = bbp_get_topic_author_id( $topic_id );
+			$topic_author = psf_get_topic_author_id( $topic_id );
 
 			// If gained, points, deduct
 			if ( $this->has_entry( 'new_forum_topic', $topic_id, $topic_author ) ) {
@@ -358,7 +358,7 @@ function bonipress_load_bbpress_hook() {
 			if ( $this->core->exclude_user( $reply_author ) ) return;
 
 			// Check if topic author gets points for their own replies
-			if ( (bool) $this->prefs['new_reply']['author'] === false && bbp_get_topic_author_id( $topic_id ) == $reply_author ) return;
+			if ( (bool) $this->prefs['new_reply']['author'] === false && psf_get_topic_author_id( $topic_id ) == $reply_author ) return;
 
 			// Limit
 			if ( $this->over_hook_limit( 'new_reply', 'new_forum_reply', $reply_author ) ) return;
@@ -387,7 +387,7 @@ function bonipress_load_bbpress_hook() {
 		public function delete_reply( $reply_id ) {
 
 			// Get Author
-			$reply_author = bbp_get_reply_author_id( $reply_id );
+			$reply_author = psf_get_reply_author_id( $reply_id );
 
 			// If gained, points, deduct
 			if ( $this->has_entry( 'new_forum_reply', $reply_id, $reply_author ) ) {
@@ -605,7 +605,7 @@ function bonipress_load_bbpress_hook() {
 					<label for="<?php echo $this->field_id( 'show_points_in_reply' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_points_in_reply' ); ?>" id="<?php echo $this->field_id( 'show_points_in_reply' ); ?>" <?php checked( $prefs['show_points_in_reply'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Show users %_plural% balance in replies', 'bonipress' ) ); ?></label>
 				</div>
 				<div class="radio">
-					<label for="<?php echo $this->field_id( 'show_points_in_profile' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_points_in_profile' ); ?>" id="<?php echo $this->field_id( 'show_points_in_profile' ); ?>" <?php checked( $prefs['show_points_in_profile'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Show users %_plural% balance in their bbPress profiles', 'bonipress' ) ); ?></label>
+					<label for="<?php echo $this->field_id( 'show_points_in_profile' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_points_in_profile' ); ?>" id="<?php echo $this->field_id( 'show_points_in_profile' ); ?>" <?php checked( $prefs['show_points_in_profile'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Show users %_plural% balance in their PSForum profiles', 'bonipress' ) ); ?></label>
 				</div>
 			</div>
 		</div>

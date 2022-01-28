@@ -66,7 +66,7 @@ endif;
 
 /**
  * Get The Post ID
- * Will attempt to get the current posts ID. Also supports bbPress
+ * Will attempt to get the current posts ID. Also supports PSForum
  * where it will return either the form ID (if viewing a forum), the topic ID
  * (if viewing a topic) or the reply ID (if viewing a reply).
  * @since 1.7
@@ -75,57 +75,57 @@ endif;
 if ( ! function_exists( 'bonipress_sell_content_post_id' ) ) :
 	function bonipress_sell_content_post_id() {
 
-		$post_id = $bbp_topic_id = $bbp_reply_id = false;
+		$post_id = $psf_topic_id = $psf_reply_id = false;
 
-		// Check if we are selling access to bbPress forum, topic or reply
-		if ( function_exists( 'bbpress' ) ) {
+		// Check if we are selling access to PSForum forum, topic or reply
+		if ( function_exists( 'psforum' ) ) {
 
 			global $wp_query;
 
-			$bbp = bbpress();
+			$psf = psforum();
 
 			// Currently inside a topic loop
-			if ( ! empty( $bbp->topic_query->in_the_loop ) && isset( $bbp->topic_query->post->ID ) )
-				$bbp_topic_id = $bbp->topic_query->post->ID;
+			if ( ! empty( $psf->topic_query->in_the_loop ) && isset( $psf->topic_query->post->ID ) )
+				$psf_topic_id = $psf->topic_query->post->ID;
 
 			// Currently inside a search loop
-			elseif ( ! empty( $bbp->search_query->in_the_loop ) && isset( $bbp->search_query->post->ID ) && bbp_is_topic( $bbp->search_query->post->ID ) )
-				$bbp_topic_id = $bbp->search_query->post->ID;
+			elseif ( ! empty( $psf->search_query->in_the_loop ) && isset( $psf->search_query->post->ID ) && psf_is_topic( $psf->search_query->post->ID ) )
+				$psf_topic_id = $psf->search_query->post->ID;
 
 			// Currently viewing/editing a topic, likely alone
-			elseif ( ( bbp_is_single_topic() || bbp_is_topic_edit() ) && ! empty( $bbp->current_topic_id ) )
-				$bbp_topic_id = $bbp->current_topic_id;
+			elseif ( ( psf_is_single_topic() || psf_is_topic_edit() ) && ! empty( $psf->current_topic_id ) )
+				$psf_topic_id = $psf->current_topic_id;
 
 			// Currently viewing/editing a topic, likely in a loop
-			elseif ( ( bbp_is_single_topic() || bbp_is_topic_edit() ) && isset( $wp_query->post->ID ) )
-				$bbp_topic_id = $wp_query->post->ID;
+			elseif ( ( psf_is_single_topic() || psf_is_topic_edit() ) && isset( $wp_query->post->ID ) )
+				$psf_topic_id = $wp_query->post->ID;
 			
 			// So far, no topic found, check if we are in a reply
-			if ( $bbp_topic_id === false ) {
+			if ( $psf_topic_id === false ) {
 
 				// Currently inside a replies loop
-				if ( ! empty( $bbp->reply_query->in_the_loop ) && isset( $bbp->reply_query->post->ID ) )
-					$bbp_reply_id = $bbp->reply_query->post->ID;
+				if ( ! empty( $psf->reply_query->in_the_loop ) && isset( $psf->reply_query->post->ID ) )
+					$psf_reply_id = $psf->reply_query->post->ID;
 
 				// Currently inside a search loop
-				elseif ( ! empty( $bbp->search_query->in_the_loop ) && isset( $bbp->search_query->post->ID ) && bbp_is_reply( $bbp->search_query->post->ID ) )
-					$bbp_reply_id = $bbp->search_query->post->ID;
+				elseif ( ! empty( $psf->search_query->in_the_loop ) && isset( $psf->search_query->post->ID ) && psf_is_reply( $psf->search_query->post->ID ) )
+					$psf_reply_id = $psf->search_query->post->ID;
 
 				// Currently viewing a forum
-				elseif ( ( bbp_is_single_reply() || bbp_is_reply_edit() ) && ! empty( $bbp->current_reply_id ) )
-					$bbp_reply_id = $bbp->current_reply_id;
+				elseif ( ( psf_is_single_reply() || psf_is_reply_edit() ) && ! empty( $psf->current_reply_id ) )
+					$psf_reply_id = $psf->current_reply_id;
 
 				// Currently viewing a reply
-				elseif ( ( bbp_is_single_reply() || bbp_is_reply_edit() ) && isset( $wp_query->post->ID ) )
-					$bbp_reply_id = $wp_query->post->ID;
+				elseif ( ( psf_is_single_reply() || psf_is_reply_edit() ) && isset( $wp_query->post->ID ) )
+					$psf_reply_id = $wp_query->post->ID;
 			
-				if ( $bbp_reply_id !== false )
-					$post_id = $bbp_reply_id;
+				if ( $psf_reply_id !== false )
+					$post_id = $psf_reply_id;
 
 			}
 			
 			// Else we are in a topic
-			else $post_id = $bbp_topic_id;
+			else $post_id = $psf_topic_id;
 
 		}
 

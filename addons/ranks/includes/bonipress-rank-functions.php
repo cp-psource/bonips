@@ -684,13 +684,13 @@ if ( ! function_exists( 'bonipress_show_rank_in_buddypress' ) ) :
 endif;
 
 /**
- * Rank Shown in bbPress
- * Returns either false or the location where the rank is to be shown in bbPress.
+ * Rank Shown in PSForum
+ * Returns either false or the location where the rank is to be shown in PSForum.
  * @since 1.6
  * @version 1.2
  */
-if ( ! function_exists( 'bonipress_show_rank_in_bbpress' ) ) :
-	function bonipress_show_rank_in_bbpress( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+if ( ! function_exists( 'bonipress_show_rank_in_psforum' ) ) :
+	function bonipress_show_rank_in_psforum( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
 
 		$prefs  = bonipress_get_addon_settings( 'rank', $point_type );
 

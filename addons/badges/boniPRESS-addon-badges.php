@@ -45,7 +45,7 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 				'module_name' => 'badges',
 				'defaults'    => array(
 					'buddypress'  => '',
-					'bbpress'     => '',
+					'psforum'     => '',
 					'show_all_bp' => 0,
 					'show_all_bb' => 0
 				),
@@ -82,14 +82,14 @@ if ( ! class_exists( 'boniPRESS_Badge_Module' ) ) :
 			add_shortcode( BONIPRESS_SLUG . '_my_badges', 'bonipress_render_my_badges' );
 			add_shortcode( BONIPRESS_SLUG . '_badges',    'bonipress_render_badges' );
 
-			// Insert into bbPress
-			if ( class_exists( 'bbPress' ) ) {
+			// Insert into PSForum
+			if ( class_exists( 'PSForum' ) ) {
 
-				if ( $this->badges['bbpress'] == 'profile' || $this->badges['bbpress'] == 'both' )
-					add_action( 'bbp_template_after_user_profile', array( $this, 'insert_into_bbpress_profile' ) );
+				if ( $this->badges['psforum'] == 'profile' || $this->badges['psforum'] == 'both' )
+					add_action( 'psf_template_after_user_profile', array( $this, 'insert_into_psforum_profile' ) );
 
-				if ( $this->badges['bbpress'] == 'reply' || $this->badges['bbpress'] == 'both' )
-					add_action( 'bbp_theme_after_reply_author_details', array( $this, 'insert_into_bbpress_reply' ) );
+				if ( $this->badges['psforum'] == 'reply' || $this->badges['psforum'] == 'both' )
+					add_action( 'psf_theme_after_reply_author_details', array( $this, 'insert_into_psforum_reply' ) );
 
 			}
 
@@ -1185,7 +1185,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 			$settings   = $this->badges;
 
 			$buddypress = ( ( class_exists( 'BuddyPress' ) ) ? true : false ); 
-			$bbpress    = ( ( class_exists( 'bbPress' ) ) ? true : false ); 
+			$psforum    = ( ( class_exists( 'PSForum' ) ) ? true : false ); 
 
 ?>
 <h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Badges', 'bonipress' ); ?></h4>
@@ -1229,21 +1229,21 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'bbpress' ); ?>">bbPress</label>
-				<?php if ( $bbpress ) : ?>
-				<select name="<?php echo $this->field_name( 'bbpress' ); ?>" id="<?php echo $this->field_id( 'bbpress' ); ?>" class="form-control">
+				<label for="<?php echo $this->field_id( 'psforum' ); ?>">PSForum</label>
+				<?php if ( $psforum ) : ?>
+				<select name="<?php echo $this->field_name( 'psforum' ); ?>" id="<?php echo $this->field_id( 'psforum' ); ?>" class="form-control">
 <?php
 
-			$bbpress_options = array(
+			$psforum_options = array(
 				''        => __( 'Do not show', 'bonipress' ),
 				'profile' => __( 'Include in Profile', 'bonipress' ),
 				'reply'   => __( 'Include in Forum Replies', 'bonipress' ),
 				'both'    => __( 'Include in Profile and Forum Replies', 'bonipress' )
 			);
 
-			foreach ( $bbpress_options as $location => $description ) { 
+			foreach ( $psforum_options as $location => $description ) { 
 				echo '<option value="' . $location . '"';
-				if ( isset( $settings['bbpress'] ) && $settings['bbpress'] == $location ) echo ' selected="selected"';
+				if ( isset( $settings['psforum'] ) && $settings['psforum'] == $location ) echo ' selected="selected"';
 				echo '>' . $description . '</option>';
 			}
 
@@ -1256,7 +1256,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 					<label for="<?php echo $this->field_id( 'show_all_bb' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'show_all_bb' ); ?>" id="<?php echo $this->field_id( 'show_all_bb' ); ?>" <?php checked( $settings['show_all_bb'], 1 ); ?> value="1" /> <?php _e( 'Show all badges, including badges users have not yet earned.', 'bonipress' ); ?></label>
 				</div>
 				<?php else : ?>
-					<input type="hidden" name="<?php echo $this->field_name( 'bbpress' ); ?>" id="<?php echo $this->field_id( 'bbpress' ); ?>" value="" />
+					<input type="hidden" name="<?php echo $this->field_name( 'psforum' ); ?>" id="<?php echo $this->field_id( 'psforum' ); ?>" value="" />
 					<p><span class="description"><?php _e( 'Not installed', 'bonipress' ); ?></span></p>
 				<?php endif; ?>
 			</div>
@@ -1286,7 +1286,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 			$new_data['badges']['show_all_bb'] = ( isset( $data['badges']['show_all_bb'] ) ) ? $data['badges']['show_all_bb'] : 0;
 
 			$new_data['badges']['buddypress'] = ( isset( $data['badges']['buddypress'] ) ) ? sanitize_text_field( $data['badges']['buddypress'] ) : '';
-			$new_data['badges']['bbpress']    = ( isset( $data['badges']['bbpress'] ) ) ? sanitize_text_field( $data['badges']['bbpress'] ) : '';
+			$new_data['badges']['psforum']    = ( isset( $data['badges']['psforum'] ) ) ? sanitize_text_field( $data['badges']['psforum'] ) : '';
 
 			return $new_data;
 
@@ -1523,13 +1523,13 @@ jQuery(function($) {
 		}
 
 		/**
-		 * Insert Badges into bbPress profile
+		 * Insert Badges into PSForum profile
 		 * @since 1.0
 		 * @version 1.1
 		 */
-		public function insert_into_bbpress_profile() {
+		public function insert_into_psforum_profile() {
 
-			$user_id = bbp_get_displayed_user_id();
+			$user_id = psf_get_displayed_user_id();
 			if ( isset( $this->badges['show_all_bb'] ) && $this->badges['show_all_bb'] == 1 )
 				echo bonipress_render_my_badges( array(
 					'show'    => 'all',
@@ -1544,13 +1544,13 @@ jQuery(function($) {
 		}
 
 		/**
-		 * Insert Badges into bbPress
+		 * Insert Badges into PSForum
 		 * @since 1.0
 		 * @version 1.1
 		 */
-		public function insert_into_bbpress_reply() {
+		public function insert_into_psforum_reply() {
 
-			$user_id = bbp_get_reply_author_id();
+			$user_id = psf_get_reply_author_id();
 			if ( $user_id > 0 ) {
 
 				if ( isset( $this->badges['show_all_bb'] ) && $this->badges['show_all_bb'] == 1 )

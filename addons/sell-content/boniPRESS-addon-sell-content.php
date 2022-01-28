@@ -25,7 +25,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 
 		public $current_user_id = 0;
 		public $priority        = 10;
-		public $bbp_content     = '';
+		public $psf_content     = '';
 
 		/**
 		 * Construct
@@ -83,7 +83,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 			// Setup Script
 			add_action( 'bonipress_register_assets',          array( $this, 'register_assets' ) );
 			add_action( 'bonipress_front_enqueue_footer',     array( $this, 'enqueue_footer' ) );
-			add_action( 'bbp_template_redirect',              array( $this, 'bbp_content' ), 10 ); 
+			add_action( 'psf_template_redirect',              array( $this, 'psf_content' ), 10 ); 
 
 		}
 
@@ -330,7 +330,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 
 		}
 
-		public function bbp_content() {
+		public function psf_content() {
 
 			global $bonipress_partial_content_sale, $bonipress_sell_this;
 
@@ -339,7 +339,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 			$content = '';
 
 			// If content is for sale
-			if ( bonipress_post_is_for_sale( $post_id ) && ( bbp_is_single_forum() || bbp_is_single_topic() || bbp_is_single_reply() ) ) {
+			if ( bonipress_post_is_for_sale( $post_id ) && ( psf_is_single_forum() || psf_is_single_topic() || psf_is_single_reply() ) ) {
 
 				$bonipress_sell_this = true;
 
@@ -364,7 +364,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 								$content = $this->sell_content['templates']['members'];
 								$content = str_replace( '%buy_button%', $payment_options, $content );
 								$content = bonipress_sell_content_template( $content, $post, 'bonipress-sell-entire-content', 'bonipress-sell-unpaid' );
-								$this->bonipress_bbp_sell_forum_actions();
+								$this->bonipress_psf_sell_forum_actions();
 
 							}
 
@@ -373,7 +373,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 
 								$content = $this->sell_content['templates']['cantafford'];
 								$content = bonipress_sell_content_template( $content, $post, 'bonipress-sell-entire-content', 'bonipress-sell-insufficient' );
-								$this->bonipress_bbp_sell_forum_actions();
+								$this->bonipress_psf_sell_forum_actions();
 
 							}
 
@@ -388,53 +388,53 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 
 					$content = $this->sell_content['templates']['visitors'];
 					$content = bonipress_sell_content_template( $content, $post, 'bonipress-sell-entire-content', 'bonipress-sell-visitor' );
-					$this->bonipress_bbp_sell_forum_actions();
+					$this->bonipress_psf_sell_forum_actions();
 
 				}
 
 			}
 
-			$this->bbp_content = $content;
+			$this->psf_content = $content;
 
 		}
 
 
-		public function bonipress_bbp_sell_forum_actions() {
+		public function bonipress_psf_sell_forum_actions() {
 
-			add_action( 'bbp_template_before_single_forum', array( $this, 'bbp_template_before_single' ) );
-			add_action( 'bbp_template_before_single_topic', array( $this, 'bbp_template_before_single' ) );
-			add_filter( 'bbp_no_breadcrumb', 				array( $this, 'bbp_remove_breadcrumb' ), 10 );
-			add_filter( 'bbp_get_forum_subscribe_link', 	array( $this, 'bbp_remove_subscribe_link' ), 10 , 3 );
-			add_filter( 'bbp_get_topic_subscribe_link', 	array( $this, 'bbp_remove_subscribe_link' ), 10 , 3 );
-			add_filter( 'bbp_get_topic_favorite_link', 		array( $this, 'bbp_remove_subscribe_link' ), 10 , 3 );
-			add_filter( 'bbp_get_template_part', 			array( $this, 'bbp_remove_templates' ), 10 , 3 );
-			add_filter( 'bbp_get_single_forum_description', array( $this, 'bbp_get_single_description' ), 10 , 3 );
-			add_filter( 'bbp_get_single_topic_description', array( $this, 'bbp_get_single_description' ), 10 , 3 );
-
-		}
-
-		public function bbp_template_before_single() {
-
-			echo $this->bbp_content;
+			add_action( 'psf_template_before_single_forum', array( $this, 'psf_template_before_single' ) );
+			add_action( 'psf_template_before_single_topic', array( $this, 'psf_template_before_single' ) );
+			add_filter( 'psf_no_breadcrumb', 				array( $this, 'psf_remove_breadcrumb' ), 10 );
+			add_filter( 'psf_get_forum_subscribe_link', 	array( $this, 'psf_remove_subscribe_link' ), 10 , 3 );
+			add_filter( 'psf_get_topic_subscribe_link', 	array( $this, 'psf_remove_subscribe_link' ), 10 , 3 );
+			add_filter( 'psf_get_topic_favorite_link', 		array( $this, 'psf_remove_subscribe_link' ), 10 , 3 );
+			add_filter( 'psf_get_template_part', 			array( $this, 'psf_remove_templates' ), 10 , 3 );
+			add_filter( 'psf_get_single_forum_description', array( $this, 'psf_get_single_description' ), 10 , 3 );
+			add_filter( 'psf_get_single_topic_description', array( $this, 'psf_get_single_description' ), 10 , 3 );
 
 		}
 
-		public function bbp_remove_breadcrumb( $is_front ) {
+		public function psf_template_before_single() {
+
+			echo $this->psf_content;
+
+		}
+
+		public function psf_remove_breadcrumb( $is_front ) {
 			return true;
 		}
 
-		public function bbp_remove_subscribe_link( $retval, $r, $args ) {
+		public function psf_remove_subscribe_link( $retval, $r, $args ) {
 			return '';
 		}
 
-		public function bbp_remove_templates( $templates, $slug, $name ) {
+		public function psf_remove_templates( $templates, $slug, $name ) {
 
 			if ( $slug == 'content' ) return $templates;
 
 			return array('');
 		}
 
-		public function bbp_get_single_description( $retstr, $r, $args ) {
+		public function psf_get_single_description( $retstr, $r, $args ) {
 			return '';
 		}
 

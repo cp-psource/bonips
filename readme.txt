@@ -128,7 +128,7 @@ Bug fixes release.
 = 1.8.3 =
 FIX - Fixed Woocommerce checkout errors.
 FIX - Fixed get_users_balance function.
-FIX - Fixed typo error in bbPress hook.
+FIX - Fixed typo error in PSForum hook.
 NEW - Added new feature to copy to clipboard referral link in BuddyPress profile page
 
 = 1.8.2 =

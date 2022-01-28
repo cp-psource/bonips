@@ -3,7 +3,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * boniPRESS_Object class
- * @see http://codex.bonipress.me/classes/bonipress_object/
  * @since 1.7
  * @version 1.1
  */

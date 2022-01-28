@@ -2359,11 +2359,11 @@ if ( ! function_exists( 'bonipress_get_all_references' ) ) :
 			$hooks['update_link'] = __( 'Link Update', 'bonipress' );
 		}
 
-		if ( class_exists( 'bbPress' ) ) {
-			$hooks['new_forum'] = __( 'New Forum (bbPress)', 'bonipress' );
-			$hooks['new_forum_topic'] = __( 'New Forum Topic (bbPress)', 'bonipress' );
-			$hooks['topic_favorited'] = __( 'Favorited Topic (bbPress)', 'bonipress' );
-			$hooks['new_forum_reply'] = __( 'New Topic Reply (bbPress)', 'bonipress' );
+		if ( class_exists( 'PSForum' ) ) {
+			$hooks['new_forum'] = __( 'New Forum (PSForum)', 'bonipress' );
+			$hooks['new_forum_topic'] = __( 'New Forum Topic (PSForum)', 'bonipress' );
+			$hooks['topic_favorited'] = __( 'Favorited Topic (PSForum)', 'bonipress' );
+			$hooks['new_forum_reply'] = __( 'New Topic Reply (PSForum)', 'bonipress' );
 		}
 
 		if ( function_exists( 'wpcf7' ) )

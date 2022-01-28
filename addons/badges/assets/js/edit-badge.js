@@ -178,7 +178,7 @@ jQuery(function($){
 
 			e.preventDefault();
 
-			console.log( 'Add new requirement clicked' );
+			console.log( 'Neue Anforderung hinzufügen angeklickt' );
 			// Prep
 			var totallevels         = $( '#bonipress-badge-setup #badge-levels .badge-level' );
 			var totalrequirements   = $( '#bonipress-badge-level0 .level-requirements .row-narrow' );
@@ -529,7 +529,7 @@ jQuery(function($){
 
 					$( '#bonipress-badge-default .default-image-wrapper' ).fadeOut(function(){
 
-						$( '#bonipress-badge-default .default-image-wrapper' ).empty().removeClass( 'empty dashicons' ).html( '<img src="' + attachment.url + '" alt="Badge default image" \/><input type="hidden" name="bonipress_badge[main_image]" value="' + attachment.id + '" \/><input type="hidden" name="bonipress_badge[main_image_url]" value="" \/>' ).fadeIn();
+						$( '#bonipress-badge-default .default-image-wrapper' ).empty().removeClass( 'empty dashicons' ).html( '<img src="' + attachment.url + '" alt="Abzeichen-Standardbild" \/><input type="hidden" name="bonipress_badge[main_image]" value="' + attachment.id + '" \/><input type="hidden" name="bonipress_badge[main_image_url]" value="" \/>' ).fadeIn();
 						button.text( boniPRESSBadge.changeimage );
 
 						RemoveDefaultImageButton.removeClass('hidden');

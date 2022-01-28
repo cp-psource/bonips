@@ -136,10 +136,10 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				add_action( 'bp_after_profile_loop_content',        array( $this, 'insert_rank_profile' ) );
 			}
 
-			// bbPress
-			if ( class_exists( 'bbPress' ) ) {
-				add_action( 'bbp_theme_after_reply_author_details', array( $this, 'insert_rank_bb_reply' ) );
-				add_action( 'bbp_template_after_user_profile',      array( $this, 'insert_rank_bb_profile' ) );
+			// PSForum
+			if ( class_exists( 'PSForum' ) ) {
+				add_action( 'psf_theme_after_reply_author_details', array( $this, 'insert_rank_bb_reply' ) );
+				add_action( 'psf_template_after_user_profile',      array( $this, 'insert_rank_bb_profile' ) );
 			}
 
 			// Shortcodes
@@ -843,14 +843,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		}
 
 		/**
-		 * Insert Rank In bbPress Reply
+		 * Insert Rank In PSForum Reply
 		 * @since 1.6
 		 * @version 1.1.1
 		 */
 		public function insert_rank_bb_reply() {
 
 			$output  = '';
-			$user_id = bbp_get_reply_author_id();
+			$user_id = psf_get_reply_author_id();
 			if ( $user_id == 0 ) return;
 
 			$bonipress_types = bonipress_get_usable_types( $user_id );
@@ -893,14 +893,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		}
 
 		/**
-		 * Insert Rank In bbPress Profile
+		 * Insert Rank In PSForum Profile
 		 * @since 1.6
 		 * @version 1.0.1
 		 */
 		public function insert_rank_bb_profile() {
 
 			$output       = '';
-			$user_id      = bbp_get_displayed_user_id();
+			$user_id      = psf_get_displayed_user_id();
 			$bonipress_types = bonipress_get_usable_types( $user_id );
 
 			foreach ( $bonipress_types as $type_id => $label ) {
@@ -1542,7 +1542,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 
 			$buddypress        = ( ( class_exists( 'BuddyPress' ) ) ? true : false ); 
-			$bbpress           = ( ( class_exists( 'bbPress' ) ) ? true : false ); 
+			$psforum           = ( ( class_exists( 'PSForum' ) ) ? true : false ); 
 
 			$box               = ( ( $prefs['base'] == 'current' ) ? 'display: none;' : 'display: block;' );
 
@@ -1701,8 +1701,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'bp_location' ); ?>">bbPress</label>
-				<?php if ( $bbpress ) : ?>
+				<label for="<?php echo $this->field_id( 'bp_location' ); ?>">PSForum</label>
+				<?php if ( $psforum ) : ?>
 				<select name="<?php echo $this->field_name( 'bp_location' ); ?>" id="<?php echo $this->field_id( 'bp_location' ); ?>" class="form-control">
 <?php
 
