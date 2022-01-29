@@ -799,9 +799,9 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			}
 
 			if ( ! empty( $custom ) )
-				$custom = ' ' . __( 'and', 'bonipress' ) . ': ' . $custom;
+				$custom = ' ' . __( 'und', 'bonipress' ) . ': ' . $custom;
 
-			return __( 'Available Template Tags:', 'bonipress' ) . ' ' . implode( ', ', $links ) . $custom . '.';
+			return __( 'Verfügbare Vorlagen-Tags:', 'bonipress' ) . ' ' . implode( ', ', $links ) . $custom . '.';
 
 		}
 

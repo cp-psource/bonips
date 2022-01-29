@@ -24,21 +24,21 @@ if ( ! function_exists( 'bonipress_render_shortcode_exchange' ) ) :
 
 		if ( $from == '' || $to == '' ) return '';
 
-		if ( ! bonipress_point_type_exists( $from ) || ! bonipress_point_type_exists( $to ) ) return __( 'Point type not found.', 'bonipress' );
+		if ( ! bonipress_point_type_exists( $from ) || ! bonipress_point_type_exists( $to ) ) return __( 'Punkttyp nicht gefunden.', 'bonipress' );
 
 		$user_id     = get_current_user_id();
 
 		$bonipress_from = bonipress( $from );
 		if ( $bonipress_from->exclude_user( $user_id ) )
-			return sprintf( __( 'You are excluded from using %s.', 'bonipress' ), $bonipress_from->plural() );
+			return sprintf( __( 'Du bist von der Verwendung von %s ausgeschlossen.', 'bonipress' ), $bonipress_from->plural() );
 
 		$balance     = $bonipress_from->get_users_balance( $user_id, $from );
 		if ( $balance < $bonipress_from->number( $min ) )
-			return __( 'Your balance is too low to use this feature.', 'bonipress' );
+			return __( 'Dein Guthaben ist zu niedrig, um diese Funktion zu verwenden.', 'bonipress' );
 
 		$bonipress_to   = bonipress( $to );
 		if ( $bonipress_to->exclude_user( $user_id ) )
-			return sprintf( __( 'You are excluded from using %s.', 'bonipress' ), $bonipress_to->plural() );
+			return sprintf( __( 'Du bist von der Verwendung von %s ausgeschlossen.', 'bonipress' ), $bonipress_to->plural() );
 
 		global $bonipress_exchange;
 
@@ -60,19 +60,19 @@ if ( ! function_exists( 'bonipress_render_shortcode_exchange' ) ) :
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 bonipress-exchange-current-balance">
 				<div class="form-group">
-					<label><?php printf( __( 'Your current %s balance', 'bonipress' ), $bonipress_from->singular() ); ?></label>
+					<label><?php printf( __( 'Dein aktuelles %s-Guthaben', 'bonipress' ), $bonipress_from->singular() ); ?></label>
 					<p class="form-control-static"><?php echo $bonipress_from->format_creds( $balance ); ?></p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 bonipress-exchange-current-amount">
 				<div class="form-group">
-					<label for="bonipress-exchange-amount"><?php _e( 'Amount', 'bonipress' ); ?></label>
+					<label for="bonipress-exchange-amount"><?php _e( 'Betrag', 'bonipress' ); ?></label>
 					<input type="text" size="20" placeholder="<?php printf( __( 'Minimum %s', 'bonipress' ), $bonipress_from->format_creds( $min ) ); ?>" value="" class="form-control" id="bonipress-exchange-amount" name="bonipress_exchange[amount]" />
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 bonipress-exchange-current-rate">
 				<div class="form-group">
-					<label><?php _e( 'Exchange Rate', 'bonipress' ); ?></label>
+					<label><?php _e( 'Tauschrate', 'bonipress' ); ?></label>
 					<p class="form-control-static"><?php printf( __( '1 %s = <span class="rate">%s</span> %s', 'bonipress' ), $bonipress_from->singular(), $rate, ( ( $rate == 1 ) ? $bonipress_to->singular() : $bonipress_to->plural() ) ); ?></p>
 				</div>
 			</div>
@@ -121,7 +121,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( ! array_key_exists( $from, $types ) || ! array_key_exists( $to, $types ) ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => __( 'Point types not found.', 'bonipress' )
+				'message' => __( 'Punkttypen nicht gefunden.', 'bonipress' )
 			);
 			return;
 		}
@@ -133,7 +133,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( $bonipress_from->exclude_user( $user_id ) ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => sprintf( __( 'You are excluded from using %s.', 'bonipress' ), $bonipress_from->plural() )
+				'message' => sprintf( __( 'Du bist von der Verwendung von %s ausgeschlossen.', 'bonipress' ), $bonipress_from->plural() )
 			);
 			return;
 		}
@@ -143,7 +143,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( $balance < $bonipress_from->number( $min ) ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => __( 'Your balance is too low to use this feature.', 'bonipress' )
+				'message' => __( 'Dein Guthaben ist zu niedrig, um diese Funktion zu verwenden.', 'bonipress' )
 			);
 			return;
 		}
@@ -153,7 +153,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( $bonipress_to->exclude_user( $user_id ) ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => sprintf( __( 'You are excluded from using %s.', 'bonipress' ), $bonipress_to->plural() )
+				'message' => sprintf( __( 'Du bist von der Verwendung von %s ausgeschlossen.', 'bonipress' ), $bonipress_to->plural() )
 			);
 			return;
 		}
@@ -166,7 +166,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( $amount < $min ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => sprintf( __( 'You must exchange at least %s!', 'bonipress' ), $bonipress_from->format_creds( $min ) )
+				'message' => sprintf( __( 'Du musst mindestens %s tauschen!', 'bonipress' ), $bonipress_from->format_creds( $min ) )
 			);
 			return;
 		}
@@ -175,7 +175,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 		if ( $amount > $balance ) {
 			$bonipress_exchange = array(
 				'success' => false,
-				'message' => __( 'Insufficient Funds. Please try a lower amount.', 'bonipress' )
+				'message' => __( 'Unzureichende Mittel. Bitte versuche es mit einer geringeren Menge.', 'bonipress' )
 			);
 			return;
 		}
@@ -188,7 +188,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 				'exchange',
 				$user_id,
 				0-$amount,
-				sprintf( __( 'Exchange from %s', 'bonipress' ), $bonipress_from->plural() ),
+				sprintf( __( 'Austausch von %s', 'bonipress' ), $bonipress_from->plural() ),
 				0,
 				array( 'from' => $from, 'rate' => $rate, 'min' => $min ),
 				$from
@@ -200,7 +200,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 				'exchange',
 				$user_id,
 				$exchanged,
-				sprintf( __( 'Exchange to %s', 'bonipress' ), $bonipress_to->plural() ),
+				sprintf( __( 'Austausch zu %s', 'bonipress' ), $bonipress_to->plural() ),
 				0,
 				array( 'to' => $to, 'rate' => $rate, 'min' => $min ),
 				$to
@@ -208,7 +208,7 @@ if ( ! function_exists( 'bonipress_catch_exchange_requests' ) ) :
 
 			$bonipress_exchange = array(
 				'success' => true,
-				'message' => sprintf( __( 'You have successfully exchanged %s into %s.', 'bonipress' ), $bonipress_from->format_creds( $amount ), $bonipress_to->format_creds( $exchanged ) )
+				'message' => sprintf( __( 'Du hast %s erfolgreich in %s umgetauscht.', 'bonipress' ), $bonipress_from->format_creds( $amount ), $bonipress_to->format_creds( $exchanged ) )
 			);
 
 		}

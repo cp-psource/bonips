@@ -16,7 +16,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_best_user' ) ) :
 			'from'    => '',
 			'until'   => '',
 			'types'   => BONIPRESS_DEFAULT_TYPE_KEY,
-			'nothing' => 'No user found',
+			'nothing' => 'Kein Benutzer gefunden',
 			'order'   => 'DESC',
 			'avatar'  => 50
 		), $attr, BONIPRESS_SLUG . '_best_user' ) );

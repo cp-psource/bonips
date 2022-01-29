@@ -3,7 +3,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * BoniPress Shortcode: bonipress_leaderboard
- * @see https://n3rds.work/docs/bonipress-shortcodes-bonipress_leaderboard//
+ * @see https://n3rds.work/docs/bonipress-shortcodes-bonipress_leaderboard/
  * @since 0.1
  * @version 1.6
  */
@@ -19,7 +19,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderboard' ) ) :
 			'total'        => 0,
 			'wrap'         => 'li',
 			'template'     => '#%position% %user_profile_link% %cred_f%',
-			'nothing'      => 'Leaderboard is empty',
+			'nothing'      => 'Bestenliste ist leer',
 			'current'      => 0,
 			'exclude_zero' => 1,
 			'timeframe'    => '',

@@ -16,10 +16,10 @@ if ( ! class_exists( 'boniPRESS_Widget_Wallet' ) ) :
 
 			parent::__construct(
 				'bonipress_widget_wallet',
-				sprintf( __( '(%s) Wallet', 'bonipress' ), bonipress_label( true ) ),
+				sprintf( __( '(%s) Brieftasche', 'bonipress' ), bonipress_label( true ) ),
 				array(
 					'classname'   => 'widget-my-wallet',
-					'description' => __( 'Shows multiple balances.', 'bonipress' )
+					'description' => __( 'Zeigt mehrere Salden an.', 'bonipress' )
 				)
 			);
 
@@ -109,35 +109,35 @@ if ( ! class_exists( 'boniPRESS_Widget_Wallet' ) ) :
 			$types         = isset( $instance['types'] )         ? $instance['types']         : array();
 			$row_template  = isset( $instance['row'] )           ? $instance['row']           : '%label%: %cred_f%';
 			$show_visitors = isset( $instance['show_visitors'] ) ? $instance['show_visitors'] : 0;
-			$message       = isset( $instance['message'] )       ? $instance['message']       : '<a href="%login_url_here%">Login</a> to view your balance.';
+			$message       = isset( $instance['message'] )       ? $instance['message']       : '<a href="%login_url_here%">Melde Dich an</a>, um Dein Guthaben anzuzeigen.';
 
 ?>
 <!-- Widget Options -->
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Titel', 'bonipress' ); ?>:</label>
 	<input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" class="widefat" />
 </p>
 
 <!-- Point Type -->
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>"><?php _e( 'Point Types', 'bonipress' ); ?>:</label><br />
+	<label for="<?php echo esc_attr( $this->get_field_id( 'types' ) ); ?>"><?php _e( 'Punkttypen', 'bonipress' ); ?>:</label><br />
 	<?php bonipress_types_select_from_checkboxes( $this->get_field_name( 'types' ) . '[]', $this->get_field_id( 'types' ), $types ); ?>
 </p>
 
 <!-- Row layout -->
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'row' ) ); ?>"><?php _e( 'Row Layout', 'bonipress' ); ?>:</label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'row' ) ); ?>"><?php _e( 'Zeilenlayout', 'bonipress' ); ?>:</label>
 	<textarea name="<?php echo esc_attr( $this->get_field_name( 'row' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'row' ) ); ?>" rows="3" cols="20" class="widefat"><?php echo esc_attr( $row_template ); ?></textarea>
 	<small><?php echo $bonipress->available_template_tags( array( 'general', 'amount' ) ); ?></small>
 </p>
 
 <!-- Show to Visitors -->
 <p class="boniPRESS-widget-field">
-	<label for="<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_visitors' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>" value="1"<?php checked( $show_visitors, 1 ); ?> class="checkbox" /> <?php _e( 'Show message when not logged in', 'bonipress' ); ?></label>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_visitors' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>" value="1"<?php checked( $show_visitors, 1 ); ?> class="checkbox" /> <?php _e( 'Nachricht anzeigen, wenn nicht eingeloggt', 'bonipress' ); ?></label>
 </p>
 <div id="<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>-details" class="bonipress-hidden<?php if ( $show_visitors == 1 ) echo ' ex-field'; ?>">
 	<p class="boniPRESS-widget-field">
-		<label for="<?php echo esc_attr( $this->get_field_id( 'message' ) ); ?>"><?php _e( 'Message', 'bonipress' ); ?>:</label>
+		<label for="<?php echo esc_attr( $this->get_field_id( 'message' ) ); ?>"><?php _e( 'Nachricht', 'bonipress' ); ?>:</label>
 		<textarea name="<?php echo esc_attr( $this->get_field_name( 'message' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'message' ) ); ?>" rows="3" cols="20" class="widefat"><?php echo esc_attr( $message ); ?></textarea>
 		<small><?php echo $bonipress->available_template_tags( array( 'general', 'amount' ) ); ?></small>
 	</p>

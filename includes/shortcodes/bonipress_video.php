@@ -41,7 +41,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_video' ) ) :
 			$interval = $prefs['interval'];
 
 		// ID is required
-		if ( $id === NULL || empty( $id ) ) return __( 'A video ID is required for this shortcode', 'bonipress' );
+		if ( $id === NULL || empty( $id ) ) return __( 'Für diesen Shortcode ist eine Video-ID erforderlich', 'bonipress' );
 
 		// Interval
 		if ( strlen( $interval ) < 3 ) {
