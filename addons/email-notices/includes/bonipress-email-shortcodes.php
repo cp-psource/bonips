@@ -4,7 +4,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 /**
  * BoniPress Shortcode: bonipress_email_subscriptions
  * Returns a given users rank
- * @see http://codex.bonipress.me/shortcodes/bonipress_email_subscriptions/
+ * @see https://n3rds.work/docs/bonipress-bonipress_email_subscriptions/
  * @since 1.4.6
  * @version 1.1
  */
@@ -12,7 +12,7 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 	function bonipress_render_email_subscriptions( $atts = array(), $content = '' ) {
 
 		extract( shortcode_atts( array(
-			'success' => __( 'Settings Updated', 'bonipress' )
+			'success' => __( 'Einstellungen aktualisiert', 'bonipress' )
 		), $atts, BONIPRESS_SLUG . '_email_subscriptions' ) );
 
 		if ( ! is_user_logged_in() ) return $content;
@@ -62,8 +62,8 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 	<table class="table">
 		<thead>
 			<tr>
-				<th class="check"><?php _e( 'Unsubscribe', 'bonipress' ); ?></th>
-				<th class="notice-title"><?php _e( 'Email Notice', 'bonipress' ); ?></th>
+				<th class="check"><?php _e( 'Abbestellen', 'bonipress' ); ?></th>
+				<th class="notice-title"><?php _e( 'E-Mail-Benachrichtigung', 'bonipress' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -84,14 +84,14 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 		<?php else : ?>
 
 			<tr>
-				<td colspan="2"><?php _e( 'There are no email notifications yet.', 'bonipress' ); ?></td>
+				<td colspan="2"><?php _e( 'Es gibt noch keine E-Mail-Benachrichtigungen.', 'bonipress' ); ?></td>
 			</tr>
 
 		<?php endif; ?>
 
 		</tbody>
 	</table>
-	<input type="submit" class="btn btn-primary button button-primary pull-right" value="<?php _e( 'Save Changes', 'bonipress' ); ?>" />
+	<input type="submit" class="btn btn-primary button button-primary pull-right" value="<?php _e( 'Änderungen speichern', 'bonipress' ); ?>" />
 </form>
 <?php
 

@@ -330,7 +330,7 @@ if ( ! class_exists( 'boniPRESS_Hooks_Module' ) ) :
 									<input type="hidden" name="add_new" class="add_new" value="single" />
 									<div class="widget-control-actions">
 										<div class="alignleft">
-											<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?> | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Documentation</a><?php endif; ?>
+											<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?> | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
 										</div>
 										<div class="alignright">
 											<input type="submit" name="savewidget" id="widget-bonipress-hook-<?php echo $key; ?>-__i__-savewidget" class="button button-primary widget-control-save right" value="<?php _e( 'Speichern', 'bonipress' ); ?>" />
@@ -446,7 +446,7 @@ jQuery(function($) {
 							<input type="hidden" name="add_new" class="add_new" value="single" />
 							<div class="widget-control-actions">
 								<div class="alignleft">
-									<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?>  | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Documentation</a><?php endif; ?>
+									<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?>  | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
 								</div>
 								<div class="alignright">
 									<input type="submit" name="savewidget" id="widget-bonipress-hook-<?php echo $key; ?>-__i__-savewidget" class="button button-primary widget-control-save right" value="<?php _e( 'Speichern', 'bonipress' ); ?>" />

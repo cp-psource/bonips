@@ -141,19 +141,19 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 		protected function register_email_notices() {
 
 			$labels = array(
-				'name'               => __( 'Email Notifications', 'bonipress' ),
-				'singular_name'      => __( 'Email Notification', 'bonipress' ),
-				'add_new'            => __( 'Add New', 'bonipress' ),
-				'add_new_item'       => __( 'Add New', 'bonipress' ),
-				'edit_item'          => __( 'Edit Email Notification', 'bonipress' ),
-				'new_item'           => __( 'New Email Notification', 'bonipress' ),
-				'all_items'          => __( 'Email Notifications', 'bonipress' ),
+				'name'               => __( 'E-Mail Benachrichtigungen', 'bonipress' ),
+				'singular_name'      => __( 'E-Mail-Benachrichtigung', 'bonipress' ),
+				'add_new'            => __( 'Neue hinzufügen', 'bonipress' ),
+				'add_new_item'       => __( 'Neue hinzufügen', 'bonipress' ),
+				'edit_item'          => __( 'E-Mail-Benachrichtigung bearbeiten', 'bonipress' ),
+				'new_item'           => __( 'Neue E-Mail-Benachrichtigung', 'bonipress' ),
+				'all_items'          => __( 'E-Mail Benachrichtigungen', 'bonipress' ),
 				'view_item'          => '',
-				'search_items'       => __( 'Search Email Notifications', 'bonipress' ),
-				'not_found'          => __( 'No email notifications found', 'bonipress' ),
-				'not_found_in_trash' => __( 'No email notifications found in Trash', 'bonipress' ), 
+				'search_items'       => __( 'Suche nach E-Mail-Benachrichtigungen', 'bonipress' ),
+				'not_found'          => __( 'Keine E-Mail-Benachrichtigungen gefunden', 'bonipress' ),
+				'not_found_in_trash' => __( 'Keine E-Mail-Benachrichtigungen im Papierkorb gefunden', 'bonipress' ), 
 				'parent_item_colon'  => '',
-				'menu_name'          => __( 'Email Notifications', 'bonipress' )
+				'menu_name'          => __( 'E-Mail Benachrichtigungen', 'bonipress' )
 			);
 			$args = array(
 				'labels'               => $labels,
@@ -247,16 +247,16 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			$messages[ BONIPRESS_EMAIL_KEY ] = array(
 				0  => '',
-				1  => __( 'Email Notice Updated.', 'bonipress' ),
-				2  => __( 'Email Notice Updated.', 'bonipress' ),
-				3  => __( 'Email Notice Updated.', 'bonipress' ),
-				4  => __( 'Email Notice Updated.', 'bonipress' ),
+				1  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				2  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				3  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				4  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
 				5  => false,
-				6  => __( 'Email Notice Activated.', 'bonipress' ),
-				7  => __( 'Email Notice Updated.', 'bonipress' ),
-				8  => __( 'Email Notice Updated.', 'bonipress' ),
-				9  => __( 'Email Notice Updated.', 'bonipress' ),
-				10 => __( 'Email Notice Updated.', 'bonipress' )
+				6  => __( 'E-Mail-Benachrichtigung aktiviert.', 'bonipress' ),
+				7  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				8  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				9  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
+				10 => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' )
 			);
 
 			return $messages;
@@ -276,8 +276,8 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			add_submenu_page(
 				BONIPRESS_SLUG,
-				__( 'Email Notifications', 'bonipress' ),
-				__( 'Email Notifications', 'bonipress' ),
+				__( 'E-Mail Benachrichtigungen', 'bonipress' ),
+				__( 'E-Mail Benachrichtigungen', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
 				'edit.php?post_type=' . BONIPRESS_EMAIL_KEY
 			);
@@ -338,7 +338,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			global $post_type;
 
 			if ( $post_type == BONIPRESS_EMAIL_KEY )
-				return __( 'Email Subject', 'bonipress' );
+				return __( 'E-Mail Betreff', 'bonipress' );
 
 			return $title;
 
@@ -355,12 +355,12 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			$columns['cb'] = $defaults['cb'];
 
 			// Add / Adjust
-			$columns['title']                  = __( 'Email Subject', 'bonipress' );
+			$columns['title']                  = __( 'E-Mail Betreff', 'bonipress' );
 			$columns['bonipress-email-status']    = __( 'Status', 'bonipress' );
 			$columns['bonipress-email-reference'] = __( 'Setup', 'bonipress' );
 
 			if ( count( $this->point_types ) > 1 )
-				$columns['bonipress-email-ctype'] = __( 'Point Type', 'bonipress' );
+				$columns['bonipress-email-ctype'] = __( 'Punkttyp', 'bonipress' );
 
 			// Return
 			return $columns;
@@ -382,17 +382,17 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			if ( $column_name == 'bonipress-email-status' ) {
 
 				if ( $email->post->post_status != 'publish' && $email->post->post_status != 'future' )
-					echo '<p>' . __( 'Not Active', 'bonipress' ) . '</p>';
+					echo '<p>' . __( 'Nicht aktiv', 'bonipress' ) . '</p>';
 
 				elseif ( $email->post->post_status == 'future' )
-					echo '<p>' . sprintf( '<strong>%s</strong> %s', __( 'Scheduled', 'bonipress' ), date( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime( $email->post->post_date ) ) ) . '</p>';
+					echo '<p>' . sprintf( '<strong>%s</strong> %s', __( 'Geplant', 'bonipress' ), date( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime( $email->post->post_date ) ) ) . '</p>';
 
 				else {
 
 					if ( empty( $email->last_run ) )
-						echo '<p><strong>' . __( 'Active', 'bonipress' ) . '</strong></p>';
+						echo '<p><strong>' . __( 'Aktiv', 'bonipress' ) . '</strong></p>';
 					else
-						echo '<p>' . sprintf( '<strong>%s</strong> %s', __( 'Active - Last run', 'bonipress' ), date( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), $email->last_run ) ) . '</p>';
+						echo '<p>' . sprintf( '<strong>%s</strong> %s', __( 'Aktiv - Letzte Ausführung', 'bonipress' ), date( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), $email->last_run ) ) . '</p>';
 
 				}
 
@@ -408,25 +408,25 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				$description = array();
 
 				if ( $trigger == '' )
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Sent when', 'bonipress' ), __( 'Not set', 'bonipress' ) );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Gesendet wenn', 'bonipress' ), __( 'Nicht eingestellt', 'bonipress' ) );
 
 				elseif ( array_key_exists( $trigger, $instances ) )
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Sent when', 'bonipress' ), $instances[ $trigger ] );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Gesendet wenn', 'bonipress' ), $instances[ $trigger ] );
 
 				elseif( array_key_exists( $trigger, $references ) )
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Sent when', 'bonipress' ), $references[ $trigger ] );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Gesendet wenn', 'bonipress' ), $references[ $trigger ] );
 
 				else
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Sent at custom events', 'bonipress' ), str_replace( ',', ', ', $trigger ) );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Wird bei benutzerdefinierten Veranstaltungen gesendet', 'bonipress' ), str_replace( ',', ', ', $trigger ) );
 
 				if ( $email->settings['recipient'] == 'user' )
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Recipient', 'bonipress' ), __( 'User', 'bonipress' ) );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Empfänger', 'bonipress' ), __( 'Benutzer', 'bonipress' ) );
 
 				elseif ( $email->settings['recipient'] == 'admin' )
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Recipient', 'bonipress' ), __( 'Administrator', 'bonipress' ) );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Empfänger', 'bonipress' ), __( 'Administrator', 'bonipress' ) );
 
 				else
-					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Recipient', 'bonipress' ), __( 'Both', 'bonipress' ) );
+					$description[] = sprintf( '<strong>%s:</strong> %s', __( 'Empfänger', 'bonipress' ), __( 'Beide', 'bonipress' ) );
 
 				echo '<p>' . implode( '<br />', $description ) . '</p>';
 
@@ -437,7 +437,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 				echo '<p>';
 				if ( empty( $email->point_types ) )
-					_e( 'No point types selected', 'bonipress' );
+					_e( 'Keine Punkttypen ausgewählt', 'bonipress' );
 
 				else {
 					$types = array();
@@ -486,7 +486,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			add_meta_box(
 				'bonipress-email-tags',
-				__( 'Available Template Tags', 'bonipress' ),
+				__( 'Verfügbare Vorlagen-Tags', 'bonipress' ),
 				array( $this, 'metabox_template_tags' ),
 				BONIPRESS_EMAIL_KEY,
 				'normal',
@@ -607,7 +607,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-email-instance"<?php if ( $post->post_status == 'publish' && empty( $trigger ) ) echo ' style="color:red;font-weight:bold;"'; ?>><?php _e( 'Send this email notice when...', 'bonipress' ); ?></label>
+				<label for="bonipress-email-instance"<?php if ( $post->post_status == 'publish' && empty( $trigger ) ) echo ' style="color:red;font-weight:bold;"'; ?>><?php _e( 'Diese E-Mail-Benachrichtigung senden, wenn...', 'bonipress' ); ?></label>
 				<select name="bonipress_email[instance]" id="bonipress-email-instance" class="form-control">
 <?php
 
@@ -625,11 +625,11 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			</div>
 			<div id="reference-selection" style="display: <?php if ( $uses_specific || $uses_custom ) echo 'block'; else echo 'none'; ?>;">
 				<div class="form-group">
-					<label for="bonipress-email-ctype"><?php _e( 'Reference', 'bonipress' ); ?></label>
+					<label for="bonipress-email-ctype"><?php _e( 'Referenz', 'bonipress' ); ?></label>
 					<select name="bonipress_email[reference]" id="bonipress-email-reference" class="form-control">
 <?php
 
-			$references['bonipress_custom'] = __( 'Custom Reference', 'bonipress' );
+			$references['bonipress_custom'] = __( 'Benutzerdefinierte Referenz', 'bonipress' );
 
 			foreach ( $references as $ref_id => $ref_description ) {
 
@@ -645,16 +645,16 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				</div>
 				<div id="custom-reference-selection" style="display: <?php if ( $uses_custom ) echo 'block'; else echo 'none'; ?>;">
 					<div class="form-group">
-						<label for="bonipress-email-custom-ref"><?php _e( 'Custom Reference', 'bonipress' ); ?></label>
+						<label for="bonipress-email-custom-ref"><?php _e( 'Benutzerdefinierte Referenz', 'bonipress' ); ?></label>
 						<input type="text" name="bonipress_email[custom_reference]" placeholder="<?php _e( 'required', 'bonipress' ); ?>" id="bonipress-email-custom-ref" class="form-control" value="<?php echo esc_attr( $trigger ); ?>" />
 					</div>
-					<p class="description" style="line-height: 16px;"><?php _e( 'This can be either a single reference or a comma separated list of references.', 'bonipress' ); ?></p>
+					<p class="description" style="line-height: 16px;"><?php _e( 'Dies kann entweder eine einzelne Referenz oder eine durch Kommas getrennte Liste von Referenzen sein.', 'bonipress' ); ?></p>
 				</div>
 			</div>
 			<hr />
 
 			<div class="form-group">
-				<label for="bonipress-email-ctype"><?php _e( 'Point Types', 'bonipress' ); ?></label>
+				<label for="bonipress-email-ctype"><?php _e( 'Punkttypen', 'bonipress' ); ?></label>
 <?php
 
 			if ( count( $this->point_types ) > 1 ) {
@@ -679,15 +679,15 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			<hr />
 
 			<div class="form-group" style="margin-bottom: 0;">
-				<label for="bonipress-email-recipient-user"><?php _e( 'Recipient:', 'bonipress' ); ?></label>
+				<label for="bonipress-email-recipient-user"><?php _e( 'Empfänger:', 'bonipress' ); ?></label>
 				<div class="inline-radio">
-					<label for="bonipress-email-recipient-user"><input type="radio" name="bonipress_email[recipient]" id="bonipress-email-recipient-user" value="user" <?php checked( $email->settings['recipient'], 'user' ); ?> /> <?php _e( 'User', 'bonipress' ); ?></label>
+					<label for="bonipress-email-recipient-user"><input type="radio" name="bonipress_email[recipient]" id="bonipress-email-recipient-user" value="user" <?php checked( $email->settings['recipient'], 'user' ); ?> /> <?php _e( 'Benutzer', 'bonipress' ); ?></label>
 				</div>
 				<div class="inline-radio">
 					<label for="bonipress-email-recipient-admin"><input type="radio" name="bonipress_email[recipient]" id="bonipress-email-recipient-admin" value="admin" <?php checked( $email->settings['recipient'], 'admin' ); ?> /> <?php _e( 'Administrator', 'bonipress' ); ?></label>
 				</div>
 				<div class="inline-radio">
-					<label for="bonipress-email-recipient-both"><input type="radio" name="bonipress_email[recipient]" id="bonipress-email-recipient-both" value="both" <?php checked( $email->settings['recipient'], 'both' ); ?> /> <?php _e( 'Both', 'bonipress' ); ?></label>
+					<label for="bonipress-email-recipient-both"><input type="radio" name="bonipress_email[recipient]" id="bonipress-email-recipient-both" value="both" <?php checked( $email->settings['recipient'], 'both' ); ?> /> <?php _e( 'Beide', 'bonipress' ); ?></label>
 				</div>
 			</div>
 		</div>
@@ -714,19 +714,19 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-email-senders-name"><?php _e( 'Senders Name:', 'bonipress' ); ?></label>
+				<label for="bonipress-email-senders-name"><?php _e( 'Name des Absenders:', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_email[senders_name]" id="bonipress-email-senders-name" class="form-control" value="<?php echo esc_attr( $email->settings['senders_name'] ); ?>" />
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-email-senders-email"><?php _e( 'Senders Email:', 'bonipress' ); ?></label>
+				<label for="bonipress-email-senders-email"><?php _e( 'E-Mail des Absenders:', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_email[senders_email]" id="bonipress-email-senders-email" class="form-control" value="<?php echo esc_attr( $email->settings['senders_email'] ); ?>" />
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-email-reply-to"><?php _e( 'Reply-To Email:', 'bonipress' ); ?></label>
+				<label for="bonipress-email-reply-to"><?php _e( 'Antwort-E-Mail:', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_email[reply_to]" id="bonipress-email-reply-to" class="form-control" value="<?php echo esc_attr( $email->settings['reply_to'] ); ?>" />
 			</div>
 		</div>
@@ -741,7 +741,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-email-styling"><?php _e( 'CSS Styling', 'bonipress' ); ?></label>
+				<label for="bonipress-email-styling"><?php _e( 'CSS-Styling', 'bonipress' ); ?></label>
 				<textarea name="bonipress_email[styling]" class="form-control code" rows="10" cols="30" id="bonipress-email-styling"><?php echo esc_html( $email->get_email_styling() ); ?></textarea>
 			</div>
 		</div>
@@ -765,13 +765,13 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 ?>
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Site Related', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Webseiten-bezogen', 'bonipress' ); ?></h3>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<strong>%blog_name%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'Your websites title', 'bonipress' ); ?></div>
+				<div><?php _e( 'Titel Deiner Webseite', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -779,7 +779,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%blog_url%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'Your websites address', 'bonipress' ); ?></div>
+				<div><?php _e( 'Deine Webseiten-Adresse', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -787,7 +787,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%blog_info%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'Your websites tagline (description)', 'bonipress' ); ?></div>
+				<div><?php _e( 'Slogan Deiner Webseite (Beschreibung)', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -795,7 +795,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%admin_email%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'Your websites admin email', 'bonipress' ); ?></div>
+				<div><?php _e( 'Die E-Mail-Adresse des Administrators Deiner Webseite', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -803,18 +803,18 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%num_members%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'Total number of blog members', 'bonipress' ); ?></div>
+				<div><?php _e( 'Gesamtzahl der Blog-Mitglieder', 'bonipress' ); ?></div>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Instance Related', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Instanzbezogen', 'bonipress' ); ?></h3>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<strong>%new_balance%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'The users new balance', 'bonipress' ); ?></div>
+				<div><?php _e( 'Das neue Guthaben des Benutzers', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -822,7 +822,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%old_balance%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'The users old balance', 'bonipress' ); ?></div>
+				<div><?php _e( 'Das alte Guthaben des Benutzers', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -830,7 +830,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%amount%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'The amount of points gained or lost in this instance', 'bonipress' ); ?></div>
+				<div><?php _e( 'Die Anzahl der in diesem Fall gewonnenen oder verlorenen Punkte', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
@@ -838,12 +838,12 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				<strong>%entry%</strong>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div><?php _e( 'The log entry', 'bonipress' ); ?></div>
+				<div><?php _e( 'Der Logeintrag', 'bonipress' ); ?></div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div><?php printf( __( 'You can also use %s.', 'bonipress' ), '<a href="http://codex.bonipress.me/category/template-tags/temp-user/" target="_blank">' . __( 'user related template tags', 'bonipress' ) . '</a>' ); ?></div>
+				<div><?php printf( __( 'Du kannst auch %s verwenden.', 'bonipress' ), '<a href="https://n3rds.work/docs/boniprerss-benutzerbezogene-template-tags/" target="_blank">' . __( 'benutzerbezogene Template-Tags', 'bonipress' ) . '</a>' ); ?></div>
 			</div>
 		</div>
 	</div>
@@ -1084,7 +1084,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'ref'      => 'rank_promotion',
 				'user_id'  => $user_id,
 				'amount'   => 0,
-				'entry'    => 'New Rank',
+				'entry'    => 'Neuer Rang',
 				'ref_id'   => $rank_id,
 				'data'     => array( 'ref_type' => 'post' ),
 				'type'     => $point_type,
@@ -1119,7 +1119,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'ref'      => 'rank_promotion',
 				'user_id'  => $user_id,
 				'amount'   => 0,
-				'entry'    => 'New Rank',
+				'entry'    => 'Neuer Rang',
 				'ref_id'   => $rank_id,
 				'data'     => array( 'ref_type' => 'post' ),
 				'type'     => $point_type,
@@ -1147,7 +1147,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			$this->emailnotices = bonipress_apply_defaults( $this->default_prefs, $this->emailnotices );
 
 ?>
-<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Email Notices', 'bonipress' ); ?></h4>
+<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'E-Mail-Benachrichtigungen', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
 	<div class="row">
@@ -1155,7 +1155,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			<h3><?php _e( 'Format', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<div class="radio">
-					<label for="<?php echo $this->field_id( array( 'use_html' => 'no' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'use_html' ); ?>" id="<?php echo $this->field_id( array( 'use_html' => 'no' ) ); ?>" <?php checked( $this->emailnotices['use_html'], 0 ); ?> value="0" /> <?php _e( 'Plain Text', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'use_html' => 'no' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'use_html' ); ?>" id="<?php echo $this->field_id( array( 'use_html' => 'no' ) ); ?>" <?php checked( $this->emailnotices['use_html'], 0 ); ?> value="0" /> <?php _e( 'Einfacher Text', 'bonipress' ); ?></label>
 				</div>
 				<div class="radio">
 					<label for="<?php echo $this->field_id( array( 'use_html' => 'yes' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'use_html' ); ?>" id="<?php echo $this->field_id( array( 'use_html' => 'yes' ) ); ?>" <?php checked( $this->emailnotices['use_html'], 1 ); ?> value="1" /> HTML</label>
@@ -1163,32 +1163,32 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-			<h3><?php _e( 'Schedule', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Zeitplan', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<?php if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) : ?>
 				<input type="hidden" name="<?php echo $this->field_name( 'send' ); ?>" value="" />
-				<p class="form-control-static"><?php _e( 'WordPress Cron is disabled. Emails will be sent immediately.', 'bonipress' ); ?></p>
+				<p class="form-control-static"><?php _e( 'WordPress-Cron ist deaktiviert. E-Mails werden sofort versendet.', 'bonipress' ); ?></p>
 				<?php else : ?>
 				<div class="radio">
-					<label for="<?php echo $this->field_id( 'send' ); ?>"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>" <?php checked( $this->emailnotices['send'], '' ); ?> value="" /> <?php _e( 'Send emails immediately', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'send' ); ?>"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>" <?php checked( $this->emailnotices['send'], '' ); ?> value="" /> <?php _e( 'E-Mails sofort versenden', 'bonipress' ); ?></label>
 				</div>
 				<div class="radio">
-					<label for="<?php echo $this->field_id( 'send' ); ?>-hourly"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>-hourly" <?php checked( $this->emailnotices['send'], 'hourly' ); ?> value="hourly" /> <?php _e( 'Send emails once an hour', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'send' ); ?>-hourly"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>-hourly" <?php checked( $this->emailnotices['send'], 'hourly' ); ?> value="hourly" /> <?php _e( 'Sende E-Mails einmal pro Stunde', 'bonipress' ); ?></label>
 				</div>
 				<div class="radio">
-					<label for="<?php echo $this->field_id( 'send' ); ?>-daily"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>-daily" <?php checked( $this->emailnotices['send'], 'daily' ); ?> value="daily" /> <?php _e( 'Send emails once a day', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'send' ); ?>-daily"><input type="radio" name="<?php echo $this->field_name( 'send' ); ?>" id="<?php echo $this->field_id( 'send' ); ?>-daily" <?php checked( $this->emailnotices['send'], 'daily' ); ?> value="daily" /> <?php _e( 'Sende einmal täglich E-Mails', 'bonipress' ); ?></label>
 				</div>
 				<?php endif; ?>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Advanced', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Erweitert', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'filter' => 'subject' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'filter' => 'subject' ) ); ?>" id="<?php echo $this->field_id( array( 'filter' => 'subject' ) ); ?>" <?php checked( $this->emailnotices['filter']['subject'], 1 ); ?> value="1" /> <?php _e( 'Filter Email Subjects', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'filter' => 'subject' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'filter' => 'subject' ) ); ?>" id="<?php echo $this->field_id( array( 'filter' => 'subject' ) ); ?>" <?php checked( $this->emailnotices['filter']['subject'], 1 ); ?> value="1" /> <?php _e( 'E-Mail-Betreff filtern', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'filter' => 'content' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'filter' => 'content' ) ); ?>" id="<?php echo $this->field_id( array( 'filter' => 'content' ) ); ?>" <?php checked( $this->emailnotices['filter']['content'], 1 ); ?> value="1" /> <?php _e( 'Filter Email Body', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'filter' => 'content' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'filter' => 'content' ) ); ?>" id="<?php echo $this->field_id( array( 'filter' => 'content' ) ); ?>" <?php checked( $this->emailnotices['filter']['content'], 1 ); ?> value="1" /> <?php _e( 'E-Mail-Text filtern', 'bonipress' ); ?></label>
 				</div>
 			</div>
 		</div>
@@ -1197,36 +1197,36 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( 'override' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'override' ); ?>" id="<?php echo $this->field_id( 'override' ); ?>" <?php checked( $this->emailnotices['override'], 1 ); ?> value="1" /> <?php _e( 'SMTP Debug. Enable if you are experiencing issues with wp_mail() or if you use a SMTP plugin for emails.', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'override' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'override' ); ?>" id="<?php echo $this->field_id( 'override' ); ?>" <?php checked( $this->emailnotices['override'], 1 ); ?> value="1" /> <?php _e( 'SMTP-Debug. Aktiviere diese Option, wenn Du Probleme mit wp_mail() hast oder wenn Du ein SMTP-Plugin für E-Mails verwendest.', 'bonipress' ); ?></label>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<h3 style="margin-bottom: 0;"><?php _e( 'Available Shortcodes', 'bonipress' ); ?></h3>
+	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="http://codex.bonipress.me/shortcodes/bonipress_email_subscriptions/" target="_blank">[bonipress_email_subscriptions]</a></p>
+			<p><a href="https://n3rds.work/docs/bonipress-bonipress_email_subscriptions/" target="_blank">[bonipress_email_subscriptions]</a></p>
 		</div>
 	</div>
 
-	<h3><?php _e( 'Defaults', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Standardwerte', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'from' => 'name' ) ); ?>"><?php _e( 'Senders Name:', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'from' => 'name' ) ); ?>"><?php _e( 'Name des Absenders:', 'bonipress' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'from' => 'name' ) ); ?>" id="<?php echo $this->field_id( array( 'from' => 'name' ) ); ?>" value="<?php echo esc_attr( $this->emailnotices['from']['name'] ); ?>" class="form-control" />
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'from' => 'email' ) ); ?>"><?php _e( 'Senders Email:', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'from' => 'email' ) ); ?>"><?php _e( 'E-Mail des Absenders:', 'bonipress' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'from' => 'email' ) ); ?>" id="<?php echo $this->field_id( array( 'from' => 'email' ) ); ?>" value="<?php echo esc_attr( $this->emailnotices['from']['email'] ); ?>" class="form-control" />
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'from' => 'reply_to' ) ); ?>"><?php _e( 'Reply-To:', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'from' => 'reply_to' ) ); ?>"><?php _e( 'Antwort an:', 'bonipress' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'from' => 'reply_to' ) ); ?>" id="<?php echo $this->field_id( array( 'from' => 'reply_to' ) ); ?>" value="<?php echo esc_attr( $this->emailnotices['from']['reply_to'] ); ?>" class="form-control" />
 			</div>
 		</div>
@@ -1234,18 +1234,18 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'content' ); ?>"><?php _e( 'Default Email Content', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'content' ); ?>"><?php _e( 'Standard-E-Mail-Inhalt', 'bonipress' ); ?></label>
 				<textarea rows="10" cols="50" name="<?php echo $this->field_name( 'content' ); ?>" id="<?php echo $this->field_id( 'content' ); ?>" class="form-control"><?php echo esc_attr( $this->emailnotices['content'] ); ?></textarea>
-				<p><span class="description"><?php _e( 'Default email content.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Standard-E-Mail-Inhalt.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'styling' ); ?>"><?php _e( 'Default CSS Styling', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'styling' ); ?>"><?php _e( 'Standard-CSS-Stil', 'bonipress' ); ?></label>
 				<textarea rows="10" cols="50" name="<?php echo $this->field_name( 'styling' ); ?>" id="<?php echo $this->field_id( 'styling' ); ?>" class="form-control"><?php echo esc_attr( $this->emailnotices['styling'] ); ?></textarea>
-				<p><span class="description"><?php _e( 'Default email CSS styling. Note that if you intend to send HTML emails, you should use inline CSS styling for best results.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Standard-E-Mail-CSS-Stil. Beachte, dass Du, wenn Du HTML-E-Mails senden möchtest, für beste Ergebnisse das Inline-CSS-Styling verwenden solltest.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 	</div>

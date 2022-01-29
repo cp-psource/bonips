@@ -754,7 +754,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			if ( in_array( 'user', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'User Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-user/'
+					'url'   => 'https://n3rds.work/docs/boniprerss-benutzerbezogene-template-tags/'
 				);
 
 			// Post

@@ -18,7 +18,7 @@ if ( ! class_exists( 'boniPRESS_Hook_Registration' ) ) :
 				'id'       => 'registration',
 				'defaults' => array(
 					'creds'   => 10,
-					'log'     => '%plural% for becoming a member'
+					'log'     => '%plural% für die Registrierung'
 				)
 			), $hook_prefs, $type );
 
@@ -84,7 +84,7 @@ if ( ! class_exists( 'boniPRESS_Hook_Registration' ) ) :
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( 'log' ); ?>"><?php _e( 'Protokollvorlage', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" placeholder="<?php _e( 'erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'user' ) ); ?></span>
 			</div>
 		</div>
