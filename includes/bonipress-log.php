@@ -3,7 +3,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * Query Log
- * @see http://codex.bonipress.me/classes/bonipress_query_log/ 
+ * @see https://n3rds.work/docs/bonipress-bonipress_query_log/ 
  * @since 0.1
  * @version 1.4.1
  */
@@ -395,7 +395,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 			if ( $this->have_entries() ) {
 				$total_number = count( $this->results );
-				$output = '<span class="displaying-num">' . sprintf( __( 'Showing %d %s', 'bonipress' ), $total_number, _n( 'entry', 'entries', $total_number, 'bonipress' ) ) . '</span>';
+				$output = '<span class="displaying-num">' . sprintf( __( '%d %s werden angezeigt', 'bonipress' ), $total_number, _n( 'Eintrag', 'Einträge', $total_number, 'bonipress' ) ) . '</span>';
 			}
 
 			$page_links = array();
@@ -408,14 +408,14 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 			$page_links[] = sprintf( '<a class="%s" title="%s" href="%s">%s</a>',
 				'btn btn-default btn-sm first-page' . $disable_first,
-				esc_attr__( 'Go to the first page' ),
+				esc_attr__( 'Gehe zur ersten Seite' ),
 				esc_url( remove_query_arg( 'paged', $current_url ) ),
 				'&laquo;'
 			);
 
 			$page_links[] = sprintf( '<a class="%s" title="%s" href="%s">%s</a>',
 				'btn btn-default btn-sm prev-page' . $disable_first,
-				esc_attr__( 'Go to the previous page' ),
+				esc_attr__( 'Gehe zur vorherigen Seite' ),
 				esc_url( add_query_arg( 'paged', max( 1, $current-1 ), $current_url ) ),
 				'&lsaquo;'
 			);
@@ -424,24 +424,24 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 				$html_current_page = $current;
 			else
 				$html_current_page = sprintf( '<input class="current-page btn btn-sm" title="%s" type="text" name="paged" value="%s" size="%d" />',
-					esc_attr__( 'Current page' ),
+					esc_attr__( 'Aktuelle Seite' ),
 					$current,
 					strlen( $total_pages )
 				);
 
 			$html_total_pages = sprintf( "<span class='total-pages'>%s</span>", number_format_i18n( $total_pages ) );
-			$page_links[] = '<span class="paging-input">' . sprintf( _x( '%1$s of %2$s', 'paging' ), $html_current_page, $html_total_pages ) . '</span>';
+			$page_links[] = '<span class="paging-input">' . sprintf( _x( '%1$s von %2$s', 'paging' ), $html_current_page, $html_total_pages ) . '</span>';
 
 			$page_links[] = sprintf( '<a class="%s"  title="%s" href="%s">%s</a>',
 				'btn btn-default btn-sm next-page' . $disable_last,
-				esc_attr__( 'Go to the next page' ),
+				esc_attr__( 'Gehe zur nächsten Seite' ),
 				esc_url( add_query_arg( 'paged', min( $total_pages, $current+1 ), $current_url ) ),
 				'&rsaquo;'
 			);
 
 			$page_links[] = sprintf( '<a class="%s" title="%s" href="%s">%s</a>',
 				'btn btn-default btn-sm last-page' . $disable_last,
-				esc_attr__( 'Go to the last page' ),
+				esc_attr__( 'Gehe zur letzten Seite' ),
 				esc_url( add_query_arg( 'paged', $total_pages, $current_url ) ),
 				'&raquo;'
 			);
@@ -509,7 +509,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			// Filter by reference
 			$references = $this->get_refs( $refs );
 			if ( ! empty( $references ) ) {
-				echo '<select name="ref" id="boniPRESS-reference-filter"><option value="">' . __( 'Show all references', 'bonipress' ) . '</option>';
+				echo '<select name="ref" id="boniPRESS-reference-filter"><option value="">' . __( 'Alle Referenzen anzeigen', 'bonipress' ) . '</option>';
 				foreach ( $references as $ref ) {
 					$label = str_replace( array( '_', '-' ), ' ', $ref );
 					echo '<option value="' . $ref . '"';
@@ -522,14 +522,14 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 			// Filter by user
 			if ( $this->core->can_edit_creds() && ! $is_profile && $this->num_rows > 0 ) {
-				echo '<input type="text" class="form-control" name="user_id" id="boniPRESS-user-filter" size="12" placeholder="' . __( 'User ID', 'bonipress' ) . '" value="' . ( ( isset( $_GET['user_id'] ) ) ? $_GET['user_id'] : '' ) . '" /> ';
+				echo '<input type="text" class="form-control" name="user_id" id="boniPRESS-user-filter" size="12" placeholder="' . __( 'Benutzer ID', 'bonipress' ) . '" value="' . ( ( isset( $_GET['user_id'] ) ) ? $_GET['user_id'] : '' ) . '" /> ';
 				$show = true;
 			}
 
 			// Filter Order
 			if ( $this->num_rows > 0 ) {
-				echo '<select name="order" id="boniPRESS-order-filter"><option value="">' . __( 'Show in order', 'bonipress' ) . '</option>';
-				$options = array( 'ASC' => __( 'Ascending', 'bonipress' ), 'DESC' => __( 'Descending', 'bonipress' ) );
+				echo '<select name="order" id="boniPRESS-order-filter"><option value="">' . __( 'Reihenfolge anzeigen', 'bonipress' ) . '</option>';
+				$options = array( 'ASC' => __( 'Aufsteigend', 'bonipress' ), 'DESC' => __( 'Absteigend', 'bonipress' ) );
 				foreach ( $options as $value => $label ) {
 					echo '<option value="' . $value . '"';
 					if ( ! isset( $_GET['order'] ) && $value == 'DESC' ) echo ' selected="selected"';
@@ -600,11 +600,11 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 				}
 ?>
 	</form>
-	<p><span class="description"><?php _e( 'Log entries are exported to a CSV file and depending on the number of entries selected, the process may take a few seconds.', 'bonipress' ); ?></span></p>
+	<p><span class="description"><?php _e( 'Protokolleinträge werden in eine CSV-Datei exportiert und je nach Anzahl der ausgewählten Einträge kann der Vorgang einige Sekunden dauern.', 'bonipress' ); ?></span></p>
 <?php
 			}
 			else {
-				echo '<p>' . __( 'No export options available.', 'bonipress' ) . '</p>';
+				echo '<p>' . __( 'Keine Exportoptionen verfügbar.', 'bonipress' ) . '</p>';
 			}
 ?>
 </div>
@@ -630,10 +630,10 @@ jQuery(function($) {
 			global $bonipress_types;
 
 			return apply_filters( 'bonipress_log_column_headers', array(
-				'column-username' => __( 'User', 'bonipress' ),
-				'column-time'     => __( 'Date', 'bonipress' ),
+				'column-username' => __( 'Benutzer', 'bonipress' ),
+				'column-time'     => __( 'Datum', 'bonipress' ),
 				'column-creds'    => $this->core->plural(),
-				'column-entry'    => __( 'Entry', 'bonipress' )
+				'column-entry'    => __( 'Eintrag', 'bonipress' )
 			), $this );
 		}
 
@@ -734,7 +734,7 @@ jQuery(function($) {
 
 						$user = get_userdata( $log_entry->user_id );
 						if ( $user === false )
-							$content = '<span>' . __( 'User Missing', 'bonipress' ) . ' (ID: ' . $log_entry->user_id . ')</span>';
+							$content = '<span>' . __( 'Benutzer fehlt', 'bonipress' ) . ' (ID: ' . $log_entry->user_id . ')</span>';
 						else
 							$content = '<span>' . $user->display_name . '</span>';
 						
@@ -804,7 +804,7 @@ jQuery(function($) {
 		 * @version 1.0
 		 */
 		public function get_no_entries() {
-			return __( 'No log entries found', 'bonipress' );
+			return __( 'Keine Protokolleinträge gefunden', 'bonipress' );
 		}
 
 		/**
@@ -819,9 +819,9 @@ jQuery(function($) {
 				$serarch_string = ''; ?>
 
 			<p class="search-box">
-				<label class="screen-reader-text" for=""><?php _e( 'Search Log', 'bonipress' ); ?>:</label>
-				<input type="search" name="s" value="<?php echo $serarch_string; ?>" placeholder="<?php _e( 'search log entries', 'bonipress' ); ?>" />
-				<input type="submit" name="bonipress-search-log" id="search-submit" class="button button-medium button-secondary" value="<?php _e( 'Search Log', 'bonipress' ); ?>" />
+				<label class="screen-reader-text" for=""><?php _e( 'Suchprotokoll', 'bonipress' ); ?>:</label>
+				<input type="search" name="s" value="<?php echo $serarch_string; ?>" placeholder="<?php _e( 'Logeinträge suchen', 'bonipress' ); ?>" />
+				<input type="submit" name="bonipress-search-log" id="search-submit" class="button button-medium button-secondary" value="<?php _e( 'Suche Log', 'bonipress' ); ?>" />
 			</p>
 <?php
 		}
@@ -833,11 +833,11 @@ jQuery(function($) {
 		 */
 		public function filter_dates( $url = '' ) {
 			$date_sorting = apply_filters( 'bonipress_sort_by_time', array(
-				''          => __( 'All', 'bonipress' ),
-				'today'     => __( 'Today', 'bonipress' ),
-				'yesterday' => __( 'Yesterday', 'bonipress' ),
-				'thisweek'  => __( 'This Week', 'bonipress' ),
-				'thismonth' => __( 'This Month', 'bonipress' )
+				''          => __( 'Alle', 'bonipress' ),
+				'today'     => __( 'Heute', 'bonipress' ),
+				'yesterday' => __( 'Gestern', 'bonipress' ),
+				'thisweek'  => __( 'Diese Woche', 'bonipress' ),
+				'thismonth' => __( 'Dieser Monat', 'bonipress' )
 			) );
 
 			if ( ! empty( $date_sorting ) ) {

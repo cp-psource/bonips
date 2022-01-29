@@ -3,7 +3,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 /**
  * Query Log
- * @see http://codex.bonipress.me/classes/bonipress_query_log/ 
+ * @see https://n3rds.work/docs/bonipress-bonipress_query_log/ 
  * @since 0.1
  * @version 1.8
  */
@@ -259,7 +259,6 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			/**
 			 * Populate Query Arguments
 			 * @uses bonipress_query_log_args
-			 * @see http://codex.bonipress.me/filters/bonipress_query_log_args/
 			 */
 			$defaults        = array(
 				'entry_id'      => NULL,
@@ -1008,10 +1007,10 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			global $bonipress_types;
 
 			$columns = array(
-				'username' => __( 'User', 'bonipress' ),
-				'time'     => __( 'Date', 'bonipress' ),
+				'username' => __( 'Benutzer', 'bonipress' ),
+				'time'     => __( 'Datum', 'bonipress' ),
 				'creds'    => $this->core->plural(),
-				'entry'    => __( 'Entry', 'bonipress' )
+				'entry'    => __( 'Eintrag', 'bonipress' )
 			);
 
 			if ( $this->args['user_id'] !== NULL )
@@ -1020,11 +1019,11 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			if ( $this->is_admin )
 				$columns = array(
 					'cb'       => '',
-					'username' => __( 'User', 'bonipress' ),
-					'ref'      => __( 'Reference', 'bonipress' ),
-					'time'     => __( 'Date', 'bonipress' ),
+					'username' => __( 'Benutzer', 'bonipress' ),
+					'ref'      => __( 'Referenz', 'bonipress' ),
+					'time'     => __( 'Datum', 'bonipress' ),
 					'creds'    => $this->core->plural(),
-					'entry'    => __( 'Entry', 'bonipress' )
+					'entry'    => __( 'Eintrag', 'bonipress' )
 				);
 
 			$headers = $this->headers;
@@ -1034,7 +1033,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			// If we are showing results for multiple point types, the label will not be correct
 			// Instead we use a more generic label.
 			if ( array_key_exists( 'creds', $headers ) && count( $this->types ) > 1 )
-				$headers['creds'] = __( 'Amount', 'bonipress' );
+				$headers['creds'] = __( 'Betrag', 'bonipress' );
 
 			$this->headers = apply_filters( 'bonipress_log_column_headers', $headers, $this, $this->is_admin );
 
@@ -1071,7 +1070,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 		 */
 		public function get_no_entries() {
 
-			return __( 'No log entries found', 'bonipress' );
+			return __( 'Keine Protokolleinträge gefunden', 'bonipress' );
 
 		}
 
@@ -1133,10 +1132,10 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			if ( ! $this->is_admin || ! $this->render_mode ) return;
 
 			$bulk_actions = apply_filters( 'bonipress_log_bulk_actions', array(
-				'-1'            => __( 'Bulk Actions', 'bonipress' ),
-				'export-raw'    => __( 'Export Raw', 'bonipress' ),
-				'export-format' => __( 'Export Formatted', 'bonipress' ),
-				'delete'        => __( 'Delete', 'bonipress' )
+				'-1'            => __( 'Massenaktionen', 'bonipress' ),
+				'export-raw'    => __( 'Roh exportieren', 'bonipress' ),
+				'export-format' => __( 'Formatiert exportieren', 'bonipress' ),
+				'delete'        => __( 'Löschen', 'bonipress' )
 			), $this );
 
 			if ( empty( $bulk_actions ) ) return;
@@ -1151,7 +1150,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 ?>
 	</select>
-	<input type="submit" class="button action" id="doaction" value="<?php _e( 'Apply', 'bonipress' ); ?>" />
+	<input type="submit" class="button action" id="doaction" value="<?php _e( 'Anwenden', 'bonipress' ); ?>" />
 </div>
 <?php
 
@@ -1172,7 +1171,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			// Filter by reference
 			if ( ! empty( $this->references ) ) {
 
-				echo '<select name="ref" id="boniPRESS-reference-filter"><option value="">' . __( 'Show all references', 'bonipress' ) . '</option>';
+				echo '<select name="ref" id="boniPRESS-reference-filter"><option value="">' . __( 'Alle Referenzen anzeigen', 'bonipress' ) . '</option>';
 				foreach ( $this->references as $ref_id => $ref_label ) {
 
 					echo '<option value="' . $ref_id . '"';
@@ -1188,7 +1187,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			// Filter by user
 			if ( $this->core->user_is_point_editor() && ! $is_profile && $this->num_rows > 0 ) {
 
-				echo '<input type="text" class="form-control" name="user" id="boniPRESS-user-filter" size="22" placeholder="' . __( 'User ID, Username, Email or Nicename', 'bonipress' ) . '" value="' . ( ( isset( $_GET['user'] ) ) ? esc_attr( $_GET['user'] ) : '' ) . '" /> ';
+				echo '<input type="text" class="form-control" name="user" id="boniPRESS-user-filter" size="22" placeholder="' . __( 'Benutzer-ID, Benutzername, E-Mail oder Nickname', 'bonipress' ) . '" value="' . ( ( isset( $_GET['user'] ) ) ? esc_attr( $_GET['user'] ) : '' ) . '" /> ';
 				$show = true;
 
 			}
@@ -1196,8 +1195,8 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			// Filter Order
 			if ( $this->num_rows > 0 ) {
 
-				echo '<select name="order" id="boniPRESS-order-filter"><option value="">' . __( 'Show in order', 'bonipress' ) . '</option>';
-				foreach ( array( 'ASC' => __( 'Ascending', 'bonipress' ), 'DESC' => __( 'Descending', 'bonipress' ) ) as $value => $label ) {
+				echo '<select name="order" id="boniPRESS-order-filter"><option value="">' . __( 'Reihenfolge anzeigen', 'bonipress' ) . '</option>';
+				foreach ( array( 'ASC' => __( 'Aufsteigend', 'bonipress' ), 'DESC' => __( 'Absteigend', 'bonipress' ) ) as $value => $label ) {
 
 					echo '<option value="' . $value . '"';
 					if ( ! isset( $_GET['order'] ) && $value == 'DESC' ) echo ' selected="selected"';
@@ -1255,7 +1254,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			if ( ! $this->render_mode ) return;
 
 ?>
-<h2 class="screen-reader-text sr-only"><?php _e( 'Log entries navigation', 'bonipress' ); ?></h2>
+<h2 class="screen-reader-text sr-only"><?php _e( 'Navigation durch Protokolleinträge', 'bonipress' ); ?></h2>
 <div class="tablenav-pages<?php if ( $this->max_num_pages == 1 ) echo ' one-page'; ?>">
 
 	<?php $this->pagination( $location, $id ); ?>
@@ -1386,7 +1385,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			$current_url        = remove_query_arg( array( 'hotkeys_highlight_last', 'hotkeys_highlight_first' ), $current_url );
 
 			if ( $this->have_entries() )
-				$output = '<span class="displaying-num">' . sprintf( _n( '1 entry', '%d entries', $this->num_rows, 'bonipress' ), $this->num_rows ) . '</span>';
+				$output = '<span class="displaying-num">' . sprintf( _n( '1 Eintrag', '%d Einträge', $this->num_rows, 'bonipress' ), $this->num_rows ) . '</span>';
 	
 			$total_pages_before = '<span class="paging-input">';
 			$total_pages_after  = '</span>';
@@ -1413,7 +1412,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			} else {
 				$page_links[] = sprintf( "<a class='first-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
 					esc_url( remove_query_arg( 'paged', $current_url ) ),
-					__( 'First page' ),
+					__( 'Erste Seite' ),
 					'&laquo;'
 				);
 			}
@@ -1423,30 +1422,30 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			} else {
 				$page_links[] = sprintf( "<a class='prev-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
 					esc_url( add_query_arg( 'paged', max( 1, $current-1 ), $current_url ) ),
-					__( 'Previous page' ),
+					__( 'Vorherige Seite' ),
 					'&lsaquo;'
 				);
 			}
 	
 			if ( 'bottom' === $location ) {
 				$html_current_page  = $current;
-				$total_pages_before = '<span class="screen-reader-text">' . __( 'Current Page' ) . '</span><span id="table-paging" class="paging-input">';
+				$total_pages_before = '<span class="screen-reader-text">' . __( 'Aktuelle Seite' ) . '</span><span id="table-paging" class="paging-input">';
 			} else {
 				$html_current_page = sprintf( "%s<input class='current-page' id='current-page-selector' type='text' name='paged' value='%s' size='%d' aria-describedby='table-paging' />",
-					'<label for="current-page-selector" class="screen-reader-text">' . __( 'Current Page' ) . '</label>',
+					'<label for="current-page-selector" class="screen-reader-text">' . __( 'Aktuelle Seite' ) . '</label>',
 					$current,
 					strlen( $total_pages )
 				);
 			}
 			$html_total_pages = sprintf( "<span class='total-pages'>%s</span>", number_format_i18n( $total_pages ) );
-			$page_links[]     = $total_pages_before . sprintf( _x( '%1$s of %2$s', 'paging' ), $html_current_page, $html_total_pages ) . $total_pages_after;
+			$page_links[]     = $total_pages_before . sprintf( _x( '%1$s von %2$s', 'paging' ), $html_current_page, $html_total_pages ) . $total_pages_after;
 	
 			if ( $disable_next ) {
 				$page_links[] = '<span class="tablenav-pages-navspan" aria-hidden="true">&rsaquo;</span>';
 			} else {
 				$page_links[] = sprintf( "<a class='next-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
 					esc_url( add_query_arg( 'paged', min( $total_pages, $current+1 ), $current_url ) ),
-					__( 'Next page' ),
+					__( 'Nächste Seite' ),
 					'&rsaquo;'
 				);
 			}
@@ -1456,7 +1455,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			} else {
 				$page_links[] = sprintf( "<a class='last-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
 					esc_url( add_query_arg( 'paged', $total_pages, $current_url ) ),
-					__( 'Last page' ),
+					__( 'Letzte Seite' ),
 					'&raquo;'
 				);
 			}
@@ -1522,7 +1521,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 					$class = ' hidden';
 
 				if ( $col_id == 'cb' )
-					$output .= '<td id="cb" class="manage-column column-cb check-column"><label class="screen-reader-text" for="cb-select-all-1">' . __( 'Select all', 'bonipress' ) . '</label><input type="checkbox" id="cb-select-all-1" /></td>';
+					$output .= '<td id="cb" class="manage-column column-cb check-column"><label class="screen-reader-text" for="cb-select-all-1">' . __( 'Wähle Alle', 'bonipress' ) . '</label><input type="checkbox" id="cb-select-all-1" /></td>';
 
 				else
 					$output .= '<th scope="col" id="' . $col_id . '" class="manage-column' . ( ( $col_id == 'username' ) ? ' column-primary' : '' ) . ' column-' . $col_id . $class . '">' . $col_title . '</th>';
@@ -1572,7 +1571,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 					$class = ' hidden';
 
 				if ( $col_id == 'cb' )
-					$output .= '<td class="manage-column column-cb check-column"><label class="screen-reader-text" for="cb-select-all-2">' . __( 'Select all', 'bonipress' ) . '</label><input type="checkbox" id="cb-select-all-2" /></td>';
+					$output .= '<td class="manage-column column-cb check-column"><label class="screen-reader-text" for="cb-select-all-2">' . __( 'Wähle Alle', 'bonipress' ) . '</label><input type="checkbox" id="cb-select-all-2" /></td>';
 
 				else
 					$output .= '<th scope="col" class="manage-column' . ( ( $col_id == 'username' ) ? ' column-primary' : '' ) . ' column-' . $col_id . $class . '">' . $col_title . '</th>';
@@ -1632,7 +1631,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 					// Checkbox column for bulk actions
 					case 'cb' :
 
-						$entry_data .= '<th scope="row" class="check-column"><label class="screen-reader-text" for="bonipress-log-entry' . $log_entry->id . '">' . __( 'Select entry', 'bonipress' ) . '</label><input type="checkbox" name="entry[]" id="bonipress-log-entry' . $log_entry->id . '" value="' . $log_entry->id . '" /></th>';
+						$entry_data .= '<th scope="row" class="check-column"><label class="screen-reader-text" for="bonipress-log-entry' . $log_entry->id . '">' . __( 'Eintrag auswählen', 'bonipress' ) . '</label><input type="checkbox" name="entry[]" id="bonipress-log-entry' . $log_entry->id . '" value="' . $log_entry->id . '" /></th>';
 
 					break;
 
@@ -1640,7 +1639,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 					case 'username' :
 
 						$user = get_userdata( $log_entry->user_id );
-						$display_name = '<span>' . __( 'User Missing', 'bonipress' ) . ' (ID: ' . $log_entry->user_id . ')</span>';
+						$display_name = '<span>' . __( 'Benutzer fehlt', 'bonipress' ) . ' (ID: ' . $log_entry->user_id . ')</span>';
 						if ( isset( $user->display_name ) )
 							$display_name = $user->display_name;
 
@@ -1653,7 +1652,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 						}
 
 						if ( $this->is_admin )
-							$content .= '<button type="button" class="toggle-row"><span class="screen-reader-text">' . __( 'Show more details', 'bonipress' ) . '</span></button>';
+							$content .= '<button type="button" class="toggle-row"><span class="screen-reader-text">' . __( 'Weitere Details anzeigen', 'bonipress' ) . '</span></button>';
 
 						$content = apply_filters( 'bonipress_log_username', $content, $log_entry->user_id, $log_entry );
 
@@ -1677,7 +1676,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 						$content = '<time>' . $content . '</time>';
 
 						if ( $this->is_admin )
-							$content .= '<div class="row-actions"><span class="view"><a href="' . add_query_arg( array( 'page' => $_REQUEST['page'], 'time' => $this->get_time_for_filter( $log_entry->time ) ), admin_url( 'admin.php' ) ) . '">' . __( 'Filter by Date', 'bonipress' ) . '</a></span></div>';
+							$content .= '<div class="row-actions"><span class="view"><a href="' . add_query_arg( array( 'page' => $_REQUEST['page'], 'time' => $this->get_time_for_filter( $log_entry->time ) ), admin_url( 'admin.php' ) ) . '">' . __( 'Nach Datum filtern', 'bonipress' ) . '</a></span></div>';
 
 					break;
 
@@ -1726,17 +1725,17 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 			if ( ! $this->is_admin || ! $this->render_mode ) return;
 
-			$filter_label = __( 'Filter by User', 'bonipress' );
+			$filter_label = __( 'Nach Benutzer filtern', 'bonipress' );
 			if ( $user === false )
-				$filter_label = __( 'Filter by ID', 'bonipress' );
+				$filter_label = __( 'Nach ID filtern', 'bonipress' );
 
 			$actions = array();
 
 			if ( ! isset( $_REQUEST['user'] ) || $_REQUEST['user'] == '' )
 				$actions['view']   = '<a href="' . add_query_arg( array( 'page' => $_REQUEST['page'], 'user' => $entry->user_id ), admin_url( 'admin.php' ) ) . '">' . $filter_label . '</a>';
 
-			$actions['edit']   = '<a href="javascript:void(0);" class="bonipress-open-log-entry-editor" data-id="' . $entry->id . '" data-ref="' . $entry->ref . '">' . __( 'Edit', 'bonipress' ) . '</a>';
-			$actions['delete'] = '<a href="javascript:void(0);" class="bonipress-delete-row" data-id="' . $entry->id . '">' . __( 'Delete', 'bonipress' ) . '</a>';
+			$actions['edit']   = '<a href="javascript:void(0);" class="bonipress-open-log-entry-editor" data-id="' . $entry->id . '" data-ref="' . $entry->ref . '">' . __( 'Bearbeiten', 'bonipress' ) . '</a>';
+			$actions['delete'] = '<a href="javascript:void(0);" class="bonipress-delete-row" data-id="' . $entry->id . '">' . __( 'Löschen', 'bonipress' ) . '</a>';
 
 			if ( ! empty( $actions ) ) {
 
@@ -1801,14 +1800,14 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 				}
 
 ?>
-	<p><span class="description"><?php _e( 'Log entries are exported to a CSV file and depending on the number of entries selected, the process may take a few seconds.', 'bonipress' ); ?></span></p>
+	<p><span class="description"><?php _e( 'Protokolleinträge werden in eine CSV-Datei exportiert und je nach Anzahl der ausgewählten Einträge kann der Vorgang einige Sekunden dauern.', 'bonipress' ); ?></span></p>
 <?php
 
 			}
 
 			else {
 
-				echo '<p>' . __( 'No export options available.', 'bonipress' ) . '</p>';
+				echo '<p>' . __( 'Keine Exportoptionen verfügbar.', 'bonipress' ) . '</p>';
 
 			}
 
@@ -1841,9 +1840,9 @@ jQuery(function($) {
 
 ?>
 <p class="search-box">
-	<label class="screen-reader-text"><?php _e( 'Search Log', 'bonipress' ); ?>:</label>
-	<input type="search" name="s" value="<?php echo esc_attr( $serarch_string ); ?>" placeholder="<?php _e( 'search log entries', 'bonipress' ); ?>" />
-	<input type="submit" id="search-submit" class="button button-medium button-secondary" value="<?php _e( 'Search Log', 'bonipress' ); ?>" />
+	<label class="screen-reader-text"><?php _e( 'Suche Log', 'bonipress' ); ?>:</label>
+	<input type="search" name="s" value="<?php echo esc_attr( $serarch_string ); ?>" placeholder="<?php _e( 'Logeinträge suchen', 'bonipress' ); ?>" />
+	<input type="submit" id="search-submit" class="button button-medium button-secondary" value="<?php _e( 'Suche Log', 'bonipress' ); ?>" />
 </p>
 <?php
 
@@ -1859,11 +1858,11 @@ jQuery(function($) {
 			if ( ! $this->render_mode ) return;
 
 			$date_sorting = apply_filters( 'bonipress_sort_by_time', array(
-				''          => __( 'All', 'bonipress' ),
-				'today'     => __( 'Today', 'bonipress' ),
-				'yesterday' => __( 'Yesterday', 'bonipress' ),
-				'thisweek'  => __( 'This Week', 'bonipress' ),
-				'thismonth' => __( 'This Month', 'bonipress' )
+				''          => __( 'Alle', 'bonipress' ),
+				'today'     => __( 'Heute', 'bonipress' ),
+				'yesterday' => __( 'Gestern', 'bonipress' ),
+				'thisweek'  => __( 'Diese Woche', 'bonipress' ),
+				'thismonth' => __( 'Dieser Monat', 'bonipress' )
 			) );
 
 			if ( ! empty( $date_sorting ) ) {
@@ -2305,150 +2304,150 @@ if ( ! function_exists( 'bonipress_get_all_references' ) ) :
 
 		// Hooks
 		$hooks = array(
-			'registration'        => __( 'Website Registration', 'bonipress' ),
-			'site_visit'          => __( 'Website Visit', 'bonipress' ),
-			'view_content'        => __( 'Viewing Content (Member)', 'bonipress' ),
-			'view_content_author' => __( 'Viewing Content (Author)', 'bonipress' ),
-			'logging_in'          => __( 'Logging in', 'bonipress' ),
-			'publishing_content'  => __( 'Publishing Content', 'bonipress' ),
-			'approved_comment'    => __( 'Approved Comment', 'bonipress' ),
-			'unapproved_comment'  => __( 'Unapproved Comment', 'bonipress' ),
-			'spam_comment'        => __( 'SPAM Comment', 'bonipress' ),
-			'deleted_comment'     => __( 'Deleted Comment', 'bonipress' ),
-			'link_click'          => __( 'Link Click', 'bonipress' ),
-			'watching_video'      => __( 'Watching Video', 'bonipress' ),
-			'visitor_referral'    => __( 'Visitor Referral', 'bonipress' ),
-			'signup_referral'     => __( 'Signup Referral', 'bonipress' )
+			'registration'        => __( 'Webseiten-Registrierung', 'bonipress' ),
+			'site_visit'          => __( 'Webseiten-Besuch', 'bonipress' ),
+			'view_content'        => __( 'Anzeigen von Inhalten (Mitglied)', 'bonipress' ),
+			'view_content_author' => __( 'Anzeigen von Inhalten (Autor)', 'bonipress' ),
+			'logging_in'          => __( 'Einloggen', 'bonipress' ),
+			'publishing_content'  => __( 'Veröffentlichung von Inhalten', 'bonipress' ),
+			'approved_comment'    => __( 'Genehmigter Kommentar', 'bonipress' ),
+			'unapproved_comment'  => __( 'Nicht genehmigter Kommentar', 'bonipress' ),
+			'spam_comment'        => __( 'SPAM-Kommentar', 'bonipress' ),
+			'deleted_comment'     => __( 'Gelöschter Kommentar', 'bonipress' ),
+			'link_click'          => __( 'Link klicken', 'bonipress' ),
+			'watching_video'      => __( 'Video ansehen', 'bonipress' ),
+			'visitor_referral'    => __( 'Besucherempfehlung', 'bonipress' ),
+			'signup_referral'     => __( 'Anmeldeempfehlung', 'bonipress' )
 		);
 
 		if ( class_exists( 'BuddyPress' ) ) {
-			$hooks['new_profile_update']     = __( 'New Profile Update', 'bonipress' );
-			$hooks['deleted_profile_update'] = __( 'Profile Update Removal', 'bonipress' );
-			$hooks['upload_avatar']          = __( 'Avatar Upload', 'bonipress' );
-			$hooks['upload_cover']           = __( 'Profile Cover Upload', 'bonipress' );
-			$hooks['new_friendship']         = __( 'New Friendship', 'bonipress' );
-			$hooks['ended_friendship']       = __( 'Ended Friendship', 'bonipress' );
-			$hooks['new_comment']            = __( 'New Profile Comment', 'bonipress' );
-			$hooks['comment_deletion']       = __( 'Profile Comment Deletion', 'bonipress' );
-			$hooks['fave_activity']          = __( 'Add Activity to Favorites', 'bonipress' );
-			$hooks['unfave_activity']        = __( 'Remove Activity from Favorites', 'bonipress' );
-			$hooks['new_message']            = __( 'New Message', 'bonipress' );
-			$hooks['sending_gift']           = __( 'Sending Gift', 'bonipress' );
-			$hooks['creation_of_new_group']  = __( 'New Group', 'bonipress' );
-			$hooks['deletion_of_group']      = __( 'Deleted Group', 'bonipress' );
-			$hooks['new_group_forum_topic']  = __( 'New Group Forum Topic', 'bonipress' );
-			$hooks['edit_group_forum_topic'] = __( 'Edit Group Forum Topic', 'bonipress' );
-			$hooks['new_group_forum_post']   = __( 'New Group Forum Post', 'bonipress' );
-			$hooks['edit_group_forum_post']  = __( 'Edit Group Forum Post', 'bonipress' );
-			$hooks['joining_group']          = __( 'Joining Group', 'bonipress' );
-			$hooks['leaving_group']          = __( 'Leaving Group', 'bonipress' );
-			$hooks['upload_group_avatar']    = __( 'New Group Avatar', 'bonipress' );
-			$hooks['upload_group_cover']     = __( 'New Group Cover', 'bonipress' );
-			$hooks['new_group_comment']      = __( 'New Group Comment', 'bonipress' );
+			$hooks['new_profile_update']     = __( 'Neues Profil-Update', 'bonipress' );
+			$hooks['deleted_profile_update'] = __( 'Entfernen von Profilaktualisierungen', 'bonipress' );
+			$hooks['upload_avatar']          = __( 'Avatar-Upload', 'bonipress' );
+			$hooks['upload_cover']           = __( 'Hochladen des Profilcovers', 'bonipress' );
+			$hooks['new_friendship']         = __( 'Neue Freundschaft', 'bonipress' );
+			$hooks['ended_friendship']       = __( 'Beendete Freundschaft', 'bonipress' );
+			$hooks['new_comment']            = __( 'Neuer Profilkommentar', 'bonipress' );
+			$hooks['comment_deletion']       = __( 'Löschen von Profilkommentaren', 'bonipress' );
+			$hooks['fave_activity']          = __( 'Aktivität zu Favoriten hinzufügen', 'bonipress' );
+			$hooks['unfave_activity']        = __( 'Aktivität aus Favoriten entfernen', 'bonipress' );
+			$hooks['new_message']            = __( 'Neue Nachricht', 'bonipress' );
+			$hooks['sending_gift']           = __( 'Geschenk senden', 'bonipress' );
+			$hooks['creation_of_new_group']  = __( 'Neue Gruppe', 'bonipress' );
+			$hooks['deletion_of_group']      = __( 'Gelöschte Gruppe', 'bonipress' );
+			$hooks['new_group_forum_topic']  = __( 'Neues Gruppenforum-Thema', 'bonipress' );
+			$hooks['edit_group_forum_topic'] = __( 'Gruppenforum-Thema bearbeiten', 'bonipress' );
+			$hooks['new_group_forum_post']   = __( 'Neuer Beitrag im Gruppenforum', 'bonipress' );
+			$hooks['edit_group_forum_post']  = __( 'Bearbeiteter Gruppenforumsbeitrag', 'bonipress' );
+			$hooks['joining_group']          = __( 'Gruppe beitreten', 'bonipress' );
+			$hooks['leaving_group']          = __( 'Gruppe verlassen', 'bonipress' );
+			$hooks['upload_group_avatar']    = __( 'Neuer Gruppenavatar', 'bonipress' );
+			$hooks['upload_group_cover']     = __( 'Neues Gruppencover', 'bonipress' );
+			$hooks['new_group_comment']      = __( 'Neuer Gruppenkommentar', 'bonipress' );
 		}
 
 		if ( function_exists( 'bpa_init' ) || function_exists( 'bpgpls_init' ) ) {
-			$hooks['photo_upload'] = __( 'Photo Upload', 'bonipress' );
-			$hooks['video_upload'] = __( 'Video Upload', 'bonipress' );
-			$hooks['music_upload'] = __( 'Music Upload', 'bonipress' );
+			$hooks['photo_upload'] = __( 'Foto-Upload', 'bonipress' );
+			$hooks['video_upload'] = __( 'Video-Upload', 'bonipress' );
+			$hooks['music_upload'] = __( 'Musik-Upload', 'bonipress' );
 		}
 
 		if ( function_exists( 'bp_links_setup_root_component' ) ) {
-			$hooks['new_link']    = __( 'New Link', 'bonipress' );
-			$hooks['link_voting'] = __( 'Link Voting', 'bonipress' );
-			$hooks['update_link'] = __( 'Link Update', 'bonipress' );
+			$hooks['new_link']    = __( 'Neuer Link', 'bonipress' );
+			$hooks['link_voting'] = __( 'Link-Voting', 'bonipress' );
+			$hooks['update_link'] = __( 'Link-Update', 'bonipress' );
 		}
 
 		if ( class_exists( 'PSForum' ) ) {
-			$hooks['new_forum'] = __( 'New Forum (PSForum)', 'bonipress' );
-			$hooks['new_forum_topic'] = __( 'New Forum Topic (PSForum)', 'bonipress' );
-			$hooks['topic_favorited'] = __( 'Favorited Topic (PSForum)', 'bonipress' );
-			$hooks['new_forum_reply'] = __( 'New Topic Reply (PSForum)', 'bonipress' );
+			$hooks['new_forum'] = __( 'Neues Forum (PS Forum)', 'bonipress' );
+			$hooks['new_forum_topic'] = __( 'Neues Forumsthema (PS Forum)', 'bonipress' );
+			$hooks['topic_favorited'] = __( 'Lieblingsthema (PS Forum)', 'bonipress' );
+			$hooks['new_forum_reply'] = __( 'Antwort auf neues Thema (PS Forum)', 'bonipress' );
 		}
 
 		if ( function_exists( 'wpcf7' ) )
-			$hooks['contact_form_submission'] = __( 'Form Submission (Contact Form 7)', 'bonipress' );
+			$hooks['contact_form_submission'] = __( 'Formulareinreichung (Contact Form 7)', 'bonipress' );
 
 		if ( class_exists( 'GFForms' ) )
-			$hooks['gravity_form_submission'] = __( 'Form Submission (Gravity Form)', 'bonipress' );
+			$hooks['gravity_form_submission'] = __( 'Formulareinreichung (Gravity Form)', 'bonipress' );
 
 		if ( defined( 'SFTOPICS' ) ) {
-			$hooks['new_forum_topic'] = __( 'New Forum Topic (SimplePress)', 'bonipress' );
-			$hooks['new_topic_post']  = __( 'New Forum Post (SimplePress)', 'bonipress' );
+			$hooks['new_forum_topic'] = __( 'Neues Forumsthema (SimplePress)', 'bonipress' );
+			$hooks['new_topic_post']  = __( 'Neuer Forumsbeitrag (SimplePress)', 'bonipress' );
 		}
 
 		if ( class_exists( 'Affiliate_WP' ) ) {
-			$hooks['affiliate_signup']          = __( 'Affiliate Signup (AffiliateWP)', 'bonipress' );
-			$hooks['affiliate_visit_referral']  = __( 'Referred Visit (AffiliateWP)', 'bonipress' );
-			$hooks['affiliate_referral']        = __( 'Affiliate Referral (AffiliateWP)', 'bonipress' );
-			$hooks['affiliate_referral_refund'] = __( 'Referral Refund (AffiliateWP)', 'bonipress' );
+			$hooks['affiliate_signup']          = __( 'Affiliate-Anmeldung (AffiliateWP)', 'bonipress' );
+			$hooks['affiliate_visit_referral']  = __( 'Empfohlener Besuch (AffiliateWP)', 'bonipress' );
+			$hooks['affiliate_referral']        = __( 'Affiliate-Empfehlung (AffiliateWP)', 'bonipress' );
+			$hooks['affiliate_referral_refund'] = __( 'Empfehlungsrückerstattung (AffiliateWP)', 'bonipress' );
 		}
 
 		if ( defined( 'WP_POSTRATINGS_VERSION' ) ) {
-			$hooks['post_rating']        = __( 'Adding a Rating', 'bonipress' );
-			$hooks['post_rating_author'] = __( 'Receiving a Rating', 'bonipress' );
+			$hooks['post_rating']        = __( 'Hinzufügen einer Bewertung', 'bonipress' );
+			$hooks['post_rating_author'] = __( 'Eine Bewertung erhalten', 'bonipress' );
 		}
 
 		if ( function_exists( 'vote_poll' ) )
-			$hooks['poll_voting'] = __( 'Poll Voting', 'bonipress' );
+			$hooks['poll_voting'] = __( 'Umfrage Abstimmung', 'bonipress' );
 
 		if ( function_exists( 'invite_anyone_init' ) ) {
-			$hooks['sending_an_invite']   = __( 'Sending an Invite', 'bonipress' );
-			$hooks['accepting_an_invite'] = __( 'Accepting an Invite', 'bonipress' );
+			$hooks['sending_an_invite']   = __( 'Senden einer Einladung', 'bonipress' );
+			$hooks['accepting_an_invite'] = __( 'Annehmen einer Einladung', 'bonipress' );
 		}
 
 		// Addons
 		$addons = array();
 		if ( class_exists( 'boniPRESS_Banking_Module' ) ) {
-			$addons['interest']  = __( 'Compound Interest', 'bonipress' );
-			$addons['recurring'] = __( 'Recurring Payout', 'bonipress' );
+			$addons['interest']  = __( 'Zinseszins', 'bonipress' );
+			$addons['recurring'] = __( 'Wiederkehrende Auszahlung', 'bonipress' );
 		}
 
 		if ( class_exists( 'boniPRESS_Badge_Module' ) )
-			$hooks['badge_reward'] = __( 'Badge Reward', 'bonipress' );
+			$hooks['badge_reward'] = __( 'Abzeichen-Belohnung', 'bonipress' );
 
 		if ( class_exists( 'boniPRESS_buyCRED_Module' ) ) {
-			$addons['buy_creds_with_paypal_standard'] = __( 'buyCRED Purchase (PayPal Standard)', 'bonipress' );
-			$addons['buy_creds_with_skrill']          = __( 'buyCRED Purchase (Skrill)', 'bonipress' );
-			$addons['buy_creds_with_zombaio']         = __( 'buyCRED Purchase (Zombaio)', 'bonipress' );
-			$addons['buy_creds_with_netbilling']      = __( 'buyCRED Purchase (NETBilling)', 'bonipress' );
-			$addons['buy_creds_with_bitpay']          = __( 'buyCRED Purchase (BitPay)', 'bonipress' );
-			$addons['buy_creds_with_bank']            = __( 'buyCRED Purchase (Bank Transfer)', 'bonipress' );
+			$addons['buy_creds_with_paypal_standard'] = __( 'buyCRED Kauf (PayPal Standard)', 'bonipress' );
+			$addons['buy_creds_with_skrill']          = __( 'buyCRED Kauf (Skrill)', 'bonipress' );
+			$addons['buy_creds_with_zombaio']         = __( 'buyCRED Kauf (Zombaio)', 'bonipress' );
+			$addons['buy_creds_with_netbilling']      = __( 'buyCRED Kauf (NETBilling)', 'bonipress' );
+			$addons['buy_creds_with_bitpay']          = __( 'buyCRED Kauf (BitPay)', 'bonipress' );
+			$addons['buy_creds_with_bank']            = __( 'buyCRED Kauf (Bank Transfer)', 'bonipress' );
 			$addons = apply_filters( 'bonipress_buycred_refs', $addons );
 		}
 
 		if ( class_exists( 'boniPRESS_Coupons_Module' ) )
-			$addons['coupon'] = __( 'Coupon Usage', 'bonipress' );
+			$addons['coupon'] = __( 'Gutschein-Nutzung', 'bonipress' );
 
 		if ( defined( 'boniPRESS_GATE' ) ) {
 			if ( class_exists( 'WooCommerce' ) ) {
-				$addons['woocommerce_payment'] = __( 'Store Purchase (WooCommerce)', 'bonipress' );
-				$addons['reward']              = __( 'Store Reward (WooCommerce)', 'bonipress' );
-				$addons['product_review']      = __( 'Product Review (WooCommerce)', 'bonipress' );
+				$addons['woocommerce_payment'] = __( 'Shop-Kauf (WooCommerce)', 'bonipress' );
+				$addons['reward']              = __( 'Shop Belohnung (WooCommerce)', 'bonipress' );
+				$addons['product_review']      = __( 'Produktbewertung (WooCommerce)', 'bonipress' );
 			}
 			if ( class_exists( 'PSeCommerce' ) ) {
-				$addons['psecommerce_payment'] = __( 'Store Purchase (PSeCommerce)', 'bonipress' );
-				$addons['psecommerce_reward']  = __( 'Store Reward (PSeCommerce)', 'bonipress' );
+				$addons['psecommerce_payment'] = __( 'Shop-Kauf (PSeCommerce)', 'bonipress' );
+				$addons['psecommerce_reward']  = __( 'Shop Belohnung (PSeCommerce)', 'bonipress' );
 			}
 			if ( class_exists( 'wpsc_merchant' ) )
-				$addons['wpecom_payment']      = __( 'Store Purchase (WP E-Commerce)', 'bonipress' );
+				$addons['wpecom_payment']      = __( 'Shop-Kauf (WP E-Commerce)', 'bonipress' );
 
 			$addons = apply_filters( 'bonipress_gateway_refs', $addons );
 		}
 
 		if ( defined( 'EVENT_ESPRESSO_VERSION' ) ) {
-			$addons['event_payment']   = __( 'Event Payment (Event Espresso)', 'bonipress' );
-			$addons['event_sale']      = __( 'Event Sale (Event Espresso)', 'bonipress' );
+			$addons['event_payment']   = __( 'Veranstaltungszahlung (Event Espresso)', 'bonipress' );
+			$addons['event_sale']      = __( 'Event-Verkauf (Event Espresso)', 'bonipress' );
 		}
 
 		if ( defined( 'EM_VERSION' ) ) {
-			$addons['ticket_purchase'] = __( 'Event Payment (Events Manager)', 'bonipress' );
-			$addons['ticket_sale']     = __( 'Event Sale (Events Manager)', 'bonipress' );
+			$addons['ticket_purchase'] = __( 'Veranstaltungszahlung (Events Manager)', 'bonipress' );
+			$addons['ticket_sale']     = __( 'Event-Verkauf (Events Manager)', 'bonipress' );
 		}
 
 		if ( class_exists( 'boniPRESS_Sell_Content_Module' ) ) {
-			$addons['buy_content']  = __( 'Content Purchase', 'bonipress' );
-			$addons['sell_content'] = __( 'Content Sale', 'bonipress' );
+			$addons['buy_content']  = __( 'Kauf von Inhalten', 'bonipress' );
+			$addons['sell_content'] = __( 'Verkauf von Inhalten', 'bonipress' );
 		}
 
 		if ( class_exists( 'boniPRESS_Transfer_Module' ) )
@@ -2456,7 +2455,7 @@ if ( ! function_exists( 'bonipress_get_all_references' ) ) :
 
 		$references = array_merge( $hooks, $addons );
 
-		$references['manual'] = __( 'Manual Adjustment by Admin', 'bonipress' );
+		$references['manual'] = __( 'Manuelle Anpassung durch Admin', 'bonipress' );
 
 		return apply_filters( 'bonipress_all_references', $references );
 
@@ -2518,7 +2517,6 @@ endif;
  * Count All Reference Instances
  * Counts all the reference instances in the log returning the result
  * in an assosiative array.
- * @see http://codex.bonipress.me/functions/bonipress_count_all_ref_instances/
  * @param $number (int) number of references to return. Defaults to 5. Use '-1' for all.
  * @param $order (string) order to return ASC or DESC
  * @filter bonipress_count_all_refs
@@ -2572,7 +2570,6 @@ endif;
 /**
  * Count Reference Instances
  * Counts the total number of occurrences of a specific reference for a user.
- * @see http://codex.bonipress.me/functions/bonipress_count_ref_instances/
  * @param $reference (string) required reference to check
  * @param $user_id (int) option to check references for a specific user
  * @uses get_var()
@@ -2608,7 +2605,6 @@ endif;
 /**
  * Count Reference ID Instances
  * Counts the total number of occurrences of a specific reference combined with a reference ID for a user.
- * @see http://codex.bonipress.me/functions/bonipress_count_ref_id_instances/
  * @param $reference (string) required reference to check
  * @param $user_id (int) option to check references for a specific user
  * @uses get_var()
