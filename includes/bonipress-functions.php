@@ -747,49 +747,49 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			if ( in_array( 'general', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Allgemein', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-general/'
+					'url'   => 'https://n3rds.work/docs/bonipress-template-tags-allgemein/'
 				);
 
 			// User
 			if ( in_array( 'user', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'User Related', 'bonipress' ),
+					'title' => __( 'Benutzerbezogen', 'bonipress' ),
 					'url'   => 'https://n3rds.work/docs/boniprerss-benutzerbezogene-template-tags/'
 				);
 
 			// Post
 			if ( in_array( 'post', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'Post Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-post/'
+					'title' => __( 'Beitragsbezogen', 'bonipress' ),
+					'url'   => 'https://n3rds.work/docs/bonipress-beitragsbezogene-template-tags/'
 				);
 
 			// Comment
 			if ( in_array( 'comment', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'Comment Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-comment/'
+					'title' => __( 'Kommentar bezogen', 'bonipress' ),
+					'url'   => 'https://n3rds.work/docs/bonipress-kommentar-bezogen/'
 				);
 
 			// Widget
 			if ( in_array( 'widget', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'Widget Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-widget/'
+					'title' => __( 'Widget-bezogen', 'bonipress' ),
+					'url'   => 'https://n3rds.work/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
 				);
 
 			// Amount
 			if ( in_array( 'amount', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'Amount Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-amount/'
+					'title' => __( 'Betrag bezogen', 'bonipress' ),
+					'url'   => 'https://n3rds.work/docs/bonipress-betrag-bezogen/'
 				);
 
 			// Video
 			if ( in_array( 'video', $available ) )
 				$template_tags[] = array(
-					'title' => __( 'Video Related', 'bonipress' ),
-					'url'   => 'http://codex.bonipress.me/category/template-tags/temp-video/'
+					'title' => __( 'Video bezogen', 'bonipress' ),
+					'url'   => 'https://n3rds.work/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
 				);
 
 			if ( ! empty( $template_tags ) ) {
@@ -3112,7 +3112,6 @@ endif;
 /**
  * Exclude User
  * Checks if a given user is excluded from using boniPRESS.
- * @see http://codex.bonipress.me/functions/bonipress_exclude_user/
  * @param $user_id (int), optional user to check, defaults to current user
  * @since 0.1
  * @version 1.2
@@ -3268,7 +3267,6 @@ endif;
  * Adds creds to a given user. A refernece ID, user id and amount must be given.
  * Important! This function will not check if the user should be excluded from gaining points, this must
  * be done before calling this function!
- * @see http://codex.bonipress.me/functions/bonipress_add/
  * @param $ref (string), required reference id
  * @param $user_id (int), required id of the user who will get these points
  * @param $amount (int|float), required number of creds to give or deduct from the given user.
@@ -3491,29 +3489,29 @@ if ( ! function_exists( 'bonipress_translate_limit_code' ) ) :
 		if ( $code == '' ) return '-';
 
 		if ( $code == '0/x' || $code == 0 )
-			return __( 'No limit', 'bonipress' );
+			return __( 'Kein Limit', 'bonipress' );
 
 		$result = '-';
 		$check  = explode( '/', $code );
 		if ( count( $check ) == 2 ) {
 
-			$per    = __( 'in total', 'bonipress' );
+			$per    = __( 'in Summe', 'bonipress' );
 			if ( $check[1] == 'd' )
-				$per = __( 'per day', 'bonipress' );
+				$per = __( 'pro Tag', 'bonipress' );
 
 			elseif ( $check[1] == 'w' )
-				$per = __( 'per week', 'bonipress' );
+				$per = __( 'pro Woche', 'bonipress' );
 
 			elseif ( $check[1] == 'm' )
-				$per = __( 'per month', 'bonipress' );
+				$per = __( 'pro Monat', 'bonipress' );
 
-			$result = sprintf( _n( 'Maximum once', 'Maximum %d times', $check[0], 'bonipress' ), $check[0] ) . ' ' . $per;
+			$result = sprintf( _n( 'Maximal einmal', 'Maximal %d mal', $check[0], 'bonipress' ), $check[0] ) . ' ' . $per;
 
 		}
 
 		elseif ( is_numeric( $code ) ) {
 
-			$result = sprintf( _n( 'Maximum once', 'Maximum %d times', $code, 'bonipress' ), $code );
+			$result = sprintf( _n( 'Maximal einmal', 'Maximal %d mal', $code, 'bonipress' ), $code );
 
 		}
 
