@@ -150,19 +150,19 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		protected function register_pending_payments() {
 
 			$labels = array(
-				'name'                => _x( 'Pending Payments', 'Post Type General Name', 'bonipress' ),
-				'singular_name'       => _x( 'Pending Payment', 'Post Type Singular Name', 'bonipress' ),
-				'menu_name'           => __( 'Pending Payments', 'bonipress' ),
+				'name'                => _x( 'Ausstehende Zahlungen', 'Post Type General Name', 'bonipress' ),
+				'singular_name'       => _x( 'Ausstehende Zahlung', 'Post Type Singular Name', 'bonipress' ),
+				'menu_name'           => __( 'Ausstehende Zahlungen', 'bonipress' ),
 				'parent_item_colon'   => '',
-				'all_items'           => __( 'Pending Payments', 'bonipress' ),
+				'all_items'           => __( 'Ausstehende Zahlungen', 'bonipress' ),
 				'view_item'           => '',
 				'add_new_item'        => '',
 				'add_new'             => '',
-				'edit_item'           => __( 'Edit Pending Payment', 'bonipress' ),
+				'edit_item'           => __( 'Ausstehende Zahlung bearbeiten', 'bonipress' ),
 				'update_item'         => '',
 				'search_items'        => '',
-				'not_found'           => __( 'Not found in Trash', 'bonipress' ),
-				'not_found_in_trash'  => __( 'Not found in Trash', 'bonipress' ),
+				'not_found'           => __( 'Nicht im Papierkorb gefunden', 'bonipress' ),
+				'not_found_in_trash'  => __( 'Nicht im Papierkorb gefunden', 'bonipress' ),
 			);
 			$args = array(
 				'labels'               => $labels,
@@ -192,15 +192,15 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 
 			$messages[ BONIPRESS_BUY_KEY ] = array(
 				0 => '',
-				1 => __( 'Payment Updated.', 'bonipress' ),
-				2 => __( 'Payment Updated.', 'bonipress' ),
-				3 => __( 'Payment Updated.', 'bonipress' ),
-				4 => __( 'Payment Updated.', 'bonipress' ),
-				5 => __( 'Payment Updated.', 'bonipress' ),
-				6 => __( 'Payment Updated.', 'bonipress' ),
-				7 => __( 'Payment Updated.', 'bonipress' ),
-				8 => __( 'Payment Updated.', 'bonipress' ),
-				9 => __( 'Payment Updated.', 'bonipress' ),
+				1 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				2 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				3 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				4 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				5 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				6 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				7 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				8 => __( 'Zahlung aktualisiert.', 'bonipress' ),
+				9 => __( 'Zahlung aktualisiert.', 'bonipress' ),
 				10 => ''
 			);
 
@@ -306,13 +306,13 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 			return array(
 				'cb'       => $columns['cb'],
 				'comments' => $columns['comments'],
-				'title'    => __( 'Transaction ID', 'bonipress' ),
+				'title'    => __( 'Transaktions-ID', 'bonipress' ),
 				'date'     => $columns['date'],
-				'author'   => __( 'Buyer', 'bonipress' ),
-				'amount'   => __( 'Amount', 'bonipress' ),
-				'cost'     => __( 'Cost', 'bonipress' ),
+				'author'   => __( 'Käufer', 'bonipress' ),
+				'amount'   => __( 'Betrag', 'bonipress' ),
+				'cost'     => __( 'Kosten', 'bonipress' ),
 				'gateway'  => __( 'Gateway', 'bonipress' ),
-				'ctype'    => __( 'Type', 'bonipress' )
+				'ctype'    => __( 'Typ', 'bonipress' )
 			);
 
 		}
@@ -409,7 +409,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 						'post_type' => $post->post_type,
 						'credit'    => $post->ID,
 						'token'     => wp_create_nonce( 'buycred-payout-pending' )
-					), admin_url( 'edit.php' ) ) ) . '">' . __( 'Pay Out', 'bonipress' ) . '</a>';
+					), admin_url( 'edit.php' ) ) ) . '">' . __( 'Auszahlen', 'bonipress' ) . '</a>';
 
 			}
 
@@ -483,7 +483,7 @@ jQuery(function($){
 
 			add_meta_box(
 				'buycred-pending-payment',
-				__( 'Pending Payment', 'bonipress' ),
+				__( 'Ausstehende Zahlung', 'bonipress' ),
 				array( $this, 'metabox_pending_payment' ),
 				BONIPRESS_BUY_KEY,
 				'normal',
@@ -506,7 +506,7 @@ jQuery(function($){
 			remove_meta_box( 'submitdiv', BONIPRESS_BUY_KEY, 'side' );
 			add_meta_box(
 				'submitdiv',
-				__( 'Actions', 'bonipress' ),
+				__( 'Aktionen', 'bonipress' ),
 				array( $this, 'metabox_pending_actions' ),
 				BONIPRESS_BUY_KEY,
 				'side',
@@ -534,13 +534,13 @@ jQuery(function($){
 <div class="submitbox bonipress-metabox" id="submitpost">
 	<div id="minor-publishing">
 		<div style="display:none;">
-		<?php submit_button( __( 'Save', 'bonipress' ), 'button', 'save' ); ?>
+		<?php submit_button( __( 'Speichern', 'bonipress' ), 'button', 'save' ); ?>
 		</div>
 
 		<div id="minor-publishing-actions">
 
-			<div><a href="<?php echo $payout_url; ?>" class="button button-secondary button-block"><?php _e( 'Pay Out', 'bonipress' ); ?></a></div>
-			<div><a href="<?php echo $delete_url; ?>" class="button button-secondary button-block"><?php _e( 'Trash', 'bonipress' ); ?></a></div>
+			<div><a href="<?php echo $payout_url; ?>" class="button button-secondary button-block"><?php _e( 'Auszahlen', 'bonipress' ); ?></a></div>
+			<div><a href="<?php echo $delete_url; ?>" class="button button-secondary button-block"><?php _e( 'Müll', 'bonipress' ); ?></a></div>
 
 		</div>
 
@@ -551,7 +551,7 @@ jQuery(function($){
 		<div id="publishing-action">
 			<span class="spinner"></span>
 
-			<input type="submit" id="publish" class="button button-primary primary button-large" value="<?php _e( 'Save Changes', 'bonipress' ); ?>" />
+			<input type="submit" id="publish" class="button button-primary primary button-large" value="<?php _e( 'Änderungen speichern', 'bonipress' ); ?>" />
 
 		</div>
 		<div class="clear"></div>
@@ -604,13 +604,13 @@ jQuery(function($){
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
-				<label><?php _e( 'Payer', 'bonipress' ); ?></label>
+				<label><?php _e( 'Käufer', 'bonipress' ); ?></label>
 				<p class="form-control-static"><?php echo esc_attr( $buyer_name ); ?></p>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				<label><?php _e( 'Recipient', 'bonipress' ); ?></label>
+				<label><?php _e( 'Empfänger', 'bonipress' ); ?></label>
 				<p class="form-control-static"><?php echo esc_attr( $recipient_name ); ?></p>
 			</div>
 		</div>
@@ -618,7 +618,7 @@ jQuery(function($){
 	<div class="row">
 		<div class="col-md-3 col-sm-6">
 			<div class="form-group">
-				<label for="buycred-pending-payment-point_type"><?php _e( 'Point Type', 'bonipress' ); ?></label>
+				<label for="buycred-pending-payment-point_type"><?php _e( 'Punkttyp', 'bonipress' ); ?></label>
 <?php
 
 			// Just one point type is set for sale. No need for a dropdown menu
@@ -676,19 +676,19 @@ jQuery(function($){
 		</div>
 		<div class="col-md-2 col-sm-6">
 			<div class="form-group">
-				<label for="buycred-pending-payment-amount"><?php _e( 'Amount', 'bonipress' ); ?></label>
+				<label for="buycred-pending-payment-amount"><?php _e( 'Betrag', 'bonipress' ); ?></label>
 				<input type="text" name="buycred_pending_payment[amount]" id="buycred-pending-payment-amount" class="form-control" value="<?php echo $bonipress->number( $pending_payment->amount ); ?>" />
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-6">
 			<div class="form-group">
-				<label for="buycred-pending-payment-cost"><?php _e( 'Cost', 'bonipress' ); ?></label>
+				<label for="buycred-pending-payment-cost"><?php _e( 'Kosten', 'bonipress' ); ?></label>
 				<input type="text" name="buycred_pending_payment[cost]" id="buycred-pending-payment-cost" class="form-control" value="<?php echo esc_attr( $pending_payment->cost ); ?>" />
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-6">
 			<div class="form-group">
-				<label for="buycred-pending-payment-currency"><?php _e( 'Currency', 'bonipress' ); ?></label>
+				<label for="buycred-pending-payment-currency"><?php _e( 'Währung', 'bonipress' ); ?></label>
 				<input type="text" name="buycred_pending_payment[currency]" id="buycred-pending-payment-currency" class="form-control" value="<?php echo esc_attr( $pending_payment->currency ); ?>" />
 			</div>
 		</div>
@@ -713,7 +713,7 @@ jQuery(function($){
 
 				$c                  = new StdClass();
 				$c->comment_date    = $post->post_date;
-				$c->comment_content = __( 'Pending request created.', 'bonipress' );
+				$c->comment_content = __( 'Ausstehende Anfrage erstellt.', 'bonipress' );
 
 				$event = $this->add_comment( $post->ID, $c->comment_content, $c->comment_date );
 				if ( $event === false )
@@ -761,7 +761,7 @@ jQuery(function($){
 
 			if ( $changed ) {
 				$user = wp_get_current_user();
-				$this->add_comment( $post_id, sprintf( __( 'Pending payment updated by %s', 'bonipress' ), $user->user_login ) );
+				$this->add_comment( $post_id, sprintf( __( 'Ausstehende Zahlung aktualisiert von %s', 'bonipress' ), $user->user_login ) );
 			}
 
 		}
