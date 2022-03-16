@@ -34,14 +34,14 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			parent::__construct( 'boniPRESS_Coupons_Module', array(
 				'module_name' => 'coupons',
 				'defaults'    => array(
-					'log'         => 'Coupon redemption',
-					'invalid'     => 'This is not a valid coupon',
-					'expired'     => 'This coupon has expired',
-					'user_limit'  => 'You have already used this coupon',
-					'min'         => 'A minimum of %amount% is required to use this coupon',
-					'max'         => 'A maximum of %amount% is required to use this coupon',
-					'excluded'    => 'You can not use coupons.',
-					'success'     => '%amount% successfully deposited into your account'
+					'log'         => 'Gutschein-Einlösung',
+					'invalid'     => 'Dies ist kein gültiger Gutschein',
+					'expired'     => 'Dieser Gutschein ist abgelaufen',
+					'user_limit'  => 'Du hast diesen Gutschein bereits verwendet',
+					'min'         => 'Um diesen Gutschein zu verwenden, ist ein Mindestbetrag von %amount% erforderlich',
+					'max'         => 'Um diesen Gutschein zu verwenden, ist ein Maximum von %amount% erforderlich',
+					'excluded'    => 'Du kannst keine Gutscheine verwenden.',
+					'success'     => '%amount% erfolgreich auf Dein Konto eingezahlt'
 				),
 				'register'    => false,
 				'add_to_core' => true,
@@ -102,19 +102,19 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 		protected function register_coupons() {
 
 			$labels = array(
-				'name'                 => __( 'Coupons', 'bonipress' ),
-				'singular_name'        => __( 'Coupon', 'bonipress' ),
-				'add_new'              => __( 'Create New', 'bonipress' ),
-				'add_new_item'         => __( 'Create New', 'bonipress' ),
-				'edit_item'            => __( 'Edit Coupon', 'bonipress' ),
-				'new_item'             => __( 'New Coupon', 'bonipress' ),
-				'all_items'            => __( 'Coupons', 'bonipress' ),
+				'name'                 => __( 'Gutscheine', 'bonipress' ),
+				'singular_name'        => __( 'Gutschein', 'bonipress' ),
+				'add_new'              => __( 'Neuer Gutschein', 'bonipress' ),
+				'add_new_item'         => __( 'Neuer Gutschein', 'bonipress' ),
+				'edit_item'            => __( 'Gutschein bearbeiten', 'bonipress' ),
+				'new_item'             => __( 'Neuer Gutschein', 'bonipress' ),
+				'all_items'            => __( 'Gutscheine', 'bonipress' ),
 				'view_item'            => '',
-				'search_items'         => __( 'Search coupons', 'bonipress' ),
-				'not_found'            => __( 'No coupons found', 'bonipress' ),
-				'not_found_in_trash'   => __( 'No coupons found in Trash', 'bonipress' ), 
+				'search_items'         => __( 'Gutscheine suchen', 'bonipress' ),
+				'not_found'            => __( 'Keine Gutscheine gefunden', 'bonipress' ),
+				'not_found_in_trash'   => __( 'Keine Gutscheine im Papierkorb gefunden', 'bonipress' ), 
 				'parent_item_colon'    => '',
-				'menu_name'            => __( 'Email Notices', 'bonipress' )
+				'menu_name'            => __( 'E-Mail-Benachrichtigungen', 'bonipress' )
 			);
 			$args = array(
 				'labels'               => $labels,
@@ -145,16 +145,16 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			$messages[ BONIPRESS_COUPON_KEY ] = array(
 				0  => '',
-				1  => __( 'Coupon updated.', 'bonipress' ),
-				2  => __( 'Coupon updated.', 'bonipress' ),
-				3  => __( 'Coupon updated.', 'bonipress' ),
-				4  => __( 'Coupon updated.', 'bonipress' ),
+				1  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				2  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				3  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				4  => __( 'Gutschein aktualisiert.', 'bonipress' ),
 				5  => false,
-				6  => __( 'Coupon published.', 'bonipress' ),
-				7  => __( 'Coupon updated.', 'bonipress' ),
-				8  => __( 'Coupon updated.', 'bonipress' ),
-				9  => __( 'Coupon updated.', 'bonipress' ),
-				10 => __( 'Coupon updated.', 'bonipress' ),
+				6  => __( 'Gutschein veröffentlicht.', 'bonipress' ),
+				7  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				8  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				9  => __( 'Gutschein aktualisiert.', 'bonipress' ),
+				10 => __( 'Gutschein aktualisiert.', 'bonipress' ),
 			);
 
 			return $messages;
@@ -174,8 +174,8 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			add_submenu_page(
 				BONIPRESS_SLUG,
-				__( 'Coupons', 'bonipress' ),
-				__( 'Coupons', 'bonipress' ),
+				__( 'Gutscheine', 'bonipress' ),
+				__( 'Gutscheine', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
 				'edit.php?post_type=' . BONIPRESS_COUPON_KEY
 			);
@@ -236,7 +236,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			global $post_type;
 
 			if ( $post_type == BONIPRESS_COUPON_KEY )
-				return __( 'Coupon Code', 'bonipress' );
+				return __( 'Gutscheincode', 'bonipress' );
 
 			return $title;
 
@@ -253,14 +253,14 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			$columns['cb']      = $defaults['cb'];
 
 			// Add / Adjust
-			$columns['title']   = __( 'Coupon Code', 'bonipress' );
-			$columns['value']   = __( 'Value', 'bonipress' );
-			$columns['usage']   = __( 'Used', 'bonipress' );
+			$columns['title']   = __( 'Gutscheincode', 'bonipress' );
+			$columns['value']   = __( 'Wert', 'bonipress' );
+			$columns['usage']   = __( 'Benutzt', 'bonipress' );
 			$columns['limits']  = __( 'Limits', 'bonipress' );
-			$columns['expires'] = __( 'Expires', 'bonipress' );
+			$columns['expires'] = __( 'Abgelaufen', 'bonipress' );
 
 			if ( count( $this->point_types ) > 1 )
-				$columns['ctype'] = __( 'Point Type', 'bonipress' );
+				$columns['ctype'] = __( 'Punkttyp', 'bonipress' );
 
 			return $columns;
 
@@ -299,7 +299,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 							$page .= '_' . $set_type;
 
 						$url      = add_query_arg( array( 'page' => $page, 'ref' => 'coupon', 'ref_id' => $post_id ), admin_url( 'admin.php' ) );
-						echo '<a href="' . esc_url( $url ) . '">' . sprintf( _n( '1 time', '%d times', $coupon->used, 'bonipress' ), $coupon->used ) . '</a>';
+						echo '<a href="' . esc_url( $url ) . '">' . sprintf( _n( '1 mal', '%d mal', $coupon->used, 'bonipress' ), $coupon->used ) . '</a>';
 
 					}
 
@@ -307,7 +307,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 				case 'limits' :
 
-					printf( '%1$s: %2$d<br />%3$s: %4$d', __( 'Total', 'bonipress' ), $coupon->max_global, __( 'Per User', 'bonipress' ), $coupon->max_user );
+					printf( '%1$s: %2$d<br />%3$s: %4$d', __( 'Gesamt', 'bonipress' ), $coupon->max_global, __( 'Pro Benutzer', 'bonipress' ), $coupon->max_user );
 
 				break;
 
@@ -322,13 +322,13 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 							bonipress_trash_post( $post_id );
 
-							echo '<span style="color:red;">' . __( 'Expired', 'bonipress' ) . '</span>';
+							echo '<span style="color:red;">' . __( 'Abgelaufen', 'bonipress' ) . '</span>';
 
 						}
 
 						else {
 
-							echo sprintf( __( 'In %s time', 'bonipress' ), human_time_diff( $coupon->expires_unix ) ) . '<br /><small class="description">' . date( get_option( 'date_format' ), $coupon->expires_unix ) . '</small>';
+							echo sprintf( __( 'In %s Zeit', 'bonipress' ), human_time_diff( $coupon->expires_unix ) ) . '<br /><small class="description">' . date( get_option( 'date_format' ), $coupon->expires_unix ) . '</small>';
 
 						}
 
@@ -416,7 +416,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			add_meta_box(
 				'bonipress-coupon-setup',
-				__( 'Coupon Setup', 'bonipress' ),
+				__( 'Gutschein-Einrichtung', 'bonipress' ),
 				array( $this, 'metabox_coupon_setup' ),
 				BONIPRESS_COUPON_KEY,
 				'normal',
@@ -425,7 +425,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			add_meta_box(
 				'bonipress-coupon-limits',
-				__( 'Coupon Limits', 'bonipress' ),
+				__( 'Gutscheinlimits', 'bonipress' ),
 				array( $this, 'metabox_coupon_limits' ),
 				BONIPRESS_COUPON_KEY,
 				'normal',
@@ -434,7 +434,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			add_meta_box(
 				'bonipress-coupon-requirements',
-				__( 'Coupon Requirements', 'bonipress' ),
+				__( 'Gutscheinanforderungen', 'bonipress' ),
 				array( $this, 'bonipress_coupon_requirements' ),
 				BONIPRESS_COUPON_KEY,
 				'side',
@@ -444,7 +444,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			if ( $post->post_status == 'publish' )
 				add_meta_box(
 					'bonipress-coupon-usage',
-					__( 'Coupon Usage', 'bonipress' ),
+					__( 'Coupon-Nutzung', 'bonipress' ),
 					array( $this, 'bonipress_coupon_usage' ),
 					BONIPRESS_COUPON_KEY,
 					'side',
@@ -470,7 +470,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 					bonipress_delete_post_meta( $post_id, '_warning_bad_expiration' );
 
-					echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Warning. The previous expiration date set for this coupon was formatted incorrectly and was deleted. If you still want the coupon to expire, please enter a new date or leave empty to disable.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
+					echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Warnung. Das vorherige für diesen Gutschein festgelegte Ablaufdatum war falsch formatiert und wurde gelöscht. Wenn Du dennoch möchtest, dass der Gutschein abläuft, gib bitte ein neues Datum ein oder lasse es leer, um es zu deaktivieren.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
 
 				}
 
@@ -497,18 +497,18 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for=""><?php _e( 'Value', 'bonipress' ); ?></label>
+				<label for=""><?php _e( 'Wert', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_coupon[value]" class="form-control" id="bonipress-coupon-value" value="<?php echo $bonipress->number( $coupon->value ); ?>" />
-				<span class="description"><?php echo $bonipress->template_tags_general( __( 'The amount of %plural% a user receives when redeeming this coupon.', 'bonipress' ) ); ?></span>
+				<span class="description"><?php echo $bonipress->template_tags_general( __( 'Der Betrag von %plural%, den ein Benutzer beim Einlösen dieses Gutscheins erhält.', 'bonipress' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for=""><?php _e( 'Point Type', 'bonipress' ); ?></label>
+				<label for=""><?php _e( 'Punkttyp', 'bonipress' ); ?></label>
 				<?php if ( count( $this->point_types ) > 1 ) : ?>
 
 					<?php bonipress_types_select_from_dropdown( 'bonipress_coupon[type]', 'bonipress-coupon-type', $coupon->point_type, false, ' class="form-control"' ); ?><br />
-					<span class="description"><?php _e( 'Select the point type that this coupon is applied.', 'bonipress' ); ?></span>
+					<span class="description"><?php _e( 'Wähle den Punktetyp aus, auf den dieser Gutschein angewendet wird.', 'bonipress' ); ?></span>
 
 				<?php else : ?>
 
@@ -520,9 +520,9 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for=""><?php _e( 'Expire', 'bonipress' ); ?></label>
+				<label for=""><?php _e( 'Ablauf', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_coupon[expires]" class="form-control" id="bonipress-coupon-expire" maxlength="10" value="<?php echo esc_attr( $coupon->expires ); ?>" placeholder="YYYY-MM-DD" />
-				<span class="description"><?php _e( 'Optional date when this coupon expires. Expired coupons will be trashed.', 'bonipress' ); ?></span>
+				<span class="description"><?php _e( 'Optionales Datum, an dem dieser Gutschein abläuft. Abgelaufene Coupons werden gelöscht.', 'bonipress' ); ?></span>
 			</div>
 		</div>
 	</div>
@@ -550,16 +550,16 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-coupon-global"><?php _e( 'Global Maximum', 'bonipress' ); ?></label>
+				<label for="bonipress-coupon-global"><?php _e( 'Globales Maximum', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_coupon[global]" class="form-control" id="bonipress-coupon-global" value="<?php echo absint( $coupon->max_global ); ?>" />
-				<span class="description"><?php _e( 'The maximum number of times this coupon can be used in total. Once this is reached, the coupon is automatically trashed.', 'bonipress' ); ?></span>
+				<span class="description"><?php _e( 'Die maximale Anzahl von Malen, die dieser Gutschein insgesamt verwendet werden kann. Sobald dies erreicht ist, wird der Coupon automatisch gelöscht.', 'bonipress' ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-coupon-user"><?php _e( 'User Maximum', 'bonipress' ); ?></label>
+				<label for="bonipress-coupon-user"><?php _e( 'Benutzermaximum', 'bonipress' ); ?></label>
 				<input type="text" name="bonipress_coupon[user]" class="form-control" id="bonipress-coupon-user" value="<?php echo absint( $coupon->max_user ); ?>" />
-				<span class="description"><?php _e( 'The maximum number of times this coupon can be used by a user.', 'bonipress' ); ?></span>
+				<span class="description"><?php _e( 'Die maximale Anzahl von Malen, die dieser Gutschein von einem Benutzer verwendet werden kann.', 'bonipress' ); ?></span>
 			</div>
 		</div>
 	</div>
@@ -587,24 +587,24 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-coupon-min_balance"><?php _e( 'Minimum Balance', 'bonipress' ); ?></label>
+				<label for="bonipress-coupon-min_balance"><?php _e( 'Mindestguthaben', 'bonipress' ); ?></label>
 				<div>
 					<input type="text" name="bonipress_coupon[min_balance]" <?php if ( count( $this->point_types ) > 1 ) echo 'size="8"'; else echo ' style="width: 99%;"'; ?> id="bonipress-coupon-min_balance" value="<?php echo $bonipress->number( $coupon->requires_min['value'] ); ?>" />
 					<?php echo bonipress_types_select_from_dropdown( 'bonipress_coupon[min_balance_type]', 'bonipress-coupon-min_balance_type', $coupon->requires_min_type, true, ' style="vertical-align: top;"' ); ?>
 				</div>
-				<span class="description"><?php _e( 'Optional minimum balance a user must have in order to use this coupon. Use zero to disable.', 'bonipress' ); ?></span>
+				<span class="description"><?php _e( 'Optionales Mindestguthaben, das ein Benutzer haben muss, um diesen Gutschein zu verwenden. Verwende Null zum Deaktivieren.', 'bonipress' ); ?></span>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="bonipress-coupon-max_balance"><?php _e( 'Maximum Balance', 'bonipress' ); ?></label>
+				<label for="bonipress-coupon-max_balance"><?php _e( 'Maximales Guthaben', 'bonipress' ); ?></label>
 				<div>
 					<input type="text" name="bonipress_coupon[max_balance]" <?php if ( count( $this->point_types ) > 1 ) echo 'size="8"'; else echo ' style="width: 99%;"'; ?> id="bonipress-coupon-max_balance" value="<?php echo $bonipress->number( $coupon->requires_max['value'] ); ?>" />
 					<?php echo bonipress_types_select_from_dropdown( 'bonipress_coupon[max_balance_type]', 'bonipress-coupon-max_balance_type', $coupon->requires_max_type, true, ' style="vertical-align: top;"' ); ?>
 				</div>
-				<span class="description"><?php _e( 'Optional maximum balance a user can have in order to use this coupon. Use zero to disable.', 'bonipress' ); ?></span>
+				<span class="description"><?php _e( 'Optionales maximales Guthaben, das ein Benutzer haben kann, um diesen Gutschein zu verwenden. Verwende Null zum Deaktivieren.', 'bonipress' ); ?></span>
 			</div>
 		</div>
 	</div>
@@ -633,7 +633,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 					$page .= '_' . $set_type;
 
 				$url = add_query_arg( array( 'page' => $page, 'ref' => 'coupon', 'data' => $post->post_title ), admin_url( 'admin.php' ) );
-				echo '<a href="' . esc_url( $url ) . '">' . sprintf( _n( '1 time', '%d times', $count, 'bonipress' ), $count ) . '</a>';
+				echo '<a href="' . esc_url( $url ) . '">' . sprintf( _n( '1 mal', '%d mal', $count, 'bonipress' ), $count ) . '</a>';
 
 			}
 
@@ -686,71 +686,71 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				$prefs = bonipress_apply_defaults( $this->default_prefs, $this->coupons );
 
 ?>
-<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Coupons', 'bonipress' ); ?></h4>
+<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Gutscheine', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
-	<h3><?php _e( 'Message Templates', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Nachrichtenvorlagen', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'invalid' ); ?>"><?php _e( 'Invalid Coupon Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'invalid' ); ?>" id="<?php echo $this->field_id( 'invalid' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['invalid'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when users try to use a coupon that does not exists.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+				<label for="<?php echo $this->field_id( 'invalid' ); ?>"><?php _e( 'Ungültiger Gutschein Nachricht', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'invalid' ); ?>" id="<?php echo $this->field_id( 'invalid' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['invalid'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Meldung, die angezeigt wird, wenn Benutzer versuchen, einen nicht vorhandenen Gutschein zu verwenden.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'expired' ); ?>"><?php _e( 'Expired Coupon Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'expired' ); ?>" id="<?php echo $this->field_id( 'expired' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['expired'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when users try to use that has expired.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+				<label for="<?php echo $this->field_id( 'expired' ); ?>"><?php _e( 'Nachricht abgelaufener Gutschein', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'expired' ); ?>" id="<?php echo $this->field_id( 'expired' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['expired'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Nachricht, die angezeigt werden soll, wenn Benutzer versuchen, abgelaufene Gutscheine zu verwenden.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'min' ); ?>"><?php _e( 'Minimum Balance Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'min' ); ?>" id="<?php echo $this->field_id( 'min' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['min'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when a user does not meet the minimum balance requirement. (if used)', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+				<label for="<?php echo $this->field_id( 'min' ); ?>"><?php _e( 'Meldung Mindestguthaben', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'min' ); ?>" id="<?php echo $this->field_id( 'min' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['min'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Nachricht, die angezeigt wird, wenn ein Benutzer die Mindestguthabenanforderung nicht erfüllt. (Falls gebraucht)', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'max' ); ?>"><?php _e( 'Maximum Balance Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'max' ); ?>" id="<?php echo $this->field_id( 'max' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['max'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when a user does not meet the maximum balance requirement. (if used)', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'user_limit' ); ?>"><?php _e( 'User Limit Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'user_limit' ); ?>" id="<?php echo $this->field_id( 'user_limit' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['user_limit'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when the user limit has been reached for the coupon.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
-			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'excluded' ); ?>"><?php _e( 'Excluded Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'excluded' ); ?>" id="<?php echo $this->field_id( 'excluded' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['excluded'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when a user is excluded from the point type the coupon gives.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+				<label for="<?php echo $this->field_id( 'max' ); ?>"><?php _e( 'Meldung maximaler Kontostand', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'max' ); ?>" id="<?php echo $this->field_id( 'max' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['max'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Meldung, die angezeigt wird, wenn ein Benutzer die Anforderungen an das maximale Guthaben nicht erfüllt. (Falls gebraucht)', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'success' ); ?>"><?php _e( 'Success Message', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'success' ); ?>" id="<?php echo $this->field_id( 'success' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['success'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Message to show when a coupon was successfully deposited to a users account.', 'bonipress' ), $this->available_template_tags( array( 'general', 'amount' ) ) ); ?></span></p>
+				<label for="<?php echo $this->field_id( 'user_limit' ); ?>"><?php _e( 'Benutzerlimit-Meldung', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'user_limit' ); ?>" id="<?php echo $this->field_id( 'user_limit' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['user_limit'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Nachricht, die angezeigt wird, wenn das Benutzerlimit für den Gutschein erreicht wurde.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label for="<?php echo $this->field_id( 'excluded' ); ?>"><?php _e( 'Ausgeschlossen Nachricht', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'excluded' ); ?>" id="<?php echo $this->field_id( 'excluded' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['excluded'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Meldung, die angezeigt wird, wenn ein Benutzer von der Punkteart des Gutscheins ausgeschlossen wird.', 'bonipress' ), $this->available_template_tags( array( 'general' ) ) ); ?></span></p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<label for="<?php echo $this->field_id( 'success' ); ?>"><?php _e( 'Erfolgsmeldung', 'bonipress' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'success' ); ?>" id="<?php echo $this->field_id( 'success' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['success'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Meldung, die angezeigt wird, wenn ein Gutschein erfolgreich auf ein Benutzerkonto eingezahlt wurde.', 'bonipress' ), $this->available_template_tags( array( 'general', 'amount' ) ) ); ?></span></p>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( 'log' ); ?>"><?php _e( 'Protokollvorlage', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Required', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" />
-				<p><span class="description"><?php printf( '%s %s', __( 'Log entry for successful coupon redemption. Use %coupon% to show the coupon code.', 'bonipress' ), $this->available_template_tags( array( 'general', 'amount' ) ) ); ?></span></p>
+				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" />
+				<p><span class="description"><?php printf( '%s %s', __( 'Protokolleintrag für erfolgreiche Coupon-Einlösung. Verwende %coupon%, um den Gutscheincode anzuzeigen.', 'bonipress' ), $this->available_template_tags( array( 'general', 'amount' ) ) ); ?></span></p>
 			</div>
 		</div>
 	</div>

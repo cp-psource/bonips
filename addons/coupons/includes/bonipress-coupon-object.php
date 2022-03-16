@@ -167,14 +167,14 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 			}
 
 			$this->settings = shortcode_atts( array(
-				'log'         => 'Coupon redemption',
-				'invalid'     => 'This is not a valid coupon',
-				'expired'     => 'This coupon has expired',
-				'user_limit'  => 'You have already used this coupon',
-				'min'         => 'A minimum of %amount% is required to use this coupon',
-				'max'         => 'A maximum of %amount% is required to use this coupon',
-				'excluded'    => 'You can not use coupons.',
-				'success'     => '%amount% successfully deposited into your account'
+				'log'         => 'Gutschein-Einlösung',
+				'invalid'     => 'Dies ist kein gültiger Gutschein',
+				'expired'     => 'Dieser Gutschein ist abgelaufen',
+				'user_limit'  => 'Du hast diesen Gutschein bereits verwendet',
+				'min'         => 'Um diesen Gutschein zu verwenden, ist ein Mindestbetrag von %amount% erforderlich',
+				'max'         => 'Um diesen Gutschein zu verwenden, ist ein Maximum von %amount% erforderlich',
+				'excluded'    => 'Du kannst keine Gutscheine verwenden.',
+				'success'     => '%amount% erfolgreich auf Dein Konto eingezahlt'
 			), (array) bonipress_get_addon_settings( 'coupons' ) );
 
 		}

@@ -253,7 +253,7 @@ endif;
 if ( ! function_exists( 'bonipress_get_coupon_error_message' ) ) :
 	function bonipress_get_coupon_error_message( $code = '', $coupon = NULL ) {
 
-		$message  = __( 'An unknown error occurred. Coupon not used.', 'bonipress' );
+		$message  = __( 'Ein unbekannter Fehler ist aufgetreten. Gutschein nicht verwendet.', 'bonipress' );
 		$settings = bonipress_get_addon_settings( 'coupons' );
 
 		if ( array_key_exists( $code, $settings ) )

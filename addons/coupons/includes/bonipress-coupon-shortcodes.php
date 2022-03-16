@@ -4,7 +4,6 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 /**
  * Load Coupon Shortcode
  * Renders the form that allows users to redeem coupons from.
- * @see http://codex.bonipress.me/shortcodes/bonipress_load_coupon/
  * @since 1.4
  * @version 1.4
  */
@@ -15,14 +14,14 @@ if ( ! function_exists( 'bonipress_render_shortcode_load_coupon' ) ) :
 			return $content;
 
 		extract( shortcode_atts( array(
-			'label'       => 'Coupon',
-			'button'      => 'Apply Coupon',
+			'label'       => 'Gutschein',
+			'button'      => 'Gutschein anwenden',
 			'placeholder' => ''
 		), $atts, BONIPRESS_SLUG . '_load_coupon' ) );
 
 		$bonipress = bonipress();
 		if ( ! isset( $bonipress->coupons ) )
-			return '<p><strong>Coupon Add-on settings are missing! Please visit the boniPRESS > Settings page to save your settings before using this shortcode.</strong></p>';
+			return '<p><strong>Coupon-Add-on-Einstellungen fehlen! Bitte besuche die Seite BoniPress > Einstellungen, um Deine Einstellungen zu speichern, bevor Du diesen Shortcode verwendest.</strong></p>';
 
 		// Prep
 		$user_id = get_current_user_id();
