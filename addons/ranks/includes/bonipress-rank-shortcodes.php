@@ -134,14 +134,14 @@ if ( ! function_exists( 'bonipress_render_users_of_rank' ) ) :
 			'number'  => 10,
 			'wrap'    => 'div',
 			'col'     => 1,
-			'nothing' => 'No users found with this rank',
+			'nothing' => 'Keine Benutzer mit diesem Rang gefunden',
 			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
 			'order'   => 'DESC'
 		), $atts, BONIPRESS_SLUG . '_users_of_rank' ) );
 
 		// Rank ID required
 		if ( $rank_id === NULL )
-			return '<strong>ERROR</strong> Rank ID is required!';
+			return '<strong>FEHLER</strong> Rang-ID ist erforderlich!';
 
 		// User is not logged in
 		if ( ! is_user_logged_in() && $login != '' )

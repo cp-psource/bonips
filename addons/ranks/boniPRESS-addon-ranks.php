@@ -1,7 +1,7 @@
 <?php
 /**
  * Addon: Ranks
- * Addon URI: http://codex.bonipress.me/chapter-iii/ranks/
+ * Addon URI: https://n3rds.work/docs/bonipress-erweiterungen-raenge/
  * Version: 1.6
  */
 if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
@@ -246,28 +246,28 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		public function register_ranks() {
 
 			if ( isset( $_GET['ctype'] ) && array_key_exists( $_GET['ctype'], $this->point_types ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_RANK_KEY )
-				$name = sprintf( __( 'Ranks for %s', 'bonipress' ), $this->point_types[ $_GET['ctype'] ] );
+				$name = sprintf( __( 'Ränge für %s', 'bonipress' ), $this->point_types[ $_GET['ctype'] ] );
 			else
 				$name = __( 'Ranks', 'bonipress' );
 
 			$labels = array(
 				'name'                  => $name,
-				'singular_name'         => __( 'Rank', 'bonipress' ),
-				'add_new'               => __( 'Add New', 'bonipress' ),
-				'add_new_item'          => __( 'Add New', 'bonipress' ),
-				'edit_item'             => __( 'Edit Rank', 'bonipress' ),
-				'new_item'              => __( 'New Rank', 'bonipress' ),
-				'all_items'             => __( 'Ranks', 'bonipress' ),
-				'view_item'             => __( 'View Rank', 'bonipress' ),
-				'search_items'          => __( 'Search Ranks', 'bonipress' ),
-				'featured_image'        => __( 'Rank Logo', 'bonipress' ),
-				'set_featured_image'    => __( 'Set rank logo', 'bonipress' ),
-				'remove_featured_image' => __( 'Remove rank logo', 'bonipress' ),
-				'use_featured_image'    => __( 'Use as Logo', 'bonipress' ),
-				'not_found'             => __( 'No ranks found', 'bonipress' ),
-				'not_found_in_trash'    => __( 'No ranks found in Trash', 'bonipress' ), 
+				'singular_name'         => __( 'Rang', 'bonipress' ),
+				'add_new'               => __( 'Neuer Rang', 'bonipress' ),
+				'add_new_item'          => __( 'Neuer Rang', 'bonipress' ),
+				'edit_item'             => __( 'Rang bearbeiten', 'bonipress' ),
+				'new_item'              => __( 'Neuer Rang', 'bonipress' ),
+				'all_items'             => __( 'Ränge', 'bonipress' ),
+				'view_item'             => __( 'Rang ansehen', 'bonipress' ),
+				'search_items'          => __( 'Ränge suchen', 'bonipress' ),
+				'featured_image'        => __( 'Rang-Logo', 'bonipress' ),
+				'set_featured_image'    => __( 'Stelle das Rang-Logo ein', 'bonipress' ),
+				'remove_featured_image' => __( 'Rang-Logo entfernen', 'bonipress' ),
+				'use_featured_image'    => __( 'Als Logo verwenden', 'bonipress' ),
+				'not_found'             => __( 'Keine Ränge gefunden', 'bonipress' ),
+				'not_found_in_trash'    => __( 'Keine Ränge im Papierkorb gefunden', 'bonipress' ), 
 				'parent_item_colon'     => '',
-				'menu_name'             => __( 'Ranks', 'bonipress' )
+				'menu_name'             => __( 'Ränge', 'bonipress' )
 			);
 
 			// Support
@@ -377,15 +377,15 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			$messages[ BONIPRESS_RANK_KEY ] = array(
 				0 => '',
-				1 => __( 'Rank Updated.', 'bonipress' ),
-				2 => __( 'Rank Updated.', 'bonipress' ),
-				3 => __( 'Rank Updated.', 'bonipress' ),
-				4 => __( 'Rank Updated.', 'bonipress' ),
-				5 => __( 'Rank Updated.', 'bonipress' ),
-				6 => __( 'Rank Enabled.', 'bonipress' ),
-				7 => __( 'Rank Saved.', 'bonipress' ),
-				8 => __( 'Rank Updated.', 'bonipress' ),
-				9 => __( 'Rank Updated.', 'bonipress' ),
+				1 => __( 'Rang aktualisiert.', 'bonipress' ),
+				2 => __( 'Rang aktualisiert.', 'bonipress' ),
+				3 => __( 'Rang aktualisiert.', 'bonipress' ),
+				4 => __( 'Rang aktualisiert.', 'bonipress' ),
+				5 => __( 'Rang aktualisiert.', 'bonipress' ),
+				6 => __( 'Rang aktiviert.', 'bonipress' ),
+				7 => __( 'Rang gespeichert.', 'bonipress' ),
+				8 => __( 'Rang aktualisiert.', 'bonipress' ),
+				9 => __( 'Rang aktualisiert.', 'bonipress' ),
 				10 => ''
 			);
 
@@ -435,8 +435,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 				add_submenu_page(
 					$menu_slug,
-					__( 'Ranks', 'bonipress' ),
-					__( 'Ranks', 'bonipress' ),
+					__( 'Ränge', 'bonipress' ),
+					__( 'Ränge', 'bonipress' ),
 					$capability,
 					'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . $type_id
 				);
@@ -571,7 +571,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			}
 
-			wp_send_json( sprintf( __( 'Completed - Total of %d users effected', 'bonipress' ), $count ) );
+			wp_send_json( sprintf( __( 'Abgeschlossen - Gesamtzahl von %d betroffenen Benutzern', 'bonipress' ), $count ) );
 
 		}
 
@@ -830,7 +830,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 <div class="bp-widget bonipress-field">
 	<table class="profile-fields">
 		<tr id="bonipress-users-rank">
-			<td class="label"><?php if ( $count == 1 ) _e( 'Rank', 'bonipress' ); else _e( 'Ranks', 'bonipress' ); ?></td>
+			<td class="label"><?php if ( $count == 1 ) _e( 'Rang', 'bonipress' ); else _e( 'Ränge', 'bonipress' ); ?></td>
 			<td class="data">
 				<?php echo apply_filters( 'bonipress_bp_rank_in_profile', $output, $user_id, $this ); ?>
 
@@ -985,10 +985,10 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			$rank = bonipress_get_users_rank( $user_id, $type );
 			if ( $rank !== false )
-				$balance .= '<small style="display:block;">' . sprintf( '<strong>%s:</strong> %s', __( 'Rank', 'bonipress' ), $rank->title ) . '</small>';
+				$balance .= '<small style="display:block;">' . sprintf( '<strong>%s:</strong> %s', __( 'Rang', 'bonipress' ), $rank->title ) . '</small>';
 
 			else
-				$balance .= '<small style="display:block;">' . sprintf( '<strong>%s:</strong> -', __( 'Rank', 'bonipress' ) ) . '</small>';
+				$balance .= '<small style="display:block;">' . sprintf( '<strong>%s:</strong> -', __( 'Rang', 'bonipress' ) ) . '</small>';
 
 			return $balance;
 
@@ -1007,7 +1007,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 
 			if ( ! bonipress_have_ranks( $point_type ) ) {
-				echo '<div class="balance-desc current-rank"><em>' . __( 'No ranks exists.', 'bonipress' ) . '</em></div>';
+				echo '<div class="balance-desc current-rank"><em>' . __( 'Es gibt keine Ränge.', 'bonipress' ) . '</em></div>';
 				return;
 			}
 
@@ -1025,7 +1025,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				echo '<option value=""';
 				if ( $users_rank === false )
 					echo ' selected="selected"';
-				echo '>' . __( 'No rank', 'bonipress' ) . '</option>';
+				echo '>' . __( 'Kein Rang', 'bonipress' ) . '</option>';
 
 				foreach ( $ranks as $rank ) {
 					echo '<option value="' . $rank->post_id . '"';
@@ -1038,7 +1038,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 			else {
 
-				echo '<div class="balance-desc current-rank">' . sprintf( '<strong>%s:</strong> %s', __( 'Rank', 'bonipress' ), $rank_title ) . '</div>';
+				echo '<div class="balance-desc current-rank">' . sprintf( '<strong>%s:</strong> %s', __( 'Rang', 'bonipress' ), $rank_title ) . '</div>';
 
 			}
 
@@ -1167,9 +1167,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					array(
 						'ajaxurl'        => admin_url( 'admin-ajax.php' ),
 						'token'          => wp_create_nonce( 'bonipress-management-actions-roles' ),
-						'working'        => esc_attr__( 'Processing...', 'bonipress' ),
-						'confirm_del'    => esc_attr__( 'Warning! All ranks will be deleted! This can not be undone!', 'bonipress' ),
-						'confirm_assign' => esc_attr__( 'Are you sure you want to re-assign user ranks?', 'bonipress' )
+						'working'        => esc_attr__( 'Wird bearbeitet...', 'bonipress' ),
+						'confirm_del'    => esc_attr__( 'Warnung! Alle Ränge werden gelöscht! Das kann nicht rückgängig gemacht werden!', 'bonipress' ),
+						'confirm_assign' => esc_attr__( 'Möchtest Du Benutzerränge wirklich neu zuweisen?', 'bonipress' )
 					)
 				);
 				wp_enqueue_script( 'bonipress-rank-management' );
@@ -1258,13 +1258,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			$columns['cb']                = $defaults['cb'];
 
 			// Add / Adjust
-			$columns['title']             = __( 'Rank Title', 'bonipress' );
+			$columns['title']             = __( 'Rangtitel', 'bonipress' );
 			$columns['bonipress-rank-logo']  = __( 'Logo', 'bonipress' );
-			$columns['bonipress-rank-req']   = __( 'Requirement', 'bonipress' );
-			$columns['bonipress-rank-users'] = __( 'Users', 'bonipress' );
+			$columns['bonipress-rank-req']   = __( 'Erforderlich', 'bonipress' );
+			$columns['bonipress-rank-users'] = __( 'Benutzer', 'bonipress' );
 
 			if ( count( $this->point_types ) > 1 )
-				$columns['bonipress-rank-type']  = __( 'Point Type', 'bonipress' );
+				$columns['bonipress-rank-type']  = __( 'Punkttyp', 'bonipress' );
 
 			// Return
 			return $columns;
@@ -1286,7 +1286,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			if ( $column_name == 'bonipress-rank-logo' ) {
 				$logo = bonipress_get_rank_logo( $post_id, 'thumbnail' );
 				if ( empty( $logo ) )
-					echo __( 'No Logo Set', 'bonipress' );
+					echo __( 'Kein Logo gesetzt', 'bonipress' );
 				else
 					echo $logo;
 
@@ -1359,7 +1359,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			global $post_type;
 			if ( $post_type == BONIPRESS_RANK_KEY )
-				return __( 'Rank Title', 'bonipress' );
+				return __( 'Rangtitel', 'bonipress' );
 
 			return $title;
 
@@ -1374,7 +1374,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			add_meta_box(
 				'bonipress-rank-setup',
-				__( 'Rank Setup', 'bonipress' ),
+				__( 'Rang einrichten', 'bonipress' ),
 				array( $this, 'rank_settings' ),
 				BONIPRESS_RANK_KEY,
 				'normal',
@@ -1415,13 +1415,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="form-group">
-						<label for="bonipress-rank-min"><?php _e( 'Minimum Balance Requirement', 'bonipress' ); ?></label>
+						<label for="bonipress-rank-min"><?php _e( 'Minimale Guthabenanforderung', 'bonipress' ); ?></label>
 						<input type="text" name="bonipress_rank[bonipress_rank_min]" id="bonipress-rank-min" class="form-control" value="<?php echo esc_attr( $rank->minimum ); ?>" />
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="form-group">
-						<label for="bonipress-rank-max"><?php _e( 'Maximum Balance Requirement', 'bonipress' ); ?></label>
+						<label for="bonipress-rank-max"><?php _e( 'Maximale Guthabenanforderung', 'bonipress' ); ?></label>
 						<input type="text" name="bonipress_rank[bonipress_rank_max]" id="bonipress-rank-max" class="form-control" value="<?php echo esc_attr( $rank->maximum ); ?>" />
 					</div>
 				</div>
@@ -1432,14 +1432,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					<?php if ( count( $this->point_types ) > 1 ) : ?>
 
 					<div class="form-group">
-						<label for="bonipress-rank-point-type"><?php _e( 'Point Type', 'bonipress' ); ?></label>
+						<label for="bonipress-rank-point-type"><?php _e( 'Punkttyp', 'bonipress' ); ?></label>
 						<?php bonipress_types_select_from_dropdown( 'bonipress_rank[ctype]', 'bonipress-rank-point-type', $type, false, '  class="form-control"' ); ?>
 					</div>
 
 					<?php else : ?>
 
 					<div class="form-group">
-						<label for="bonipress-rank-point-type"><?php _e( 'Point Type', 'bonipress' ); ?></label>
+						<label for="bonipress-rank-point-type"><?php _e( 'Punkttyp', 'bonipress' ); ?></label>
 						<p class="form-control-static"><?php echo $bonipress->plural(); ?></p>
 						<input type="hidden" name="bonipress_rank[ctype]" value="<?php echo BONIPRESS_DEFAULT_TYPE_KEY; ?>" />
 					</div>
@@ -1460,8 +1460,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				echo '<ul>';
 				foreach ( $all_ranks as $rank ) {
 
-					if ( $rank->minimum == '' ) $rank->minimum = __( 'Not Set', 'bonipress' );
-					if ( $rank->maximum == '' ) $rank->maximum = __( 'Not Set', 'bonipress' );
+					if ( $rank->minimum == '' ) $rank->minimum = __( 'Nicht festgelegt', 'bonipress' );
+					if ( $rank->maximum == '' ) $rank->maximum = __( 'Nicht festgelegt', 'bonipress' );
 
 					echo '<li><strong>' . $rank->title . '</strong> ' . $rank->minimum . ' - ' . $rank->maximum . '</li>';
 
@@ -1471,7 +1471,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 			else {
 
-				echo '<p>' . __( 'No ranks found', 'bonipress' ) . '.</p>';
+				echo '<p>' . __( 'Keine Ränge gefunden', 'bonipress' ) . '.</p>';
 
 			}
 
@@ -1547,62 +1547,62 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			$box               = ( ( $prefs['base'] == 'current' ) ? 'display: none;' : 'display: block;' );
 
 ?>
-<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Ranks', 'bonipress' ); ?></h4>
+<h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Ränge', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
 	<?php if ( $bonipress->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) : ?>
 
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Rank Features', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Rangfunktionen', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<div class="checkbox">
-					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php _e( 'Title', 'bonipress' ); ?></label>
+					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php _e( 'Titel', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php echo $bonipress->core->template_tags_general( __( '%plural% requirement', 'bonipress' ) ); ?></label>
+					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php echo $bonipress->core->template_tags_general( __( '%plural% Anforderung', 'bonipress' ) ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php _e( 'Rank Logo', 'bonipress' ); ?></label>
+					<label><input type="checkbox" value="1" checked="checked" disabled="disabled" /> <?php _e( 'Rang-Logo', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
 					<label for="<?php echo $this->field_id( array( 'support' => 'content' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'content' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'content' ) ); ?>" <?php checked( $prefs['support']['content'], 1 ); ?> value="1" /> <?php _e( 'Content', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'support' => 'excerpt' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'excerpt' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'excerpt' ) ); ?>" <?php checked( $prefs['support']['excerpt'], 1 ); ?> value="1" /> <?php _e( 'Excerpt', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'support' => 'excerpt' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'excerpt' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'excerpt' ) ); ?>" <?php checked( $prefs['support']['excerpt'], 1 ); ?> value="1" /> <?php _e( 'Auszug', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'support' => 'comments' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'comments' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'comments' ) ); ?>" <?php checked( $prefs['support']['comments'], 1 ); ?> value="1" /> <?php _e( 'Comments', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'support' => 'comments' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'comments' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'comments' ) ); ?>" <?php checked( $prefs['support']['comments'], 1 ); ?> value="1" /> <?php _e( 'Kommentare', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'support' => 'page-attributes' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'page-attributes' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'page-attributes' ) ); ?>" <?php checked( $prefs['support']['page-attributes'], 1 ); ?> value="1" /> <?php _e( 'Page Attributes', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'support' => 'page-attributes' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'page-attributes' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'page-attributes' ) ); ?>" <?php checked( $prefs['support']['page-attributes'], 1 ); ?> value="1" /> <?php _e( 'Seitenattribute', 'bonipress' ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'support' => 'custom-fields' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'custom-fields' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'custom-fields' ) ); ?>" <?php checked( $prefs['support']['custom-fields'], 1 ); ?> value="1" /> <?php _e( 'Custom Fields', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'support' => 'custom-fields' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'support' => 'custom-fields' ) ); ?>" id="<?php echo $this->field_id( array( 'support' => 'custom-fields' ) ); ?>" <?php checked( $prefs['support']['custom-fields'], 1 ); ?> value="1" /> <?php _e( 'Benutzerdefinierte Felder', 'bonipress' ); ?></label>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Rank Post Type', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Rang Beitragstyp', 'bonipress' ); ?></h3>
 			<div class="form-group">
 				<div class="checkbox">
 					<label for="<?php echo $this->field_id( 'public' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'public' ); ?>" id="<?php echo $this->field_id( 'public' ); ?>" <?php checked( $prefs['public'], 1 ); ?> value="1" /> <?php _e( 'Ränge öffentlich machen', 'bonipress' ); ?></label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="subheader" for="<?php echo $this->field_id( 'slug' ); ?>"><?php _e( 'Rank SLUG', 'bonipress' ); ?></label>
+				<label class="subheader" for="<?php echo $this->field_id( 'slug' ); ?>"><?php _e( 'Rang SLUG', 'bonipress' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( 'slug' ); ?>" id="<?php echo $this->field_id( 'slug' ); ?>" value="<?php echo esc_attr( $prefs['slug'] ); ?>" class="form-control" />
-				<p><span class="description"><?php _e( 'If you have selected to make Ranks public, you can select what rank archive URL slug you want to use. Ignored if Ranks are not set to be public.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Wenn Du Dich entschieden hast, Ränge öffentlich zu machen, kannst Du auswählen, welchen Rangarchiv-URL-Slug Du verwenden möchtest. Wird ignoriert, wenn Ränge nicht öffentlich sind.', 'bonipress' ); ?></span></p>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'order' ); ?>"><?php _e( 'Display Order', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'order' ); ?>"><?php _e( 'Anzeigesortierung', 'bonipress' ); ?></label>
 				<select name="<?php echo $this->field_name( 'order' ); ?>" id="<?php echo $this->field_id( 'order' ); ?>" class="form-control">
 <?php
 
 			// Order added in 1.1.1
 			$options = array(
-				'ASC'  => __( 'Ascending - Lowest rank to highest', 'bonipress' ),
-				'DESC' => __( 'Descending - Highest rank to lowest', 'bonipress' )
+				'ASC'  => __( 'Aufsteigend - Vom niedrigsten zum höchsten Rang', 'bonipress' ),
+				'DESC' => __( 'Absteigend - Vom höchsten Rang zum niedrigsten', 'bonipress' )
 			);
 			foreach ( $options as $option_value => $option_label ) {
 				echo '<option value="' . $option_value . '"';
@@ -1613,50 +1613,50 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 ?>
 
 				</select>
-				<p><span class="description"><?php _e( 'Option to set in which order Ranks should be shown on the archive page.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Option um festzulegen, in welcher Reihenfolge Ränge auf der Archivseite angezeigt werden sollen.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 	</div>
 
 	<?php endif; ?>
 
-	<h3><?php _e( 'Rank Behaviour', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Rangverhalten', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="radio">
 					<label for="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'manual' ) ); ?>"<?php checked( $prefs['base'], 'manual' ); ?> value="manual" /> <?php _e( 'Manueller Modus', 'bonipress' ); ?></label>
 				</div>
-				<p><span class="description"><?php _e( 'Ranks are assigned manually for each user.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Ränge werden jedem Benutzer manuell zugewiesen.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="radio">
-					<label for="<?php echo $this->field_id( array( 'base' => 'current' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'current' ) ); ?>"<?php checked( $prefs['base'], 'current' ); ?> value="current" /> <?php _e( 'Based on Current Balances', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'base' => 'current' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'current' ) ); ?>"<?php checked( $prefs['base'], 'current' ); ?> value="current" /> <?php _e( 'Basierend auf aktuellen Salden', 'bonipress' ); ?></label>
 				</div>
-				<p><span class="description"><?php _e( 'Users can be promoted or demoted depending on where their balance fits in amongst your ranks.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Benutzer können befördert oder herabgestuft werden, je nachdem, wo ihr Guthaben in Deine Reihen passt.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="radio">
-					<label for="<?php echo $this->field_id( array( 'base' => 'total' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'total' ) ); ?>"<?php checked( $prefs['base'], 'total' ); ?> value="total" /> <?php _e( 'Based on Total Balances', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'base' => 'total' ) ); ?>"><input type="radio" name="<?php echo $this->field_name( 'base' ); ?>" id="<?php echo $this->field_id( array( 'base' => 'total' ) ); ?>"<?php checked( $prefs['base'], 'total' ); ?> value="total" /> <?php _e( 'Basierend auf Gesamtsalden', 'bonipress' ); ?></label>
 				</div>
-				<p><span class="description"><?php _e( 'Users can only be promoted and gain higher ranks even if their balance decreases.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Benutzer können nur befördert werden und höhere Ränge erreichen, selbst wenn ihr Guthaben abnimmt.', 'bonipress' ); ?></span></p>
 			</div>
 		</div>
 	</div>
 
 	<div class="row" id="bonipress-rank-based-on-wrapper" style="<?php echo $box; ?>">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Tools', 'bonipress' ); ?></h3>
-			<p><span class="description"><?php _e( 'Use this button to calculate or recalculate each individual users total balance if you think your users total balances are incorrect, or if you switch from Ranks being based on users current balance to total balance.', 'bonipress' ); ?></span></p>
-			<p><input type="button" name="bonipress-update-totals" data-type="<?php echo $bonipress->bonipress_type; ?>" id="bonipress-update-totals" value="<?php _e( 'Calculate Totals', 'bonipress' ); ?>" class="button button-large button-<?php if ( $prefs['base'] == 'current' ) echo 'secondary'; else echo 'primary'; ?>"<?php if ( $prefs['base'] == 'current' ) echo ' disabled="disabled"'; ?> /></p>
+			<h3><?php _e( 'Werkzeuge', 'bonipress' ); ?></h3>
+			<p><span class="description"><?php _e( 'Verwende diese Schaltfläche, um das Gesamtguthaben jedes einzelnen Benutzers zu berechnen oder neu zu berechnen, wenn Du der Meinung bist, dass das Gesamtguthaben Deines Benutzers falsch ist, oder wenn Du von Rängen, die auf dem aktuellen Kontostand des Benutzers basieren, zum Gesamtguthaben wechselst.', 'bonipress' ); ?></span></p>
+			<p><input type="button" name="bonipress-update-totals" data-type="<?php echo $bonipress->bonipress_type; ?>" id="bonipress-update-totals" value="<?php _e( 'Berechne Summen', 'bonipress' ); ?>" class="button button-large button-<?php if ( $prefs['base'] == 'current' ) echo 'secondary'; else echo 'primary'; ?>"<?php if ( $prefs['base'] == 'current' ) echo ' disabled="disabled"'; ?> /></p>
 		</div>
 	</div>
 
-	<h3><?php _e( 'Third-party Integrations', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Integrationen von Drittanbietern', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="form-group">
@@ -1669,13 +1669,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				$prefs['bb_location'] = '';
 
 			if ( ! array_key_exists( 'bb_template', $prefs ) )
-				$prefs['bb_template'] = 'Rank: %rank_title%';
+				$prefs['bb_template'] = 'Rang: %rank_title%';
 
 			$rank_locations = array(
-				''            => __( 'Do not show.', 'bonipress' ),
-				'top'         => __( 'Include in Profile Header.', 'bonipress' ),
-				'profile_tab' => __( 'Include under the "Profile" tab', 'bonipress' ),
-				'both'        => __( 'Include under the "Profile" tab and Profile Header.', 'bonipress' )
+				''            => __( 'Nicht anzeigen.', 'bonipress' ),
+				'top'         => __( 'In Profilkopfzeile einschließen.', 'bonipress' ),
+				'profile_tab' => __( 'Unter der Registerkarte "Profil" einschließen', 'bonipress' ),
+				'both'        => __( 'Auf der Registerkarte „Profil“ und im Profil-Header einschließen.', 'bonipress' )
 			);
 
 			foreach ( $rank_locations as $value => $label ) {
@@ -1689,13 +1689,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'bb_template' ); ?>"><?php _e( 'Template', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'bb_template' ); ?>"><?php _e( 'Vorlage', 'bonipress' ); ?></label>
 				<textarea name="<?php echo $this->field_name( 'bb_template' ); ?>" id="<?php echo $this->field_id( 'bb_template' ); ?>" rows="5" cols="50" class="form-control"><?php echo esc_attr( $prefs['bb_template'] ); ?></textarea>
-				<p><span class="description"><?php _e( 'Template to use when showing a users Rank in BuddyPress. Use %rank_title% for the title and %rank_logo% to show the rank logo. HTML is allowed.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Vorlage zum Anzeigen des Rangs eines Benutzers in BuddyPress. Verwende %rank_title% für den Titel und %rank_logo%, um das Ranglogo anzuzeigen. HTML ist erlaubt.', 'bonipress' ); ?></span></p>
 				<?php else : ?>
 				<input type="hidden" name="<?php echo $this->field_name( 'bb_location' ); ?>" value="" />
 				<input type="hidden" name="<?php echo $this->field_name( 'bb_template' ); ?>" value="" />
-				<p><span class="description"><?php _e( 'Not installed', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Nicht installiert', 'bonipress' ); ?></span></p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -1710,13 +1710,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				$prefs['bp_location'] = '';
 
 			if ( ! array_key_exists( 'bp_template', $prefs ) )
-				$prefs['bp_template'] = 'Rank: %rank_title%';
+				$prefs['bp_template'] = 'Rang: %rank_title%';
 
 			$rank_locations = array(
-				''        => __( 'Do not show.', 'bonipress' ),
-				'reply'   => __( 'Include in Topic Replies', 'bonipress' ),
-				'profile' => __( 'Include in Profile', 'bonipress' ),
-				'both'    => __( 'Include in Topic Replies and Profile', 'bonipress' )
+				''        => __( 'Nicht anzeigen.', 'bonipress' ),
+				'reply'   => __( 'In Themenantworten aufnehmen', 'bonipress' ),
+				'profile' => __( 'In Profil aufnehmen', 'bonipress' ),
+				'both'    => __( 'In Themenantworten und Profil aufnehmen', 'bonipress' )
 			);
 
 			foreach ( $rank_locations as $value => $label ) {
@@ -1730,22 +1730,22 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'bp_template' ); ?>"><?php _e( 'Template', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'bp_template' ); ?>"><?php _e( 'Vorlage', 'bonipress' ); ?></label>
 				<textarea name="<?php echo $this->field_name( 'bp_template' ); ?>" id="<?php echo $this->field_id( 'bp_template' ); ?>" rows="5" cols="50" class="form-control"><?php echo esc_attr( $prefs['bp_template'] ); ?></textarea>
-				<p><span class="description"><?php _e( 'Template to use when showing a users Rank in BuddyPress. Use %rank_title% for the title and %rank_logo% to show the rank logo. HTML is allowed.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Vorlage zum Anzeigen des Rangs eines Benutzers in BuddyPress. Verwende %rank_title% für den Titel und %rank_logo%, um das Ranglogo anzuzeigen. HTML ist erlaubt.', 'bonipress' ); ?></span></p>
 				<?php else : ?>
 				<input type="hidden" name="<?php echo $this->field_name( 'bp_location' ); ?>" value="" />
 				<input type="hidden" name="<?php echo $this->field_name( 'bp_template' ); ?>" value="" />
-				<p><span class="description"><?php _e( 'Not installed', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Nicht installiert', 'bonipress' ); ?></span></p>
 				<?php endif; ?>
 			</div>
 		</div>
 	</div>
 
-	<h3 style="margin-bottom: 0;"><?php _e( 'Available Shortcodes', 'bonipress' ); ?></h3>
+	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonipress' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="http://codex.bonipress.me/shortcodes/bonipress_my_rank/" target="_blank">[bonipress_my_rank]</a>, <a href="http://codex.bonipress.me/shortcodes/bonipress_my_ranks/" target="_blank">[bonipress_my_ranks]</a>, <a href="http://codex.bonipress.me/shortcodes/bonipress_list_ranks/" target="_blank">[bonipress_list_ranks]</a>, <a href="http://codex.bonipress.me/shortcodes/bonipress_users_of_all_ranks/" target="_blank">[bonipress_users_of_all_ranks]</a>, <a href="http://codex.bonipress.me/shortcodes/bonipress_users_of_rank/" target="_blank">[bonipress_users_of_rank]</a></p>
+			<p><a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_my_rank/" target="_blank">[bonipress_my_rank]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_my_ranks/" target="_blank">[bonipress_my_ranks]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_list_ranks/" target="_blank">[bonipress_list_ranks]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_users_of_all_ranks/" target="_blank">[bonipress_users_of_all_ranks]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_users_of_rank/" target="_blank">[bonipress_users_of_rank]</a></p>
 		</div>
 	</div>
 
@@ -1764,7 +1764,7 @@ jQuery(function($){
 			dataType   : "JSON",
 			url        : '<?php echo admin_url( 'admin-ajax.php' ); ?>',
 			beforeSend : function() {
-				button.attr( 'disabled', 'disabled' ).removeClass( 'button-primary' ).addClass( 'button-seconday' ).val( '<?php echo esc_js( esc_attr__( 'Processing...', 'bonipress' ) ); ?>' );
+				button.attr( 'disabled', 'disabled' ).removeClass( 'button-primary' ).addClass( 'button-seconday' ).val( '<?php echo esc_js( esc_attr__( 'Wird bearbeitet...', 'bonipress' ) ); ?>' );
 			},
 			success    : function( response ) {
 				button.val( response );
