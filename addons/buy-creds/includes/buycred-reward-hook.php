@@ -2,12 +2,12 @@
 if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
- * boniPRESS_Addons_Module class
+ * boniPS_Addons_Module class
  * @since 0.1
  * @version 1.1.1
  */
-if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
-	class boniPRESS_buyCRED_Reward_Hook extends boniPRESS_Hook {
+if ( ! class_exists( 'boniPS_buyCRED_Reward_Hook' ) ) :
+	class boniPS_buyCRED_Reward_Hook extends boniPS_Hook {
 
 		/**
 		 * Construct
@@ -33,7 +33,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 		 */
 		public function run() {
 
-			add_filter( 'bonipress_add_finished', array( $this, 'assign_buycred_reward' ), 20, 3 );
+			add_filter( 'bonips_add_finished', array( $this, 'assign_buycred_reward' ), 20, 3 );
 
 		}
 
@@ -42,7 +42,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 		 * @since 1.8
 		 * @version 1.0
 		 */
-		public function assign_buycred_reward( $result, $request, $bonipress ) {
+		public function assign_buycred_reward( $result, $request, $bonips ) {
 
 			extract( $request );
 
@@ -84,7 +84,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 				        $this->prefs['log'][$hook_index],
 				        $ref_id,
 				        $data,
-						$this->bonipress_type
+						$this->bonips_type
 					);
 				}
 
@@ -166,13 +166,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="form-group">
 								<label>Reward <?php echo $this->core->plural(); ?></label>
-								<input type="text" name="<?php echo $this->name( $this->bonipress_type, 'creds' ); ?>" value="<?php echo $this->core->number( $hook['creds'] ); ?>" class="form-control buycred-reward-creds" />
+								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'creds' ); ?>" value="<?php echo $this->core->number( $hook['creds'] ); ?>" class="form-control buycred-reward-creds" />
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="form-group">
-								<label><?php _e( 'Log Template', 'bonipress' ); ?></label>
-								<input type="text" name="<?php echo $this->name( $this->bonipress_type, 'log' ); ?>" placeholder="<?php _e( 'required', 'bonipress' ); ?>" value="<?php echo esc_attr( $hook['log'] ); ?>" class="form-control buycred-reward-log" />
+								<label><?php _e( 'Log Template', 'bonips' ); ?></label>
+								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'log' ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $hook['log'] ); ?>" class="form-control buycred-reward-log" />
 								<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 							</div>
 						</div>
@@ -180,22 +180,22 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="form-group">
-								<label><?php _e( 'Minimum', 'bonipress' ); ?></label>
-								<input type="text" name="<?php echo $this->name( $this->bonipress_type, 'min' ); ?>" value="<?php echo $this->core->number( $hook['min'] ); ?>" class="form-control buycred-reward-min" />
+								<label><?php _e( 'Minimum', 'bonips' ); ?></label>
+								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'min' ); ?>" value="<?php echo $this->core->number( $hook['min'] ); ?>" class="form-control buycred-reward-min" />
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="form-group">
-								<label><?php _e( 'Maximium', 'bonipress' ); ?></label>
-								<input type="text" name="<?php echo $this->name( $this->bonipress_type, 'max' ); ?>" value="<?php echo $this->core->number( $hook['max'] ); ?>" class="form-control buycred-reward-max" />
+								<label><?php _e( 'Maximium', 'bonips' ); ?></label>
+								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'max' ); ?>" value="<?php echo $this->core->number( $hook['max'] ); ?>" class="form-control buycred-reward-max" />
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="form-group specific-hook-actions textright">
-								<button class="button button-small bonipress-add-specific-hook" type="button">Add More</button>
-								<button class="button button-small bonipress-remove-specific-hook" type="button">Remove</button>
+								<button class="button button-small bonips-add-specific-hook" type="button">Add More</button>
+								<button class="button button-small bonips-remove-specific-hook" type="button">Remove</button>
 							</div>
 						</div>
 					</div>
@@ -206,10 +206,10 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 
 		public function name( $type, $attr ){
 
-			$hook_prefs_key = 'bonipress_pref_hooks';
+			$hook_prefs_key = 'bonips_pref_hooks';
 
 			if ( $type != BONIPS_DEFAULT_TYPE_KEY ) {
-				$hook_prefs_key = 'bonipress_pref_hooks_'.$type;
+				$hook_prefs_key = 'bonips_pref_hooks_'.$type;
 			}
 
 			return "{$hook_prefs_key}[hook_prefs][buycred_reward][{$attr}][]";

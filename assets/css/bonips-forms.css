@@ -1,0 +1,53 @@
+#titlewrap #title.readonly { color: rgba(51,51,51,.5); cursor: not-allowed; }
+#poststuff .bonips-metabox .inside { margin: 0 0 0 0; padding: 12px; background-color: #f5f5f5; }
+.bonips-metabox .text-center { text-align: center; }
+.bonips-metabox .text-center img { margin: 0 auto; }
+.bonips-metabox .row { margin-bottom: 12px; }
+.bonips-metabox .row-narrow { margin-bottom: 0; }
+.bonips-metabox .row.padded-row { padding: 0 12px; }
+.bonips-metabox .row:last-child { margin-bottom: 0; }
+.bonips-metabox .form-control { vertical-align: top; }
+.bonips-metabox .form .form-control { width: 100%; margin-bottom: 0; }
+.bonips-metabox .form-group { margin-bottom: 12px; }
+.bonips-metabox .form-group.slim { margin-bottom: 0; }
+.bonips-metabox .form-group label { display: block; font-weight: bold; font-size: 12px; line-height: 18px; }
+.bonips-metabox .form-inline label { display: inline-block; }
+.bonips-metabox .form-group label.slim { font-weight: normal; }
+.bonips-metabox .form-control-static { margin: 0 0 6px 0; }
+.bonips-metabox .form .form-control-static { margin: 0 0 0 0; line-height: 27px; }
+.bonips-metabox .form-inline .form-control { width: auto; }
+.bonips-metabox .form-inline .form-control-static { margin: 0 0 0 0; line-height: 27px; }
+.bonips-metabox ul.history { margin: 0 0 0 0; padding: 0 0 0 0; }
+.bonips-metabox ul.history li { margin: 0 0 0 0; padding: 6px 0; border-bottom: 1px solid #ddd; }
+.bonips-metabox ul.history li:last-child { border-bottom: none; }
+.bonips-metabox ul.history li time { display: block; font-size: 10px; line-height: 18px; font-style: italic; }
+.bonips-metabox ul.history li p { margin: 0 0 0 0; }
+.bonips-metabox .button-block { width: 100%; display: block; }
+.bonips-metabox #minor-publishing-actions > div { padding-bottom: 10px; text-align: center; }
+.bonips-metabox .req-title { font-size: 10px; line-height: 24px; border-bottom: 1px solid #ddd; margin-bottom: 12px; }
+.bonips-metabox .label-field input { border: 1px solid transparent; background-color: transparent; box-shadow: none; text-align: center; color: #aaa; width: 50%; margin: 12px auto; }
+.bonips-metabox .top-right-corner { position: absolute; top: 0; right: 12px; }
+.seperate-bottom { padding-bottom: 12px; border-bottom: 1px solid #ddd; margin-bottom: 12px; }
+.bonips-metabox .padd-bottom { padding-bottom: 12px; }
+.bonips-metabox .badge-level { padding-bottom: 12px; border-bottom: 1px solid #ddd; margin-bottom: 12px; }
+.bonips-metabox .badge-level:last-child { padding-bottom: 0; border-bottom: none; margin-bottom: 0; }
+.bonips-metabox .image-wrapper { width: 100%; min-height: 114px; padding-bottom: 12px; }
+.bonips-metabox .image-wrapper.empty:before { display: block; margin: 0 auto; width: 90%; height: 100px; line-height: 100px; text-align: center; border: 2px dashed #ddd; color: #ddd; content: "\f128"; }
+.bonips-metabox .level-image .image-wrapper.empty:before { width: 50%; }
+.bonips-metabox .image-wrapper img { max-width: 100%; height: auto; margin: 0 auto; max-height: 100px; }
+.bonips-metabox a.selected { color: #aaa; text-decoration: none; cursor: not-allowed; }
+.bonips-metabox a.selected:hover { text-decoration: none; color: #ddd; cursor: not-allowed; }
+.bonips-metabox .level-type-by p { padding-left: 12px; }
+.bonips-metabox .level-compare p { color: #aaa; }
+
+.form-inline .form-group { display: inline-block; margin-bottom: 0; vertical-align: middle; }
+.form-inline .form-control { display: inline-block; width: auto; vertical-align: middle; }
+.form-inline .form-control-static { display: inline-block; }
+.form-inline .input-group { display: inline-table; vertical-align: middle; }
+.form-inline .input-group .input-group-addon, .form-inline .input-group .input-group-btn, .form-inline .input-group .form-control { width: auto; }
+.form-inline .input-group > .form-control { width: 100%; }
+.form-inline .control-label { margin-bottom: 0; vertical-align: middle; }
+.form-inline .radio, .form-inline .checkbox { display: inline-block; margin-top: 0; margin-bottom: 0; vertical-align: middle; }
+.form-inline .radio label, .form-inline .checkbox label { padding-left: 0; }
+.form-inline .radio input[type="radio"], .form-inline .checkbox input[type="checkbox"] { position: relative; margin-left: 0; }
+.form-inline .has-feedback .form-control-feedback { top: 0; }

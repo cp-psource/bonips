@@ -1,5 +1,5 @@
 /**
- * boniPRESS Rank Tweaks
+ * boniPS Rank Tweaks
  * @since 1.6
  * @version 1.0.1
  */
@@ -10,7 +10,7 @@
 	$( document ).ready(function() {
 
 		var newurl = $( 'a.add-new-h2' ).attr( 'href' );
-		newurl = newurl + '&ctype=' + boniPRESS_Ranks.rank_ctype;
+		newurl = newurl + '&ctype=' + boniPS_Ranks.rank_ctype;
 		$( 'a.add-new-h2' ).attr( 'href', newurl );
 
 	});

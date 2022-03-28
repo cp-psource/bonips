@@ -1,34 +1,34 @@
-#bonipress_overview p.sub,
-#bonipress_overview .table, #bonipress_overview .versions { margin: -12px; }
-#bonipress_overview .inside { font-size: 13px; padding-top: 20px; }
-body.mp6 #bonipress_overview p.sub { padding: 5px 0 15px; font-size: 11px; font-weight: 600; left: 14px; letter-spacing: 1px; position: absolute; text-transform: uppercase; top: -17px; }
-body #bonipress_overview p.sub { padding: 5px 0 15px; color: #8f8f8f; font-size: 14px; position: absolute; top: -17px; left: 15px; }
-#bonipress_overview .table { margin: 0; padding: 0; position: relative; }
-body.mp6 #bonipress_overview .table_content { float: left; width: 45%; }
-body #bonipress_overview .table_content { float: left; width: 45%; border-top: 1px solid #ececec; }
-#bonipress_overview .table_content.push { margin-right: 9%; }
-#bonipress_overview table td { padding: 3px 0; white-space: nowrap; }
-#bonipress_overview table tr.first td { border-top: none; }
-#bonipress_overview td.b { padding-right: 6px; text-align: right; font-size: 14px; width: 1%; }
-#bonipress_overview td.b a { font-size: 18px; }
-#bonipress_overview td.b a:hover { color: #d54e21; }
-#bonipress_overview .t { padding-right: 12px; }
-#bonipress_overview .t,
-#bonipress_overview .b { font-size: 14px; padding-top: 4px; }
-#bonipress_overview .t a { white-space: nowrap; }
-#bonipress_overview .spam { color: red; }
-#bonipress_overview .waiting { color: #e66f00; }
-#bonipress_overview .approved { color: green; }
-#bonipress_overview .versions { padding: 6px 10px 12px; clear: both; }
-#bonipress_overview a.button { float: right; clear: right; position: relative; top: -5px; }
-#bonipress_overview .no-modules { color: #dedede; text-align: center; margin-top: 0; }
+#bonips_overview p.sub,
+#bonips_overview .table, #bonips_overview .versions { margin: -12px; }
+#bonips_overview .inside { font-size: 13px; padding-top: 20px; }
+body.mp6 #bonips_overview p.sub { padding: 5px 0 15px; font-size: 11px; font-weight: 600; left: 14px; letter-spacing: 1px; position: absolute; text-transform: uppercase; top: -17px; }
+body #bonips_overview p.sub { padding: 5px 0 15px; color: #8f8f8f; font-size: 14px; position: absolute; top: -17px; left: 15px; }
+#bonips_overview .table { margin: 0; padding: 0; position: relative; }
+body.mp6 #bonips_overview .table_content { float: left; width: 45%; }
+body #bonips_overview .table_content { float: left; width: 45%; border-top: 1px solid #ececec; }
+#bonips_overview .table_content.push { margin-right: 9%; }
+#bonips_overview table td { padding: 3px 0; white-space: nowrap; }
+#bonips_overview table tr.first td { border-top: none; }
+#bonips_overview td.b { padding-right: 6px; text-align: right; font-size: 14px; width: 1%; }
+#bonips_overview td.b a { font-size: 18px; }
+#bonips_overview td.b a:hover { color: #d54e21; }
+#bonips_overview .t { padding-right: 12px; }
+#bonips_overview .t,
+#bonips_overview .b { font-size: 14px; padding-top: 4px; }
+#bonips_overview .t a { white-space: nowrap; }
+#bonips_overview .spam { color: red; }
+#bonips_overview .waiting { color: #e66f00; }
+#bonips_overview .approved { color: green; }
+#bonips_overview .versions { padding: 6px 10px 12px; clear: both; }
+#bonips_overview a.button { float: right; clear: right; position: relative; top: -5px; }
+#bonips_overview .no-modules { color: #dedede; text-align: center; margin-top: 0; }
 
-div.columns-3 #bonipress_overview .table_content, 
-div.columns-4 #bonipress_overview .table_content { float: none; width: 100%; clear: both; margin-bottom: 42px;  }
-div.columns-3 #bonipress_overview .table_content.push,
-div.columns-4 #bonipress_overview .table_content.push { margin-right: 0; }
-div.columns-4 #bonipress_overview td.b a, 
-div.columns-4 #bonipress_overview .t { font-size: 12px; }
-div.columns-4 #bonipress_overview td { line-height: 1em; }
+div.columns-3 #bonips_overview .table_content, 
+div.columns-4 #bonips_overview .table_content { float: none; width: 100%; clear: both; margin-bottom: 42px;  }
+div.columns-3 #bonips_overview .table_content.push,
+div.columns-4 #bonips_overview .table_content.push { margin-right: 0; }
+div.columns-4 #bonips_overview td.b a, 
+div.columns-4 #bonips_overview .t { font-size: 12px; }
+div.columns-4 #bonips_overview td { line-height: 1em; }
 
-#bonipress_overview form.dashboard-widget-control-form { overflow: visible; }
+#bonips_overview form.dashboard-widget-control-form { overflow: visible; }

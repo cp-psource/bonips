@@ -15,14 +15,14 @@ function onYouTubeIframeAPIReady() {
 	console.log( 'YouTube Iframe API' );
 	
 	// Listen for the ready event for any vimeo video players on the page
-	var youtPlayers = document.querySelectorAll( 'iframe.bonipress-youtube-video' ),
+	var youtPlayers = document.querySelectorAll( 'iframe.bonips-youtube-video' ),
 		youframes,
 		yplayer;
 
 	for (var i = 0, length = youtPlayers.length; i < length; i++) {
 		yplayer = youtPlayers[i];
 		var video_id = yplayer.getAttribute( 'data-vid' );
-		youframes = new YT.Player( yplayer, { events : { 'onStateChange': 'bonipress_vvideo_v' + video_id } } );
+		youframes = new YT.Player( yplayer, { events : { 'onStateChange': 'bonips_vvideo_v' + video_id } } );
 		console.log( video_id );
 	}
 }
@@ -41,7 +41,7 @@ function onYouTubePlayerReady( id ) {
 	duration[ id ] = yplayer.getDuration();
 
 	// Listen in on state changes
-	yplayer.addEventListener( 'onStateChange', 'bonipress_video_' + id );
+	yplayer.addEventListener( 'onStateChange', 'bonips_video_' + id );
 	
 	console.log( id );
 }

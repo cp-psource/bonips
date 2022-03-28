@@ -1,5 +1,5 @@
 /**
- * boniPRESS Management Scripts
+ * boniPS Management Scripts
  * @since 1.3
  * @version 1.2
  */
@@ -8,25 +8,25 @@ jQuery(function($) {
 	/**
 	 * Empty Log AJAX Caller
 	 */
-	var bonipress_action_empty_log = function( button ) {
+	var bonips_action_empty_log = function( button ) {
 		var label = button.val();
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-action-empty-log',
-				token     : boniPRESSmanage.token,
+				action    : 'bonips-action-empty-log',
+				token     : boniPSmanage.token,
 				type      : button.attr( 'data-type' )
 			},
 			dataType   : "JSON",
-			url        : boniPRESSmanage.ajaxurl,
+			url        : boniPSmanage.ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', boniPRESSmanage.working );
+				button.attr( 'value', boniPSmanage.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success    : function( response ) {
 				if ( response.success ) {
-					$( 'input#bonipress-manage-table-rows' ).val( response.data );
-					button.val( boniPRESSmanage.done );
+					$( 'input#bonips-manage-table-rows' ).val( response.data );
+					button.val( boniPSmanage.done );
 					button.removeClass( 'button-primary' );
 				}
 				else {
@@ -41,28 +41,28 @@ jQuery(function($) {
 	/**
 	 * Empty Log Trigger
 	 */
-	$( 'input#bonipress-manage-action-empty-log' ).click(function(){
+	$( 'input#bonips-manage-action-empty-log' ).click(function(){
 		// Confirm action
-		if ( confirm( boniPRESSmanage.confirm_log ) )
-			bonipress_action_empty_log( $(this) );
+		if ( confirm( boniPSmanage.confirm_log ) )
+			bonips_action_empty_log( $(this) );
 	});
 
 	/**
 	 * Reset Balance AJAX Caller
 	 */
-	var bonipress_action_reset_balance = function( button ) {
+	var bonips_action_reset_balance = function( button ) {
 		var label = button.val();
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-action-reset-accounts',
-				token     : boniPRESSmanage.token,
+				action    : 'bonips-action-reset-accounts',
+				token     : boniPSmanage.token,
 				type      : button.attr( 'data-type' )
 			},
 			dataType   : "JSON",
-			url        : boniPRESSmanage.ajaxurl,
+			url        : boniPSmanage.ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', boniPRESSmanage.working );
+				button.attr( 'value', boniPSmanage.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success    : function( response ) {
@@ -82,21 +82,21 @@ jQuery(function($) {
 	/**
 	 * Reset Balance Trigger
 	 */
-	$( 'input#bonipress-manage-action-reset-accounts' ).click(function(){
+	$( 'input#bonips-manage-action-reset-accounts' ).click(function(){
 		// Confirm action
-		if ( confirm( boniPRESSmanage.confirm_reset ) )
-			bonipress_action_reset_balance( $(this) );
+		if ( confirm( boniPSmanage.confirm_reset ) )
+			bonips_action_reset_balance( $(this) );
 	});
 
 	/**
 	 * Export Balances Modal
 	 */
 	$('#export-points').dialog({
-		dialogClass : 'bonipress-export-points',
+		dialogClass : 'bonips-export-points',
 		draggable   : false,
 		autoOpen    : false,
-		closeText   : boniPRESSmanage.export_close,
-		title       : boniPRESSmanage.export_title,
+		closeText   : boniPSmanage.export_close,
+		title       : boniPSmanage.export_title,
 		modal       : true,
 		width       : 500,
 		resizable   : false,
@@ -107,28 +107,28 @@ jQuery(function($) {
 	/**
 	 * Export balances Modal Trigger
 	 */
-	$( '#bonipress-export-users-points' ).click( function() {
+	$( '#bonips-export-users-points' ).click( function() {
 		$( '#export-points' ).dialog( 'open' );
 	});
 
 	/**
 	 * Export Balances AJAX Caller
 	 */
-	var bonipress_action_export_balances = function( button ) {
+	var bonips_action_export_balances = function( button ) {
 		var label = button.val();
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-action-export-balances',
-				token     : boniPRESSmanage.token,
-				identify  : $( '#bonipress-export-identify-by' ).val(),
-				log_temp  : $( '#bonipress-export-log-template' ).val(),
+				action    : 'bonips-action-export-balances',
+				token     : boniPSmanage.token,
+				identify  : $( '#bonips-export-identify-by' ).val(),
+				log_temp  : $( '#bonips-export-log-template' ).val(),
 				type      : button.attr( 'data-type' )
 			},
 			dataType   : "JSON",
-			url        : boniPRESSmanage.ajaxurl,
+			url        : boniPSmanage.ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', boniPRESSmanage.working );
+				button.attr( 'value', boniPSmanage.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success    : function( response ) {
@@ -138,7 +138,7 @@ jQuery(function($) {
 				if ( response.success ) {
 					setTimeout(function(){
 						window.location.href = response.data;
-						button.val( boniPRESSmanage.done );
+						button.val( boniPSmanage.done );
 					}, 2000 );
 					setTimeout(function(){
 						button.removeAttr( 'disabled' );
@@ -156,25 +156,25 @@ jQuery(function($) {
 	/**
 	 * Balance Export Trigger
 	 */
-	$( '#bonipress-run-exporter' ).click(function(){
-		bonipress_action_export_balances( $(this) );
+	$( '#bonips-run-exporter' ).click(function(){
+		bonips_action_export_balances( $(this) );
 	});
 
 	/**
 	 * Generate Key AJAX Caller
 	 */
-	var bonipress_generate_key = function() {
+	var bonips_generate_key = function() {
 		$.ajax({
 			type     : "POST",
 			data     : {
-				action  : 'bonipress-action-generate-key',
-				token   : boniPRESSmanage.token
+				action  : 'bonips-action-generate-key',
+				token   : boniPSmanage.token
 			},
 			dataType : "JSON",
-			url      : boniPRESSmanage.ajaxurl,
+			url      : boniPSmanage.ajaxurl,
 			success  : function( response ) {
-				$( '#boniPRESS-remote-key' ).val( response.data );
-				$( '#bonipress-length-counter' ).text( response.data.length );
+				$( '#boniPS-remote-key' ).val( response.data );
+				$( '#bonips-length-counter' ).text( response.data.length );
 			}
 		});
 	}
@@ -182,21 +182,21 @@ jQuery(function($) {
 	/**
 	 * Generate Key Trigger
 	 */
-	$( '#bonipress-generate-api-key' ).click(function(){
-		bonipress_generate_key();
+	$( '#bonips-generate-api-key' ).click(function(){
+		bonips_generate_key();
 	});
 
 	/**
 	 * Key Length Indicator
 	 */
-	$( '#boniPRESS-remote-key' ).change(function(){
-		$( '#bonipress-length-counter' ).text( $(this).val().length );
+	$( '#boniPS-remote-key' ).change(function(){
+		$( '#bonips-length-counter' ).text( $(this).val().length );
 	});
 
 	/**
 	 * Key Length Indicator
 	 */
-	$( '#boniPRESS-remote-key' ).keyup(function(){
-		$( '#bonipress-length-counter' ).text( $(this).val().length );
+	$( '#boniPS-remote-key' ).keyup(function(){
+		$( '#bonips-length-counter' ).text( $(this).val().length );
 	});
 });

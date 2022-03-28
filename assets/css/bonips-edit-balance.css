@@ -1,0 +1,85 @@
+/* Editor */
+.bonips-update-balance { font-family: "Open Sans",sans-serif; background-color: white !important; z-index: 9999 !important; border: none !important; border-radius: 0 !important; background-image: none !important; padding: 0 !important; overflow: visible !important; }
+.bonips-update-balance.ui-dialog .ui-dialog-content { padding: 0 0 0 0; }
+.bonips-update-balance .ui-widget-header { border: none !important; background: transparent !important; font-weight: normal !important; }
+.bonips-update-balance .ui-dialog-titlebar { line-height: 24px !important; border-bottom: 1px solid #ddd !important; border-left: none; border-top: none; border-right: none; padding: 12px !important; border-radius: 0 !important; }
+.bonips-update-balance .ui-dialog-titlebar:hover { cursor: move; }
+.bonips-update-balance .ui-dialog-titlebar-close { float: right; margin: 0 12px 0 0; background: 0 0; border: none; -webkit-box-shadow: none; box-shadow: none; color: #666; cursor: pointer; display: block; padding: 0; position: absolute; top: 0; right: 0; width: 36px; height: 36px; text-align: center; font-size: 13px; line-height: 26px; vertical-align: top; white-space: nowrap; }
+.bonips-update-balance .ui-icon { display: none !important; }
+.bonips-update-balance .ui-button:focus, .bonips-update-balance .ui-button:active { outline: none !important; }
+.bonips-update-balance .ui-button .ui-button-text { display: block; text-indent: 0; }
+.bonips-update-balance .ui-dialog-title { font-size: 22px; font-weight: 600; margin: 0 0 0 0; width: auto !important; float: none !important; }
+body.users-php .ui-widget-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeat-x scroll 70% 70% #000; opacity: 0.7; overflow: hidden; background: repeat-x scroll 70% 70% #000; z-index: 99; }
+#edit-bonips-balance { background-color: #f3f3f3; font-size: 14px; }
+#edit-bonips-balance form { display: block; padding: 12px; }
+#edit-bonips-balance .row { margin-bottom: 24px; }
+#edit-bonips-balance .row.ledger { margin-bottom: 6px; font-size: 12px; line-height: 18px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+#edit-bonips-balance .row.ledger:last-of-type { border-bottom: 0; margin-bottom: 0; }
+#edit-bonips-balance .row.ledger.header { margin-bottom: 6px; font-size: 14px; line-height: 22px; }
+#edit-bonips-balance .row.ledger .row { border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+#edit-bonips-balance .row.last { margin-bottom: 0; }
+#edit-bonips-balance .row input { width: 99%; }
+#edit-bonips-balance .row .button { width: 99%; }
+#edit-bonips-balance .row input.regular-text { width: 99%; }
+#edit-bonips-balance .row select { width: 99%; }
+#edit-bonips-balance .row .button-secondary { float: right; }
+#edit-bonips-balance .row.ledger .button-secondary { float: none; }
+#edit-bonips-balance .row.ledger p { text-align: center; margin: 6px 0 0 0; }
+#edit-bonips-balance .row span { display: block; font-size: 12px; line-height: 16px; padding: 2px 0 0 3px; }
+#edit-bonips-balance .row label { display: block; font-weight: bold; line-height: 22px; }
+#edit-bonips-balance .text-right { text-align: right; }
+#edit-bonips-balance #bonips-editor-results { line-height: 30px; }
+#bonips-users-mini-ledger .border { border-top: 1px solid #ddd; padding: 12px; margin: 0 0 0 0; background-color: #e8e8e8; }
+#bonips-processing { text-align: center; min-height: 4px; width: 100%; }
+img#bonips-token-sitting { display: none; }
+
+fieldset#bonips-badge-list .badge-wrapper img { margin: 0 auto; max-width: 100px; height: auto; width: 100px; }
+fieldset#bonips-badge-list .badge-wrapper .no-badge-image { margin: 0 auto; max-width: 100px; height: auto; width: 100px;line-height: 100px; }
+fieldset#bonips-badge-list .badge-wrapper label { display: block; }
+fieldset#bonips-badge-list .badge-image-wrap { text-align: center; }
+fieldset#bonips-badge-list .badge-image-wrap h4 { margin: 0 0 0 0; }
+fieldset#bonips-badge-list .badge-actions { text-align: center; }
+
+.loading-indicator { height: 5px; width: 100%; position: relative; overflow: hidden; background-color: white; }
+.loading-indicator:before { display: block; position: absolute; content: ""; left: -200px; width: 200px; height: 5px; background-color: #c5d93d; animation: loading 2s linear infinite; }
+@keyframes loading { from { left: -200px; width: 30%; } 25% { width: 50%; } 50% { width: 50%; } 70% { width: 50%; } 80% { left: 75%; } 95% { left: 100%; } to { left: 100%; } }
+
+.bonips-wrapper.color-option { width: 48%; }
+p.bonips-p { margin: 12px 0 0 0; }
+.bonips-inline-table { margin: 0 0 18px 0; }
+.bonips-wrapper { min-height: 100px; padding: 15px !important; border: 1px solid #ddd; }
+.bonips-wrapper:hover { cursor: default; }
+.bonips-wrapper.disabled-option { color: #949494; }
+.bonips-wrapper.disabled-option:hover { background-color: transparent; }
+.bonips-wrapper .toggle-bonips-balance-editor { float: right; }
+.bonips-wrapper .balance-desc { font-size: 12px; line-height: 15px; color: #949494; }
+.balance-row { display: block; height: 32px; line-height: 32px; font-size: 18px; }
+.balance-row > div { height: 32px; line-height: inherit; font-size: inherit; vertical-align: top; }
+.balance-row .balance-edit { display: none; }
+.balance-row.edit .balance-view { display: none; }
+.balance-row.edit .balance-edit { display: block; }
+.balance-row input { width: 100%; margin: 0 12px 0 0; }
+.balance-row input.half { width: 60% !important; display: inline-block !important; margin-right: 6px; }
+.balance-row input.short { width: 30% !important; display: inline-block !important; margin: 0 3px; }
+#bonips-edit-user-wrapper h2 { margin: 12px 0 6px 0; }
+
+@media screen and (max-width: 782px) {
+
+	.balance-row { display: block; height: auto; line-height: 1.5em; font-size: 18px; }
+	.balance-row > div { height: auto; line-height: 42px; font-size: inherit; vertical-align: top; }
+
+}
+
+@media screen and (max-width: 520px) {
+
+	.bonips-wrapper.color-option { width: 100%; }
+
+
+}
+
+@media screen and (min-width: 1400px) {
+
+	.bonips-wrapper.color-option { width: 24% !important; }
+
+
+}

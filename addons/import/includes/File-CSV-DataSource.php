@@ -1,6 +1,6 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-if ( !defined( 'boniPRESS_VERSION' ) ) exit;
+if ( !defined( 'boniPS_VERSION' ) ) exit;
 /**
  * CSV Import Class
  *

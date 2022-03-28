@@ -4,8 +4,8 @@
  * @version 1.0
  */
 jQuery(function($) {
-	if ( boniPRESS.active != '-1' ) {
-		var active_box = parseInt( boniPRESS.active, 10 );
+	if ( boniPS.active != '-1' ) {
+		var active_box = parseInt( boniPS.active, 10 );
 	}
 	else {
 		var active_box = false;

@@ -1,5 +1,5 @@
 /**
- * boniPRESS Inline Edit
+ * boniPS Inline Edit
  * @since 1.2
  * @version 1.2
  */
@@ -14,12 +14,12 @@ jQuery(function($) {
 	 * Setup Points Editor Modal
 	 */
 	$(document).ready( function() {
-		$('#edit-bonipress-balance').dialog({
-			dialogClass : 'bonipress-update-balance',
+		$('#edit-bonips-balance').dialog({
+			dialogClass : 'bonips-update-balance',
 			draggable   : true,
 			autoOpen    : false,
-			title       : boniPRESSedit.title,
-			closeText   : boniPRESSedit.close,
+			title       : boniPSedit.title,
+			closeText   : boniPSedit.close,
 			modal       : true,
 			width       : 500,
 			height      : 'auto',
@@ -40,50 +40,50 @@ jQuery(function($) {
 	/**
 	 * Edit Points Trigger
 	 */
-	$( '.bonipress-open-points-editor' ).click( function() {
+	$( '.bonips-open-points-editor' ).click( function() {
 		
-		$( '#edit-bonipress-balance' ).dialog( 'open' );
+		$( '#edit-bonips-balance' ).dialog( 'open' );
 		
-		$( '#edit-bonipress-balance #bonipress-username' ).empty().text( $(this).attr( 'data-username' ) );
+		$( '#edit-bonips-balance #bonips-username' ).empty().text( $(this).attr( 'data-username' ) );
 		
-		$( '#edit-bonipress-balance #bonipress-userid' ).empty().text( $(this).attr( 'data-userid' ) );
+		$( '#edit-bonips-balance #bonips-userid' ).empty().text( $(this).attr( 'data-userid' ) );
 		
-		$( '#edit-bonipress-balance #bonipress-current' ).empty().text( $(this).attr( 'data-current' ) );
+		$( '#edit-bonips-balance #bonips-current' ).empty().text( $(this).attr( 'data-current' ) );
 		
-		$( '#bonipress-update-users-balance-type' ).val( $(this).attr( 'data-type' ) );
+		$( '#bonips-update-users-balance-type' ).val( $(this).attr( 'data-type' ) );
 	});
 
 	/**
 	 * Update Balance AJAX Caller
 	 */
-	$( '#bonipress-update-users-balance-submit' ).click( function() {
+	$( '#bonips-update-users-balance-submit' ).click( function() {
 		var button = $(this);
 		var label = button.val();
-		var current_el = $( '#edit-bonipress-balance #bonipress-current' );
-		var user_id = $( '#edit-bonipress-balance #bonipress-userid' ).text();
-		var amount_el = $( 'input#bonipress-update-users-balance-amount' );
-		var entry_el = $( 'input#bonipress-update-users-balance-entry' );
-		var type_el = $( '#bonipress-update-users-balance-type' );
+		var current_el = $( '#edit-bonips-balance #bonips-current' );
+		var user_id = $( '#edit-bonips-balance #bonips-userid' ).text();
+		var amount_el = $( 'input#bonips-update-users-balance-amount' );
+		var entry_el = $( 'input#bonips-update-users-balance-entry' );
+		var type_el = $( '#bonips-update-users-balance-type' );
 		
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-inline-edit-users-balance',
-				token     : $( 'input#bonipress-update-users-balance-token' ).val(),
+				action    : 'bonips-inline-edit-users-balance',
+				token     : $( 'input#bonips-update-users-balance-token' ).val(),
 				user      : user_id,
 				amount    : amount_el.val(),
 				entry     : entry_el.val(),
 				type      : type_el.val()
 			},
 			dataType   : "JSON",
-			url        : boniPRESSedit.ajaxurl,
+			url        : boniPSedit.ajaxurl,
 			// Before we start
 			beforeSend : function() {
 				current_el.removeClass( 'done' );
 				entry_el.removeClass( 'error' );
 				amount_el.removeClass( 'error' );
 				
-				button.attr( 'value', boniPRESSedit.working );
+				button.attr( 'value', boniPSedit.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			// On Successful Communication
@@ -96,11 +96,11 @@ jQuery(function($) {
 					current_el.text( response.data );
 					amount_el.val( '' );
 					entry_el.val( '' );
-					$( 'div#bonipress-user-' + user_id + '-balance-' + type_el.val() + ' span' ).empty().html( response.data );
+					$( 'div#bonips-user-' + user_id + '-balance-' + type_el.val() + ' span' ).empty().html( response.data );
 				}
 				else {
 					if ( response.data.error == 'ERROR_1' ) {
-						$( '#edit-bonipress-balance' ).dialog( 'destroy' );
+						$( '#edit-bonips-balance' ).dialog( 'destroy' );
 					}
 					else if ( response.data.error == 'ERROR_2' ) {
 						alert( response.data.message );

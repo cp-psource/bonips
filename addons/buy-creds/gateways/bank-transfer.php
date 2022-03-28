@@ -1,21 +1,21 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
- * boniPRESS_Bank_Transfer class
+ * boniPS_Bank_Transfer class
  * Manual payment gateway - bank transfers
  * @since 1.7
  * @version 1.1
  */
-if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
-	class boniPRESS_Bank_Transfer extends boniPRESS_Payment_Gateway {
+if ( ! class_exists( 'boniPS_Bank_Transfer' ) ) :
+	class boniPS_Bank_Transfer extends boniPS_Payment_Gateway {
 
 		/**
 		 * Construct
 		 */
 		public function __construct( $gateway_prefs ) {
 
-			$types            = bonipress_get_types();
+			$types            = bonips_get_types();
 			$default_exchange = array();
 			foreach ( $types as $type => $label )
 				$default_exchange[ $type ] = 1;
@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 			parent::__construct( array(
 				'id'               => 'bank',
 				'label'            => 'Bank Transfer',
-				'documentation'    => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/bank-transfers/',
+				'documentation'    => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/bank-transfers/',
 				'gateway_logo_url' => '',
 				'defaults'         => array(
 					'title'            => '',
@@ -50,7 +50,7 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 		 */
 		public function returning() {
 
-			add_filter( 'bonipress_setup_gateways', array( $this, 'relable_gateway' ) );
+			add_filter( 'bonips_setup_gateways', array( $this, 'relable_gateway' ) );
 
 		}
 
@@ -61,7 +61,7 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 		 */
 		public function admin_init() {
 
-			add_filter( 'bonipress_setup_gateways', array( $this, 'relable_gateway' ) );
+			add_filter( 'bonips_setup_gateways', array( $this, 'relable_gateway' ) );
 
 		}
 
@@ -161,24 +161,24 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 ?>
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Details', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Details', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'title' ); ?>"><?php _e( 'Title', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'title' ); ?>"><?php _e( 'Title', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'title' ); ?>" id="<?php echo $this->field_id( 'title' ); ?>" value="<?php echo esc_attr( $prefs['title'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'logo_url' ); ?>" id="<?php echo $this->field_id( 'logo_url' ); ?>" value="<?php echo esc_attr( $prefs['logo_url'] ); ?>" class="form-control" />
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Setup', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Setup', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'currency' ); ?>" id="<?php echo $this->field_id( 'currency' ); ?>" value="<?php echo esc_attr( $prefs['currency'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label><?php _e( 'Exchange Rates', 'bonipress' ); ?></label>
+			<label><?php _e( 'Exchange Rates', 'bonips' ); ?></label>
 
 			<?php $this->exchange_rate_setup(); ?>
 
@@ -188,7 +188,7 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
-			<label for="buycredbanktransferaccount"><?php _e( 'Bank Account Information', 'bonipress' ); ?></label>
+			<label for="buycredbanktransferaccount"><?php _e( 'Bank Account Information', 'bonips' ); ?></label>
 			<?php wp_editor( $prefs['account'], 'buycredbanktransferaccount', array( 'textarea_name' => $this->field_name( 'account' ), 'textarea_rows' => 10 ) ); ?>
 		</div>
 	</div>
@@ -196,8 +196,8 @@ if ( ! class_exists( 'boniPRESS_Bank_Transfer' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#bonipress-gateway-prefs-bank-currency' ).change(function(){
-		$( 'span.bonipress-gateway-bank-currency' ).text( $(this).val() );
+	$( '#bonips-gateway-prefs-bank-currency' ).change(function(){
+		$( 'span.bonips-gateway-bank-currency' ).text( $(this).val() );
 	});
 
 });

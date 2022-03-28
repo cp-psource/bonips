@@ -1,21 +1,21 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
- * boniPRESS_PayPal class
+ * boniPS_PayPal class
  * PayPal Payments Standard - Payment Gateway
  * @since 0.1
  * @version 1.3
  */
-if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
-	class boniPRESS_PayPal_Standard extends boniPRESS_Payment_Gateway {
+if ( ! class_exists( 'boniPS_PayPal_Standard' ) ) :
+	class boniPS_PayPal_Standard extends boniPS_Payment_Gateway {
 
 		/**
 		 * Construct
 		 */
 		public function __construct( $gateway_prefs ) {
 
-			$types            = bonipress_get_types();
+			$types            = bonips_get_types();
 			$default_exchange = array();
 			foreach ( $types as $type => $label )
 				$default_exchange[ $type ] = 1;
@@ -29,7 +29,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 					'currency'         => '',
 					'account'          => '',
 					'logo_url'         => '',
-					'item_name'        => 'Purchase of boniPRESS %plural%',
+					'item_name'        => 'Purchase of boniPS %plural%',
 					'exchange'         => $default_exchange
 				)
 			), $gateway_prefs );
@@ -67,7 +67,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 			}
 
 			// Call PayPal
-			$curl_attempts = apply_filters( 'bonipress_paypal_standard_max_attempts', 3 );
+			$curl_attempts = apply_filters( 'bonips_paypal_standard_max_attempts', 3 );
 			$attempt       = 1;
 			$result        = '';
 			// We will make a x number of curl attempts before finishing with a fsock.
@@ -83,7 +83,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 				curl_setopt( $call, CURLOPT_SSL_VERIFYHOST, 2 );
 				curl_setopt( $call, CURLOPT_FRESH_CONNECT, 1 );
 				curl_setopt( $call, CURLOPT_FORBID_REUSE, 1 );
-				curl_setopt( $call, CURLOPT_HTTPHEADER, array( 'Connection: Close', 'User-Agent: boniPRESS' ) );
+				curl_setopt( $call, CURLOPT_HTTPHEADER, array( 'Connection: Close', 'User-Agent: boniPS' ) );
 				$result = curl_exec( $call );
 
 				// End on success
@@ -142,19 +142,19 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 
 						// Check amount paid
 						if ( $_POST['mc_gross'] != $pending_payment->cost ) {
-							$new_call[] = sprintf( __( 'Price mismatch. Expected: %s Received: %s', 'bonipress' ), $pending_payment->cost, $_POST['mc_gross'] );
+							$new_call[] = sprintf( __( 'Price mismatch. Expected: %s Received: %s', 'bonips' ), $pending_payment->cost, $_POST['mc_gross'] );
 							$errors     = true;
 						}
 
 						// Check currency
 						if ( $_POST['mc_currency'] != $pending_payment->currency ) {
-							$new_call[] = sprintf( __( 'Currency mismatch. Expected: %s Received: %s', 'bonipress' ), $pending_payment->currency, $_POST['mc_currency'] );
+							$new_call[] = sprintf( __( 'Currency mismatch. Expected: %s Received: %s', 'bonips' ), $pending_payment->currency, $_POST['mc_currency'] );
 							$errors     = true;
 						}
 
 						// Check status
 						if ( $_POST['payment_status'] != 'Completed' ) {
-							$new_call[] = sprintf( __( 'Payment not completed. Received: %s', 'bonipress' ), $_POST['payment_status'] );
+							$new_call[] = sprintf( __( 'Payment not completed. Received: %s', 'bonips' ), $_POST['payment_status'] );
 							$errors     = true;
 						}
 
@@ -165,7 +165,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 							if ( $this->complete_payment( $pending_payment, $_POST['txn_id'] ) )
 								$this->trash_pending_payment( $pending_post_id );
 							else
-								$new_call[] = __( 'Failed to credit users account.', 'bonipress' );
+								$new_call[] = __( 'Failed to credit users account.', 'bonips' );
 
 						}
 
@@ -189,8 +189,8 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 		public function returning() {
 
 			if ( isset( $_REQUEST['tx'] ) && isset( $_REQUEST['st'] ) && $_REQUEST['st'] == 'Completed' ) {
-				$this->get_page_header( __( 'Success', 'bonipress' ), $this->get_thankyou() );
-				echo '<h1 style="text-align:center;">' . __( 'Thank you for your purchase', 'bonipress' ) . '</h1>';
+				$this->get_page_header( __( 'Success', 'bonips' ), $this->get_thankyou() );
+				echo '<h1 style="text-align:center;">' . __( 'Thank you for your purchase', 'bonips' ) . '</h1>';
 				$this->get_page_footer();
 				exit;
 			}
@@ -228,7 +228,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 				'return'        => $this->get_thankyou(),
 				'notify_url'    => $this->callback_url(),
 				'rm'            => 2,
-				'cbt'           => sprintf( _x( 'Return to %s', 'Return label. %s = Website name', 'bonipress' ), get_bloginfo( 'name' ) ),
+				'cbt'           => sprintf( _x( 'Return to %s', 'Return label. %s = Website name', 'bonips' ), get_bloginfo( 'name' ) ),
 				'cancel_return' => $this->get_cancelled( $this->transaction_id )
 			);
 
@@ -283,30 +283,30 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 ?>
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Details', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Details', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'account' ); ?>"><?php _e( 'Account Email', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'account' ); ?>"><?php _e( 'Account Email', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'account' ); ?>" id="<?php echo $this->field_id( 'account' ); ?>" value="<?php echo esc_attr( $prefs['account'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'item_name' ); ?>"><?php _e( 'Item Name', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'item_name' ); ?>"><?php _e( 'Item Name', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'item_name' ); ?>" id="<?php echo $this->field_id( 'item_name' ); ?>" value="<?php echo esc_attr( $prefs['item_name'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'logo_url' ); ?>" id="<?php echo $this->field_id( 'logo_url' ); ?>" value="<?php echo esc_attr( $prefs['logo_url'] ); ?>" class="form-control" />
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Setup', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Setup', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonips' ); ?></label>
 
-			<?php $this->currencies_dropdown( 'currency', 'bonipress-gateway-paypal-standard-currency' ); ?>
+			<?php $this->currencies_dropdown( 'currency', 'bonips-gateway-paypal-standard-currency' ); ?>
 
 		</div>
 		<div class="form-group">
-			<label><?php _e( 'Exchange Rates', 'bonipress' ); ?></label>
+			<label><?php _e( 'Exchange Rates', 'bonips' ); ?></label>
 
 			<?php $this->exchange_rate_setup(); ?>
 

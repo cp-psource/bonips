@@ -1,21 +1,21 @@
-#poststuff #bonipress_email_settings .inside { margin: 0; padding: 0; }
-#poststuff .inside .bonipress-save { text-align: right; padding: 10px 10px 8px; border-top: 1px solid #ddd; clear: both; margin-top: -2px; background-color: #F5F5F5; }
-.bonipress-inline label { padding: 0 6px; }
+#poststuff #bonips_email_settings .inside { margin: 0; padding: 0; }
+#poststuff .inside .bonips-save { text-align: right; padding: 10px 10px 8px; border-top: 1px solid #ddd; clear: both; margin-top: -2px; background-color: #F5F5F5; }
+.bonips-inline label { padding: 0 6px; }
 
-#bonipress-email-notice { border-bottom: 1px solid #DDD; padding-bottom: 8px; margin-top: 0; }
+#bonips-email-notice { border-bottom: 1px solid #DDD; padding-bottom: 8px; margin-top: 0; }
 
-#bonipress_email_settings .misc-pub-section { border-bottom: 1px solid #ddd; }
-#bonipress_email_settings select { margin-bottom: 6px; min-width: 95%; }
-#bonipress_email_settings .bonipress-inline input[type="radio"] { margin-right: 0; }
-#bonipress_email_settings input[type="text"] { margin-bottom: 6px; width: 95%; }
+#bonips_email_settings .misc-pub-section { border-bottom: 1px solid #ddd; }
+#bonips_email_settings select { margin-bottom: 6px; min-width: 95%; }
+#bonips_email_settings .bonips-inline input[type="radio"] { margin-right: 0; }
+#bonips_email_settings input[type="text"] { margin-bottom: 6px; width: 95%; }
 
-#bonipress-test { line-height: 25px; vertical-align: middle; text-align: left; float: left; }
-#bonipress-text .spinner { float: left; }
-#bonipress-email-styling { width: 95%; max-width: 98%; min-width: 95%; min-height: 100px; height: 100px; max-height: 200px; }
+#bonips-test { line-height: 25px; vertical-align: middle; text-align: left; float: left; }
+#bonips-text .spinner { float: left; }
+#bonips-email-styling { width: 95%; max-width: 98%; min-width: 95%; min-height: 100px; height: 100px; max-height: 200px; }
 
-#bonipress_email_template_tags ul { display: block; width: 50%; height: auto; float: left; }
-#bonipress_email_template_tags ul .title { font-size: large; }
-#bonipress_email_template_tags ul li strong { display: block; float: left; min-width: 40%; }
-#bonipress_email_template_tags ul li div { padding-left: 40%; }
+#bonips_email_template_tags ul { display: block; width: 50%; height: auto; float: left; }
+#bonips_email_template_tags ul .title { font-size: large; }
+#bonips_email_template_tags ul li strong { display: block; float: left; min-width: 40%; }
+#bonips_email_template_tags ul li div { padding-left: 40%; }
 
 #misc-publishing-actions #visibility, #misc-publishing-actions .misc-pub-curtime { display: none; display: none !important; }

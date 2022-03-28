@@ -2,34 +2,34 @@
 if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
- * Shortcode: bonipress_buy
- * @see http://codex.bonipress.me/shortcodes/bonipress_buy/
+ * Shortcode: bonips_buy
+ * @see http://codex.bonips.me/shortcodes/bonips_buy/
  * @since 1.0
  * @version 1.3
  */
-if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
-	function bonipress_render_buy_points( $atts = array(), $button_label = '' ) {
+if ( ! function_exists( 'bonips_render_buy_points' ) ) :
+	function bonips_render_buy_points( $atts = array(), $button_label = '' ) {
 
-		$settings           = bonipress_get_buycred_settings();
+		$settings           = bonips_get_buycred_settings();
 
 		extract( shortcode_atts( array(
 			'gateway' => '',
 			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'amount'  => '',
 			'gift_to' => '',
-			'class'   => 'bonipress-buy-link btn btn-primary btn-lg',
+			'class'   => 'bonips-buy-link btn btn-primary btn-lg',
 			'login'   => $settings['login']
 		), $atts, BONIPS_SLUG . '_buy' ) );
 
-		$bonipress = bonipress( $ctype );
+		$bonips = bonips( $ctype );
 
 		// If we are not logged in
-		if ( ! is_user_logged_in() ) return $bonipress->template_tags_general( $login );
+		if ( ! is_user_logged_in() ) return $bonips->template_tags_general( $login );
 
-		global $bonipress_modules, $buycred_sale, $post;
+		global $bonips_modules, $buycred_sale, $post;
 
-		$buycred            = $bonipress_modules['solo']['buycred'];
-		$installed          = bonipress_get_buycred_gateways();
+		$buycred            = $bonips_modules['solo']['buycred'];
+		$installed          = bonips_get_buycred_gateways();
 
 		// Catch errors
 		if ( empty( $installed ) )                                                   return 'No gateways installed.';
@@ -44,7 +44,7 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 			$ctype = $settings['types'][0];
 
 		$args               = array();
-		$args['bonipress_buy'] = $gateway;
+		$args['bonips_buy'] = $gateway;
 		$classes[]          = $gateway;
 
 		// Prep
@@ -61,21 +61,21 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 			$args['gift_to'] = $recipient_id;
 
 		// Allow user related template tags to be used in the button label
-		$button_label       = $bonipress->template_tags_general( $button_label );
-		$button_label       = $bonipress->template_tags_user( $button_label, $recipient_id );
+		$button_label       = $bonips->template_tags_general( $button_label );
+		$button_label       = $bonips->template_tags_user( $button_label, $recipient_id );
 
 		$args['ctype']      = $ctype;
 		$args['amount']     = $amount;
-		$args['token']      = wp_create_nonce( 'bonipress-buy-creds' );
+		$args['token']      = wp_create_nonce( 'bonips-buy-creds' );
 
 		// Let others add items to the arguments
-		$args               = apply_filters( 'bonipress_buy_args', $args, $atts, $bonipress );
+		$args               = apply_filters( 'bonips_buy_args', $args, $atts, $bonips );
 
 		// Classes
 		$classes            = explode( ' ', $class );
 
-		if ( empty( $classes ) || ! in_array( 'bonipress-buy-link', $classes ) )
-			$classes[] = 'bonipress-buy-link';
+		if ( empty( $classes ) || ! in_array( 'bonips-buy-link', $classes ) )
+			$classes[] = 'bonips-buy-link';
 
 		$current_url        = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 		if ( is_ssl() )
@@ -88,18 +88,18 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 endif;
 
 /**
- * Shortcode: bonipress_buy_form
- * @see http://codex.bonipress.me/shortcodes/bonipress_buy_form/
+ * Shortcode: bonips_buy_form
+ * @see http://codex.bonips.me/shortcodes/bonips_buy_form/
  * @since 1.0
  * @version 1.3
  */
-if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
-	function bonipress_render_buy_form_points( $atts = array(), $content = '' ) {
+if ( ! function_exists( 'bonips_render_buy_form_points' ) ) :
+	function bonips_render_buy_form_points( $atts = array(), $content = '' ) {
 
-		$settings     = bonipress_get_buycred_settings();
+		$settings     = bonips_get_buycred_settings();
 
 		extract( shortcode_atts( array(
-			'button'   => __( 'Kaufe jetzt', 'bonipress' ),
+			'button'   => __( 'Kaufe jetzt', 'bonips' ),
 			'gateway'  => '',
 			'ctype'    => BONIPS_DEFAULT_TYPE_KEY,
 			'amount'   => '',
@@ -107,7 +107,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 			'maxed'    => '',
 			'gift_to'  => '',
 			'e_rate'   => '',
-			'gift_by'  => __( 'Benutzername', 'bonipress' ),
+			'gift_by'  => __( 'Benutzername', 'bonips' ),
 			'inline'   => 0
 		), $atts, BONIPS_SLUG . '_buy_form' ) );
 
@@ -119,22 +119,22 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		// Prepare
 		$buyer_id     = get_current_user_id();
 		$recipient_id = $buyer_id;
-		$classes      = array( 'boniPRESS-buy-form' );
+		$classes      = array( 'boniPS-buy-form' );
 		$amounts      = array();
 		$gifting      = false;
 
 		// Make sure we have a gateway we can use
-		if ( ( ! empty( $gateway ) && ! bonipress_buycred_gateway_is_usable( $gateway ) ) || ( empty( $gateway ) && empty( $buycred_instance->active ) ) )
+		if ( ( ! empty( $gateway ) && ! bonips_buycred_gateway_is_usable( $gateway ) ) || ( empty( $gateway ) && empty( $buycred_instance->active ) ) )
 			return 'Kein Gateway verfügbar.';
 
 		// Make sure we are trying to sell a point type that is allowed to be purchased
 		if ( ! in_array( $ctype, $settings['types'] ) )
 			$ctype = $settings['types'][0];
 
-		$bonipress       = bonipress( $ctype );
-		$setup        = bonipress_get_buycred_sale_setup( $ctype );
+		$bonips       = bonips( $ctype );
+		$setup        = bonips_get_buycred_sale_setup( $ctype );
 
-		$remaining    = bonipress_user_can_buycred( $buyer_id, $ctype );
+		$remaining    = bonips_user_can_buycred( $buyer_id, $ctype );
 
 		// We are excluded from this point type
 		if ( $remaining === false ) return $excluded;
@@ -146,11 +146,11 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		$buycred_sale = true;
 
 		// Amount - This can be one single amount or a comma separated list
-		$minimum      = $bonipress->number( $setup['min'] );
+		$minimum      = $bonips->number( $setup['min'] );
 
 		if ( ! empty( $amount ) ) {
 			foreach ( explode( ',', $amount ) as $value ) {
-				$value     = $bonipress->number( abs( trim( $value ) ) );
+				$value     = $bonips->number( abs( trim( $value ) ) );
 				if ( $value < $minimum ) continue;
 				$amounts[] = $value;
 			}
@@ -169,7 +169,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		}
 
 		// Button Label
-		$button_label = $bonipress->template_tags_general( $button );
+		$button_label = $bonips->template_tags_general( $button );
 
 		if ( ! empty( $gateway ) ) {
 			$gateway_name = explode( ' ', $buycred_instance->active[ $gateway ]['title'] );
@@ -190,7 +190,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 <div class="row">
 	<div class="col-xs-12">
 		<form method="post" class="form<?php if ( $inline == 1 ) echo '-inline'; ?> <?php echo implode( ' ', $classes ); ?>" action="">
-			<input type="hidden" name="token" value="<?php echo wp_create_nonce( 'bonipress-buy-creds' ); ?>" />
+			<input type="hidden" name="token" value="<?php echo wp_create_nonce( 'bonips-buy-creds' ); ?>" />
 			<input type="hidden" name="ctype" value="<?php echo esc_attr( $ctype ); ?>" />
 
 			<?php if( isset($e_rate) && !empty($e_rate)){ 
@@ -200,14 +200,14 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 			<?php } ?>
 
 			<div class="form-group">
-				<label><?php echo $bonipress->plural(); ?></label>
+				<label><?php echo $bonips->plural(); ?></label>
 <?php
 
 		// No amount given - user must nominate the amount
 		if ( count( $amounts ) == 0 ) {
 
 ?>
-				<input type="text" name="amount" class="form-control" placeholder="<?php echo $bonipress->format_creds( $minimum ); ?>" min="<?php echo $minimum; ?>" value="" />
+				<input type="text" name="amount" class="form-control" placeholder="<?php echo $bonips->format_creds( $minimum ); ?>" min="<?php echo $minimum; ?>" value="" />
 <?php
 
 		}
@@ -216,7 +216,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		elseif ( count( $amounts ) == 1 ) {
 
 ?>
-				<p class="form-control-static"><?php echo $bonipress->format_creds( $amounts[0] ); ?></p>
+				<p class="form-control-static"><?php echo $bonips->format_creds( $amounts[0] ); ?></p>
 				<input type="hidden" name="amount" value="<?php echo esc_attr( $amounts[0] ); ?>" />
 <?php
 
@@ -237,7 +237,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 					// disable the option
 					if ( $remaining !== true && $remaining < $amount ) echo ' disabled="disabled"';
 
-					echo '>' . $bonipress->format_creds( $amount ) . '</option>';
+					echo '>' . $bonips->format_creds( $amount ) . '</option>';
 
 				}
 
@@ -254,7 +254,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 
 ?>
 				<div class="form-group">
-					<label for="gift_to"><?php _e( 'Recipient', 'bonipress' ); ?></label>
+					<label for="gift_to"><?php _e( 'Recipient', 'bonips' ); ?></label>
 					<p class="form-control-static"><?php echo esc_html( $user->display_name ); ?></p>
 					<input type="hidden" name="<?php if ( $gift_to == 'author' ) echo 'post_id'; else echo 'gift_to'; ?>" value="<?php echo absint( $recipient_id ); ?>" />
 				</div>
@@ -267,11 +267,11 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 
 ?>
 				<div class="form-group">
-					<label for="gateway"><?php _e( 'Pay Using', 'bonipress' ); ?></label>
-					<select name="bonipress_buy" class="form-control">
+					<label for="gateway"><?php _e( 'Pay Using', 'bonips' ); ?></label>
+					<select name="bonips_buy" class="form-control">
 <?php
 
-			$active_gateways = apply_filters( 'bonipress_buycred_sort_gateways', $buycred_instance->active, $atts );
+			$active_gateways = apply_filters( 'bonips_buycred_sort_gateways', $buycred_instance->active, $atts );
 			foreach ( $active_gateways as $gateway_id => $info )
 				echo '<option value="' . esc_attr( $gateway_id ) . '">' . esc_html( $info['title'] ) . '</option>';
 
@@ -290,7 +290,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 				$gateway = array_keys( $buycred_instance->active )[0];
 
 ?>
-				<input type="hidden" name="bonipress_buy" value="<?php echo esc_attr( $gateway ); ?>" />
+				<input type="hidden" name="bonips_buy" value="<?php echo esc_attr( $gateway ); ?>" />
 <?php
 
 		}
@@ -317,29 +317,29 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 endif;
 
 /**
- * Shortcode: bonipress_buy_pending
- * @see http://codex.bonipress.me/shortcodes/bonipress_buy_pending/
+ * Shortcode: bonips_buy_pending
+ * @see http://codex.bonips.me/shortcodes/bonips_buy_pending/
  * @since 1.5
  * @version 1.3
  */
-if ( ! function_exists( 'bonipress_render_pending_purchases' ) ) :
-	function bonipress_render_pending_purchases( $atts = array(), $content = '' ) {
+if ( ! function_exists( 'bonips_render_pending_purchases' ) ) :
+	function bonips_render_pending_purchases( $atts = array(), $content = '' ) {
 
 		// Must be logged in
 		if ( ! is_user_logged_in() ) return $content;
 
 		extract( shortcode_atts( array(
 			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
-			'pay_now' => __( 'Pay Now', 'bonipress' ),
-			'cancel'  => __( 'Cancel', 'bonipress' )
+			'pay_now' => __( 'Pay Now', 'bonips' ),
+			'cancel'  => __( 'Cancel', 'bonips' )
 		), $atts, BONIPS_SLUG . '_buy_pending' ) );
 
 		$user_id = get_current_user_id();
 		$pending = buycred_get_users_pending_payments( $user_id, $ctype );
 
-		global $bonipress_modules, $buycred_sale;
+		global $bonips_modules, $buycred_sale;
 
-		$buycred = $bonipress_modules['solo']['buycred-pending'];
+		$buycred = $bonips_modules['solo']['buycred-pending'];
 
 		ob_start();
 
@@ -348,12 +348,12 @@ if ( ! function_exists( 'bonipress_render_pending_purchases' ) ) :
 	<table class="table">
 		<thead>
 			<tr>
-				<th class="column-transaction-id"><?php _e( 'Transaction ID', 'bonipress' ); ?></th>
-				<th class="column-gateway"><?php _e( 'Gateway', 'bonipress' ); ?></th>
-				<th class="column-amount"><?php _e( 'Amount', 'bonipress' ); ?></th>
-				<th class="column-cost"><?php _e( 'Cost', 'bonipress' ); ?></th>
-				<?php if ( $ctype == '' ) : ?><th class="column-ctype"><?php _e( 'Point Type', 'bonipress' ); ?></th><?php endif; ?>
-				<th class="column-actions"><?php _e( 'Actions', 'bonipress' ); ?></th>
+				<th class="column-transaction-id"><?php _e( 'Transaction ID', 'bonips' ); ?></th>
+				<th class="column-gateway"><?php _e( 'Gateway', 'bonips' ); ?></th>
+				<th class="column-amount"><?php _e( 'Amount', 'bonips' ); ?></th>
+				<th class="column-cost"><?php _e( 'Cost', 'bonips' ); ?></th>
+				<?php if ( $ctype == '' ) : ?><th class="column-ctype"><?php _e( 'Point Type', 'bonips' ); ?></th><?php endif; ?>
+				<th class="column-actions"><?php _e( 'Actions', 'bonips' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -376,7 +376,7 @@ if ( ! function_exists( 'bonipress_render_pending_purchases' ) ) :
 				<td class="column-gateway"><?php echo $buycred->adjust_column_content( 'gateway', $entry->payment_id ); ?></td>
 				<td class="column-amount"><?php echo $buycred->adjust_column_content( 'amount', $entry->payment_id ); ?></td>
 				<td class="column-cost"><?php echo $buycred->adjust_column_content( 'cost', $entry->payment_id ); ?></td>
-				<td class="column-ctype"><?php echo bonipress_get_point_type_name( $entry->point_type, false ); ?></td>
+				<td class="column-ctype"><?php echo bonips_get_point_type_name( $entry->point_type, false ); ?></td>
 				<td class="column-actions">
 					<a href="<?php echo esc_url( $entry->pay_now_url ); ?>"><?php echo $pay_now; ?></a> &bull; <a href="<?php echo esc_url( $entry->cancel_url ); ?>"><?php echo $cancel; ?></a>
 				</td>
@@ -415,7 +415,7 @@ if ( ! function_exists( 'bonipress_render_pending_purchases' ) ) :
 
 ?>
 			<tr>
-				<td colspan="<?php if ( $ctype == '' ) echo '6'; else echo '5'; ?>"><?php _e( 'No pending payments found', 'bonipress' ); ?></td>
+				<td colspan="<?php if ( $ctype == '' ) echo '6'; else echo '5'; ?>"><?php _e( 'No pending payments found', 'bonips' ); ?></td>
 			</tr>
 <?php
 

@@ -1,14 +1,14 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * Query Log
- * @see http://codex.bonipress.me/classes/bonipress_query_leaderboard/ 
+ * @see http://codex.bonips.me/classes/bonips_query_leaderboard/ 
  * @since 1.7.9.1
  * @version 1.0.1
  */
-if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
-	class boniPRESS_Query_Leaderboard {
+if ( ! class_exists( 'boniPS_Query_Leaderboard' ) ) :
+	class boniPS_Query_Leaderboard {
 
 		public $cache_key       = false;
 		public $now             = 0;
@@ -37,7 +37,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			$this->now      = current_time( 'timestamp' );
 			$this->user_id  = get_current_user_id();
-			$this->max_size = apply_filters( 'bonipress_max_leaderboard_size', 250, $this );
+			$this->max_size = apply_filters( 'bonips_max_leaderboard_size', 250, $this );
 
 			// Parse and validate the given args
 			$this->parse_args( $args );
@@ -77,7 +77,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				'forced'       => 0
 			);
 
-			return apply_filters( 'bonipress_query_leaderboard_args', shortcode_atts( $defaults, $data ), $data, $this );
+			return apply_filters( 'bonips_query_leaderboard_args', shortcode_atts( $defaults, $data ), $data, $this );
 
 		}
 
@@ -92,8 +92,8 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			/**
 			 * Populate Query Arguments
-			 * @uses bonipress_query_leaderboard_args
-			 * @see http://codex.bonipress.me/filters/bonipress_query_leaderboard_args/
+			 * @uses bonips_query_leaderboard_args
+			 * @see http://codex.bonips.me/filters/bonips_query_leaderboard_args/
 			 */
 			$args                       = $this->apply_defaults( $args );
 
@@ -151,7 +151,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				foreach ( $point_types as $potential_key ) {
 
 					$type_key = sanitize_key( $potential_key );
-					if ( bonipress_point_type_exists( $type_key ) || ! in_array( $type_key, $list_of_types ) )
+					if ( bonips_point_type_exists( $type_key ) || ! in_array( $type_key, $list_of_types ) )
 						$list_of_types[] = $type_key;
 
 				}
@@ -162,7 +162,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			$this->point_types          = $list_of_types;
 			$this->multitype_query      = ( count( $list_of_types ) > 1 ) ? true : false;
 
-			$this->core                 = bonipress( $this->point_types[0] );
+			$this->core                 = bonips( $this->point_types[0] );
 
 			// Timeframe
 			$this->args['timeframe']    = ( BONIPS_ENABLE_LOGGING ) ? sanitize_text_field( $args['timeframe'] ) : '';
@@ -214,7 +214,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				$this->append_current_user();
 
 			$results           = $this->leaderboard;
-			$this->leaderboard = apply_filters( 'bonipress_get_leaderboard_results', $results, $append_current_user, $this );
+			$this->leaderboard = apply_filters( 'bonips_get_leaderboard_results', $results, $append_current_user, $this );
 
 		}
 
@@ -269,7 +269,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_user_in_leaderboard', $in_leaderboard, $user_id, $this );
+			return apply_filters( 'bonips_user_in_leaderboard', $in_leaderboard, $user_id, $this );
 
 		}
 
@@ -298,7 +298,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 		 */
 		public function get_balance_db_query() {
 
-			global $wpdb, $bonipress_log_table;
+			global $wpdb, $bonips_log_table;
 
 			$query             = '';
 			$exclude_filter    = $this->get_excludefilter();
@@ -306,7 +306,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			/**
 			 * Total balance with timeframe
-			 * For this, we need to query the boniPRESS log so we can apply the timeframe.
+			 * For this, we need to query the boniPS log so we can apply the timeframe.
 			 */
 			if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
@@ -324,7 +324,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 				$query             = $wpdb->prepare( "
 					SELECT l.user_id AS ID, SUM( l.creds ) AS cred 
-					FROM {$bonipress_log_table} l 
+					FROM {$bonips_log_table} l 
 					{$multisite_check} 
 					WHERE {$point_type_is} AND ( ( l.creds > 0 ) OR ( l.creds < 0 AND l.ref = 'manual' ) ) 
 					{$time_filter}
@@ -342,7 +342,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			else {
 
 				$point_type_is     = 'l.meta_key = %s';
-				$point_type_values = bonipress_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
+				$point_type_values = bonips_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 				// For multiple point types
 				if ( count( $this->point_types ) > 1 ) {
@@ -351,7 +351,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 					$point_type_values = array();
 
 					foreach ( $this->point_types as $type_key )
-						$point_type_values[] = bonipress_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
+						$point_type_values[] = bonips_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 				}
 
@@ -367,7 +367,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_get_balance_leaderboard_sql', $query, $this );
+			return apply_filters( 'bonips_get_balance_leaderboard_sql', $query, $this );
 
 		}
 
@@ -379,7 +379,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 		 */
 		public function get_reference_db_query() {
 
-			global $wpdb, $bonipress_log_table;
+			global $wpdb, $bonips_log_table;
 
 			$time_filter       = $this->get_timefilter();
 			$multisite_check   = $this->get_multisitefilter();
@@ -408,11 +408,11 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			 * Central Logging
 			 * When we are not using Multisite or if we do, but enabled "Central Loggign".
 			 */
-			if ( bonipress_centralize_log() ) {
+			if ( bonips_centralize_log() ) {
 
 				$query = $wpdb->prepare( "
 					SELECT DISTINCT l.user_id AS ID, SUM( l.creds ) AS cred 
-					FROM {$bonipress_log_table} l 
+					FROM {$bonips_log_table} l 
 					WHERE {$reference_is} AND {$point_type_is} 
 					{$time_filter} 
 					GROUP BY l.user_id 
@@ -429,7 +429,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 				$query = $wpdb->prepare( "
 					SELECT DISTINCT l.user_id AS ID, SUM( l.creds ) AS cred 
-					FROM {$bonipress_log_table} l 
+					FROM {$bonips_log_table} l 
 					{$multisite_check} 
 					WHERE {$reference_is} AND {$point_type_is}
 					{$time_filter} 
@@ -439,7 +439,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_get_reference_leaderboard_sql', $query, $this );
+			return apply_filters( 'bonips_get_reference_leaderboard_sql', $query, $this );
 
 		}
 
@@ -458,7 +458,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			if ( $user_id === NULL || absint( $user_id ) === 0 )
 				$user_id = $this->user_id;
 
-			global $wpdb, $bonipress_log_table;
+			global $wpdb, $bonips_log_table;
 
 			$time_filter       = $this->get_timefilter();
 			$exclude_filter    = $this->get_excludefilter();
@@ -481,14 +481,14 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 				/**
 				 * Total balance with timeframe
-				 * For this, we need to query the boniPRESS log so we can apply the timeframe.
+				 * For this, we need to query the boniPS log so we can apply the timeframe.
 				 */
 				if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
 					$position          = $wpdb->get_var( $wpdb->prepare( "
 						SELECT rank FROM (
 							SELECT s.*, @rank := @rank + 1 rank FROM (
-								SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonipress_log_table} l 
+								SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonips_log_table} l 
 								{$multisite_check}
 								WHERE {$point_type_is} AND ( ( l.creds > 0 ) OR ( l.creds < 0 AND l.ref = 'manual' ) ) 
 								{$time_filter} 
@@ -508,7 +508,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				else {
 
 					$point_type_is     = 'l.meta_key = %s';
-					$point_type_values = bonipress_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
+					$point_type_values = bonips_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 					// For multiple point types
 					if ( count( $this->point_types ) > 1 ) {
@@ -517,7 +517,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 						$point_type_values = array();
 
 						foreach ( $this->point_types as $type_key )
-							$point_type_values[] = bonipress_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
+							$point_type_values[] = bonips_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 					}
 
@@ -552,7 +552,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				$position          = $wpdb->get_var( $wpdb->prepare( "
 					SELECT rank FROM (
 						SELECT s.*, @rank := @rank + 1 rank FROM (
-							SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonipress_log_table} l 
+							SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonips_log_table} l 
 							{$multisite_check}
 							WHERE {$point_type_is} AND ( ( l.creds > 0 ) OR ( l.creds < 0 AND l.ref = 'manual' ) ) 
 							{$reference_is} 
@@ -569,7 +569,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			if ( $position === NULL )
 				$position = $no_position;
 
-			return apply_filters( 'bonipress_get_leaderboard_position', $position, $user_id, $no_position, $this );
+			return apply_filters( 'bonips_get_leaderboard_position', $position, $user_id, $no_position, $this );
 
 		}
 
@@ -588,7 +588,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			if ( $user_id === NULL || absint( $user_id ) === 0 )
 				$user_id = $this->user_id;
 
-			global $wpdb, $bonipress_log_table;
+			global $wpdb, $bonips_log_table;
 
 			$time_filter       = $this->get_timefilter();
 			$multisite_check   = $this->get_multisitefilter();
@@ -610,14 +610,14 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 				/**
 				 * Total balance with timeframe
-				 * For this, we need to query the boniPRESS log so we can apply the timeframe.
+				 * For this, we need to query the boniPS log so we can apply the timeframe.
 				 */
 				if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
 					$value             = $wpdb->get_var( $wpdb->prepare( "
 						SELECT TotalPoints FROM (
 							SELECT s.*, @rank := @rank + 1 rank FROM (
-								SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonipress_log_table} l 
+								SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonips_log_table} l 
 								{$multisite_check}
 								WHERE {$point_type_is} AND ( ( l.creds > 0 ) OR ( l.creds < 0 AND l.ref = 'manual' ) ) 
 								{$time_filter} 
@@ -637,7 +637,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				else {
 
 					$point_type_is     = 'l.meta_key = %s';
-					$point_type_values = bonipress_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
+					$point_type_values = bonips_get_meta_key( $this->point_types[0], ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 					// For multiple point types
 					if ( count( $this->point_types ) > 1 ) {
@@ -646,7 +646,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 						$point_type_values = array();
 
 						foreach ( $this->point_types as $type_key )
-							$point_type_values[] = bonipress_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
+							$point_type_values[] = bonips_get_meta_key( $type_key, ( ( $this->args['total'] ) ? '_total' : '' ) );
 
 					}
 
@@ -681,7 +681,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				$value             = $wpdb->get_var( $wpdb->prepare( "
 					SELECT TotalPoints FROM (
 						SELECT s.*, @rank := @rank + 1 rank FROM (
-							SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonipress_log_table} l 
+							SELECT l.user_id, sum( l.creds ) TotalPoints FROM {$bonips_log_table} l 
 							{$multisite_check}
 							WHERE {$point_type_is} AND ( ( l.creds > 0 ) OR ( l.creds < 0 AND l.ref = 'manual' ) ) 
 							{$reference_is} 
@@ -695,7 +695,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_get_users_leaderboard_value', $value, $user_id, $this );
+			return apply_filters( 'bonips_get_users_leaderboard_value', $value, $user_id, $this );
 
 		}
 
@@ -740,14 +740,14 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_leaderboard_time_filter', $query, $this );
+			return apply_filters( 'bonips_leaderboard_time_filter', $query, $this );
 
 		}
 
 		/**
 		 * Get Exclude Filter
 		 * Generates the required SQL query for filtering results based on if zero balances should
-		 * be part of the leaderboard or not. By default, boniPRESS will not give a user a balance until they
+		 * be part of the leaderboard or not. By default, boniPS will not give a user a balance until they
 		 * gain or lose points. A user that has no balance and is not excluded, is considered to have zero balance.
 		 * @since 1.0
 		 * @version 1.0
@@ -771,7 +771,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_leaderboard_exclude_filter', $query, $this );
+			return apply_filters( 'bonips_leaderboard_exclude_filter', $query, $this );
 
 		}
 
@@ -787,14 +787,14 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			global $wpdb;
 
 			$multisite_check = "";
-			if ( ! bonipress_centralize_log() ) {
+			if ( ! bonips_centralize_log() ) {
 
 				$blog_id         = absint( $GLOBALS['blog_id'] );
 				$multisite_check = "LEFT JOIN {$wpdb->usermeta} cap ON ( l.user_id = cap.user_id AND cap.meta_key = 'cap.wp_{$blog_id}_capabilities' )";
 
 			}
 
-			return apply_filters( 'bonipress_leaderboard_musite_filter', $multisite_check, $this );
+			return apply_filters( 'bonips_leaderboard_musite_filter', $multisite_check, $this );
 
 		}
 
@@ -833,7 +833,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_get_cached_leaderboard', $data, $this );
+			return apply_filters( 'bonips_get_cached_leaderboard', $data, $this );
 
 		}
 
@@ -847,19 +847,19 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			if ( $this->args['forced'] ) return;
 
 			$key        = $this->get_cache_key();
-			$cache_keys = bonipress_get_option( BONIPS_SLUG . '-cache-leaderboard-keys', array() );
+			$cache_keys = bonips_get_option( BONIPS_SLUG . '-cache-leaderboard-keys', array() );
 
 			if ( empty( $cache_keys ) || ( ! empty( $cache_keys ) && ! in_array( $key, $cache_keys ) ) ) {
 
 				$cache_keys[] = $key;
 
-				bonipress_update_option( BONIPS_SLUG . '-cache-leaderboard-keys', $cache_keys );
+				bonips_update_option( BONIPS_SLUG . '-cache-leaderboard-keys', $cache_keys );
 
 			}
 
 			wp_cache_set( $key, $data, BONIPS_SLUG );
 
-			do_action( 'bonipress_cache_leaderboard', $data, $this );
+			do_action( 'bonips_cache_leaderboard', $data, $this );
 
 		}
 
@@ -894,7 +894,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			// Leaderboard is empty
 			if ( $this->leaderboard === false || empty( $this->leaderboard ) ) {
 
-				$output .= '<p class="bonipress-leaderboard-none">' . $nothing . '</p>';
+				$output .= '<p class="bonips-leaderboard-none">' . $nothing . '</p>';
 
 			}
 
@@ -903,7 +903,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 				// Wrapper
 				if ( $wrap == 'li' )
-					$output .= '<ol class="boniPRESS-leaderboard list-unstyled">';
+					$output .= '<ol class="boniPS-leaderboard list-unstyled">';
 
 				// Loop
 				foreach ( $this->leaderboard as $position => $user ) {
@@ -949,8 +949,8 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 					if ( ! empty( $wrap ) )
 						$layout = '<' . $wrap . ' class="%classes%">' . $layout . '</' . $wrap . '>';
 
-					$layout  = str_replace( '%classes%', apply_filters( 'bonipress_ranking_classes', implode( ' ', $class ), $this ), $layout );
-					$layout  = apply_filters( 'bonipress_ranking_row', $layout, $template, $user, $position, $this );
+					$layout  = str_replace( '%classes%', apply_filters( 'bonips_ranking_classes', implode( ' ', $class ), $this ), $layout );
+					$layout  = apply_filters( 'bonips_ranking_row', $layout, $template, $user, $position, $this );
 
 					$output .= $layout . "\n";
 
@@ -961,7 +961,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			}
 
-			return apply_filters( 'bonipress_leaderboard', $output, $args, $this );
+			return apply_filters( 'bonips_leaderboard', $output, $args, $this );
 
 		}
 
@@ -973,23 +973,23 @@ endif;
  * @since 1.7.9.1
  * @version 1.1
  */
-if ( ! function_exists( 'bonipress_get_leaderboard' ) ) :
-	function bonipress_get_leaderboard( $args = array() ) {
+if ( ! function_exists( 'bonips_get_leaderboard' ) ) :
+	function bonips_get_leaderboard( $args = array() ) {
 
-		global $bonipress_leaderboard;
+		global $bonips_leaderboard;
 
-		if ( isset( $bonipress_leaderboard )
-			&& ( $bonipress_leaderboard instanceof boniPRESS_Query_Leaderboard )
-			&& ( $bonipress_leaderboard->is_leaderboard( $args ) )
+		if ( isset( $bonips_leaderboard )
+			&& ( $bonips_leaderboard instanceof boniPS_Query_Leaderboard )
+			&& ( $bonips_leaderboard->is_leaderboard( $args ) )
 		) {
 
-			return $bonipress_leaderboard;
+			return $bonips_leaderboard;
 
 		}
 
-		$bonipress_leaderboard = new boniPRESS_Query_Leaderboard( $args );
+		$bonips_leaderboard = new boniPS_Query_Leaderboard( $args );
 
-		return $bonipress_leaderboard;
+		return $bonips_leaderboard;
 
 	}
 endif;

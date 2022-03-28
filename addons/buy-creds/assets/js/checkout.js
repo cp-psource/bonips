@@ -40,8 +40,8 @@ jQuery(function($){
 
 	$(document).ready(function(){
 
-		// Forms rendered by bonipress_buy
-		$( 'body' ).on( 'click', '.bonipress-buy-link', function(e){
+		// Forms rendered by bonips_buy
+		$( 'body' ).on( 'click', '.bonips-buy-link', function(e){
 
 			if ( buyCRED.checkout == 'popup' ) {
 
@@ -55,7 +55,7 @@ jQuery(function($){
 				var targeturl          = $(this).attr( 'href' );
 				var formdata           = JSON.parse( '{"' + decodeURI( targeturl ).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}' );
 				formdata['ajax']       = 1;
-				formdata['bonipress_buy'] = $(this).data( 'gateway' );
+				formdata['bonips_buy'] = $(this).data( 'gateway' );
 console.log( formdata );
 				buycred_send_call( formdata );
 
@@ -63,8 +63,8 @@ console.log( formdata );
 
 		});
 
-		// Forms rendered by bonipress_buy_form
-		$( 'body' ).on( 'submit', '.boniPRESS-buy-form', function(e){
+		// Forms rendered by bonips_buy_form
+		$( 'body' ).on( 'submit', '.boniPS-buy-form', function(e){
 
 			if ( buyCRED.checkout == 'popup' ) {
 

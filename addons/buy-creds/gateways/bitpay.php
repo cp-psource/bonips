@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * Load BitPay PHP Library
@@ -34,20 +34,20 @@ if ( ! class_exists( 'WC_Gateway_Bitpay' ) ) {
 }
 
 /**
- * boniPRESS_Bitpay class
+ * boniPS_Bitpay class
  * BitPay (Bitcoins) - Payment Gateway
  * @since 1.4
  * @version 1.2
  */
-if ( ! class_exists( 'boniPRESS_Bitpay' ) ) :
-	class boniPRESS_Bitpay extends boniPRESS_Payment_Gateway {
+if ( ! class_exists( 'boniPS_Bitpay' ) ) :
+	class boniPS_Bitpay extends boniPS_Payment_Gateway {
 
 		/**
 		 * Construct
 		 */
 		public function __construct( $gateway_prefs ) {
 
-			$types            = bonipress_get_types();
+			$types            = bonips_get_types();
 			$default_exchange = array();
 			foreach ( $types as $type => $label )
 				$default_exchange[ $type ] = 1;
@@ -65,7 +65,7 @@ if ( ! class_exists( 'boniPRESS_Bitpay' ) ) :
 					'api_label'        => '',
 					'currency'         => 'USD',
 					'exchange'         => $default_exchange,
-					'item_name'        => 'Purchase of boniPRESS %plural%',
+					'item_name'        => 'Purchase of boniPS %plural%',
 					'logo_url'         => '',
 					'speed'            => 'high',
 					'notifications'    => 1
@@ -128,7 +128,7 @@ if ( ! class_exists( 'boniPRESS_Bitpay' ) ) :
 							if ( $this->complete_payment( $pending_payment, $json['id'] ) )
 								$this->trash_pending_payment( $pending_post_id );
 							else
-								$new_call[] = __( 'Failed to credit users account.', 'bonipress' );
+								$new_call[] = __( 'Failed to credit users account.', 'bonips' );
 
 							// Log Call
 							if ( ! empty( $new_call ) )
@@ -362,12 +362,12 @@ if ( ! class_exists( 'boniPRESS_Bitpay' ) ) :
 ?>
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Details', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Details', 'bonips' ); ?></h3>
 
 		<?php if ( ! $this->is_ready ) : ?>
 
 		<div class="form-group">
-			<label><?php _e( 'API Token', 'bonipress' ); ?></label>
+			<label><?php _e( 'API Token', 'bonips' ); ?></label>
 			<div class="form-inline" id="bitpay-pairing-wrapper">
 				<input type="text" id="bitpay-pair-code" class="form-control" placeholder="Pairing Code" value="" /> 
 				<select id="bitpay-pair-network" class="form-control">
@@ -445,7 +445,7 @@ jQuery(function($){
 		<?php else : ?>
 
 		<div class="form-group">
-			<label><?php _e( 'API Token', 'bonipress' ); ?></label>
+			<label><?php _e( 'API Token', 'bonips' ); ?></label>
 			<p class="form-control-static"><?php echo esc_attr( $prefs['api_label'] ); ?></p>
 			<button type="button" id="bitpay-cancel-pair" class="button button-secondary">Revoke Token</button>
 			<input type="hidden" class="reset-api" name="<?php echo $this->field_name( 'api_secret' ); ?>" value="<?php echo esc_attr( $prefs['api_secret'] ); ?>" />
@@ -461,10 +461,10 @@ jQuery(function($){
 
 		e.preventDefault();
 
-		if ( confirm( '<?php echo esc_js( esc_attr( __( 'Are you sure you want to do this?', 'bonipress' ) ) ); ?>' ) ) {
+		if ( confirm( '<?php echo esc_js( esc_attr( __( 'Are you sure you want to do this?', 'bonips' ) ) ); ?>' ) ) {
 
 			$( 'input.reset-api' ).val( '' );
-			$(this).before().html( '<?php echo esc_js( __( 'Removed - Remember to save your changes.', 'bonipress' ) ); ?>' );
+			$(this).before().html( '<?php echo esc_js( __( 'Removed - Remember to save your changes.', 'bonips' ) ); ?>' );
 
 		}
 
@@ -476,24 +476,24 @@ jQuery(function($){
 		<?php endif; ?>
 
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'item_name' ); ?>"><?php _e( 'Item Name', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'item_name' ); ?>"><?php _e( 'Item Name', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'item_name' ); ?>" id="<?php echo $this->field_id( 'item_name' ); ?>" value="<?php echo esc_attr( $prefs['item_name'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'logo_url' ); ?>" id="<?php echo $this->field_id( 'logo_url' ); ?>" value="<?php echo esc_attr( $prefs['logo_url'] ); ?>" class="form-control" />
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="form-group">
-					<label for="<?php echo $this->field_id( 'speed' ); ?>"><?php _e( 'Transaction Speed', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'speed' ); ?>"><?php _e( 'Transaction Speed', 'bonips' ); ?></label>
 					<select name="<?php echo $this->field_name( 'speed' ); ?>" id="<?php echo $this->field_id( 'speed' ); ?>" class="form-control">
 <?php
 
 			$options = array(
-				'high'   => __( 'High', 'bonipress' ),
-				'medium' => __( 'Medium', 'bonipress' ),
-				'low'    => __( 'Low', 'bonipress' )
+				'high'   => __( 'High', 'bonips' ),
+				'medium' => __( 'Medium', 'bonips' ),
+				'low'    => __( 'Low', 'bonips' )
 			);
 			foreach ( $options as $value => $label ) {
 				echo '<option value="' . $value . '"';
@@ -508,13 +508,13 @@ jQuery(function($){
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="form-group">
-					<label for="<?php echo $this->field_id( 'notifications' ); ?>"><?php _e( 'Full Notifications', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'notifications' ); ?>"><?php _e( 'Full Notifications', 'bonips' ); ?></label>
 					<select name="<?php echo $this->field_name( 'notifications' ); ?>" id="<?php echo $this->field_id( 'notifications' ); ?>" class="form-control">
 <?php
 
 			$options = array(
-				0 => __( 'No', 'bonipress' ),
-				1 => __( 'Yes', 'bonipress' )
+				0 => __( 'No', 'bonips' ),
+				1 => __( 'Yes', 'bonips' )
 			);
 			foreach ( $options as $value => $label ) {
 				echo '<option value="' . $value . '"';
@@ -530,14 +530,14 @@ jQuery(function($){
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Setup', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Setup', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonipress' ); ?></label>
-			<input type="text" name="<?php echo $this->field_name( 'currency' ); ?>" id="<?php echo $this->field_id( 'currency' ); ?>" value="<?php echo $prefs['currency']; ?>" class="form-control" maxlength="3" placeholder="<?php _e( 'Currency Code', 'bonipress' ); ?>" />
+			<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonips' ); ?></label>
+			<input type="text" name="<?php echo $this->field_name( 'currency' ); ?>" id="<?php echo $this->field_id( 'currency' ); ?>" value="<?php echo $prefs['currency']; ?>" class="form-control" maxlength="3" placeholder="<?php _e( 'Currency Code', 'bonips' ); ?>" />
 
 		</div>
 		<div class="form-group">
-			<label><?php _e( 'Exchange Rates', 'bonipress' ); ?></label>
+			<label><?php _e( 'Exchange Rates', 'bonips' ); ?></label>
 
 			<?php $this->exchange_rate_setup(); ?>
 

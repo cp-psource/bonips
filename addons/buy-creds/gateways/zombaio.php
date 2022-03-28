@@ -1,21 +1,21 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
- * boniPRESS_Zombaio class
+ * boniPS_Zombaio class
  * Zombaio Payment Gateway
  * @since 1.1
  * @version 1.2
  */
-if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
-	class boniPRESS_Zombaio extends boniPRESS_Payment_Gateway {
+if ( ! class_exists( 'boniPS_Zombaio' ) ) :
+	class boniPS_Zombaio extends boniPS_Payment_Gateway {
 
 		/**
 		 * Construct
 		 */
 		public function __construct( $gateway_prefs ) {
 
-			$types            = bonipress_get_types();
+			$types            = bonips_get_types();
 			$default_exchange = array();
 			foreach ( $types as $type => $label )
 				$default_exchange[ $type ] = 1;
@@ -195,13 +195,13 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 
 						// Make sure transaction is unique
 						if ( ! $this->transaction_id_is_unique( $transaction_id ) ) {
-							$new_call[] = sprintf( __( 'Duplicate transaction. Received: %s', 'bonipress' ), $transaction_id );
+							$new_call[] = sprintf( __( 'Duplicate transaction. Received: %s', 'bonips' ), $transaction_id );
 							$errors     = true;
 						}
 
 						// Live transaction during testing
 						if ( $this->sandbox_mode && $transaction_id != '0000' ) {
-							$new_call[] = sprintf( __( 'Live transaction while debug mode is enabled! Received: %s', 'bonipress' ), $transaction_id );
+							$new_call[] = sprintf( __( 'Live transaction while debug mode is enabled! Received: %s', 'bonips' ), $transaction_id );
 							$errors     = true;
 						}
 
@@ -222,9 +222,9 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 
 								// Type
 								$point_type                = $pending_payment->point_type;
-								$bonipress                    = bonipress( $point_type );
+								$bonips                    = bonips( $point_type );
 
-								$pending_payment->amount   = $bonipress->number( $amount );
+								$pending_payment->amount   = $bonips->number( $amount );
 								$pending_payment->cost     = $cost;
 
 								// If account is credited, delete the post and it's comments.
@@ -233,7 +233,7 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 									$outcome = 'COMPLETED';
 								}
 								else
-									$new_call[] = __( 'Failed to credit users account.', 'bonipress' );
+									$new_call[] = __( 'Failed to credit users account.', 'bonips' );
 
 							}
 
@@ -335,29 +335,29 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 ?>
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Details', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Details', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'site_id' ); ?>"><?php _e( 'Site ID', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'site_id' ); ?>"><?php _e( 'Site ID', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'site_id' ); ?>" id="<?php echo $this->field_id( 'site_id' ); ?>" value="<?php echo esc_attr( $prefs['site_id'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'gwpass' ); ?>"><?php _e( 'GW Password', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'gwpass' ); ?>"><?php _e( 'GW Password', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'gwpass' ); ?>" id="<?php echo $this->field_id( 'gwpass' ); ?>" value="<?php echo esc_attr( $prefs['gwpass'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'logo_url' ); ?>"><?php _e( 'Logo URL', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'logo_url' ); ?>" id="<?php echo $this->field_id( 'logo_url' ); ?>" value="<?php echo esc_attr( $prefs['logo_url'] ); ?>" class="form-control" />
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="form-group">
-					<label for="<?php echo $this->field_id( 'bypass_ipn' ); ?>"><?php _e( 'IP Verification', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'bypass_ipn' ); ?>"><?php _e( 'IP Verification', 'bonips' ); ?></label>
 					<select name="<?php echo $this->field_name( 'bypass_ipn' ); ?>" id="<?php echo $this->field_id( 'bypass_ipn' ); ?>" class="form-control">
 <?php
 
 			$options = array(
-				0 => __( 'No', 'bonipress' ),
-				1 => __( 'Yes', 'bonipress' )
+				0 => __( 'No', 'bonips' ),
+				1 => __( 'Yes', 'bonips' )
 			);
 			foreach ( $options as $value => $label ) {
 				echo '<option value="' . $value . '"';
@@ -371,7 +371,7 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="form-group">
-					<label for="<?php echo $this->field_id( 'lang' ); ?>"><?php _e( 'Language', 'bonipress' ); ?></label>
+					<label for="<?php echo $this->field_id( 'lang' ); ?>"><?php _e( 'Language', 'bonips' ); ?></label>
 
 					<?php $this->lang_dropdown( 'lang' ); ?>
 
@@ -380,25 +380,25 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Setup', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Setup', 'bonips' ); ?></h3>
 		<div class="form-group">
-			<label for="<?php echo $this->field_id( 'pricing_id' ); ?>"><?php _e( 'Pricing ID', 'bonipress' ); ?></label>
+			<label for="<?php echo $this->field_id( 'pricing_id' ); ?>"><?php _e( 'Pricing ID', 'bonips' ); ?></label>
 			<input type="text" name="<?php echo $this->field_name( 'pricing_id' ); ?>" id="<?php echo $this->field_id( 'pricing_id' ); ?>" value="<?php echo esc_attr( $prefs['pricing_id'] ); ?>" class="form-control" />
 		</div>
 		<div class="form-group">
 			<div class="checkbox">
-				<label for="<?php echo $this->field_id( 'dynamic' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'dynamic' ); ?>" id="<?php echo $this->field_id( 'dynamic' ); ?>"<?php checked( $prefs['dynamic'], 1 ); ?> value="1" /> <?php _e( 'This pricing ID is a "Dynamic Credits Purchase" in Zombaio.', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'dynamic' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'dynamic' ); ?>" id="<?php echo $this->field_id( 'dynamic' ); ?>"<?php checked( $prefs['dynamic'], 1 ); ?> value="1" /> <?php _e( 'This pricing ID is a "Dynamic Credits Purchase" in Zombaio.', 'bonips' ); ?></label>
 			</div>
 		</div>
 		<div id="zombaio-dynamic-wrapper" style="display: <?php if ( $prefs['dynamic'] == 1 ) echo 'block'; else echo 'none'; ?>;">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'currency' ); ?>"><?php _e( 'Currency', 'bonips' ); ?></label>
 
-				<?php $this->currencies_dropdown( 'currency', 'bonipress-gateway-zombaio-currency' ); ?>
+				<?php $this->currencies_dropdown( 'currency', 'bonips-gateway-zombaio-currency' ); ?>
 
 			</div>
 			<div class="form-group">
-				<label><?php _e( 'Exchange Rates', 'bonipress' ); ?></label>
+				<label><?php _e( 'Exchange Rates', 'bonips' ); ?></label>
 
 				<?php $this->exchange_rate_setup(); ?>
 
@@ -408,9 +408,9 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 </div>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<h3><?php _e( 'Postback URL (ZScript)', 'bonipress' ); ?></h3>
+		<h3><?php _e( 'Postback URL (ZScript)', 'bonips' ); ?></h3>
 		<code style="padding: 12px;display:block;"><?php echo get_bloginfo( 'url' ); ?></code>
-		<p><?php _e( 'For this gateway to work, login to ZOA and set the Postback URL to the above address and click validate.', 'bonipress' ); ?></p>
+		<p><?php _e( 'For this gateway to work, login to ZOA and set the Postback URL to the above address and click validate.', 'bonips' ); ?></p>
 	</div>
 </div>
 <script type="text/javascript">
@@ -473,13 +473,13 @@ jQuery(function($){
 			$currencies = array(
 				'USD' => 'US Dollars'
 			);
-			$currencies = apply_filters( 'bonipress_dropdown_currencies_' . $this->id, $currencies );
+			$currencies = apply_filters( 'bonips_dropdown_currencies_' . $this->id, $currencies );
 
 			if ( $js != '' )
 				$js = ' data-update="' . $js . '"';
 
 			echo '<select name="' . $this->field_name( $name ) . '" id="' . $this->field_id( $name ) . '" class="currency form-control"' . $js . '>';
-			echo '<option value="">' . __( 'Select', 'bonipress' ) . '</option>';
+			echo '<option value="">' . __( 'Select', 'bonips' ) . '</option>';
 			foreach ( $currencies as $code => $cname ) {
 				echo '<option value="' . $code . '"';
 				if ( isset( $this->prefs[ $name ] ) && $this->prefs[ $name ] == $code ) echo ' selected="selected"';
@@ -511,7 +511,7 @@ jQuery(function($){
 			);
 
 			echo '<select name="' . $this->field_name( $name ) . '" id="' . $this->field_id( $name ) . '" class="form-control">';
-			echo '<option value="">' . __( 'Select', 'bonipress' ) . '</option>';
+			echo '<option value="">' . __( 'Select', 'bonips' ) . '</option>';
 			foreach ( $languages as $code => $cname ) {
 				echo '<option value="' . $code . '"';
 				if ( isset( $this->prefs[ $name ] ) && $this->prefs[ $name ] == $code ) echo ' selected="selected"';

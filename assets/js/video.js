@@ -18,7 +18,7 @@ var done     = {};
  * @since 1.2
  * @version 1.1
  */
-function bonipress_view_video( id, state, custom_logic, custom_interval, key, ctype ) {
+function bonips_view_video( id, state, custom_logic, custom_interval, key, ctype ) {
 
 	var videoid = id;
 
@@ -32,13 +32,13 @@ function bonipress_view_video( id, state, custom_logic, custom_interval, key, ct
 
 	// Logic override
 	if ( custom_logic == '0' )
-		logic[ id ] = boniPRESS_Video.default_logic;
+		logic[ id ] = boniPS_Video.default_logic;
 	else
 		logic[ id ] = custom_logic;
 
 	// Interval override
 	if ( custom_interval == '0' )
-		interval[ id ] = parseInt( boniPRESS_Video.default_interval, 10 );
+		interval[ id ] = parseInt( boniPS_Video.default_interval, 10 );
 	else
 		interval[ id ] = parseInt( custom_interval, 10 );
 
@@ -49,7 +49,7 @@ function bonipress_view_video( id, state, custom_logic, custom_interval, key, ct
 		if ( logic[ id ] == 'play' ) {
 			// As soon as we start playing we award points
 			if ( videostate == 1 && done[ id ] === undefined )
-				bonipress_video_call( videoid, key, videostate, '', '', ctype );
+				bonips_video_call( videoid, key, videostate, '', '', ctype );
 		}
 
 		// Points first when video has ended
@@ -70,8 +70,8 @@ function bonipress_view_video( id, state, custom_logic, custom_interval, key, ct
 				// Stop timer
 				clearInterval( timer );
 
-				// Notify boniPRESS
-				bonipress_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
+				// Notify boniPS
+				bonips_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
 
 				// Reset
 				seconds[ id ] = 0;
@@ -97,14 +97,14 @@ function bonipress_view_video( id, state, custom_logic, custom_interval, key, ct
 					var laps = parseInt( interval[ id ] / 1000, 10 );
 					seconds[ id ] = seconds[ id ] + laps;
 					// key, state, id, actions, seconds, duration
-					bonipress_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
+					bonips_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
 				}, interval[ id ] );
 			}
 
 			// Video has ended
 			else if ( state == 0 ) {
 				clearInterval( timer );
-				bonipress_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
+				bonips_video_call( videoid, key, videostate, actions[ videoid ], seconds[ videoid ], ctype );
 
 				seconds[ id ] = 0;
 				actions[ id ] = '';
@@ -124,7 +124,7 @@ function bonipress_view_video( id, state, custom_logic, custom_interval, key, ct
  * @since 1.2
  * @version 1.1
  */
-function bonipress_video_call( id, key, state, actions, seconds, pointtype ) {
+function bonips_video_call( id, key, state, actions, seconds, pointtype ) {
 
 	if ( done[ id ] === undefined ) {
 
@@ -134,8 +134,8 @@ function bonipress_video_call( id, key, state, actions, seconds, pointtype ) {
 		jQuery.ajax({
 			type       : "POST",
 			data       : {
-				action   : 'bonipress-viewing-videos',
-				token    : boniPRESS_Video.token,
+				action   : 'bonips-viewing-videos',
+				token    : boniPS_Video.token,
 				setup    : key,
 				video_a  : actions,
 				video_b  : seconds,
@@ -144,7 +144,7 @@ function bonipress_video_call( id, key, state, actions, seconds, pointtype ) {
 				type     : pointtype
 			},
 			dataType   : "JSON",
-			url        : boniPRESS_Video.ajaxurl,
+			url        : boniPS_Video.ajaxurl,
 			success    : function( response ) {
 
 				// Add to done list

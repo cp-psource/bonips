@@ -1,7 +1,7 @@
 /**
- * boniPRESS Edit Log Scripts
+ * boniPS Edit Log Scripts
  * These scripts are used to edit or delete entries
- * in the boniPRESS Log.
+ * in the boniPS Log.
  * @since 1.4
  * @version 1.1
  */
@@ -18,16 +18,16 @@ jQuery(function($) {
 	/**
 	 * Delete Log Entry AJAX caller
 	 */
-	var bonipress_delete_log_entry = function( rowid, button ) {
+	var bonips_delete_log_entry = function( rowid, button ) {
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-delete-log-entry',
-				token     : boniPRESSLog.tokens.delete_row,
+				action    : 'bonips-delete-log-entry',
+				token     : boniPSLog.tokens.delete_row,
 				row       : rowid
 			},
 			dataType   : "JSON",
-			url        : boniPRESSLog.ajaxurl,
+			url        : boniPSLog.ajaxurl,
 			success    : function( response ) {
 				// Debug
 				//console.log( response );
@@ -58,13 +58,13 @@ jQuery(function($) {
 	/**
 	 * Log Entry Deletion Trigger
 	 */
-	$( '.bonipress-delete-row' ).click(function(){
+	$( '.bonips-delete-row' ).click(function(){
 		// Require user to confirm deletion
-		if ( ! confirm( boniPRESSLog.messages.delete_row ) )
+		if ( ! confirm( boniPSLog.messages.delete_row ) )
 			return false;
 
 		// Execute AJAX call
-		bonipress_delete_log_entry( $(this).attr( 'data-id' ), $(this) );
+		bonips_delete_log_entry( $(this).attr( 'data-id' ), $(this) );
 	});
 
 	var log_row_id = '';
@@ -78,12 +78,12 @@ jQuery(function($) {
 	/**
 	 * Setup Log Editor Modal
 	 */
-	$('#edit-bonipress-log-entry').dialog({
-		dialogClass : 'bonipress-edit-log-entry',
+	$('#edit-bonips-log-entry').dialog({
+		dialogClass : 'bonips-edit-log-entry',
 		draggable   : true,
 		autoOpen    : false,
-		title       : boniPRESSLog.title,
-		closeText   : boniPRESSLog.close,
+		title       : boniPSLog.title,
+		closeText   : boniPSLog.close,
 		modal       : true,
 		width       : 500,
 		height      : 'auto',
@@ -103,7 +103,7 @@ jQuery(function($) {
 	/**
 	 * Edit Modal Trigger
 	 */
-	$( '.bonipress-open-log-entry-editor' ).click( function() {
+	$( '.bonips-open-log-entry-editor' ).click( function() {
 
 		// Get the details we want to show
 		log_row_id = $(this).attr( 'data-id' );
@@ -115,71 +115,71 @@ jQuery(function($) {
 		log_entry = $(this).parent().siblings( 'td.column-entry' ).children( 'div.entry' ).text();
 
 		// Show the modal window
-		$( '#edit-bonipress-log-entry' ).dialog( 'open' );
+		$( '#edit-bonips-log-entry' ).dialog( 'open' );
 
 		// Populate the form
-		var username_el = $( '#edit-bonipress-log-entry #bonipress-username' );
+		var username_el = $( '#edit-bonips-log-entry #bonips-username' );
 		username_el.empty();
 		username_el.text( log_user );
 
-		var time_el = $( '#edit-bonipress-log-entry #bonipress-time' );
+		var time_el = $( '#edit-bonips-log-entry #bonips-time' );
 		time_el.empty();
 		time_el.text( log_time );
 
-		var creds_el = $( '#edit-bonipress-log-entry #bonipress-creds' );
+		var creds_el = $( '#edit-bonips-log-entry #bonips-creds' );
 		creds_el.empty();
 		creds_el.text( log_cred );
 
-		var entry_el = $( '#edit-bonipress-log-entry #bonipress-raw-entry' );
+		var entry_el = $( '#edit-bonips-log-entry #bonips-raw-entry' );
 		entry_el.val( '' );
 		entry_el.val( log_entry );
 
-		var raw_entry_el = $( '#edit-bonipress-log-entry #bonipress-new-entry' );
+		var raw_entry_el = $( '#edit-bonips-log-entry #bonips-new-entry' );
 		raw_entry_el.val( '' );
 		raw_entry_el.val( log_entry_raw );
 		
-		$( 'input#bonipress-log-row-id' ).val( log_row_id );
+		$( 'input#bonips-log-row-id' ).val( log_row_id );
 
 	});
 
 	/**
 	 * Edit AJAX Call
 	 */
-	var bonipress_update_log_entry = function( rowid, entry, button ) {
+	var bonips_update_log_entry = function( rowid, entry, button ) {
 		var button_label = button.val();
 
 		$.ajax({
 			type       : "POST",
 			data       : {
-				action    : 'bonipress-update-log-entry',
-				token     : boniPRESSLog.tokens.update_row,
+				action    : 'bonips-update-log-entry',
+				token     : boniPSLog.tokens.update_row,
 				row       : rowid,
 				new_entry : entry
 			},
 			dataType   : "JSON",
-			url        : boniPRESSLog.ajaxurl,
+			url        : boniPSLog.ajaxurl,
 			beforeSend : function() {
 			
 				button.removeClass( 'button-primary' );
 				button.addClass( 'button-secondary' );
-				button.val( boniPRESSLog.working );
+				button.val( boniPSLog.working );
 			},
 			success    : function( response ) {
 				// Debug
 				console.log( response );
 
-				var effected_row = $( '#bonipress-log-entry-' + response.data.row_id );
+				var effected_row = $( '#bonips-log-entry-' + response.data.row_id );
 				button.removeClass( 'button-secondary' );
 
 				if ( response.success ) {
 					effected_row.addClass( 'updated-row' );
 					effected_row.children( 'td.column-entry' ).children( 'div.raw' ).empty().html( response.data.new_entry_raw );
 
-					$( '#edit-bonipress-log-entry #bonipress-raw-entry' ).val( response.data.new_entry );
+					$( '#edit-bonips-log-entry #bonips-raw-entry' ).val( response.data.new_entry );
 
 					effected_row.children( 'td.column-entry' ).children( 'div.entry' ).empty().html( response.data.new_entry );
 
-					$( '#edit-bonipress-log-entry #bonipress-new-entry' ).val( response.data.new_entry_raw );
+					$( '#edit-bonips-log-entry #bonips-new-entry' ).val( response.data.new_entry_raw );
 
 					button.val( response.data.label );
 					setTimeout(function(){ button.val( button_label ); button.addClass( 'button-primary' ); }, 5000 );
@@ -200,8 +200,8 @@ jQuery(function($) {
 	/**
 	 * Edit AJAX Call Trigger
 	 */
-	$( '#bonipress-update-log-entry' ).click( function() {
-		bonipress_update_log_entry( $(this).next().val(), $( 'input#bonipress-new-entry' ).val(), $(this) );
+	$( '#bonips-update-log-entry' ).click( function() {
+		bonips_update_log_entry( $(this).next().val(), $( 'input#bonips-new-entry' ).val(), $(this) );
 	});
 
 	/* global setUserSetting, ajaxurl, commonL10n, alert, confirm, toggleWithKeyboard, pagenow */

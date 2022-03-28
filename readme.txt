@@ -12,8 +12,8 @@ Ein adaptives und leistungsstarkes Punkteverwaltungssystem für WordPress-basier
 
 == Description ==
 
-boniPRESS is an adaptive points management system that lets you build a broad range of point related applications for your WordPress powered website.
-Store reward systems, community leaderboards, online banking or monetizing your websites content, are a few examples of the ways boniPRESS is used.
+boniPS is an adaptive points management system that lets you build a broad range of point related applications for your WordPress powered website.
+Store reward systems, community leaderboards, online banking or monetizing your websites content, are a few examples of the ways boniPS is used.
 
 
 == Mehr PSOURCE ==

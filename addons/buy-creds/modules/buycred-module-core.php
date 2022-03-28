@@ -2,12 +2,12 @@
 if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
- * boniPRESS_buyCRED_Module class
+ * boniPS_buyCRED_Module class
  * @since 0.1
  * @version 1.4.1
  */
-if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
-	class boniPRESS_buyCRED_Module extends boniPRESS_Module {
+if ( ! class_exists( 'boniPS_buyCRED_Module' ) ) :
+	class boniPS_buyCRED_Module extends boniPS_Module {
 
 		public $purchase_log = '';
 
@@ -16,18 +16,18 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
-			parent::__construct( 'boniPRESS_BuyCRED_Module', array(
+			parent::__construct( 'boniPS_BuyCRED_Module', array(
 				'module_name' => 'gateways',
-				'option_id'   => 'bonipress_pref_buycreds',
+				'option_id'   => 'bonips_pref_buycreds',
 				'defaults'    => array(
 					'installed'     => array(),
 					'active'        => array(),
 					'gateway_prefs' => array()
 				),
 				'labels'      => array(
-					'menu'        => __( 'Zahlungs-Gateways', 'bonipress' ),
-					'page_title'  => __( 'Zahlungs-Gateways', 'bonipress' ),
-					'page_header' => __( 'Zahlungs-Gateways', 'bonipress' )
+					'menu'        => __( 'Zahlungs-Gateways', 'bonips' ),
+					'page_title'  => __( 'Zahlungs-Gateways', 'bonips' ),
+					'page_header' => __( 'Zahlungs-Gateways', 'bonips' )
 				),
 				'screen_id'   => BONIPS_SLUG . '-gateways',
 				'accordion'   => true,
@@ -35,7 +35,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				'menu_pos'    => 70
 			), $type );
 
-			$this->bonipress_type = BONIPS_DEFAULT_TYPE_KEY;
+			$this->bonips_type = BONIPS_DEFAULT_TYPE_KEY;
 
 		}
 
@@ -45,21 +45,21 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		public function load() {
 
-			add_filter( 'bonipress_parse_log_entry',      array( $this, 'render_gift_tags' ), 10, 2 );
+			add_filter( 'bonips_parse_log_entry',      array( $this, 'render_gift_tags' ), 10, 2 );
 
-			add_action( 'bonipress_init',                 array( $this, 'module_init' ), $this->menu_pos );
+			add_action( 'bonips_init',                 array( $this, 'module_init' ), $this->menu_pos );
 			add_action( 'wp_loaded',                   array( $this, 'module_run' ) );
 
-			add_action( 'bonipress_register_assets',      array( $this, 'register_assets' ) );
-			add_action( 'bonipress_front_enqueue_footer', array( $this, 'enqueue_footer' ) );
+			add_action( 'bonips_register_assets',      array( $this, 'register_assets' ) );
+			add_action( 'bonips_front_enqueue_footer', array( $this, 'enqueue_footer' ) );
 
-			add_action( 'bonipress_admin_init',           array( $this, 'module_admin_init' ), $this->menu_pos );
-			add_action( 'bonipress_admin_init',           array( $this, 'register_settings' ), $this->menu_pos+1 );
-			add_action( 'bonipress_add_menu',             array( $this, 'add_menu' ), $this->menu_pos );
-			add_action( 'bonipress_add_menu',             array( $this, 'add_to_menu' ), $this->menu_pos+1 );
+			add_action( 'bonips_admin_init',           array( $this, 'module_admin_init' ), $this->menu_pos );
+			add_action( 'bonips_admin_init',           array( $this, 'register_settings' ), $this->menu_pos+1 );
+			add_action( 'bonips_add_menu',             array( $this, 'add_menu' ), $this->menu_pos );
+			add_action( 'bonips_add_menu',             array( $this, 'add_to_menu' ), $this->menu_pos+1 );
 
-			add_action( 'bonipress_after_core_prefs',     array( $this, 'after_general_settings' ) );
-			add_filter( 'bonipress_save_core_prefs',      array( $this, 'sanitize_extra_settings' ), 90, 3 );
+			add_action( 'bonips_after_core_prefs',     array( $this, 'after_general_settings' ) );
+			add_filter( 'bonips_save_core_prefs',      array( $this, 'sanitize_extra_settings' ), 90, 3 );
 
 			add_action('pre_get_comments',             array( $this, 'hide_buycred_transactions' ) );
 
@@ -74,8 +74,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		public function module_init() {
 
 			// Add shortcodes first
-			add_shortcode( BONIPS_SLUG . '_buy',      'bonipress_render_buy_points' );
-			add_shortcode( BONIPS_SLUG . '_buy_form', 'bonipress_render_buy_form_points' );
+			add_shortcode( BONIPS_SLUG . '_buy',      'bonips_render_buy_points' );
+			add_shortcode( BONIPS_SLUG . '_buy_form', 'bonips_render_buy_form_points' );
 
 			$this->setup_instance();
 
@@ -105,7 +105,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			global $buycred_instance;
 
 			$buycred_instance             = new StdClass();
-			$buycred_instance->settings   = bonipress_get_buycred_settings();
+			$buycred_instance->settings   = bonips_get_buycred_settings();
 			$buycred_instance->active     = array();
 			$buycred_instance->gateway_id = false;
 			$buycred_instance->checkout   = false;
@@ -123,7 +123,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		public function get() {
 
-			$installed = bonipress_get_buycred_gateways();
+			$installed = bonips_get_buycred_gateways();
 
 			// Untill all custom gateways have been updated, make sure all gateways have an external setting
 			if ( ! empty( $installed ) ) {
@@ -183,11 +183,11 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			 * Step 2 - Check for gateway calls
 			 * Checks to see if a gateway should be loaded.
 			 */
-			$buycred_instance->gateway_id = bonipress_get_requested_gateway_id();
+			$buycred_instance->gateway_id = bonips_get_requested_gateway_id();
 			$buycred_instance->checkout   = false;
 			$buycred_instance->is_ajax    = ( isset( $_REQUEST['ajax'] ) && $_REQUEST['ajax'] == 1 ) ? true : false;
 
-			do_action( 'bonipress_pre_process_buycred' );
+			do_action( 'bonips_pre_process_buycred' );
 
 			// If we have a valid gateway ID and the gateway is active, lets run that gateway.
 			if ( $buycred_instance->gateway_id !== false && array_key_exists( $buycred_instance->gateway_id, $buycred_instance->active ) ) {
@@ -196,12 +196,12 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				$buycred_instance->gateway = buycred_gateway( $buycred_instance->gateway_id );
 
 				// Check payment processing
-				if ( isset( $_REQUEST['bonipress_call'] ) ) {
+				if ( isset( $_REQUEST['bonips_call'] ) ) {
 
 					$buycred_instance->gateway->process();
 
-					do_action( 'bonipress_buycred_process',               $buycred_instance->gateway_id, $this->gateway_prefs );
-					do_action( "bonipress_buycred_process_{$gateway_id}", $this->gateway_prefs );
+					do_action( 'bonips_buycred_process',               $buycred_instance->gateway_id, $this->gateway_prefs );
+					do_action( "bonips_buycred_process_{$gateway_id}", $this->gateway_prefs );
 
 				}
 
@@ -221,7 +221,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 			global $buycred_instance, $buycred_sale;
 
-			if ( $buycred_instance->checkout === false && isset( $_REQUEST['bonipress_buy'] ) )
+			if ( $buycred_instance->checkout === false && isset( $_REQUEST['bonips_buy'] ) )
 				$buycred_instance->checkout = true;
 
 			if ( $buycred_instance->checkout ) {
@@ -233,8 +233,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 					if ( $buycred_instance->is_ajax )
 						$buycred_instance->gateway->ajax_buy();
 
-					do_action( 'bonipress_buycred_buy', $buycred_instance->gateway_id, $this->gateway_prefs );
-					do_action( "bonipress_buycred_buy_{$buycred_instance->gateway_id}", $this->gateway_prefs );
+					do_action( 'bonips_buycred_buy', $buycred_instance->gateway_id, $this->gateway_prefs );
+					do_action( "bonips_buycred_buy_{$buycred_instance->gateway_id}", $this->gateway_prefs );
 
 				}
 				else {
@@ -265,7 +265,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			if ( $buycred_instance->checkout ) {
 
 				return BONIPS_BUYCRED_TEMPLATES_DIR . 'buycred-checkout.php';
-				$override = bonipress_locate_template( 'buycred-checkout.php', BONIPS_SLUG, BONIPS_BUYCRED_TEMPLATES_DIR );
+				$override = bonips_locate_template( 'buycred-checkout.php', BONIPS_SLUG, BONIPS_BUYCRED_TEMPLATES_DIR );
 				if ( ! $override )
 					$template = $override;
 
@@ -284,7 +284,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 			global $buycred_instance, $buycred_sale;
 
-			$settings = bonipress_get_buycred_settings();
+			$settings = bonips_get_buycred_settings();
 
 			if ( $buycred_sale ) {
 
@@ -293,11 +293,11 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				wp_localize_script(
 					'buycred-checkout',
 					'buyCRED',
-					apply_filters( 'bonipress_buycred_checkout_js', array(
+					apply_filters( 'bonips_buycred_checkout_js', array(
 						'ajaxurl'     => home_url( '/' ),
-						'token'       => wp_create_nonce( 'bonipress-buy-creds' ),
+						'token'       => wp_create_nonce( 'bonips-buy-creds' ),
 						'checkout'    => $settings['checkout'],
-						'redirecting' => esc_js( esc_attr__( 'Redirecting', 'bonipress' ) ),
+						'redirecting' => esc_js( esc_attr__( 'Redirecting', 'bonips' ) ),
 						'error'       => 'communications error'
 					), $this )
 				);
@@ -334,13 +334,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		public function module_admin_init() {
 
-			add_action( 'bonipress_user_edit_after_balances', array( $this, 'exchange_rates_user_screen' ), 30 );
+			add_action( 'bonips_user_edit_after_balances', array( $this, 'exchange_rates_user_screen' ), 30 );
 
 			add_action( 'personal_options_update',         array( $this, 'save_manual_exchange_rates' ), 30 );
 			add_action( 'edit_user_profile_update',        array( $this, 'save_manual_exchange_rates' ), 30 );
 
 			// Prep
-			$installed = bonipress_get_buycred_gateways();
+			$installed = bonips_get_buycred_gateways();
 
 			// Make sure we have installed gateways.
 			if ( empty( $installed ) ) return;
@@ -359,7 +359,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 * @since 0.1
 		 * @version 1.2
 		 */
-		public function after_general_settings( $bonipress = NULL ) {
+		public function after_general_settings( $bonips = NULL ) {
 
 			// Reset while on this screen so we can use $this->field_id() and $this->field_name()
 			$this->module_name = 'buy_creds';
@@ -367,7 +367,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 			$uses_buddypress   = class_exists( 'BuddyPress' );
 
-			$settings          = bonipress_get_buycred_settings();
+			$settings          = bonips_get_buycred_settings();
 
 ?>
 <h4><span class="dashicons dashicons-admin-plugins static"></span><strong>buy</strong>CRED</h4>
@@ -375,22 +375,22 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Verkaufseinrichtung', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Verkaufseinrichtung', 'bonips' ); ?></h3>
 <?php
 
 			foreach ( $this->point_types as $type_id => $label ) {
 
-				$bonipress     = bonipress( $type_id );
-				$sale_setup = bonipress_get_buycred_sale_setup( $type_id );
+				$bonips     = bonips( $type_id );
+				$sale_setup = bonips_get_buycred_sale_setup( $type_id );
 
 ?>
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
 					<div class="form-group">
-						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"><?php echo $bonipress->plural(); ?></label>
+						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"><?php echo $bonips->plural(); ?></label>
 						<div class="checkbox" style="padding-top: 4px;">
-							<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"><input type="checkbox" name="bonipress_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][enabled]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"<?php if ( in_array( $type_id, $settings['types'] ) ) echo ' checked="checked"'; ?> value="<?php echo esc_attr( $type_id ); ?>" /> <?php _e( 'Aktivieren', 'bonipress' ); ?></label>
+							<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"><input type="checkbox" name="bonips_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][enabled]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-enabled"<?php if ( in_array( $type_id, $settings['types'] ) ) echo ' checked="checked"'; ?> value="<?php echo esc_attr( $type_id ); ?>" /> <?php _e( 'Aktivieren', 'bonips' ); ?></label>
 						</div>
 					</div>
 
@@ -398,21 +398,21 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
 					<div class="form-group">
-						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-min"><?php _e( 'Mindestbetrag', 'bonipress' ); ?></label>
-						<input type="text" name="bonipress_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][min]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-min" class="form-control" placeholder="<?php echo $bonipress->get_lowest_value(); ?>" value="<?php echo esc_attr( $sale_setup['min'] ); ?>" />
+						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-min"><?php _e( 'Mindestbetrag', 'bonips' ); ?></label>
+						<input type="text" name="bonips_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][min]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-min" class="form-control" placeholder="<?php echo $bonips->get_lowest_value(); ?>" value="<?php echo esc_attr( $sale_setup['min'] ); ?>" />
 					</div>
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 					<div class="form-group">
-						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-max"><?php _e( 'Maximal', 'bonipress' ); ?></label>
+						<label for="buycred-type-<?php echo esc_attr( $type_id ); ?>-max"><?php _e( 'Maximal', 'bonips' ); ?></label>
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input type="text" name="bonipress_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][max]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-max" class="form-control" placeholder="<?php _e( 'Kein Limit', 'bonipress' ); ?>" value="<?php echo esc_attr( $sale_setup['max'] ); ?>" />
+								<input type="text" name="bonips_pref_core[buy_creds][types][<?php echo esc_attr( $type_id ); ?>][max]" id="buycred-type-<?php echo esc_attr( $type_id ); ?>-max" class="form-control" placeholder="<?php _e( 'Kein Limit', 'bonips' ); ?>" value="<?php echo esc_attr( $sale_setup['max'] ); ?>" />
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<?php bonipress_purchase_limit_dropdown( 'bonipress_pref_core[buy_creds][types][' . $type_id . '][time]', 'buycred-type-' . $type_id . '-time', $sale_setup['time'] ); ?>
+								<?php bonips_purchase_limit_dropdown( 'bonips_pref_core[buy_creds][types][' . $type_id . '][time]', 'buycred-type-' . $type_id . '-time', $sale_setup['time'] ); ?>
 							</div>
 						</div>
 					</div>
@@ -427,12 +427,12 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			<hr />
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( 'custom_log' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'custom_log' ); ?>" id="<?php echo $this->field_id( 'custom_log' ); ?>"<?php checked( $settings['custom_log'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Erstelle ein dediziertes Protokoll für Einkäufe.', 'bonipress' ) ); ?></label>
+					<label for="<?php echo $this->field_id( 'custom_log' ); ?>"><input type="checkbox" name="<?php echo $this->field_name( 'custom_log' ); ?>" id="<?php echo $this->field_id( 'custom_log' ); ?>"<?php checked( $settings['custom_log'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Erstelle ein dediziertes Protokoll für Einkäufe.', 'bonips' ) ); ?></label>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-			<h3><?php _e( 'Kasse', 'bonipress' ); ?></h3>
+			<h3><?php _e( 'Kasse', 'bonips' ); ?></h3>
 
 			<div class="form-group">
 
@@ -456,15 +456,15 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		</div>
 	</div>
 
-	<h3><?php _e( 'Weiterleitungen', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Weiterleitungen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
-				<p style="margin-top: 0;"><span class="description"><?php _e( 'Wohin sollen Benutzer nach erfolgreichem Abschluss eines Kaufs weitergeleitet werden? Du kannst eine bestimmte URL oder eine Seite benennen.', 'bonipress' ); ?></span></p>
+				<p style="margin-top: 0;"><span class="description"><?php _e( 'Wohin sollen Benutzer nach erfolgreichem Abschluss eines Kaufs weitergeleitet werden? Du kannst eine bestimmte URL oder eine Seite benennen.', 'bonips' ); ?></span></p>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'thankyou' => 'page' ) ); ?>"><?php _e( 'Weiterleitung auf Seite', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'thankyou' => 'page' ) ); ?>"><?php _e( 'Weiterleitung auf Seite', 'bonips' ); ?></label>
 <?php
 
 			// Thank you page dropdown
@@ -472,7 +472,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				'name'             => $this->field_name( array( 'thankyou' => 'page' ) ),
 				'id'               => $this->field_id( array( 'thankyou' => 'page' ) ) . '-id',
 				'selected'         => $settings['thankyou']['page'],
-				'show_option_none' => __( 'Auswählen', 'bonipress' ),
+				'show_option_none' => __( 'Auswählen', 'bonips' ),
 				'class'            => 'form-control'
 			);
 			wp_dropdown_pages( $thankyou_args );
@@ -480,21 +480,21 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 ?>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'thankyou' => 'custom' ) ); ?>"><?php _e( 'Umleitung auf URL', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'thankyou' => 'custom' ) ); ?>"><?php _e( 'Umleitung auf URL', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'thankyou' => 'custom' ) ); ?>" id="<?php echo $this->field_id( array( 'thankyou' => 'custom' ) ); ?>" placeholder="https://" class="form-control" value="<?php echo esc_attr( $settings['thankyou']['custom'] ); ?>" />
 			</div>
 			<?php if ( $uses_buddypress ) : ?>
-			<p style="margin-top: 0;"><span class="description"><?php _e( 'Du kannst %profile% für die Basis-URL des Benutzerprofils verwenden.', 'bonipress' ); ?></span></p>
+			<p style="margin-top: 0;"><span class="description"><?php _e( 'Du kannst %profile% für die Basis-URL des Benutzerprofils verwenden.', 'bonips' ); ?></span></p>
 			<?php endif; ?>
 
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
-				<p style="margin-top: 0;"><span class="description"><?php _e( 'Wohin sollen Benutzer umgeleitet werden, wenn sie eine Transaktion stornieren? Du kannst eine bestimmte URL oder eine Seite benennen.', 'bonipress' ); ?></span></p>
+				<p style="margin-top: 0;"><span class="description"><?php _e( 'Wohin sollen Benutzer umgeleitet werden, wenn sie eine Transaktion stornieren? Du kannst eine bestimmte URL oder eine Seite benennen.', 'bonips' ); ?></span></p>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'cancelled' => 'page' ) ); ?>"><?php _e( 'Weiterleitung auf Seite', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'cancelled' => 'page' ) ); ?>"><?php _e( 'Weiterleitung auf Seite', 'bonips' ); ?></label>
 <?php
 
 			// Thank you page dropdown
@@ -502,7 +502,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				'name'             => $this->field_name( array( 'cancelled' => 'page' ) ),
 				'id'               => $this->field_id( array( 'cancelled' => 'page' ) ) . '-id',
 				'selected'         => $settings['cancelled']['page'],
-				'show_option_none' => __( 'Auswählen', 'bonipress' ),
+				'show_option_none' => __( 'Auswählen', 'bonips' ),
 				'class'            => 'form-control'
 			);
 			wp_dropdown_pages( $thankyou_args );
@@ -510,48 +510,48 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 ?>
 			</div>
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'cancelled' => 'custom' ) ); ?>"><?php _e( 'Umleitung auf URL', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'cancelled' => 'custom' ) ); ?>"><?php _e( 'Umleitung auf URL', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'cancelled' => 'custom' ) ); ?>" id="<?php echo $this->field_id( array( 'cancelled' => 'custom' ) ); ?>" placeholder="https://" class="form-control" value="<?php echo esc_attr( $settings['cancelled']['custom'] ); ?>" />
 			</div>
 			<?php if ( $uses_buddypress ) : ?>
-			<p style="margin-top: 0;"><span class="description"><?php _e( 'Du kannst %profile% für die Basis-URL des Benutzerprofils verwenden.', 'bonipress' ); ?></span></p>
+			<p style="margin-top: 0;"><span class="description"><?php _e( 'Du kannst %profile% für die Basis-URL des Benutzerprofils verwenden.', 'bonips' ); ?></span></p>
 			<?php endif; ?>
 
 		</div>
 	</div>
 
-	<h3><?php _e( 'Vorlagen', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Vorlagen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'login' ); ?>"><?php _e( 'Anmeldenachricht', 'bonipress' ); ?></label>
+				<label for="<?php echo $this->field_id( 'login' ); ?>"><?php _e( 'Anmeldenachricht', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( 'login' ); ?>" id="<?php echo $this->field_id( 'login' ); ?>" class="form-control" value="<?php echo esc_attr( $settings['login'] ); ?>" />
-				<p><span class="description"><?php _e( 'Nachricht, die in Shortcodes angezeigt wird, wenn sie von jemandem angezeigt wird, der nicht angemeldet ist.', 'bonipress' ); ?></span></p>
+				<p><span class="description"><?php _e( 'Nachricht, die in Shortcodes angezeigt wird, wenn sie von jemandem angezeigt wird, der nicht angemeldet ist.', 'bonips' ); ?></span></p>
 			</div>
 
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( 'log' ); ?>"><?php _e( 'Protokollvorlage', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $settings['log'] ); ?>" />
+				<label for="<?php echo $this->field_id( 'log' ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $settings['log'] ); ?>" />
 				<p><span class="description"><?php echo $this->core->available_template_tags( array( 'general' ), '%gateway%' ); ?></span></p>
 			</div>
 
 		</div>
 	</div>
 
-	<h3><?php _e( 'Schenken', 'bonipress' ); ?></h3>
+	<h3><?php _e( 'Schenken', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'gifting' => 'members' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'gifting' => 'members' ) ); ?>" id="<?php echo $this->field_id( array( 'gifting' => 'members' ) ); ?>"<?php checked( $settings['gifting']['members'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Benutzern erlauben, %_plural% für andere Benutzer zu kaufen.', 'bonipress' ) ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'gifting' => 'members' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'gifting' => 'members' ) ); ?>" id="<?php echo $this->field_id( array( 'gifting' => 'members' ) ); ?>"<?php checked( $settings['gifting']['members'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Benutzern erlauben, %_plural% für andere Benutzer zu kaufen.', 'bonips' ) ); ?></label>
 				</div>
 				<div class="checkbox">
-					<label for="<?php echo $this->field_id( array( 'gifting' => 'authors' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'gifting' => 'authors' ) ); ?>" id="<?php echo $this->field_id( array( 'gifting' => 'authors' ) ); ?>"<?php checked( $settings['gifting']['authors'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Benutzern erlauben, %_plural% für Inhaltsautoren zu kaufen.', 'bonipress' ) ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'gifting' => 'authors' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'gifting' => 'authors' ) ); ?>" id="<?php echo $this->field_id( array( 'gifting' => 'authors' ) ); ?>"<?php checked( $settings['gifting']['authors'], 1 ); ?> value="1" /> <?php echo $this->core->template_tags_general( __( 'Benutzern erlauben, %_plural% für Inhaltsautoren zu kaufen.', 'bonips' ) ); ?></label>
 				</div>
 			</div>
 
@@ -559,18 +559,18 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'gifting' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonipress' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'gifting' => 'log' ) ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonipress' ); ?>" value="<?php echo esc_attr( $settings['gifting']['log'] ); ?>" />
+				<label for="<?php echo $this->field_id( array( 'gifting' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'gifting' => 'log' ) ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" class="form-control" placeholder="<?php _e( 'Erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $settings['gifting']['log'] ); ?>" />
 				<p><span class="description"><?php echo $this->core->available_template_tags( array( 'general', 'user' ) ); ?></span></p>
 			</div>
 
 		</div>
 	</div>
 
-	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonipress' ); ?></h3>
+	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_buy/" target="_blank">[bonipress_buy]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_buy_form/" target="_blank">[bonipress_buy_form]</a>, <a href="https://n3rds.work/docs/bonipress-shortcodes-bonipress_buy_pending/" target="_blank">[bonipress_buy_pending]</a></p>
+			<p><a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy/" target="_blank">[bonips_buy]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy_form/" target="_blank">[bonips_buy_form]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy_pending/" target="_blank">[bonips_buy_pending]</a></p>
 		</div>
 	</div>
 
@@ -578,7 +578,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 <?php
 
 			$this->module_name = 'gateways';
-			$this->option_id   = 'bonipress_pref_buycreds';
+			$this->option_id   = 'bonips_pref_buycreds';
 
 		}
 
@@ -595,7 +595,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				foreach ( $data['buy_creds']['types'] as $type_id => $setup ) {
 
 					$type_id = sanitize_key( $type_id );
-					if ( ! bonipress_point_type_exists( $type_id ) ) continue;
+					if ( ! bonips_point_type_exists( $type_id ) ) continue;
 
 					$point_types[]    = $type_id;
 
@@ -604,9 +604,9 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 					$settings['max']  = sanitize_text_field( $setup['max'] );
 					$settings['time'] = sanitize_key( $setup['time'] );
 
-					$settings         = shortcode_atts( bonipress_get_buycred_sale_setup( $type_id ), $settings );
+					$settings         = shortcode_atts( bonips_get_buycred_sale_setup( $type_id ), $settings );
 
-					bonipress_update_option( 'buycred-setup-' . $type_id, $settings );
+					bonips_update_option( 'buycred-setup-' . $type_id, $settings );
 
 				}
 			}
@@ -634,7 +634,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			$new_data['buy_creds']['gifting']['authors']  = ( ! isset( $data['buy_creds']['gifting']['authors'] ) ) ? 0 : 1;
 			$new_data['buy_creds']['gifting']['log']      = sanitize_text_field( $data['buy_creds']['gifting']['log'] );
 
-			delete_option( 'bonipress_buycred_reset' );
+			delete_option( 'bonips_buycred_reset' );
 
 			return $new_data;
 
@@ -661,7 +661,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 			// In case we are using the Master Template feautre on multisites, and this is not the main
 			// site in the network, bail.
-			if ( bonipress_override_settings() && ! bonipress_is_main_site() ) return;
+			if ( bonips_override_settings() && ! bonips_is_main_site() ) return;
 
 			// If we selected to insert a purchase log
 			if ( isset( $this->core->buy_creds['custom_log'] ) && $this->core->buy_creds['custom_log'] ) {
@@ -671,14 +671,14 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 				foreach ( $point_types as $type_id ) {
 
-					$bonipress    = bonipress( $type_id );
+					$bonips    = bonips( $type_id );
 					$menu_slug = ( $type_id != BONIPS_DEFAULT_TYPE_KEY ) ? BONIPS_SLUG . '_' . $type_id : BONIPS_SLUG;
 
 					$pages[]   = add_submenu_page(
 						$menu_slug,
-						__( 'buyBONI Kaufprotokoll', 'bonipress' ),
-						__( 'Kaufprotokoll', 'bonipress' ),
-						$bonipress->get_point_editor_capability(),
+						__( 'buyBONI Kaufprotokoll', 'bonips' ),
+						__( 'Kaufprotokoll', 'bonips' ),
+						$bonips->get_point_editor_capability(),
 						BONIPS_SLUG . '-purchases-' . $type_id,
 						array( $this, 'purchase_log_page' )
 					);
@@ -705,9 +705,9 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		public function settings_header() {
 
-			wp_enqueue_style( 'bonipress-admin' );
-			wp_enqueue_style( 'bonipress-bootstrap-grid' );
-			wp_enqueue_style( 'bonipress-forms' );
+			wp_enqueue_style( 'bonips-admin' );
+			wp_enqueue_style( 'bonips-bootstrap-grid' );
+			wp_enqueue_style( 'bonips-forms' );
 
 		}
 
@@ -724,20 +724,20 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			$installed = $this->get();
 
 ?>
-<div class="wrap bonipress-metabox" id="boniPRESS-wrap">
-	<h1><?php _e( 'Zahlungs-Gateways', 'bonipress' ); ?></h1>
+<div class="wrap bonips-metabox" id="boniPS-wrap">
+	<h1><?php _e( 'Zahlungs-Gateways', 'bonips' ); ?></h1>
 <?php
 
 			// Updated settings
 			if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true )
-				echo '<div class="updated settings-error"><p>' . __( 'Einstellungen aktualisiert', 'bonipress' ) . '</p></div>';
+				echo '<div class="updated settings-error"><p>' . __( 'Einstellungen aktualisiert', 'bonips' ) . '</p></div>';
 
 ?>
 	<form method="post" action="options.php" class="form">
 
 		<?php settings_fields( $this->settings_name ); ?>
 
-		<?php do_action( 'bonipress_before_buycreds_page', $this ); ?>
+		<?php do_action( 'bonips_before_buycreds_page', $this ); ?>
 
 		<div class="list-items expandable-li" id="accordion">
 <?php
@@ -766,22 +766,22 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="form-group">
 							<div>&nbsp;</div>
-							<label for="buycred-gateway-<?php echo $key; ?>"><input type="checkbox" name="bonipress_pref_buycreds[active][]" id="buycred-gateway-<?php echo $key; ?>" value="<?php echo $key; ?>"<?php if ( $this->is_active( $key ) ) echo ' checked="checked"'; ?> /> <?php _e( 'Aktivieren', 'bonipress' ); ?></label>
+							<label for="buycred-gateway-<?php echo $key; ?>"><input type="checkbox" name="bonips_pref_buycreds[active][]" id="buycred-gateway-<?php echo $key; ?>" value="<?php echo $key; ?>"<?php if ( $this->is_active( $key ) ) echo ' checked="checked"'; ?> /> <?php _e( 'Aktivieren', 'bonips' ); ?></label>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<?php if ( $has_test_mode ) : ?>
 						<div class="form-group">
 							<div>&nbsp;</div>
-							<label for="buycred-gateway-<?php echo $key; ?>-sandbox"><input type="checkbox" name="bonipress_pref_buycreds[gateway_prefs][<?php echo $key; ?>][sandbox]" id="buycred-gateway-<?php echo $key; ?>-sandbox" value="<?php echo $key; ?>"<?php if ( $sandbox_mode ) echo ' checked="checked"'; ?> /> <?php _e( 'Sandbox Modus', 'bonipress' ); ?></label>
+							<label for="buycred-gateway-<?php echo $key; ?>-sandbox"><input type="checkbox" name="bonips_pref_buycreds[gateway_prefs][<?php echo $key; ?>][sandbox]" id="buycred-gateway-<?php echo $key; ?>-sandbox" value="<?php echo $key; ?>"<?php if ( $sandbox_mode ) echo ' checked="checked"'; ?> /> <?php _e( 'Sandbox Modus', 'bonips' ); ?></label>
 						</div>
 						<?php endif; ?>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="text-align: right;">
-						<?php if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' && $has_documentation ) : ?>
+						<?php if ( BONIPS_DEFAULT_LABEL === 'boniPS' && $has_documentation ) : ?>
 						<div class="form-group">
 							<div>&nbsp;</div>
-							<a href="<?php echo $has_documentation; ?>" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a>
+							<a href="<?php echo $has_documentation; ?>" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a>
 						</div>
 						<?php endif; ?>
 					</div>
@@ -790,7 +790,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 				<?php $this->call( 'preferences', $data['callback'] ); ?>
 
-				<input type="hidden" name="bonipress_pref_buycreds[installed]" value="<?php echo $key; ?>" />
+				<input type="hidden" name="bonips_pref_buycreds[installed]" value="<?php echo $key; ?>" />
 			</div>
 <?php
 
@@ -800,13 +800,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 ?>
 		</div>
 
-		<?php do_action( 'bonipress_after_buycreds_page', $this ); ?>
+		<?php do_action( 'bonips_after_buycreds_page', $this ); ?>
 
-		<p><?php submit_button( __( 'Update Einstellungen', 'bonipress' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://n3rds.work/shop/artikel/category/bonipress-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
+		<p><?php submit_button( __( 'Update Einstellungen', 'bonips' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://n3rds.work/shop/artikel/category/bonips-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
 
 	</form>
 
-	<?php do_action( 'bonipress_bottom_buycreds_page', $this ); ?>
+	<?php do_action( 'bonips_bottom_buycreds_page', $this ); ?>
 
 <script type="text/javascript">
 jQuery(function($) {
@@ -829,7 +829,7 @@ jQuery(function($) {
 		 */
 		public function sanitize_settings( $data ) {
 
-			$data      = apply_filters( 'bonipress_buycred_save_prefs', $data );
+			$data      = apply_filters( 'bonips_buycred_save_prefs', $data );
 			$installed = $this->get();
 
 			if ( empty( $installed ) ) return $data;
@@ -858,19 +858,19 @@ jQuery(function($) {
 
 			if ( empty( $this->purchase_log ) ) return;
 
-			$meta_key = 'bonipress_payments_' . str_replace( BONIPS_SLUG . '-purchases-', '', $_GET['page'] );
+			$meta_key = 'bonips_payments_' . str_replace( BONIPS_SLUG . '-purchases-', '', $_GET['page'] );
 
 			if ( isset( $_REQUEST['wp_screen_options']['option'] ) && isset( $_REQUEST['wp_screen_options']['value'] ) ) {
 			
 				if ( $_REQUEST['wp_screen_options']['option'] == $meta_key ) {
 					$value = absint( $_REQUEST['wp_screen_options']['value'] );
-					bonipress_update_user_meta( $this->current_user_id, $meta_key, $value );
+					bonips_update_user_meta( $this->current_user_id, $meta_key, $value );
 				}
 
 			}
 
 			$args = array(
-				'label'   => __( 'Zahlungen', 'bonipress' ),
+				'label'   => __( 'Zahlungen', 'bonips' ),
 				'default' => 10,
 				'option'  => $meta_key
 			);
@@ -880,30 +880,30 @@ jQuery(function($) {
 
 		/**
 		 * Purchase Log
-		 * Render the dedicated admin screen where all point purchases are shown from the boniPRESS Log.
+		 * Render the dedicated admin screen where all point purchases are shown from the boniPS Log.
 		 * This screen is added in for each point type that is set to be for sale.
 		 * @since 1.4
 		 * @version 1.5
 		 */
 		public function purchase_log_page() {
 
-			$point_type           = str_replace( 'bonipress-purchases-', '', $_GET['page'] );
+			$point_type           = str_replace( 'bonips-purchases-', '', $_GET['page'] );
 			$installed            = $this->get();
 
-			$bonipress               = $this->core;
-			if ( $point_type != BONIPS_DEFAULT_TYPE_KEY && bonipress_point_type_exists( $point_type ) )
-				$bonipress = bonipress( $point_type );
+			$bonips               = $this->core;
+			if ( $point_type != BONIPS_DEFAULT_TYPE_KEY && bonips_point_type_exists( $point_type ) )
+				$bonips = bonips( $point_type );
 
 			// Security (incase the user has setup different capabilities to manage this particular point type)
-			if ( ! $bonipress->user_is_point_editor() ) wp_die( 'Access Denied' );
+			if ( ! $bonips->user_is_point_editor() ) wp_die( 'Access Denied' );
 
 			// Get references
-			$references           = bonipress_get_buycred_gateway_refs( $point_type );
+			$references           = bonips_get_buycred_gateway_refs( $point_type );
 
-			$search_args          = bonipress_get_search_args();
+			$search_args          = bonips_get_search_args();
 			$filter_url           = admin_url( 'admin.php?page=' . BONIPS_SLUG . '-purchases-' . $point_type );
 
-			$per_page             = bonipress_get_user_meta( $this->current_user_id, 'bonipress_payments_' . $point_type, '', true );
+			$per_page             = bonips_get_user_meta( $this->current_user_id, 'bonips_payments_' . $point_type, '', true );
 			if ( empty( $per_page ) || $per_page < 1 ) $per_page = 10;
 
 			// Entries per page
@@ -916,23 +916,23 @@ jQuery(function($) {
 				'compare' => 'IN'
 			);
 
-			$log                  = new boniPRESS_Query_Log( $search_args );
-			$log->headers         = apply_filters( 'bonipress_buycred_log_columns', array(
-				'column-gateway'     => __( 'Gateway', 'bonipress' ),
-				'column-username'    => __( 'Käufer', 'bonipress' ),
-				'column-date'        => __( 'Datum', 'bonipress' ),
-				'column-amount'      => $bonipress->plural(),
-				'column-payed'       => __( 'Bezahlt', 'bonipress' ),
-				'column-tranid'      => __( 'Transaktions-ID', 'bonipress' )
+			$log                  = new boniPS_Query_Log( $search_args );
+			$log->headers         = apply_filters( 'bonips_buycred_log_columns', array(
+				'column-gateway'     => __( 'Gateway', 'bonips' ),
+				'column-username'    => __( 'Käufer', 'bonips' ),
+				'column-date'        => __( 'Datum', 'bonips' ),
+				'column-amount'      => $bonips->plural(),
+				'column-payed'       => __( 'Bezahlt', 'bonips' ),
+				'column-tranid'      => __( 'Transaktions-ID', 'bonips' )
 			) );
 
 ?>
-<div class="wrap list" id="boniPRESS-wrap">
-	<h1><?php _e( 'Kaufprotokoll', 'bonipress' ); ?></h1>
+<div class="wrap list" id="boniPS-wrap">
+	<h1><?php _e( 'Kaufprotokoll', 'bonips' ); ?></h1>
 
 	<?php $log->filter_dates( esc_url( $filter_url ) ); ?>
 
-	<form method="get" action="" name="bonipress-buycred-form" novalidate>
+	<form method="get" action="" name="bonips-buycred-form" novalidate>
 		<input type="hidden" name="page" value="<?php echo esc_attr( $_GET['page'] ); ?>" />
 <?php
 
@@ -955,14 +955,14 @@ jQuery(function($) {
 
 ?>
 
-		<?php do_action( 'bonipress_above_payment_log_table', $this ); ?>
+		<?php do_action( 'bonips_above_payment_log_table', $this ); ?>
 
 		<div class="tablenav top">
 
 			<?php $log->table_nav( 'top' ); ?>
 
 		</div>
-		<table class="wp-list-table widefat fixed striped users bonipress-table" cellspacing="0">
+		<table class="wp-list-table widefat fixed striped users bonips-table" cellspacing="0">
 			<thead>
 				<tr>
 <?php
@@ -1023,7 +1023,7 @@ jQuery(function($) {
 					elseif ( substr( $log_entry->entry, 0, 4 ) == 'TEST' )
 						$style = ' style="color:orange;"';
 
-					echo '<tr class="boniPRESS-log-row' . $class . '" id="bonipress-log-entry-' . $log_entry->id . '">';
+					echo '<tr class="boniPS-log-row' . $class . '" id="bonips-log-entry-' . $log_entry->id . '">';
 
 					// Run though columns
 					foreach ( $log->headers as $column_id => $column_name ) {
@@ -1061,7 +1061,7 @@ jQuery(function($) {
 							// Amount Column
 							case 'column-amount' :
 
-								echo $bonipress->format_creds( $log_entry->creds );
+								echo $bonips->format_creds( $log_entry->creds );
 
 							break;
 
@@ -1086,8 +1086,8 @@ jQuery(function($) {
 
 								else {
 
-									$rendered_cost = apply_filters( 'bonipress_buycred_display_cost', $cost . ' ' . $currency, $sales_data, $log_entry, $gateway_name );
-									$rendered_cost = apply_filters( 'bonipress_buycred_display_cost_' . $gateway_name, $rendered_cost, $sales_data, $log_entry );
+									$rendered_cost = apply_filters( 'bonips_buycred_display_cost', $cost . ' ' . $currency, $sales_data, $log_entry, $gateway_name );
+									$rendered_cost = apply_filters( 'bonips_buycred_display_cost_' . $gateway_name, $rendered_cost, $sales_data, $log_entry );
 
 									echo $rendered_cost;
 
@@ -1113,8 +1113,8 @@ jQuery(function($) {
 
 							default :
 
-								do_action( "bonipress_payment_log_{$column_id}", $log_entry );
-								do_action( "bonipress_payment_log_{$column_id}_{$type}", $log_entry );
+								do_action( "bonips_payment_log_{$column_id}", $log_entry );
+								do_action( "bonips_payment_log_{$column_id}_{$type}", $log_entry );
 
 							break;
 
@@ -1133,7 +1133,7 @@ jQuery(function($) {
 			// No log entry
 			else {
 
-				echo '<tr><td colspan="' . count( $log->headers ) . '" class="no-entries">' . __( 'Keine Käufe gefunden', 'bonipress' ) . '</td></tr>';
+				echo '<tr><td colspan="' . count( $log->headers ) . '" class="no-entries">' . __( 'Keine Käufe gefunden', 'bonips' ) . '</td></tr>';
 
 			}
 
@@ -1146,7 +1146,7 @@ jQuery(function($) {
 
 		</div>
 
-		<?php do_action( 'bonipress_below_payment_log_table', $this ); ?>
+		<?php do_action( 'bonips_below_payment_log_table', $this ); ?>
 
 	</form>
 </div>
@@ -1192,9 +1192,9 @@ jQuery(function($) {
 			if ( ! isset( $this->core->buy_creds['types'] ) || empty( $this->core->buy_creds['types'] ) ) return;
 
 			// Only visible to admins
-			if ( ! bonipress_is_admin() ) return;
+			if ( ! bonips_is_admin() ) return;
 
-			$bonipress_types         = bonipress_get_types( true );
+			$bonips_types         = bonips_get_types( true );
 			$point_types_for_sale = $this->core->buy_creds['types'];
 			$installed            = $this->get();
 			$available_options    = array();
@@ -1214,7 +1214,7 @@ jQuery(function($) {
 
 				$setup = array( 'name' => $prefs['title'], 'currency' => $gateway_prefs['currency'], 'types' => array() );
 
-				foreach ( $bonipress_types as $point_type_key => $label ) {
+				foreach ( $bonips_types as $point_type_key => $label ) {
 
 					$row = array( 'name' => $label, 'enabled' => false, 'excluded' => true, 'default' => 0, 'override' => false, 'custom' => '', 'before' => '' );
 
@@ -1222,16 +1222,16 @@ jQuery(function($) {
 
 						$row['enabled'] = true;
 
-						$bonipress = bonipress( $point_type_key );
+						$bonips = bonips( $point_type_key );
 
-						if ( ! $bonipress->exclude_user( $user->ID ) ) {
+						if ( ! $bonips->exclude_user( $user->ID ) ) {
 
 							$row['excluded'] = false;
 							$row['default']  = $gateway_prefs['exchange'][ $point_type_key ];
 
-							$row['before']   = $bonipress->format_creds( 1 ) . ' = ';
+							$row['before']   = $bonips->format_creds( 1 ) . ' = ';
 
-							$saved_overrides = (array) bonipress_get_user_meta( $user->ID, 'bonipress_buycred_rates_' . $point_type_key, '', true );
+							$saved_overrides = (array) bonips_get_user_meta( $user->ID, 'bonips_buycred_rates_' . $point_type_key, '', true );
 
 							if ( ! empty( $saved_overrides ) && array_key_exists( $gateway_id, $saved_overrides ) ) {
 
@@ -1255,8 +1255,8 @@ jQuery(function($) {
 			if ( empty( $available_options ) ) return;
 
 ?>
-<p class="bonipress-p"><?php _e( 'Benutzerwechselkurs beim Kauf von Punkten.', 'bonipress' ); ?></p>
-<table class="form-table bonipress-inline-table">
+<p class="bonips-p"><?php _e( 'Benutzerwechselkurs beim Kauf von Punkten.', 'bonips' ); ?></p>
+<table class="form-table bonips-inline-table">
 <?php
 
 			foreach ( $available_options as $gateway_id => $setup ) :
@@ -1265,8 +1265,8 @@ jQuery(function($) {
 	<tr>
 		<th scope="row"><?php echo esc_attr( $setup['name'] ); ?></th>
 		<td>
-			<fieldset id="bonipress-buycred-list" class="buycred-list">
-				<legend class="screen-reader-text"><span><?php _e( 'buyBONI-Wechselkurse', 'bonipress' ); ?></span></legend>
+			<fieldset id="bonips-buycred-list" class="buycred-list">
+				<legend class="screen-reader-text"><span><?php _e( 'buyBONI-Wechselkurse', 'bonips' ); ?></span></legend>
 <?php
 
 				foreach ( $setup['types'] as $type_id => $data ) {
@@ -1275,11 +1275,11 @@ jQuery(function($) {
 					if ( ! $data['enabled'] ) {
 
 ?>
-					<div class="bonipress-wrapper buycred-wrapper disabled-option color-option">
-						<div><?php printf( _x( '%s kaufen', 'Punktname', 'bonipress' ), $data['name'] ); ?></div>
+					<div class="bonips-wrapper buycred-wrapper disabled-option color-option">
+						<div><?php printf( _x( '%s kaufen', 'Punktname', 'bonips' ), $data['name'] ); ?></div>
 						<div class="balance-row">
-							<div class="balance-view"><?php _e( 'Deaktiviert', 'bonipress' ); ?></div>
-							<div class="balance-desc"><em><?php _e( 'Dieser Punktetyp steht nicht zum Verkauf.', 'bonipress' ); ?></em></div>
+							<div class="balance-view"><?php _e( 'Deaktiviert', 'bonips' ); ?></div>
+							<div class="balance-desc"><em><?php _e( 'Dieser Punktetyp steht nicht zum Verkauf.', 'bonips' ); ?></em></div>
 						</div>
 					</div>
 <?php
@@ -1290,11 +1290,11 @@ jQuery(function($) {
 					elseif ( $data['excluded'] ) {
 
 ?>
-					<div class="bonipress-wrapper buycred-wrapper excluded-option color-option">
-						<div><?php printf( _x( '%s kaufen', 'Kaufe Punkte', 'bonipress' ), $data['name'] ); ?></div>
+					<div class="bonips-wrapper buycred-wrapper excluded-option color-option">
+						<div><?php printf( _x( '%s kaufen', 'Kaufe Punkte', 'bonips' ), $data['name'] ); ?></div>
 						<div class="balance-row">
-							<div class="balance-view"><?php _e( 'Ausgeschlossen', 'bonipress' ); ?></div>
-							<div class="balance-desc"><em><?php printf( _x( 'Benutzer kann %s nicht kaufen', 'Punktname', 'bonipress' ), $data['name'] ); ?></em></div>
+							<div class="balance-view"><?php _e( 'Ausgeschlossen', 'bonips' ); ?></div>
+							<div class="balance-desc"><em><?php printf( _x( 'Benutzer kann %s nicht kaufen', 'Punktname', 'bonips' ), $data['name'] ); ?></em></div>
 						</div>
 					</div>
 <?php
@@ -1305,11 +1305,11 @@ jQuery(function($) {
 					else {
 
 ?>
-					<div class="bonipress-wrapper buycred-wrapper color-option selected">
-						<div><?php printf( _x( '%s kaufen', 'Kaufe Punkte', 'bonipress' ), $data['name'] ); ?></div>
+					<div class="bonips-wrapper buycred-wrapper color-option selected">
+						<div><?php printf( _x( '%s kaufen', 'Kaufe Punkte', 'bonips' ), $data['name'] ); ?></div>
 						<div class="balance-row">
-							<div class="balance-view"><?php echo $data['before']; ?><input type="text" name="bonipress_adjust_users_buyrates[<?php echo $type_id; ?>][<?php echo $gateway_id; ?>]" placeholder="<?php echo $data['default']; ?>" value="<?php if ( $data['override'] ) echo esc_attr( $data['custom'] ); ?>" class="short" size="8" /><?php echo ' ' . $setup['currency']; ?></div>
-							<div class="balance-desc"><em><?php _e( 'Lasse dieses Feld leer, um den Standardsatz zu verwenden.', 'bonipress' ); ?></em></div>
+							<div class="balance-view"><?php echo $data['before']; ?><input type="text" name="bonips_adjust_users_buyrates[<?php echo $type_id; ?>][<?php echo $gateway_id; ?>]" placeholder="<?php echo $data['default']; ?>" value="<?php if ( $data['override'] ) echo esc_attr( $data['custom'] ); ?>" class="short" size="8" /><?php echo ' ' . $setup['currency']; ?></div>
+							<div class="balance-desc"><em><?php _e( 'Lasse dieses Feld leer, um den Standardsatz zu verwenden.', 'bonips' ); ?></em></div>
 						</div>
 					</div>
 <?php
@@ -1355,16 +1355,16 @@ jQuery(function($) {
 		 */
 		public function save_manual_exchange_rates( $user_id ) {
 
-			if ( ! bonipress_is_admin() ) return;
+			if ( ! bonips_is_admin() ) return;
 
-			if ( isset( $_POST['bonipress_adjust_users_buyrates'] ) && is_array( $_POST['bonipress_adjust_users_buyrates'] ) && ! empty( $_POST['bonipress_adjust_users_buyrates'] ) ) {
+			if ( isset( $_POST['bonips_adjust_users_buyrates'] ) && is_array( $_POST['bonips_adjust_users_buyrates'] ) && ! empty( $_POST['bonips_adjust_users_buyrates'] ) ) {
 
-				foreach ( $_POST['bonipress_adjust_users_buyrates'] as $ctype => $gateway ) {
+				foreach ( $_POST['bonips_adjust_users_buyrates'] as $ctype => $gateway ) {
 
 					$ctype  = sanitize_key( $ctype );
-					$bonipress = bonipress( $ctype );
+					$bonips = bonips( $ctype );
 
-					if ( ! $bonipress->exclude_user( $user_id ) ) {
+					if ( ! $bonips->exclude_user( $user_id ) ) {
 
 						$new_rates = array();
 						foreach ( (array) $gateway as $gateway_id => $rate ) {
@@ -1379,9 +1379,9 @@ jQuery(function($) {
 						}
 
 						if ( ! empty( $new_rates ) )
-							bonipress_update_user_meta( $user_id, 'bonipress_buycred_rates_' . $ctype, '', $new_rates );
+							bonips_update_user_meta( $user_id, 'bonips_buycred_rates_' . $ctype, '', $new_rates );
 						else
-							bonipress_delete_user_meta( $user_id, 'bonipress_buycred_rates_' . $ctype );
+							bonips_delete_user_meta( $user_id, 'bonips_buycred_rates_' . $ctype );
 
 					}
 
@@ -1410,14 +1410,14 @@ endif;
  * @since 1.7
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_load_buycred_core_addon' ) ) :
-	function bonipress_load_buycred_core_addon( $modules, $point_types ) {
+if ( ! function_exists( 'bonips_load_buycred_core_addon' ) ) :
+	function bonips_load_buycred_core_addon( $modules, $point_types ) {
 
-		$modules['solo']['buycred'] = new boniPRESS_buyCRED_Module();
+		$modules['solo']['buycred'] = new boniPS_buyCRED_Module();
 		$modules['solo']['buycred']->load();
 
 		return $modules;
 
 	}
 endif;
-add_filter( 'bonipress_load_modules', 'bonipress_load_buycred_core_addon', 30, 2 );
+add_filter( 'bonips_load_modules', 'bonips_load_buycred_core_addon', 30, 2 );

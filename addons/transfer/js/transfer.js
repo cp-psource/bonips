@@ -1,5 +1,5 @@
 /**
- * boniPRESS Transfer jQuery
+ * boniPS Transfer jQuery
  * Handles transfer requests and autocomplete of recipient search.
  *
  * @requires jQuery
@@ -14,33 +14,33 @@ jQuery(function($){
 		$.ajax({
 			type : "POST",
 			data : {
-				action    : 'bonipress-transfer-creds',
+				action    : 'bonips-transfer-creds',
 				form      : submitted_form,
-				token     : boniPRESS.token
+				token     : boniPS.token
 			},
 			dataType : "JSON",
-			url : boniPRESS.ajaxurl,
+			url : boniPS.ajaxurl,
 			// Before we start
 			beforeSend : function() {
 				// Prevent users from clicking multiple times
-				$( '.bonipress-click' ).val( boniPRESS.working );
-				$( '.bonipress-click' ).attr( 'disabled', 'disabled' );
+				$( '.bonips-click' ).val( boniPS.working );
+				$( '.bonips-click' ).attr( 'disabled', 'disabled' );
 			},
 			// On Successful Communication
 			success    : function( data ) {
-				$( '.bonipress-click' ).val( label );
-				$( '.bonipress-click' ).removeAttr( 'disabled' );
+				$( '.bonips-click' ).val( label );
+				$( '.bonips-click' ).removeAttr( 'disabled' );
 
 				// Error
-				if ( boniPRESS[ data ] !== undefined )
-					alert( boniPRESS[ data ] );
+				if ( boniPS[ data ] !== undefined )
+					alert( boniPS[ data ] );
 
 				// Completed
 				else if ( data == 'ok' ) {
-					alert( boniPRESS.completed );
+					alert( boniPS.completed );
 
 					// If reload is set
-					if ( boniPRESS.reload == '1' )
+					if ( boniPS.reload == '1' )
 						location.reload();
 				}
 
@@ -50,8 +50,8 @@ jQuery(function($){
 
 				// All else
 				else {
-					$('.bonipress-click').attr( 'value', data );
-					if ( boniPRESS.reload == '1' )
+					$('.bonips-click').attr( 'value', data );
+					if ( boniPS.reload == '1' )
 						location.reload();
 				}
 			}
@@ -61,7 +61,7 @@ jQuery(function($){
 	// Autocomplete
 	// @api http://api.jqueryui.com/autocomplete/
 	var cache = {};
-	$( 'input.bonipress-autofill' ).autocomplete({
+	$( 'input.bonips-autofill' ).autocomplete({
 		minLength: 2,
 		source: function( request, response ) {
 			var term = request.term;
@@ -71,11 +71,11 @@ jQuery(function($){
 			}
 			
 			var send = {
-				action : "bonipress-autocomplete",
-				token  : boniPRESS.atoken,
+				action : "bonips-autocomplete",
+				token  : boniPS.atoken,
 				string : request
 			};
-			$.getJSON( boniPRESS.ajaxurl, send, function( data, status, xhr ) {
+			$.getJSON( boniPS.ajaxurl, send, function( data, status, xhr ) {
 				cache[ term ] = data;
 				// Debug - uncomment to use
 				//console.log( data );
@@ -91,7 +91,7 @@ jQuery(function($){
 	});
 	
 	// Attempt Transfer
-	$( '.bonipress-click' ).click(function(){
+	$( '.bonips-click' ).click(function(){
 
 		// The form
 		var the_form = $(this).parent().parent().parent();
@@ -100,7 +100,7 @@ jQuery(function($){
 		var receipient = $(this).parent().prev().children( 'div' ).children( 'input' ).val();
 
 		// Amount:
-		var creds = $(this).prev().children( 'input[name=bonipress-transfer-amount]' ).val();
+		var creds = $(this).prev().children( 'input[name=bonips-transfer-amount]' ).val();
 
 		// If elements are not emepty attempt transfer
 		if ( receipient != '' && creds != '' ) {

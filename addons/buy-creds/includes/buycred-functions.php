@@ -6,14 +6,14 @@ if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_buycred_settings' ) ) :
-	function bonipress_get_buycred_settings() {
+if ( ! function_exists( 'bonips_get_buycred_settings' ) ) :
+	function bonips_get_buycred_settings() {
 
 		$defaults = array(
 			'types'      => array( BONIPS_DEFAULT_TYPE_KEY ),
 			'checkout'   => 'page',
 			'log'        => '%plural% purchase',
-			'login'      => __( 'Bitte melde Dich an, um %_plural% zu kaufen', 'bonipress' ),
+			'login'      => __( 'Bitte melde Dich an, um %_plural% zu kaufen', 'bonips' ),
 			'custom_log' => 0,
 			'thankyou'   => array(
 				'use'        => 'page',
@@ -28,14 +28,14 @@ if ( ! function_exists( 'bonipress_get_buycred_settings' ) ) :
 			'gifting'    => array(
 				'members'    => 1,
 				'authors'    => 1,
-				'log'        => __( 'Geschenkkauf von %display_name%.', 'bonipress' )
+				'log'        => __( 'Geschenkkauf von %display_name%.', 'bonips' )
 			)
 		);
 
-		$settings = bonipress_get_addon_settings( 'buy_creds' );
+		$settings = bonips_get_addon_settings( 'buy_creds' );
 		$settings = wp_parse_args( $settings, $defaults );
 
-		return apply_filters( 'bonipress_get_buycred_settings', $settings );
+		return apply_filters( 'bonips_get_buycred_settings', $settings );
 
 	}
 endif;
@@ -45,16 +45,16 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
-	function bonipress_get_buycred_gateways() {
+if ( ! function_exists( 'bonips_get_buycred_gateways' ) ) :
+	function bonips_get_buycred_gateways() {
 
 		$installed = array();
 
 		// PayPal Standard
 		$installed['paypal-standard'] = array(
 			'title'         => 'PayPal Payments Standard',
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/paypal/',
-			'callback'      => array( 'boniPRESS_PayPal_Standard' ),
+			'documentation' => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/paypal/',
+			'callback'      => array( 'boniPS_PayPal_Standard' ),
 			'icon'          => 'dashicons-admin-generic',
 			'sandbox'       => true,
 			'external'      => true,
@@ -64,8 +64,8 @@ if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
 		// BitPay
 		$installed['bitpay'] = array(
 			'title'         => 'BitPay (Bitcoins)',
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/bitpay/',
-			'callback'      => array( 'boniPRESS_Bitpay' ),
+			'documentation' => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/bitpay/',
+			'callback'      => array( 'boniPS_Bitpay' ),
 			'icon'          => 'dashicons-admin-generic',
 			'sandbox'       => true,
 			'external'      => true,
@@ -75,8 +75,8 @@ if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
 		// NetBilling
 		$installed['netbilling'] = array(
 			'title'         => 'NETBilling',
-			'callback'      => array( 'boniPRESS_NETbilling' ),
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/netbilling/',
+			'callback'      => array( 'boniPS_NETbilling' ),
+			'documentation' => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/netbilling/',
 			'icon'          => 'dashicons-admin-generic',
 			'sandbox'       => true,
 			'external'      => true,
@@ -86,8 +86,8 @@ if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
 		// Skrill
 		$installed['skrill'] = array(
 			'title'         => 'Skrill (Moneybookers)',
-			'callback'      => array( 'boniPRESS_Skrill' ),
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/skrill/',
+			'callback'      => array( 'boniPS_Skrill' ),
+			'documentation' => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/skrill/',
 			'icon'          => 'dashicons-admin-generic',
 			'sandbox'       => true,
 			'external'      => true,
@@ -96,16 +96,16 @@ if ( ! function_exists( 'bonipress_get_buycred_gateways' ) ) :
 
 		// Bank Transfers
 		$installed['bank'] = array(
-			'title'         => __( 'Bank Transfer', 'bonipress' ),
-			'documentation' => 'http://codex.bonipress.me/chapter-iii/buycred/payment-gateways/bank-transfers/',
-			'callback'      => array( 'boniPRESS_Bank_Transfer' ),
+			'title'         => __( 'Bank Transfer', 'bonips' ),
+			'documentation' => 'http://codex.bonips.me/chapter-iii/buycred/payment-gateways/bank-transfers/',
+			'callback'      => array( 'boniPS_Bank_Transfer' ),
 			'icon'          => 'dashicons-admin-generic',
 			'sandbox'       => false,
 			'external'      => false,
 			'custom_rate'   => true
 		);
 
-		return apply_filters( 'bonipress_setup_gateways', $installed );
+		return apply_filters( 'bonips_setup_gateways', $installed );
 
 	}
 endif;
@@ -115,18 +115,18 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_requested_gateway_id' ) ) :
-	function bonipress_get_requested_gateway_id() {
+if ( ! function_exists( 'bonips_get_requested_gateway_id' ) ) :
+	function bonips_get_requested_gateway_id() {
 
 		$gateway_id = false;
 
-		if ( isset( $_REQUEST['bonipress_call'] ) )
-			$gateway_id = trim( $_REQUEST['bonipress_call'] );
+		if ( isset( $_REQUEST['bonips_call'] ) )
+			$gateway_id = trim( $_REQUEST['bonips_call'] );
 
-		elseif ( isset( $_REQUEST['bonipress_buy'] ) && is_user_logged_in() )
-			$gateway_id = trim( $_REQUEST['bonipress_buy'] );
+		elseif ( isset( $_REQUEST['bonips_buy'] ) && is_user_logged_in() )
+			$gateway_id = trim( $_REQUEST['bonips_buy'] );
 
-		return apply_filters( 'bonipress_gateway_id', $gateway_id );
+		return apply_filters( 'bonips_gateway_id', $gateway_id );
 
 	}
 endif;
@@ -136,8 +136,8 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_buycred_sale_setup' ) ) :
-	function bonipress_get_buycred_sale_setup( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
+if ( ! function_exists( 'bonips_get_buycred_sale_setup' ) ) :
+	function bonips_get_buycred_sale_setup( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$defaults = array(
 			'min'  => '',
@@ -145,10 +145,10 @@ if ( ! function_exists( 'bonipress_get_buycred_sale_setup' ) ) :
 			'time' => ''
 		);
 
-		$saved    = bonipress_get_option( 'buycred-setup-' . $point_type, $defaults );
+		$saved    = bonips_get_option( 'buycred-setup-' . $point_type, $defaults );
 		$settings = shortcode_atts( $defaults, $saved );
 
-		return apply_filters( 'bonipress_get_buycred_sale_setup', $settings, $point_type );
+		return apply_filters( 'bonips_get_buycred_sale_setup', $settings, $point_type );
 
 	}
 endif;
@@ -158,8 +158,8 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_buycred_gateway_refs' ) ) :
-	function bonipress_get_buycred_gateway_refs( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
+if ( ! function_exists( 'bonips_get_buycred_gateway_refs' ) ) :
+	function bonips_get_buycred_gateway_refs( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$references = array(
 			'buy_creds_with_paypal_standard',
@@ -169,7 +169,7 @@ if ( ! function_exists( 'bonipress_get_buycred_gateway_refs' ) ) :
 			'buy_creds_with_bank'
 		);
 
-		return apply_filters( 'bonipress_buycred_log_refs', $references, $point_type );
+		return apply_filters( 'bonips_buycred_log_refs', $references, $point_type );
 
 	}
 endif;
@@ -179,14 +179,14 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_purchase_limit_dropdown' ) ) :
-	function bonipress_purchase_limit_dropdown( $name = '', $id = '', $selected = '' ) {
+if ( ! function_exists( 'bonips_purchase_limit_dropdown' ) ) :
+	function bonips_purchase_limit_dropdown( $name = '', $id = '', $selected = '' ) {
 
-		$options = apply_filters( 'bonipress_buycred_limit_dropdown', array(
-			''      => __( 'Kein Limit', 'bonipress' ),
-			'day'   => __( '/ Tag', 'bonipress' ),
-			'week'  => __( '/ Woche', 'bonipress' ),
-			'month' => __( '/ Monat', 'bonipress' )
+		$options = apply_filters( 'bonips_buycred_limit_dropdown', array(
+			''      => __( 'Kein Limit', 'bonips' ),
+			'day'   => __( '/ Tag', 'bonips' ),
+			'week'  => __( '/ Woche', 'bonips' ),
+			'month' => __( '/ Monat', 'bonips' )
 		) );
 
 		$output  = '<select name="' . $name . '" id="' . $id . '" class="form-control">';
@@ -210,22 +210,22 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_user_can_buycred' ) ) :
-	function bonipress_user_can_buycred( $user_id = 0, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
+if ( ! function_exists( 'bonips_user_can_buycred' ) ) :
+	function bonips_user_can_buycred( $user_id = 0, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$can_buy  = false;
 		$total    = 0;
-		$settings = bonipress_get_buycred_settings();
+		$settings = bonips_get_buycred_settings();
 		$user_id  = absint( $user_id );
 
 		// Need a valid ID, the point type must be enabled for sale
 		if ( $user_id === 0 || ! in_array( $point_type, $settings['types'] ) ) return $can_buy;
 
-		$bonipress   = bonipress( $point_type );
-		$setup    = bonipress_get_buycred_sale_setup( $point_type );
+		$bonips   = bonips( $point_type );
+		$setup    = bonips_get_buycred_sale_setup( $point_type );
 
 		// We need to get the lowest possible value for this point type or the minimum amount we set in our settings
-		$minimum  = $bonipress->number( ( ( $setup['min'] == '' ) ? $bonipress->get_lowest_value() : $setup['min'] ) );
+		$minimum  = $bonips->number( ( ( $setup['min'] == '' ) ? $bonips->get_lowest_value() : $setup['min'] ) );
 
 		$can_buy  = true;
 
@@ -233,13 +233,13 @@ if ( ! function_exists( 'bonipress_user_can_buycred' ) ) :
 		// So we can see how much is left on the limit
 		if ( BONIPS_ENABLE_LOGGING && $setup['time'] != '' && $setup['max'] != '' && $setup['max'] > 0 ) {
 
-			$maximum = $bonipress->number( $setup['max'] );
+			$maximum = $bonips->number( $setup['max'] );
 
-			$total   = bonipress_get_users_total_purchase( $user_id, $point_type, $setup['time'] );
-			$total   = $bonipress->number( $total );
+			$total   = bonips_get_users_total_purchase( $user_id, $point_type, $setup['time'] );
+			$total   = $bonips->number( $total );
 
 			if ( $total < $maximum )
-				$can_buy = $bonipress->number( $maximum - $total );
+				$can_buy = $bonips->number( $maximum - $total );
 
 			// Now that we have a "remaining" amount, we need to make sure it is more than the minimum
 			if ( $can_buy < $minimum )
@@ -247,7 +247,7 @@ if ( ! function_exists( 'bonipress_user_can_buycred' ) ) :
 
 		}
 
-		return apply_filters( 'bonipress_user_can_buycred', $can_buy, $user_id, $point_type, $total );
+		return apply_filters( 'bonips_user_can_buycred', $can_buy, $user_id, $point_type, $total );
 
 	}
 endif;
@@ -259,8 +259,8 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_buycred_gateway_is_usable' ) ) :
-	function bonipress_buycred_gateway_is_usable( $gateway_id ) {
+if ( ! function_exists( 'bonips_buycred_gateway_is_usable' ) ) :
+	function bonips_buycred_gateway_is_usable( $gateway_id ) {
 
 		global $buycred_instance;
 
@@ -278,17 +278,17 @@ endif;
  * @since 1.8
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_users_total_purchase' ) ) :
-	function bonipress_get_users_total_purchase( $user_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY, $timeframe = 'all' ) {
+if ( ! function_exists( 'bonips_get_users_total_purchase' ) ) :
+	function bonips_get_users_total_purchase( $user_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY, $timeframe = 'all' ) {
 
 		$from              = 0;
 		$total             = 0;
 		if ( ! BONIPS_ENABLE_LOGGING ) return $total;
 
 		$user_id           = absint( $user_id );
-		if ( $user_id === 0 || ! bonipress_point_type_exists( $point_type ) ) return $total;
+		if ( $user_id === 0 || ! bonips_point_type_exists( $point_type ) ) return $total;
 
-		global $wpdb, $bonipress_log_table;
+		global $wpdb, $bonips_log_table;
 
 		if ( $timeframe != 'all' ) {
 
@@ -318,7 +318,7 @@ if ( ! function_exists( 'bonipress_get_users_total_purchase' ) ) :
 		// First we need to count the completed purchases
 		$completed         = $wpdb->get_var( $wpdb->prepare( "
 			SELECT SUM(creds) 
-			FROM {$bonipress_log_table} 
+			FROM {$bonips_log_table} 
 			WHERE user_id = %d 
 				AND ctype = %s 
 				AND ref LIKE %s 
@@ -327,8 +327,8 @@ if ( ! function_exists( 'bonipress_get_users_total_purchase' ) ) :
 		if ( $completed === NULL ) $completed = 0;
 
 		// Multisite Master Template support
-		$posts             = bonipress_get_db_column( 'posts' );
-		$postmeta          = bonipress_get_db_column( 'postmeta' );
+		$posts             = bonips_get_db_column( 'posts' );
+		$postmeta          = bonips_get_db_column( 'postmeta' );
 
 		// Next we need to tally up pending payments
 		$pending           = $wpdb->get_var( $wpdb->prepare( "
@@ -347,7 +347,7 @@ if ( ! function_exists( 'bonipress_get_users_total_purchase' ) ) :
 
 		$total            = $completed + $pending;
 
-		return apply_filters( 'bonipress_get_users_total_purchase', $total, $user_id, $point_type, $completed, $total );
+		return apply_filters( 'bonips_get_users_total_purchase', $total, $user_id, $point_type, $completed, $total );
 
 	}
 endif;
@@ -366,7 +366,7 @@ if ( ! function_exists( 'buycred_get_pending_payment_id' ) ) :
 		$post_id = false;
 		if ( ! is_numeric( $payment_id ) ) {
 
-			$post = bonipress_get_page_by_title( strtoupper( $payment_id ), OBJECT, 'buycred_payment' );
+			$post = bonips_get_page_by_title( strtoupper( $payment_id ), OBJECT, 'buycred_payment' );
 			if ( $post === NULL ) return false;
 
 			$post_id = $post->ID;
@@ -417,22 +417,22 @@ if ( ! function_exists( 'buycred_get_pending_payment' ) ) :
 			$pending_payment                 = new StdClass();
 			$pending_payment->payment_id     = absint( $payment_id );
 			$pending_payment->public_id      = get_the_title( $payment_id );
-			$pending_payment->point_type     = bonipress_get_post_meta( $payment_id, 'point_type', true );
-			$pending_payment->amount         = bonipress_get_post_meta( $payment_id, 'amount', true );
-			$pending_payment->cost           = bonipress_get_post_meta( $payment_id, 'cost', true );
-			$pending_payment->currency       = bonipress_get_post_meta( $payment_id, 'currency', true );
-			$pending_payment->buyer_id       = bonipress_get_post_meta( $payment_id, 'from', true );
-			$pending_payment->recipient_id   = bonipress_get_post_meta( $payment_id, 'to', true );
-			$pending_payment->gateway_id     = bonipress_get_post_meta( $payment_id, 'gateway', true );
+			$pending_payment->point_type     = bonips_get_post_meta( $payment_id, 'point_type', true );
+			$pending_payment->amount         = bonips_get_post_meta( $payment_id, 'amount', true );
+			$pending_payment->cost           = bonips_get_post_meta( $payment_id, 'cost', true );
+			$pending_payment->currency       = bonips_get_post_meta( $payment_id, 'currency', true );
+			$pending_payment->buyer_id       = bonips_get_post_meta( $payment_id, 'from', true );
+			$pending_payment->recipient_id   = bonips_get_post_meta( $payment_id, 'to', true );
+			$pending_payment->gateway_id     = bonips_get_post_meta( $payment_id, 'gateway', true );
 			$pending_payment->transaction_id = $pending_payment->public_id;
 
 			$pending_payment->cancel_url     = buycred_get_cancel_transaction_url( $pending_payment->public_id );
 
 			$pending_payment->pay_now_url    = add_query_arg( array(
-				'bonipress_buy' => $pending_payment->gateway_id,
+				'bonips_buy' => $pending_payment->gateway_id,
 				'amount'     => $pending_payment->amount,
 				'revisit'    => $payment_id,
-				'token'      => wp_create_nonce( 'bonipress-buy-creds' )
+				'token'      => wp_create_nonce( 'bonips-buy-creds' )
 			), set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ) );
 
 		}
@@ -455,19 +455,19 @@ if ( ! function_exists( 'buycred_add_pending_comment' ) ) :
 		$post_id = buycred_get_pending_payment_id( $payment_id );
 		if ( $post_id === false ) return false;
 
-		global $bonipress_modules;
+		global $bonips_modules;
 
 		if ( $time === NULL || $time == 'now' )
 			$time = current_time( 'mysql' );
 
 		$author       = 'buyCRED';
-		$gateway      = bonipress_get_post_meta( $post_id, 'gateway', true );
-		$gateways     = bonipress_get_buycred_gateways();
-		$author_url   = sprintf( 'buyCRED: %s %s', __( 'Unbekanntes Gateway', 'bonipress' ), $gateway );
-		$author_email = apply_filters( 'bonipress_buycred_comment_email', 'buycred-service@bonipress.me' );
+		$gateway      = bonips_get_post_meta( $post_id, 'gateway', true );
+		$gateways     = bonips_get_buycred_gateways();
+		$author_url   = sprintf( 'buyCRED: %s %s', __( 'Unbekanntes Gateway', 'bonips' ), $gateway );
+		$author_email = apply_filters( 'bonips_buycred_comment_email', 'buycred-service@bonips.me' );
 
 		if ( array_key_exists( $gateway, $gateways ) )
-			$author = sprintf( 'buyCRED: %s %s', $gateways[ $gateway ]['title'], __( 'Gateway', 'bonipress' ) );
+			$author = sprintf( 'buyCRED: %s %s', $gateways[ $gateway ]['title'], __( 'Gateway', 'bonips' ) );
 
 		return wp_insert_comment( array(
 			'comment_post_ID'      => $post_id,
@@ -492,14 +492,14 @@ endif;
 if ( ! function_exists( 'buycred_get_cancel_transaction_url' ) ) :
 	function buycred_get_cancel_transaction_url( $transaction_id = NULL ) {
 
-		$settings = bonipress_get_buycred_settings();
+		$settings = bonips_get_buycred_settings();
 		$base     = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 
 		// Cancel page
 		if ( $settings['cancelled']['use'] == 'page' ) {
 
 			if ( ! empty( $settings['cancelled']['page'] ) && $settings['cancelled']['page'] > 0 )
-				$base = bonipress_get_permalink( $settings['cancelled']['page'] );
+				$base = bonips_get_permalink( $settings['cancelled']['page'] );
 
 		}
 
@@ -519,7 +519,7 @@ if ( ! function_exists( 'buycred_get_cancel_transaction_url' ) ) :
 		else
 			$url = $base;
 
-		return apply_filters( 'bonipress_buycred_cancel_url', $url, $transaction_id, $base );
+		return apply_filters( 'bonips_buycred_cancel_url', $url, $transaction_id, $base );
 
 	}
 endif;
@@ -535,20 +535,20 @@ if ( ! function_exists( 'buycred_get_users_pending_payments' ) ) :
 		$user_id = absint( $user_id );
 		if ( $user_id === 0 ) return false;
 
-		$pending = bonipress_get_user_meta( $user_id, 'buycred_pending_payments', '', true );
+		$pending = bonips_get_user_meta( $user_id, 'buycred_pending_payments', '', true );
 		if ( ! is_array( $pending ) ) {
 
 			global $wpdb;
 
 			$pending = array();
-			$table   = bonipress_get_db_column( 'posts' );
+			$table   = bonips_get_db_column( 'posts' );
 			$saved   = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table} posts WHERE posts.post_type = 'buycred_payment' AND posts.post_author = %d AND posts.post_status = 'publish';", $user_id ) );
 
 			if ( ! empty( $saved ) ) {
 
 				foreach ( $saved as $entry ) {
 
-					$point_type = bonipress_get_post_meta( $entry->ID, 'point_type', true );
+					$point_type = bonips_get_post_meta( $entry->ID, 'point_type', true );
 					if ( $point_type == '' ) $point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 					if ( ! array_key_exists( $point_type, $pending ) )
@@ -569,11 +569,11 @@ if ( ! function_exists( 'buycred_get_users_pending_payments' ) ) :
 
 			}
 
-			bonipress_add_user_meta( $user_id, 'buycred_pending_payments', '', $pending, true );
+			bonips_add_user_meta( $user_id, 'buycred_pending_payments', '', $pending, true );
 
 		}
 
-		if ( $point_type != '' && bonipress_point_type_exists( $point_type ) ) {
+		if ( $point_type != '' && bonips_point_type_exists( $point_type ) ) {
 
 			if ( ! is_array( $pending ) || ! array_key_exists( $point_type, $pending ) )
 				return false;
@@ -595,23 +595,23 @@ endif;
 if ( ! function_exists( 'buycred_gateway' ) ) :
 	function buycred_gateway( $gateway_id = NULL ) {
 
-		global $buycred_gateway, $bonipress_modules;
+		global $buycred_gateway, $bonips_modules;
 
 		if ( isset( $buycred_gateway )
-			&& ( $buycred_gateway instanceof boniPRESS_Payment_Gateway )
+			&& ( $buycred_gateway instanceof boniPS_Payment_Gateway )
 			&& ( $gateway_id === $buycred_gateway->id )
 		) {
 			return $buycred_gateway;
 		}
 
 		$buycred_gateway = false;
-		$installed       = $bonipress_modules['solo']['buycred']->get();
+		$installed       = $bonips_modules['solo']['buycred']->get();
 		if ( array_key_exists( $gateway_id, $installed ) ) {
 
 			$class   = $installed[ $gateway_id ]['callback'][0];
 
 			// Construct Gateway
-			$buycred_gateway = new $class( $bonipress_modules['solo']['buycred']->gateway_prefs );
+			$buycred_gateway = new $class( $bonips_modules['solo']['buycred']->gateway_prefs );
 
 		}
 
@@ -631,7 +631,7 @@ if ( ! function_exists( 'buycred_trash_pending_payment' ) ) :
 		$pending_payment = buycred_get_pending_payment( $payment_id );
 		if ( $pending_payment === false ) return false;
 
-		bonipress_delete_user_meta( $pending_payment->buyer_id, 'buycred_pending_payments' );
+		bonips_delete_user_meta( $pending_payment->buyer_id, 'buycred_pending_payments' );
 
 		return wp_trash_post( $pending_payment->payment_id );
 

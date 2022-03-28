@@ -1,30 +1,30 @@
 /**
- * boniPRESS Management Scripts
+ * boniPS Management Scripts
  * @since 1.3
  * @version 1.0
  */
 jQuery(function($) {
 	
-	var bonipress_action_delete_ranks = function( button ) {
+	var bonips_action_delete_ranks = function( button ) {
 		var label = button.val();
 		$.ajax({
 			type : "POST",
 			data : {
-				action : 'bonipress-action-delete-ranks',
-				token  : boniPRESS_Ranks.token
+				action : 'bonips-action-delete-ranks',
+				token  : boniPS_Ranks.token
 			},
 			dataType : "JSON",
-			url : boniPRESS_Ranks.ajaxurl,
+			url : boniPS_Ranks.ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', boniPRESS_Ranks.working );
+				button.attr( 'value', boniPS_Ranks.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success : function( data ) {
 				console.log( data );
 				
 				if ( data.status == 'OK' ) {
-					$( 'input#bonipress-ranks-no-of-ranks' ).val( data.rows );
-					button.val( boniPRESSmanage.done );
+					$( 'input#bonips-ranks-no-of-ranks' ).val( data.rows );
+					button.val( boniPSmanage.done );
 					button.removeClass( 'button-primary' );
 				}
 				else {
@@ -41,32 +41,32 @@ jQuery(function($) {
 		});
 	};
 	
-	$( 'input#bonipress-manage-action-reset-ranks' ).click(function(){
+	$( 'input#bonips-manage-action-reset-ranks' ).click(function(){
 		// Confirm action
-		if ( confirm( boniPRESS_Ranks.confirm_del ) ) {
-			bonipress_action_delete_ranks( $(this) );
+		if ( confirm( boniPS_Ranks.confirm_del ) ) {
+			bonips_action_delete_ranks( $(this) );
 		}
 	});
 	
-	var bonipress_action_assign_ranks = function( button ) {
+	var bonips_action_assign_ranks = function( button ) {
 		var label = button.val();
 		$.ajax({
 			type : "POST",
 			data : {
-				action : 'bonipress-action-assign-ranks',
-				token  : boniPRESS_Ranks.token
+				action : 'bonips-action-assign-ranks',
+				token  : boniPS_Ranks.token
 			},
 			dataType : "JSON",
-			url : boniPRESS_Ranks.ajaxurl,
+			url : boniPS_Ranks.ajaxurl,
 			beforeSend : function() {
-				button.attr( 'value', boniPRESS_Ranks.working );
+				button.attr( 'value', boniPS_Ranks.working );
 				button.attr( 'disabled', 'disabled' );
 			},
 			success : function( data ) {
 				console.log( data );
 				
 				if ( data.status == 'OK' ) {
-					button.val( boniPRESSmanage.done );
+					button.val( boniPSmanage.done );
 				}
 				else {
 					button.val( label );
@@ -82,10 +82,10 @@ jQuery(function($) {
 		});
 	};
 	
-	$( 'input#bonipress-manage-action-assign-ranks' ).click(function(){
+	$( 'input#bonips-manage-action-assign-ranks' ).click(function(){
 		// Confirm action
-		if ( confirm( boniPRESS_Ranks.confirm_assign ) ) {
-			bonipress_action_assign_ranks( $(this) );
+		if ( confirm( boniPS_Ranks.confirm_assign ) ) {
+			bonips_action_assign_ranks( $(this) );
 		}
 	});
 });

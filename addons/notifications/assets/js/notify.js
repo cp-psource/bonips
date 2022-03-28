@@ -34,7 +34,7 @@
 			var defaults = {
 				inEffect: 			{opacity: 'show'},	// in effect
 				inEffectDuration: 	600,				// in effect duration in miliseconds
-				stayTime: 			parseInt( boniPRESS_Notice.duration, 10 ) * 1000, // time in miliseconds before the item has to disappear
+				stayTime: 			parseInt( boniPS_Notice.duration, 10 ) * 1000, // time in miliseconds before the item has to disappear
 				text: 				'',					// content of the item
 				stay: 				true,				// should the notice item stay or not?
 				type: 				'succes' 			// could also be error, succes

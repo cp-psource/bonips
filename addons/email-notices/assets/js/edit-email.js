@@ -2,7 +2,7 @@ jQuery(function($){
 
 	$(document).ready(function(){
 
-		$( 'select#bonipress-email-instance' ).change(function(e){
+		$( 'select#bonips-email-instance' ).change(function(e){
 
 			var selectedevent = $(this).find( ':selected' );
 			console.log( selectedevent.val() );
@@ -19,19 +19,19 @@ jQuery(function($){
 
 		});
 
-		$( 'select#bonipress-email-reference' ).change(function(e){
+		$( 'select#bonips-email-reference' ).change(function(e){
 
 			var selectedevent = $(this).find( ':selected' );
-			if ( selectedevent.val() == 'bonipress_custom' ) {
+			if ( selectedevent.val() == 'bonips_custom' ) {
 
 				$( '#custom-reference-selection' ).show();
-				$( '#bonipress-email-custom-ref' ).focus();
+				$( '#bonips-email-custom-ref' ).focus();
 
 			}
 			else {
 
 				$( '#custom-reference-selection' ).hide();
-				$( '#bonipress-email-custom-ref' ).blur();
+				$( '#bonips-email-custom-ref' ).blur();
 
 			}
 

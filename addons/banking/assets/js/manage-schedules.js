@@ -40,7 +40,7 @@ jQuery(function($) {
 		 * Setup Schedule Modal
 		 */
 		RecurringSchedule.dialog({
-			dialogClass : 'bonipress-update-balance bonipress-metabox',
+			dialogClass : 'bonips-update-balance bonips-metabox',
 			draggable   : true,
 			autoOpen    : false,
 			title       : Banking.new,
@@ -63,7 +63,7 @@ jQuery(function($) {
 		RecurringSchedule.on( "dialogclose", function( event, ui ) {
 
 			$( '#manage-recurring-schedule-form' ).empty();
-			$( '#bonipress-processing' ).show();
+			$( '#bonips-processing' ).show();
 
 		} );
 
@@ -90,14 +90,14 @@ jQuery(function($) {
 				return false;
 			}
 
-			$( '#bonipress-processing' ).show();
+			$( '#bonips-processing' ).show();
 
 			var thisform = $(this);
 
 			$.ajax({
 				type       : 'POST',
 				data       : {
-					action    : 'run-bonipress-bank-service',
+					action    : 'run-bonips-bank-service',
 					_token    : Banking.token,
 					service   : 'payouts',
 					form      : thisform.serialize()
@@ -114,7 +114,7 @@ jQuery(function($) {
 						return false;
 					}
 
-					$( '#bonipress-processing' ).hide();
+					$( '#bonips-processing' ).hide();
 
 					thisform.empty().append( response.data.form ).slideDown();
 

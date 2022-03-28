@@ -1,14 +1,14 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * Query Statistics
- * @see http://codex.bonipress.me/classes/bonipress_query_stats/ 
+ * @see http://codex.bonips.me/classes/bonips_query_stats/ 
  * @since 1.7
  * @version 1.0
  */
-if ( ! class_exists( 'boniPRESS_Query_Stats' ) ) :
-	class boniPRESS_Query_Stats {
+if ( ! class_exists( 'boniPS_Query_Stats' ) ) :
+	class boniPS_Query_Stats {
 
 		protected $db = '';
 
@@ -17,9 +17,9 @@ if ( ! class_exists( 'boniPRESS_Query_Stats' ) ) :
 		 */
 		public function __construct() {
 
-			global $bonipress;
+			global $bonips;
 
-			$this->db = $bonipress->log_table;
+			$this->db = $bonips->log_table;
 
 		}
 

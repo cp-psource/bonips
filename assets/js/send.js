@@ -1,12 +1,12 @@
 /**
- * boniPRESS
- * Handle bonipress_send shortcode buttons.
+ * boniPS
+ * Handle bonips_send shortcode buttons.
  * @since 0.1
  * @version 1.3
  */
 jQuery(function($) {
 
-	$( 'button.bonipress-send-points-button' ).click(function(){
+	$( 'button.bonips-send-points-button' ).click(function(){
 
 		var button        = $(this);
 		var originallabel = button.text();
@@ -14,26 +14,26 @@ jQuery(function($) {
 		$.ajax({
 			type : "POST",
 			data : {
-				action    : 'bonipress-send-points',
+				action    : 'bonips-send-points',
 				amount    : button.data( 'amount' ),
 				recipient : button.data( 'to' ),
 				log       : button.data( 'log' ),
 				reference : button.data( 'ref' ),
 				type      : button.data( 'type' ),
-				token     : boniPRESSsend.token
+				token     : boniPSsend.token
 			},
 			dataType   : "JSON",
-			url        : boniPRESSsend.ajaxurl,
+			url        : boniPSsend.ajaxurl,
 			beforeSend : function() {
 
-				button.attr( 'disabled', 'disabled' ).text( boniPRESSsend.working );
+				button.attr( 'disabled', 'disabled' ).text( boniPSsend.working );
 
 			},
 			success    : function( data ) {
 
 				if ( data == 'done' ) {
 
-					button.text( boniPRESSsend.done );
+					button.text( boniPSsend.done );
 					setTimeout( function(){
 						button.removeAttr( 'disabled' ).text( originallabel );
 					}, 2000 );
@@ -42,10 +42,10 @@ jQuery(function($) {
 
 				else if ( data == 'zero' ) {
 
-					button.text( boniPRESSsend.done );
+					button.text( boniPSsend.done );
 					setTimeout( function(){
 
-						$( 'button.bonipress-send-points-button' ).each(function(){
+						$( 'button.bonips-send-points-button' ).each(function(){
 							$(this).attr( 'disabled', 'disabled' ).hide();
 						});
 
@@ -54,7 +54,7 @@ jQuery(function($) {
 				}
 				else {
 
-					button.text( boniPRESSsend.error );
+					button.text( boniPSsend.error );
 					setTimeout( function(){
 						button.removeAttr( 'disabled' ).text( originallabel );
 					}, 2000 );

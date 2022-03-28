@@ -1,16 +1,16 @@
 /**
- * boniPRESS Points for Link Clicks jQuery Scripts
+ * boniPS Points for Link Clicks jQuery Scripts
  * @contributors Kevin Reeves
  * @since 0.1
  * @version 1.7.1
  */
 jQuery(function($) {
 
-	$( '.bonipress-points-link' ).click(function(){
+	$( '.bonips-points-link' ).click(function(){
 
-		var bonipresslink      = $(this);
-		var linkdestination = bonipresslink.attr( 'href' );
-		var target          = bonipresslink.attr( 'target' );
+		var bonipslink      = $(this);
+		var linkdestination = bonipslink.attr( 'href' );
+		var target          = bonipslink.attr( 'target' );
 		if ( typeof target === 'undefined' ) {
 			target = 'self';
 		}
@@ -18,15 +18,15 @@ jQuery(function($) {
 		$.ajax({
 			type     : "POST",
 			data     : {
-				action : 'bonipress-click-points',
+				action : 'bonips-click-points',
 				url    : linkdestination,
-				token  : boniPRESSlink.token,
-				etitle : bonipresslink.text(),
-				ctype  : bonipresslink.attr( 'data-type' ),
-				key    : bonipresslink.attr( 'data-token' )
+				token  : boniPSlink.token,
+				etitle : bonipslink.text(),
+				ctype  : bonipslink.attr( 'data-type' ),
+				key    : bonipslink.attr( 'data-token' )
 			},
 			dataType : "JSON",
-			url      : boniPRESSlink.ajaxurl,
+			url      : boniPSlink.ajaxurl,
 			success  : function( response ) {
 				console.log( response );
 				if ( target == 'self' || target == '_self' )

@@ -1,14 +1,14 @@
 <?php
-if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
+if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * Query Export
- * @see http://codex.bonipress.me/classes/bonipress_query_export/ 
+ * @see http://codex.bonips.me/classes/bonips_query_export/ 
  * @since 1.7
  * @version 1.0
  */
-if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
-	class boniPRESS_Query_Export {
+if ( ! class_exists( 'boniPS_Query_Export' ) ) :
+	class boniPS_Query_Export {
 
 		protected $db       = '';
 
@@ -29,9 +29,9 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 		 */
 		public function __construct( $args = array(), $headers = array() ) {
 
-			global $bonipress_log_table;
+			global $bonips_log_table;
 
-			$this->args = apply_filters( 'bonipress_export_args', shortcode_atts( array(
+			$this->args = apply_filters( 'bonips_export_args', shortcode_atts( array(
 				'raw'         => false,
 				'number'      => -1,
 				'order'       => 'time',
@@ -39,9 +39,9 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 				'date_format' => get_option( 'date_format' )
 			), $args ), $args );
 
-			$this->db          = $bonipress_log_table;
+			$this->db          = $bonips_log_table;
 			$this->raw         = $this->args['raw'];
-			$this->references  = bonipress_get_all_references();
+			$this->references  = bonips_get_all_references();
 
 			$this->set_orderby();
 			$this->set_limit();
@@ -60,7 +60,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 			$file = mb_ereg_replace( "([\.]{2,})", '', $name );
 
 			if ( $file === NULL || $file === false || strlen( $file ) == 0 )
-				$file = 'bonipress-export-' . date( $this->args['date_format'], current_time( 'timestamp' ) ) . '.csv';
+				$file = 'bonips-export-' . date( $this->args['date_format'], current_time( 'timestamp' ) ) . '.csv';
 
 			$username   = '';
 			$point_type = 'default';
@@ -74,14 +74,14 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 			}
 
 			if ( ! empty( $this->types ) && count( $this->types ) == 1 ) {
-				foreach ( $this->types as $type_id => $bonipress )
+				foreach ( $this->types as $type_id => $bonips )
 					$point_type = $type_id;
 			}
 
 			$file = str_replace( '%username%',   $username, $file );
 			$file = str_replace( '%point_type%', $point_type, $file );
 
-			$this->file_name = apply_filters( 'bonipress_export_file_name', $file, $name, $this );
+			$this->file_name = apply_filters( 'bonips_export_file_name', $file, $name, $this );
 
 		}
 
@@ -165,7 +165,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 		public function get_data_by_type( $point_type = NULL ) {
 
 			$point_type = sanitize_key( $point_type );
-			if ( ! bonipress_point_type_exists( $point_type ) ) return false;
+			if ( ! bonips_point_type_exists( $point_type ) ) return false;
 
 			global $wpdb;
 
@@ -175,7 +175,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 			if ( ! empty( $data ) ) {
 
 				$types = array();
-				$types[ $point_type ] = bonipress( $point_type );
+				$types[ $point_type ] = bonips( $point_type );
 				$this->types = $types;
 
 				foreach ( $data as $entry ) {
@@ -201,7 +201,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 		 */
 		public function get_data_by_query( $args = array() ) {
 
-			$log = new boniPRESS_Query_Log( $args );
+			$log = new boniPS_Query_Log( $args );
 
 			if ( $log->have_entries() )
 				$this->data = $log->results;
@@ -232,7 +232,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 			if ( strlen( $orderby ) === 1 )
 				$orderby = $default;
 
-			$this->orderby = apply_filters( 'bonipress_export_orderby', $orderby, $this->args );
+			$this->orderby = apply_filters( 'bonips_export_orderby', $orderby, $this->args );
 
 		}
 
@@ -260,14 +260,14 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 		protected function set_column_headers( $headers = array() ) {
 
 			if ( empty( $headers ) || ! is_array( $headers ) )
-				$headers = array( 'ref' => __( 'Reference', 'bonipress' ), 'ref_id' => __( 'Reference ID', 'bonipress' ), 'user_id' => __( 'User', 'bonipress' ), 'creds' => __( 'Amount', 'bonipress' ), 'ctype' => __( 'Point Type', 'bonipress' ), 'time' => __( 'Date', 'bonipress' ), 'entry' => __( 'Entry', 'bonipress' ), 'data' => __( 'Data', 'bonipress' ) );
+				$headers = array( 'ref' => __( 'Reference', 'bonips' ), 'ref_id' => __( 'Reference ID', 'bonips' ), 'user_id' => __( 'User', 'bonips' ), 'creds' => __( 'Amount', 'bonips' ), 'ctype' => __( 'Point Type', 'bonips' ), 'time' => __( 'Date', 'bonips' ), 'entry' => __( 'Entry', 'bonips' ), 'data' => __( 'Data', 'bonips' ) );
 
 			if ( ! $this->raw ) {
 				unset( $headers['ref_id'] );
 				unset( $headers['data'] );
 			}
 
-			$headers = apply_filters( 'bonipress_export_headers', $headers, $this->raw );
+			$headers = apply_filters( 'bonips_export_headers', $headers, $this->raw );
 
 			if ( $this->raw )
 				$this->headers = array_keys( $headers );
@@ -309,7 +309,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 			foreach ( $data as $entry ) {
 
 				if ( isset( $entry->ctype ) && sanitize_text_field( $entry->ctype ) !== '' && ! array_key_exists( $entry->ctype, $types ) )
-					$types[ $entry->ctype ] = bonipress( $entry->ctype );
+					$types[ $entry->ctype ] = bonips( $entry->ctype );
 
 			}
 
@@ -357,63 +357,63 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 					switch ( $header_id ) {
 
 						case 'ref' :
-						case __( 'Reference', 'bonipress' ) :
+						case __( 'Reference', 'bonips' ) :
 
 							$content = '';
 							if ( array_key_exists( $entry->ref, $this->references ) )
 								$content = $this->references[ $entry->ref ];
 
-							$content = apply_filters( 'bonipress_log_ref', $content, $entry->ref, $entry );
+							$content = apply_filters( 'bonips_log_ref', $content, $entry->ref, $entry );
 
 						break;
 
 						case 'user_id' :
-						case __( 'User', 'bonipress' ) :
+						case __( 'User', 'bonips' ) :
 
 							$user         = get_userdata( $entry->user_id );
-							$display_name = '<span>' . __( 'User Missing', 'bonipress' ) . ' (ID: ' . $entry->user_id . ')</span>';
+							$display_name = '<span>' . __( 'User Missing', 'bonips' ) . ' (ID: ' . $entry->user_id . ')</span>';
 							if ( isset( $user->display_name ) )
 								$display_name = $user->display_name;
 
-							$content = apply_filters( 'bonipress_log_username', $display_name, $entry->user_id, $entry );
+							$content = apply_filters( 'bonips_log_username', $display_name, $entry->user_id, $entry );
 
 						break;
 
 						case 'creds' :
-						case __( 'Amount', 'bonipress' ) :
+						case __( 'Amount', 'bonips' ) :
 
 							$content = $this->types[ $type ]->format_creds( $entry->creds );
-							$content = apply_filters( 'bonipress_log_creds', $content, $entry->creds, $entry );
+							$content = apply_filters( 'bonips_log_creds', $content, $entry->creds, $entry );
 
 						break;
 
 						case 'ctype' :
-						case __( 'Point Type', 'bonipress' ) :
+						case __( 'Point Type', 'bonips' ) :
 
 							$content = $this->types[ $type ]->plural();
-							$content = apply_filters( 'bonipress_log_ctype', $content, $entry->ctype, $entry );
+							$content = apply_filters( 'bonips_log_ctype', $content, $entry->ctype, $entry );
 
 						break;
 
 						case 'time' :
-						case __( 'Date', 'bonipress' ) :
+						case __( 'Date', 'bonips' ) :
 
-							$content = apply_filters( 'bonipress_log_date', date( $this->args['date_format'], $entry->time ), $entry->time, $entry );
+							$content = apply_filters( 'bonips_log_date', date( $this->args['date_format'], $entry->time ), $entry->time, $entry );
 
 						break;
 
 						case 'entry' :
-						case __( 'Entry', 'bonipress' ) :
+						case __( 'Entry', 'bonips' ) :
 
 							$content = $this->types[ $type ]->parse_template_tags( $entry->entry, $entry );
-							$content = apply_filters( 'bonipress_log_entry', $content, $entry->entry, $entry );
+							$content = apply_filters( 'bonips_log_entry', $content, $entry->entry, $entry );
 
 						break;
 
 						// Let others play
 						default :
 
-							$content = apply_filters( 'bonipress_log_' . $header_id, '', $entry );
+							$content = apply_filters( 'bonips_log_' . $header_id, '', $entry );
 
 						break;
 
@@ -439,7 +439,7 @@ if ( ! class_exists( 'boniPRESS_Query_Export' ) ) :
 
 			// Load parseCSV
 			if ( ! class_exists( 'parseCSV' ) )
-				require_once boniPRESS_ASSETS_DIR . 'libs/parsecsv.lib.php';
+				require_once boniPS_ASSETS_DIR . 'libs/parsecsv.lib.php';
 
 			$csv = new parseCSV();
 			$csv->output( true, $this->file_name, $this->data, $this->headers );
@@ -457,12 +457,12 @@ endif;
  * @since 1.7
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_export_formats' ) ) :
-	function bonipress_get_export_formats() {
+if ( ! function_exists( 'bonips_get_export_formats' ) ) :
+	function bonips_get_export_formats() {
 
-		return apply_filters( 'bonipress_export_formats', array(
-			'raw'       => __( 'Export log entries raw', 'bonipress' ),
-			'formatted' => __( 'Export log entries formatted', 'bonipress' )
+		return apply_filters( 'bonips_export_formats', array(
+			'raw'       => __( 'Export log entries raw', 'bonips' ),
+			'formatted' => __( 'Export log entries formatted', 'bonips' )
 		) );
 
 	}
@@ -474,28 +474,28 @@ endif;
  * @since 1.4
  * @version 1.2
  */
-if ( ! function_exists( 'bonipress_get_log_exports' ) ) :
-	function bonipress_get_log_exports() {
+if ( ! function_exists( 'bonips_get_log_exports' ) ) :
+	function bonips_get_log_exports() {
 
 		$defaults = array(
 			'all'      => array(
-				'label'    => __( 'Alle Protokolleinträge', 'bonipress' ),
+				'label'    => __( 'Alle Protokolleinträge', 'bonips' ),
 				'my_label' => NULL,
 				'class'    => 'btn btn-primary button button-primary'
 			),
 			'search'   => array(
-				'label'    => __( 'Suchergebnisse', 'bonipress' ),
+				'label'    => __( 'Suchergebnisse', 'bonips' ),
 				'my_label' => NULL,
 				'class'    => 'btn btn-primary button button-secondary'
 			),
 			'user'     => array(
-				'label'    => __( 'Benutzerprotokolleinträge', 'bonipress' ),
-				'my_label' => __( 'Verlauf exportieren', 'bonipress' ),
+				'label'    => __( 'Benutzerprotokolleinträge', 'bonips' ),
+				'my_label' => __( 'Verlauf exportieren', 'bonips' ),
 				'class'    => 'btn btn-primary button button-secondary'
 			)
 		);
 
-		return apply_filters( 'bonipress_log_exports', $defaults );
+		return apply_filters( 'bonips_log_exports', $defaults );
 
 	}
 endif;
@@ -506,8 +506,8 @@ endif;
  * @since 1.7
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_get_export_url' ) ) :
-	function bonipress_get_export_url( $set = 'all', $raw = false ) {
+if ( ! function_exists( 'bonips_get_export_url' ) ) :
+	function bonips_get_export_url( $set = 'all', $raw = false ) {
 
 		$export_url = false;
 		$is_admin   = ( ( function_exists( 'is_admin' ) && is_admin() ) ? true : false );
@@ -533,14 +533,14 @@ if ( ! function_exists( 'bonipress_get_export_url' ) ) :
 				if ( isset( $_GET['page'] ) )
 					$args['page'] = $_GET['page'];
 
-				$args['bonipress-action'] = 'export';
-				$args['_token']        = wp_create_nonce( 'bonipress-export-request-admin' );
+				$args['bonips-action'] = 'export';
+				$args['_token']        = wp_create_nonce( 'bonips-export-request-admin' );
 
 			}
 			else {
 
-				$args['bonipress-action'] = 'export';
-				$args['_token']        = wp_create_nonce( 'bonipress-export-request' );
+				$args['bonips-action'] = 'export';
+				$args['_token']        = wp_create_nonce( 'bonips-export-request' );
 
 			}
 
@@ -553,7 +553,7 @@ if ( ! function_exists( 'bonipress_get_export_url' ) ) :
 
 		}
 
-		return apply_filters( 'bonipress_get_export_url', $export_url, $set, $is_admin );
+		return apply_filters( 'bonips_get_export_url', $export_url, $set, $is_admin );
 
 	}
 endif;
@@ -564,17 +564,17 @@ endif;
  * @since 1.7
  * @version 1.0
  */
-if ( ! function_exists( 'bonipress_is_valid_export_url' ) ) :
-	function bonipress_is_valid_export_url( $admin = false ) {
+if ( ! function_exists( 'bonips_is_valid_export_url' ) ) :
+	function bonips_is_valid_export_url( $admin = false ) {
 
 		$valid = false;
-		$token = 'bonipress-export-request';
+		$token = 'bonips-export-request';
 		if ( $admin )
-			$token = 'bonipress-export-request-admin';
+			$token = 'bonips-export-request-admin';
 
 		if ( is_user_logged_in() ) {
 
-			if ( isset( $_REQUEST['bonipress-action'] ) && isset( $_REQUEST['_token'] ) && substr( $_REQUEST['bonipress-action'], 0, 6 ) === 'export' ) {
+			if ( isset( $_REQUEST['bonips-action'] ) && isset( $_REQUEST['_token'] ) && substr( $_REQUEST['bonips-action'], 0, 6 ) === 'export' ) {
 
 				if ( wp_verify_nonce( $_REQUEST['_token'], $token ) )
 					$valid = true;
@@ -583,7 +583,7 @@ if ( ! function_exists( 'bonipress_is_valid_export_url' ) ) :
 
 		}
 
-		return apply_filters( 'bonipress_is_valid_export_url', $valid, $admin );
+		return apply_filters( 'bonips_is_valid_export_url', $valid, $admin );
 
 	}
 endif;

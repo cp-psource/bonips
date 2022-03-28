@@ -1,23 +1,23 @@
 /**
- * boniPRESS Sell Content
+ * boniPS Sell Content
  * @since 1.1
  * @version 1.0
  */
 jQuery(function($) {
-	var bonipress_buy_content = function( button, label ) {
-		wrapper = button.parents( 'div.bonipress-content-forsale' );
+	var bonips_buy_content = function( button, label ) {
+		wrapper = button.parents( 'div.bonips-content-forsale' );
 		$.ajax({
 			type : "POST",
 			data : {
-				action    : 'bonipress-buy-content',
+				action    : 'bonips-buy-content',
 				postid    : button.attr( 'data-id' ),
-				token     : boniPRESSsell.token
+				token     : boniPSsell.token
 			},
 			dataType : "HTML",
-			url : boniPRESSsell.ajaxurl,
+			url : boniPSsell.ajaxurl,
 			// Before we start
 			beforeSend : function() {
-				button.attr( 'value', boniPRESSsell.working );
+				button.attr( 'value', boniPSsell.working );
 				button.attr( 'disabled', 'disabled' );
 				wrapper.slideUp();
 			},
@@ -40,7 +40,7 @@ jQuery(function($) {
 		});
 	};
 	
-	$('.bonipress-sell-this-button').click(function(){
-		bonipress_buy_content( $(this), $(this).attr( 'value' ) );
+	$('.bonips-sell-this-button').click(function(){
+		bonips_buy_content( $(this), $(this).attr( 'value' ) );
 	});
 });

@@ -2,12 +2,12 @@
 if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
- * boniPRESS_buyCRED_Module class
+ * boniPS_buyCRED_Module class
  * @since 0.1
  * @version 1.4.1
  */
-if ( ! class_exists( 'boniPRESS_buyCRED_Reward' ) ) :
-	class boniPRESS_buyCRED_Reward {
+if ( ! class_exists( 'boniPS_buyCRED_Reward' ) ) :
+	class boniPS_buyCRED_Reward {
 
 		// Instnace
 		protected static $_instance = NULL;
@@ -17,10 +17,10 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward' ) ) :
 		 */
 		function __construct() {
 
-			add_action( 'bonipress_admin_enqueue',  array( $this, 'register_assets' ) );
-			add_filter( 'bonipress_setup_hooks',    array( $this, 'register_buycred_reward_hook' ), 10, 2 );
-			add_action( 'bonipress_load_hooks',     array( $this, 'load_buycred_reward_hook' ) );
-			add_filter( 'bonipress_all_references', array( $this, 'register_buycred_reward_refrence' ) );
+			add_action( 'bonips_admin_enqueue',  array( $this, 'register_assets' ) );
+			add_filter( 'bonips_setup_hooks',    array( $this, 'register_buycred_reward_hook' ), 10, 2 );
+			add_action( 'bonips_load_hooks',     array( $this, 'load_buycred_reward_hook' ) );
+			add_filter( 'bonips_all_references', array( $this, 'register_buycred_reward_refrence' ) );
 
 		}
 
@@ -55,9 +55,9 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward' ) ) :
 		public function register_buycred_reward_hook( $installed ) {
 
 			$installed['buycred_reward'] = array(
-				'title'       => __('Belohnung für den Kauf von %plural%', 'bonipress'),
-				'description' => __('Fügt einen BoniPress-Hook für die buyCred-Belohnung hinzu.', 'bonipress'),
-				'callback'    => array('boniPRESS_buyCRED_Reward_Hook')
+				'title'       => __('Belohnung für den Kauf von %plural%', 'bonips'),
+				'description' => __('Fügt einen BoniPress-Hook für die buyCred-Belohnung hinzu.', 'bonips'),
+				'callback'    => array('boniPS_buyCRED_Reward_Hook')
 			);
 
 			return $installed;
@@ -66,14 +66,14 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward' ) ) :
 
 		public function register_buycred_reward_refrence( $list ) {
 
-			$list['buycred_reward']  = __('Belohnung für den Kauf von buyCRED', 'bonipress');
+			$list['buycred_reward']  = __('Belohnung für den Kauf von buyCRED', 'bonips');
 			return $list;
 		}
 
 	}
 endif;
 
-function bonipress_buycred_reward_init() {
-	return boniPRESS_buyCRED_Reward::instance();
+function bonips_buycred_reward_init() {
+	return boniPS_buyCRED_Reward::instance();
 }
-bonipress_buycred_reward_init(); 
+bonips_buycred_reward_init(); 
