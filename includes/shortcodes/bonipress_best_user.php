@@ -15,11 +15,11 @@ if ( ! function_exists( 'bonipress_render_shortcode_best_user' ) ) :
 			'ref'     => 'balance',
 			'from'    => '',
 			'until'   => '',
-			'types'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'types'   => BONIPS_DEFAULT_TYPE_KEY,
 			'nothing' => 'Kein Benutzer gefunden',
 			'order'   => 'DESC',
 			'avatar'  => 50
-		), $attr, BONIPRESS_SLUG . '_best_user' ) );
+		), $attr, BONIPS_SLUG . '_best_user' ) );
 
 		$args = array(
 			'number'       => 1,
@@ -67,4 +67,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_best_user' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_best_user', 'bonipress_render_shortcode_best_user' );
+add_shortcode( BONIPS_SLUG . '_best_user', 'bonipress_render_shortcode_best_user' );

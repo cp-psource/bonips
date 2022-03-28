@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		/**
 		 * The current point type key
 		 */
-		public $bonipress_type  = BONIPRESS_DEFAULT_TYPE_KEY;
+		public $bonipress_type  = BONIPS_DEFAULT_TYPE_KEY;
 
 		/**
 		 * The boniPRESS object for the current type
@@ -43,7 +43,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $args = array(), $hook_prefs = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $args = array(), $hook_prefs = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( ! empty( $args ) ) {
 				foreach ( $args as $key => $value ) {
@@ -60,7 +60,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 				$this->bonipress_type   = $this->core->cred_id;
 			}
 
-			if ( $this->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $this->bonipress_type != BONIPS_DEFAULT_TYPE_KEY )
 				$this->is_main_type = false;
 
 			// Grab settings
@@ -207,7 +207,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		public function over_hook_limit( $instance = '', $reference = '', $user_id = NULL, $ref_id = NULL ) {
 
 			// If logging is disabled, we cant use this feature
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return false;
+			if ( ! BONIPS_ENABLE_LOGGING ) return false;
 
 			// Enforce limit if this function is used incorrectly
 			if ( ! isset( $this->prefs[ $instance ] ) && $instance != '' )
@@ -431,7 +431,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		public function has_entry( $action = '', $ref_id = '', $user_id = '', $data = '', $point_type = '' ) {
 
 			// If logging is disabled, we cant use this feature
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return false;
+			if ( ! BONIPS_ENABLE_LOGGING ) return false;
 
 			if ( $point_type == '' )
 				$point_type = $this->bonipress_type;
@@ -459,7 +459,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		public function is_over_daily_limit( $ref = '', $user_id = 0, $max = 0, $ref_id = NULL ) {
 
 			// If logging is disabled, we cant use this feature
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return false;
+			if ( ! BONIPS_ENABLE_LOGGING ) return false;
 
 			// Prep
 			$reply = true;
@@ -506,7 +506,7 @@ if ( ! class_exists( 'boniPRESS_Hook' ) ) :
 		public function limit_query( $ref = '', $user_id = 0, $start = 0, $end = 0, $ref_id = NULL ) {
 
 			// If logging is disabled, we cant use this feature
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return 0;
+			if ( ! BONIPS_ENABLE_LOGGING ) return 0;
 
 			// Minimum requirements
 			if ( empty( $ref ) || $user_id == 0 || $start == 0 || $end == 0 )

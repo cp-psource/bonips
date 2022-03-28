@@ -28,16 +28,16 @@ if ( ! function_exists( 'bonipress_render_shortcode_link' ) ) :
 			'target'   => '',
 			'style'    => '',
 			'amount'   => 0,
-			'ctype'    => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'    => BONIPS_DEFAULT_TYPE_KEY,
 			'hreflang' => '',
 			'media'    => '',
 			'type'     => '',
 			'onclick'  => ''
-		), $atts, BONIPRESS_SLUG . '_link' );
+		), $atts, BONIPS_SLUG . '_link' );
 
 		// Make sure point type exists
 		if ( ! bonipress_point_type_exists( $atts['ctype'] ) )
-			$atts['ctype'] = BONIPRESS_DEFAULT_TYPE_KEY;
+			$atts['ctype'] = BONIPS_DEFAULT_TYPE_KEY;
 
 		// HREF is required
 		if ( empty( $atts['href'] ) )
@@ -76,7 +76,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_link' ) ) :
 				// Get hook settings
 				$prf_hook = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
 				$hooks = bonipress_get_option( $prf_hook, false );
-				if ( $atts['ctype'] != BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $atts['ctype'] != BONIPS_DEFAULT_TYPE_KEY )
 					$hooks = bonipress_get_option( 'bonipress_pref_hooks_' . sanitize_key( $atts['ctype'] ), false );
 
 				// Apply points value
@@ -100,4 +100,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_link' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_link', 'bonipress_render_shortcode_link' );
+add_shortcode( BONIPS_SLUG . '_link', 'bonipress_render_shortcode_link' );

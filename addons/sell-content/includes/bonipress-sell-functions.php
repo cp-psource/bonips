@@ -204,7 +204,7 @@ if ( ! function_exists( 'bonipress_post_is_for_sale' ) ) :
 				foreach ( $point_types as $type_id ) {
 
 					$suffix = '_' . $type_id;
-					if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY )
+					if ( $type_id == BONIPS_DEFAULT_TYPE_KEY )
 						$suffix = '';
 
 					$sale_setup = (array) bonipress_get_post_meta( $post->ID, 'boniPRESS_sell_content' . $suffix, true );
@@ -304,7 +304,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_user_paid_for_content' ) ) :
-	function bonipress_user_paid_for_content( $user_id = NULL, $post_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_user_paid_for_content( $user_id = NULL, $post_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		global $wpdb, $bonipress_log_table;
 
@@ -390,7 +390,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_sell_content_get_expiration_length' ) ) :
-	function bonipress_sell_content_get_expiration_length( $post_id = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_sell_content_get_expiration_length( $post_id = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$length      = 0;
 		if ( $post_id === NULL ) return $length;
@@ -409,7 +409,7 @@ if ( ! function_exists( 'bonipress_sell_content_get_expiration_length' ) ) :
 		if ( $filter === 'manual' ) {
 
 			$suffix = '_' . $type;
-			if ( $type == BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $type == BONIPS_DEFAULT_TYPE_KEY )
 				$suffix = '';
 
 			$sale_setup = (array) bonipress_get_post_meta( $post->ID, 'boniPRESS_sell_content' . $suffix, true );
@@ -462,7 +462,7 @@ if ( ! function_exists( 'bonipress_sell_content_payment_buttons' ) ) :
 				// Manual mode
 				if ( $settings['filters'][ $post->post_type ]['by'] == 'manual' ) {
 
-					$suffix       = ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? '_' . $point_type : '';
+					$suffix       = ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? '_' . $point_type : '';
 					$manual_setup = (array) bonipress_get_post_meta( $post_id, 'boniPRESS_sell_content' . $suffix, true );
 					if ( ! empty( $manual_setup ) && array_key_exists( 'status', $manual_setup ) )
 						$status = $manual_setup['status'];
@@ -660,7 +660,7 @@ if ( ! function_exists( 'bonipress_get_content_price' ) ) :
 		if ( array_key_exists( $post_type, $settings['filters'] ) && $settings['filters'][ $post_type ]['by'] === 'manual' ) {
 
 			$suffix = '_' . $point_type;
-			if ( $point_type == BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $point_type == BONIPS_DEFAULT_TYPE_KEY )
 				$suffix = '';
 
 			$sale_setup = (array) bonipress_get_post_meta( $post_id, 'boniPRESS_sell_content' . $suffix, true );

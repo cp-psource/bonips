@@ -43,7 +43,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			$this->parse_args( $args );
 
 			// What is the leaderboard based on
-			$this->based_on = ( BONIPRESS_ENABLE_LOGGING ) ? $this->args['based_on'] : 'balance';
+			$this->based_on = ( BONIPS_ENABLE_LOGGING ) ? $this->args['based_on'] : 'balance';
 			$this->order    = $this->args['order'];
 
 			// Setup limit
@@ -68,7 +68,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				'based_on'     => 'balance',
 				'number'       => 25,
 				'offset'       => 0,
-				'type'         => BONIPRESS_DEFAULT_TYPE_KEY,
+				'type'         => BONIPS_DEFAULT_TYPE_KEY,
 				'timeframe'    => '',
 				'now'          => $this->now,
 				'order'        => 'DESC',
@@ -102,7 +102,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 
 			// Based on
 			$based_on                   = sanitize_text_field( $args['based_on'] );
-			if ( ! BONIPRESS_ENABLE_LOGGING ) $based_on = 'balance';
+			if ( ! BONIPS_ENABLE_LOGGING ) $based_on = 'balance';
 
 			if ( $based_on != 'balance' ) {
 
@@ -157,7 +157,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				}
 			}
 			if ( empty( $list_of_types ) )
-				$list_of_types[] = BONIPRESS_DEFAULT_TYPE_KEY;
+				$list_of_types[] = BONIPS_DEFAULT_TYPE_KEY;
 
 			$this->point_types          = $list_of_types;
 			$this->multitype_query      = ( count( $list_of_types ) > 1 ) ? true : false;
@@ -165,7 +165,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			$this->core                 = bonipress( $this->point_types[0] );
 
 			// Timeframe
-			$this->args['timeframe']    = ( BONIPRESS_ENABLE_LOGGING ) ? sanitize_text_field( $args['timeframe'] ) : '';
+			$this->args['timeframe']    = ( BONIPS_ENABLE_LOGGING ) ? sanitize_text_field( $args['timeframe'] ) : '';
 			$this->args['now']          = ( $args['now'] != '' ) ? absint( $args['now'] ) : $this->now;
 
 			// Order
@@ -176,7 +176,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			$this->args['order']        = $order;
 
 			// Show total balance
-			$this->args['total']        = ( BONIPRESS_ENABLE_TOTAL_BALANCE ) ? (bool) $args['total'] : false;
+			$this->args['total']        = ( BONIPS_ENABLE_TOTAL_BALANCE ) ? (bool) $args['total'] : false;
 
 			// Exclude zero balances
 			$this->args['exclude_zero'] = (bool) $args['exclude_zero'];
@@ -308,7 +308,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			 * Total balance with timeframe
 			 * For this, we need to query the boniPRESS log so we can apply the timeframe.
 			 */
-			if ( BONIPRESS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
+			if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
 				$time_filter       = $this->get_timefilter();
 				$point_type_is     = 'l.ctype = %s';
@@ -483,7 +483,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				 * Total balance with timeframe
 				 * For this, we need to query the boniPRESS log so we can apply the timeframe.
 				 */
-				if ( BONIPRESS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
+				if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
 					$position          = $wpdb->get_var( $wpdb->prepare( "
 						SELECT rank FROM (
@@ -540,7 +540,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			/**
 			 * Reference Query
 			 */
-			elseif ( BONIPRESS_ENABLE_LOGGING ) {
+			elseif ( BONIPS_ENABLE_LOGGING ) {
 
 				$reference_is      = 'l.ref = %s';
 				$reference_values  = $this->references[0];
@@ -612,7 +612,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 				 * Total balance with timeframe
 				 * For this, we need to query the boniPRESS log so we can apply the timeframe.
 				 */
-				if ( BONIPRESS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
+				if ( BONIPS_ENABLE_LOGGING && $this->args['total'] && $this->args['timeframe'] != '' ) {
 
 					$value             = $wpdb->get_var( $wpdb->prepare( "
 						SELECT TotalPoints FROM (
@@ -669,7 +669,7 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			/**
 			 * Reference Query
 			 */
-			elseif ( BONIPRESS_ENABLE_LOGGING ) {
+			elseif ( BONIPS_ENABLE_LOGGING ) {
 
 				$reference_is      = 'l.ref = %s';
 				$reference_values  = $this->references[0];
@@ -823,11 +823,11 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			$key          = $this->get_cache_key();
 
 			// Object caching we will always do
-			$object_cache = wp_cache_get( $key, BONIPRESS_SLUG );
+			$object_cache = wp_cache_get( $key, BONIPS_SLUG );
 			if ( $object_cache !== false && is_array( $object_cache ) ) {
 
 				if ( $this->args['forced'] )
-					wp_cache_delete( $key, BONIPRESS_SLUG );
+					wp_cache_delete( $key, BONIPS_SLUG );
 
 				else $data = $object_cache;
 
@@ -847,17 +847,17 @@ if ( ! class_exists( 'boniPRESS_Query_Leaderboard' ) ) :
 			if ( $this->args['forced'] ) return;
 
 			$key        = $this->get_cache_key();
-			$cache_keys = bonipress_get_option( BONIPRESS_SLUG . '-cache-leaderboard-keys', array() );
+			$cache_keys = bonipress_get_option( BONIPS_SLUG . '-cache-leaderboard-keys', array() );
 
 			if ( empty( $cache_keys ) || ( ! empty( $cache_keys ) && ! in_array( $key, $cache_keys ) ) ) {
 
 				$cache_keys[] = $key;
 
-				bonipress_update_option( BONIPRESS_SLUG . '-cache-leaderboard-keys', $cache_keys );
+				bonipress_update_option( BONIPS_SLUG . '-cache-leaderboard-keys', $cache_keys );
 
 			}
 
-			wp_cache_set( $key, $data, BONIPRESS_SLUG );
+			wp_cache_set( $key, $data, BONIPS_SLUG );
 
 			do_action( 'bonipress_cache_leaderboard', $data, $this );
 

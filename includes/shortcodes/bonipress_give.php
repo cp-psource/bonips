@@ -20,8 +20,8 @@ if ( ! function_exists( 'bonipress_render_shortcode_give' ) ) :
 			'log'     => '',
 			'ref'     => 'gift',
 			'limit'   => 0,
-			'type'    => BONIPRESS_DEFAULT_TYPE_KEY
-		), $atts, BONIPRESS_SLUG . '_give' ) );
+			'type'    => BONIPS_DEFAULT_TYPE_KEY
+		), $atts, BONIPS_SLUG . '_give' ) );
 
 		if ( ! is_user_logged_in() && $user_id == 'current' )
 			return $content;
@@ -51,4 +51,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_give' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_give', 'bonipress_render_shortcode_give' );
+add_shortcode( BONIPS_SLUG . '_give', 'bonipress_render_shortcode_give' );

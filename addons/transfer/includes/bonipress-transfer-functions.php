@@ -213,7 +213,7 @@ endif;
  * @version 1.4.1
  */
 if ( ! function_exists( 'bonipress_user_can_transfer' ) ) :
-	function bonipress_user_can_transfer( $user_id = NULL, $amount = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY, $reference = NULL ) {
+	function bonipress_user_can_transfer( $user_id = NULL, $amount = NULL, $type = BONIPS_DEFAULT_TYPE_KEY, $reference = NULL ) {
 
 		if ( $user_id === NULL )
 			$user_id = get_current_user_id();
@@ -222,7 +222,7 @@ if ( ! function_exists( 'bonipress_user_can_transfer' ) ) :
 			$reference = 'transfer';
 
 		if ( ! bonipress_point_type_exists( $type ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 
 		// Grab Settings
 		$settings = bonipress_get_addon_settings( 'transfers' );
@@ -326,12 +326,12 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_users_transfer_history' ) ) :
-	function bonipress_get_users_transfer_history( $user_id, $type = BONIPRESS_DEFAULT_TYPE_KEY, $key = NULL ) {
+	function bonipress_get_users_transfer_history( $user_id, $type = BONIPS_DEFAULT_TYPE_KEY, $key = NULL ) {
 
 		if ( $key === NULL )
 			$key = 'bonipress_transactions';
 
-		if ( $type != BONIPRESS_DEFAULT_TYPE_KEY && $type != '' )
+		if ( $type != BONIPS_DEFAULT_TYPE_KEY && $type != '' )
 			$key .= '_' . $type;
 
 		$default = array(
@@ -349,12 +349,12 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_update_users_transfer_history' ) ) :
-	function bonipress_update_users_transfer_history( $user_id, $history, $type = BONIPRESS_DEFAULT_TYPE_KEY, $key = NULL ) {
+	function bonipress_update_users_transfer_history( $user_id, $history, $type = BONIPS_DEFAULT_TYPE_KEY, $key = NULL ) {
 
 		if ( $key === NULL )
 			$key = 'bonipress_transactions';
 
-		if ( $type != BONIPRESS_DEFAULT_TYPE_KEY && $type != '' )
+		if ( $type != BONIPS_DEFAULT_TYPE_KEY && $type != '' )
 			$key .= '_' . $type;
 
 		// Get current history

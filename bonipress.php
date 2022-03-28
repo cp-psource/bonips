@@ -164,21 +164,21 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			// Ok to override
 			$this->define( 'boniPRESS_VERSION',              $this->version );
 			$this->define( 'boniPRESS_DB_VERSION',           '1.0' );
-			$this->define( 'BONIPRESS_SLUG',                 'bonipress' );
-			$this->define( 'BONIPRESS_DEFAULT_LABEL',        'boniPRESS' );
-			$this->define( 'BONIPRESS_DEFAULT_TYPE_KEY',     'bonipress_default' );
-			$this->define( 'BONIPRESS_SHOW_PREMIUM_ADDONS',  true );
-			$this->define( 'BONIPRESS_FOR_OLDER_WP',         false );
-			$this->define( 'BONIPRESS_MIN_TIME_LIMIT',       3 );
-			$this->define( 'BONIPRESS_ENABLE_TOTAL_BALANCE', true );
-			$this->define( 'BONIPRESS_ENABLE_LOGGING',       true );
-			$this->define( 'BONIPRESS_ENABLE_SHORTCODES',    true );
-			$this->define( 'BONIPRESS_ENABLE_HOOKS',         true );
-			$this->define( 'BONIPRESS_UNINSTALL_LOG',        true );
-			$this->define( 'BONIPRESS_UNINSTALL_CREDS',      true );
-			$this->define( 'BONIPRESS_DISABLE_PROTECTION',   false );
-			$this->define( 'BONIPRESS_CACHE_LEADERBOARDS',   false );
-			$this->define( 'BONIPRESS_MAX_HISTORY_SIZE',     100 );
+			$this->define( 'BONIPS_SLUG',                 'bonipress' );
+			$this->define( 'BONIPS_DEFAULT_LABEL',        'boniPRESS' );
+			$this->define( 'BONIPS_DEFAULT_TYPE_KEY',     'bonipress_default' );
+			$this->define( 'BONIPS_SHOW_PREMIUM_ADDONS',  true );
+			$this->define( 'BONIPS_FOR_OLDER_WP',         false );
+			$this->define( 'BONIPS_MIN_TIME_LIMIT',       3 );
+			$this->define( 'BONIPS_ENABLE_TOTAL_BALANCE', true );
+			$this->define( 'BONIPS_ENABLE_LOGGING',       true );
+			$this->define( 'BONIPS_ENABLE_SHORTCODES',    true );
+			$this->define( 'BONIPS_ENABLE_HOOKS',         true );
+			$this->define( 'BONIPS_UNINSTALL_LOG',        true );
+			$this->define( 'BONIPS_UNINSTALL_CREDS',      true );
+			$this->define( 'BONIPS_DISABLE_PROTECTION',   false );
+			$this->define( 'BONIPS_CACHE_LEADERBOARDS',   false );
+			$this->define( 'BONIPS_MAX_HISTORY_SIZE',     100 );
 
 			// Not ok to override
 			$this->define( 'boniPRESS_THIS',                 __FILE__, false );
@@ -255,7 +255,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 		 */
 		private function include_hooks() {
 
-			if ( BONIPRESS_ENABLE_HOOKS === false ) return;
+			if ( BONIPS_ENABLE_HOOKS === false ) return;
 
 			// Built-in Hooks
 			$this->file( boniPRESS_HOOKS_DIR . 'bonipress-hook-anniversary.php' );
@@ -319,7 +319,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			$bonipress             = new boniPRESS_Settings();
 			$bonipress_log_table   = $bonipress->log_table;
 			$bonipress_types       = $this->point_types;
-			$bonipress_label       = apply_filters( 'bonipress_label', BONIPRESS_DEFAULT_LABEL );
+			$bonipress_label       = apply_filters( 'bonipress_label', BONIPS_DEFAULT_LABEL );
 			$bonipress_modules     = $this->modules;
 			$bonipress_network     = bonipress_get_settings_network();
 
@@ -385,7 +385,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			}
 
 			// The log module can not be loaded if logging is disabled
-			if ( BONIPRESS_ENABLE_LOGGING ) {
+			if ( BONIPS_ENABLE_LOGGING ) {
 
 				// Attach the log to each point type we use
 				foreach ( $this->point_types as $type => $title ) {
@@ -396,7 +396,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			}
 
 			// Option to disable hooks
-			if ( BONIPRESS_ENABLE_HOOKS ) {
+			if ( BONIPS_ENABLE_HOOKS ) {
 
 				$this->include_hooks();
 
@@ -422,22 +422,22 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			}
 
 			// Attach the Management module to the main point type
-			$this->modules['type'][ BONIPRESS_DEFAULT_TYPE_KEY ]['management'] = new boniPRESS_Management_Module();
-			$this->modules['type'][ BONIPRESS_DEFAULT_TYPE_KEY ]['management']->load();
+			$this->modules['type'][ BONIPS_DEFAULT_TYPE_KEY ]['management'] = new boniPRESS_Management_Module();
+			$this->modules['type'][ BONIPS_DEFAULT_TYPE_KEY ]['management']->load();
 
 			// Attach BuddyPress module to the main point type only
 			if ( class_exists( 'BuddyPress' ) ) {
 
 				$this->file( boniPRESS_MODULES_DIR . 'bonipress-module-buddypress.php' );
-				$this->modules['type'][ BONIPRESS_DEFAULT_TYPE_KEY ]['buddypress'] = new boniPRESS_BuddyPress_Module( BONIPRESS_DEFAULT_TYPE_KEY );
-				$this->modules['type'][ BONIPRESS_DEFAULT_TYPE_KEY ]['buddypress']->load();
+				$this->modules['type'][ BONIPS_DEFAULT_TYPE_KEY ]['buddypress'] = new boniPRESS_BuddyPress_Module( BONIPS_DEFAULT_TYPE_KEY );
+				$this->modules['type'][ BONIPS_DEFAULT_TYPE_KEY ]['buddypress']->load();
 
 			}
 
 			$bonipress_modules = $this->modules['type'];
 
 			// The export module can not be loaded if logging is disabled
-			if ( BONIPRESS_ENABLE_LOGGING ) {
+			if ( BONIPS_ENABLE_LOGGING ) {
 
 				// Load Export module
 				$this->modules['solo']['exports'] = new boniPRESS_Export_Module();
@@ -460,7 +460,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 		 */
 		public function load_shortcodes() {
 
-			if ( BONIPRESS_ENABLE_SHORTCODES ) {
+			if ( BONIPS_ENABLE_SHORTCODES ) {
 
 				$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_exchange.php' );
 				$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_hide_if.php' );
@@ -472,7 +472,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 				$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_total_balance.php' );
 
 				// These shortcodes will not work if logging is disabled
-				if ( BONIPRESS_ENABLE_LOGGING ) {
+				if ( BONIPS_ENABLE_LOGGING ) {
 
 					$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_best_user.php' );
 					$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_give.php' );
@@ -483,7 +483,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 				}
 
 				// These shortcodes will not work if hooks are disabled
-				if ( BONIPRESS_ENABLE_HOOKS ) {
+				if ( BONIPS_ENABLE_HOOKS ) {
 
 					$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_affiliate_id.php' );
 					$this->file( boniPRESS_SHORTCODES_DIR . 'bonipress_affiliate_link.php' );
@@ -621,7 +621,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			 * @version 1.0
 			 */
 			register_importer(
-				BONIPRESS_SLUG . '-import-log',
+				BONIPS_SLUG . '-import-log',
 				sprintf( __( '%s Protokollimport', 'bonipress' ), bonipress_label() ),
 				__( 'Importiere Protokolleinträge über eine CSV-Datei.', 'bonipress' ),
 				array( $this, 'import_log_entries' )
@@ -633,7 +633,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			 * @version 1.0
 			 */
 			register_importer(
-				BONIPRESS_SLUG . '-import-balance',
+				BONIPS_SLUG . '-import-balance',
 				sprintf( __( '%s Saldoimport', 'bonipress' ), bonipress_label() ),
 				__( 'Importiere Salden über eine CSV-Datei.', 'bonipress' ),
 				array( $this, 'import_balances' )
@@ -645,7 +645,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			 * @version 1.0
 			 */
 			register_importer(
-				BONIPRESS_SLUG . '-import-cp',
+				BONIPS_SLUG . '-import-cp',
 				sprintf( __( '%s CubePoints-Import', 'bonipress' ), bonipress_label() ),
 				__( 'Importiere CubePoints-Protokolleinträge und/oder Salden.', 'bonipress' ),
 				array( $this, 'import_cubepoints' )
@@ -776,7 +776,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 
 			delete_transient( '_bonipress_activation_redirect' );
 
-			wp_safe_redirect( add_query_arg( array( 'page' => BONIPRESS_SLUG . '-about' ), admin_url( 'index.php' ) ) );
+			wp_safe_redirect( add_query_arg( array( 'page' => BONIPS_SLUG . '-about' ), admin_url( 'index.php' ) ) );
 			die;
 		}
 
@@ -857,9 +857,9 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			// insert their content under each of these menus
 			foreach ( $this->point_types as $type_id => $title ) {
 
-				$type_slug = BONIPRESS_SLUG;
-				if ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY )
-					$type_slug = BONIPRESS_SLUG . '_' . trim( $type_id );
+				$type_slug = BONIPS_SLUG;
+				if ( $type_id != BONIPS_DEFAULT_TYPE_KEY )
+					$type_slug = BONIPS_SLUG . '_' . trim( $type_id );
 
 				$pages[] = add_menu_page(
 					$title,
@@ -877,7 +877,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 				sprintf( __( 'Über %s', 'bonipress' ), $name ),
 				sprintf( __( 'Über %s', 'bonipress' ), $name ),
 				'moderate_comments',
-				BONIPRESS_SLUG . '-about',
+				BONIPS_SLUG . '-about',
 				'bonipress_about_page'
 			);
 
@@ -921,7 +921,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 
 				$wp_admin_bar->add_menu( array(
 					'parent' => 'my-account-buddypress',
-					'id'     => BONIPRESS_SLUG . '-account',
+					'id'     => BONIPS_SLUG . '-account',
 					'title'  => $main_label,
 					'href'   => false
 				) );
@@ -940,7 +940,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 
 				$wp_admin_bar->add_menu( array(
 					'parent' => 'my-account',
-					'id'     => BONIPRESS_SLUG . '-account',
+					'id'     => BONIPS_SLUG . '-account',
 					'title'  => $main_label,
 					'meta'   => array( 'class' => 'ab-sub-secondary' )
 				) );
@@ -953,7 +953,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 				// Make sure we want to show the balance.
 				if ( apply_filters( 'bonipress_admin_show_balance_' . $type_id, true ) === false ) continue;
 
-				if ( $type_id === BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $type_id === BONIPS_DEFAULT_TYPE_KEY )
 					$point_type = $bonipress;
 				else
 					$point_type = bonipress( $type_id );
@@ -968,8 +968,8 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 
 				// Show balance
 				$wp_admin_bar->add_menu( array(
-					'parent' => BONIPRESS_SLUG . '-account',
-					'id'     => BONIPRESS_SLUG . '-account-balance-' . $adminbar_menu_id,
+					'parent' => BONIPS_SLUG . '-account',
+					'id'     => BONIPS_SLUG . '-account-balance-' . $adminbar_menu_id,
 					'title'  => $point_type->template_tags_amount( apply_filters( 'bonipress_label_my_balance', '%plural%: %cred_f%', $user_id, $point_type ), $balance ),
 					'href'   => false
 				) );
@@ -977,8 +977,8 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 				// Verlauf link
 				if ( $history_url != '' && apply_filters( 'bonipress_admin_show_history_' . $type_id, true ) === true )
 					$wp_admin_bar->add_menu( array(
-						'parent' => BONIPRESS_SLUG . '-account',
-						'id'     => BONIPRESS_SLUG . '-account-history-' . $adminbar_menu_id,
+						'parent' => BONIPS_SLUG . '-account',
+						'id'     => BONIPS_SLUG . '-account-history-' . $adminbar_menu_id,
 						'title'  => sprintf( '%s %s', $point_type->plural(), __( 'Verlauf', 'bonipress' ) ),
 						'href'   => $history_url
 					) );
@@ -1011,7 +1011,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 		public function cron_delete_leaderboard_cache() {
 
 			// If leaderboards are cached daily, time to reset. This is the only option currently supported
-			if ( defined( 'BONIPRESS_CACHE_LEADERBOARDS' ) && BONIPRESS_CACHE_LEADERBOARDS === 'daily' ) {
+			if ( defined( 'BONIPS_CACHE_LEADERBOARDS' ) && BONIPS_CACHE_LEADERBOARDS === 'daily' ) {
 
 				global $wpdb;
 
@@ -1044,9 +1044,9 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 
 			// Link to Setup
 			if ( ! bonipress_is_installed() )
-				$actions['_setup'] = '<a href="' . admin_url( 'plugins.php?page=' . BONIPRESS_SLUG . '-setup' ) . '">' . __( 'Einrichten', 'bonipress' ) . '</a>';
+				$actions['_setup'] = '<a href="' . admin_url( 'plugins.php?page=' . BONIPS_SLUG . '-setup' ) . '">' . __( 'Einrichten', 'bonipress' ) . '</a>';
 			else
-				$actions['_settings'] = '<a href="' . admin_url( 'admin.php?page=' . BONIPRESS_SLUG . '-settings' ) . '" >' . __( 'Einstellungen', 'bonipress' ) . '</a>';
+				$actions['_settings'] = '<a href="' . admin_url( 'admin.php?page=' . BONIPS_SLUG . '-settings' ) . '" >' . __( 'Einstellungen', 'bonipress' ) . '</a>';
 
 			ksort( $actions );
 			return $actions;
@@ -1065,7 +1065,7 @@ if ( ! class_exists( 'boniPRESS_Core' ) ) :
 			// Link to Setup
 			if ( ! is_bonipress_ready() ) {
 
-				$links[] = '<a href="' . admin_url( 'plugins.php?page=' . BONIPRESS_SLUG . '-setup' ) . '">' . __( 'Einrichten', 'bonipress' ) . '</a>';
+				$links[] = '<a href="' . admin_url( 'plugins.php?page=' . BONIPS_SLUG . '-setup' ) . '">' . __( 'Einrichten', 'bonipress' ) . '</a>';
 				return $links;
 
 			}

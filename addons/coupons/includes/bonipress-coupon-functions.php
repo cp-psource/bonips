@@ -117,16 +117,16 @@ if ( ! function_exists( 'bonipress_create_new_coupon' ) ) :
 			'global_max'       => 1,
 			'user_max'         => 1,
 			'min_balance'      => 0,
-			'min_balance_type' => BONIPRESS_DEFAULT_TYPE_KEY,
+			'min_balance_type' => BONIPS_DEFAULT_TYPE_KEY,
 			'max_balance'      => 0,
-			'max_balance_type' => BONIPRESS_DEFAULT_TYPE_KEY,
+			'max_balance_type' => BONIPS_DEFAULT_TYPE_KEY,
 			'expires'          => '',
-			'type'             => BONIPRESS_DEFAULT_TYPE_KEY
+			'type'             => BONIPS_DEFAULT_TYPE_KEY
 		), $data ) );
 
 		// Create Coupon Post
 		$post_id = wp_insert_post( apply_filters( 'bonipress_create_new_coupon_post', array(
-			'post_type'      => BONIPRESS_COUPON_KEY,
+			'post_type'      => BONIPS_COUPON_KEY,
 			'post_title'     => $code,
 			'post_status'    => 'publish',
 			'comment_status' => 'closed',
@@ -173,7 +173,7 @@ if ( ! function_exists( 'bonipress_get_unique_coupon_code' ) ) :
 		do {
 
 			$id    = strtoupper( wp_generate_password( 12, false, false ) );
-			$query = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE post_title = %s AND post_type = %s;", $id, BONIPRESS_COUPON_KEY ) );
+			$query = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE post_title = %s AND post_type = %s;", $id, BONIPS_COUPON_KEY ) );
 
 		} while ( ! empty( $query ) );
 
@@ -193,7 +193,7 @@ if ( ! function_exists( 'bonipress_get_coupon_post' ) ) :
 
 		if ( $code == '' ) return false;
 
-		return apply_filters( 'bonipress_get_coupon_by_code', bonipress_get_page_by_title( strtoupper( $code ), 'OBJECT', BONIPRESS_COUPON_KEY ), $code );
+		return apply_filters( 'bonipress_get_coupon_by_code', bonipress_get_page_by_title( strtoupper( $code ), 'OBJECT', BONIPS_COUPON_KEY ), $code );
 
 	}
 endif;
@@ -330,7 +330,7 @@ if ( ! function_exists( 'bonipress_get_coupon_min_balance' ) ) :
 	function bonipress_get_coupon_min_balance( $post_id = 0 ) {
 
 		$type = bonipress_get_post_meta( $post_id, 'min_balance_type', true );
-		if ( ! bonipress_point_type_exists( $type ) ) $type = BONIPRESS_DEFAULT_TYPE_KEY;
+		if ( ! bonipress_point_type_exists( $type ) ) $type = BONIPS_DEFAULT_TYPE_KEY;
 
 		$min  = bonipress_get_post_meta( $post_id, 'min_balance', true );
 		if ( $min == '' ) $min = 0;
@@ -353,7 +353,7 @@ if ( ! function_exists( 'bonipress_get_coupon_max_balance' ) ) :
 	function bonipress_get_coupon_max_balance( $post_id = 0 ) {
 
 		$type = bonipress_get_post_meta( $post_id, 'max_balance_type', true );
-		if ( ! bonipress_point_type_exists( $type ) ) $type = BONIPRESS_DEFAULT_TYPE_KEY;
+		if ( ! bonipress_point_type_exists( $type ) ) $type = BONIPS_DEFAULT_TYPE_KEY;
 
 		$max  = bonipress_get_post_meta( $post_id, 'max_balance', true );
 		if ( $max == '' ) $max = 0;

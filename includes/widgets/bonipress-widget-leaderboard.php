@@ -36,7 +36,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Leaderboard' ) ) :
             if ( ! $instance['show_visitors'] && ! is_user_logged_in() ) return;
  
             if ( ! isset( $instance['type'] ) || empty( $instance['type'] ) )
-                $instance['type'] = BONIPRESS_DEFAULT_TYPE_KEY;
+                $instance['type'] = BONIPS_DEFAULT_TYPE_KEY;
  
             $bonipress = bonipress( $instance['type'] );
  
@@ -82,7 +82,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Leaderboard' ) ) :
  
             // Defaults
             $title         = isset( $instance['title'] )         ? $instance['title']         : 'Bestenliste';
-            $type          = isset( $instance['type'] )          ? $instance['type']          : BONIPRESS_DEFAULT_TYPE_KEY;
+            $type          = isset( $instance['type'] )          ? $instance['type']          : BONIPS_DEFAULT_TYPE_KEY;
             $based_on      = isset( $instance['based_on'] )      ? $instance['based_on']      : 'balance';
             $total         = isset( $instance['total'] )         ? $instance['total']         : 0;
  

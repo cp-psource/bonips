@@ -21,11 +21,11 @@ if ( ! function_exists( 'bonipress_render_shortcode_video' ) ) :
 			'amount'   => '',
 			'logic'    => '',
 			'interval' => '',
-			'ctype'    => BONIPRESS_DEFAULT_TYPE_KEY
-		), $atts, BONIPRESS_SLUG . '_video' ) );
+			'ctype'    => BONIPS_DEFAULT_TYPE_KEY
+		), $atts, BONIPS_SLUG . '_video' ) );
 
 		$hooks    = bonipress_get_option( 'bonipress_pref_hooks', false );
-		if ( $ctype != BONIPRESS_DEFAULT_TYPE_KEY )
+		if ( $ctype != BONIPS_DEFAULT_TYPE_KEY )
 			$hooks = bonipress_get_option( 'bonipress_pref_hooks_' . sanitize_key( $ctype ), false );
 
 		if ( $hooks === false || ! is_array( $hooks ) || ! array_key_exists( 'video_view', $hooks['hook_prefs'] ) ) return;
@@ -106,4 +106,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_video' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_video', 'bonipress_render_shortcode_video' );
+add_shortcode( BONIPS_SLUG . '_video', 'bonipress_render_shortcode_video' );

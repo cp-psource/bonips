@@ -41,7 +41,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Transfer' ) ) :
 				'reference'    => 'transfer',
 				'amount'       => '',
 				'excluded'     => '',
-				'types'        => BONIPRESS_DEFAULT_TYPE_KEY,
+				'types'        => BONIPS_DEFAULT_TYPE_KEY,
 				'placeholder'  => ''
 			), $instance );
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Transfer' ) ) :
 			$amount       = isset( $instance['amount'] )       ? $instance['amount']       : '';
 			$reference    = isset( $instance['reference'] )    ? $instance['reference']    : 'transfer';
 			$recipient    = isset( $instance['pay_to'] )       ? $instance['pay_to']       : '';
-			$point_types  = isset( $instance['types'] )        ? $instance['types']        : BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_types  = isset( $instance['types'] )        ? $instance['types']        : BONIPS_DEFAULT_TYPE_KEY;
 			$excluded     = isset( $instance['excluded'] )     ? $instance['excluded']     : '';
 			$placeholder  = isset( $instance['placeholder'] )  ? $instance['placeholder']  : '';
 

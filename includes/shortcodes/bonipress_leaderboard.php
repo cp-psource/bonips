@@ -14,7 +14,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderboard' ) ) :
 			'number'       => 25,
 			'order'        => 'DESC',
 			'offset'       => 0,
-			'type'         => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'         => BONIPS_DEFAULT_TYPE_KEY,
 			'based_on'     => 'balance',
 			'total'        => 0,
 			'wrap'         => 'li',
@@ -24,7 +24,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderboard' ) ) :
 			'exclude_zero' => 1,
 			'timeframe'    => '',
 			'to'           => ''
-		), $atts, BONIPRESS_SLUG . '_leaderboard' );
+		), $atts, BONIPS_SLUG . '_leaderboard' );
 
 		// Construct the leaderboard class
 		$leaderboard = bonipress_get_leaderboard( $args );
@@ -38,4 +38,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderboard' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_leaderboard', 'bonipress_render_shortcode_leaderboard' );
+add_shortcode( BONIPS_SLUG . '_leaderboard', 'bonipress_render_shortcode_leaderboard' );

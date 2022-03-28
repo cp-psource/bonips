@@ -15,10 +15,10 @@ if ( ! function_exists( 'bonipress_render_shortcode_total' ) ) :
 
 		extract( shortcode_atts( array(
 			'user_id' => 'current',
-			'types'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'types'   => BONIPS_DEFAULT_TYPE_KEY,
 			'raw'     => 0,
 			'total'   => 0
-		), $atts, BONIPRESS_SLUG . '_total_balance' ) );
+		), $atts, BONIPS_SLUG . '_total_balance' ) );
 
 		// If user ID is not set, get the current users ID
 		if ( ! is_user_logged_in() && $user_id == 'current' )
@@ -84,4 +84,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_total' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_total_balance', 'bonipress_render_shortcode_total' );
+add_shortcode( BONIPS_SLUG . '_total_balance', 'bonipress_render_shortcode_total' );

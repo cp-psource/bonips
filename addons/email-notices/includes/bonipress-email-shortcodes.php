@@ -13,7 +13,7 @@ if ( ! function_exists( 'bonipress_render_email_subscriptions' ) ) :
 
 		extract( shortcode_atts( array(
 			'success' => __( 'Einstellungen aktualisiert', 'bonipress' )
-		), $atts, BONIPRESS_SLUG . '_email_subscriptions' ) );
+		), $atts, BONIPS_SLUG . '_email_subscriptions' ) );
 
 		if ( ! is_user_logged_in() ) return $content;
 

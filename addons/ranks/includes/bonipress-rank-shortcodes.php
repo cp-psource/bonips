@@ -13,17 +13,17 @@ if ( ! function_exists( 'bonipress_render_my_rank' ) ) :
 
 		extract( shortcode_atts( array(
 			'user_id'    => 'current',
-			'ctype'      => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'      => BONIPS_DEFAULT_TYPE_KEY,
 			'show_title' => 1,
 			'show_logo'  => 0,
 			'logo_size'  => 'post-thumbnail',
 			'first'      => 'logo'
-		), $atts, BONIPRESS_SLUG . '_my_rank' ) );
+		), $atts, BONIPS_SLUG . '_my_rank' ) );
 
 		if ( $user_id == '' && ! is_user_logged_in() ) return;
 
 		if ( ! bonipress_point_type_exists( $ctype ) )
-			$ctype = BONIPRESS_DEFAULT_TYPE_KEY;
+			$ctype = BONIPS_DEFAULT_TYPE_KEY;
 
 		$show           = array();
 		$user_id        = bonipress_get_user_id( $user_id );
@@ -73,7 +73,7 @@ if ( ! function_exists( 'bonipress_render_my_ranks' ) ) :
 			'show_logo'  => 0,
 			'logo_size'  => 'post-thumbnail',
 			'first'      => 'logo'
-		), $atts, BONIPRESS_SLUG . '_my_ranks' ) );
+		), $atts, BONIPS_SLUG . '_my_ranks' ) );
 
 		if ( $user_id == '' && ! is_user_logged_in() ) return;
 
@@ -135,9 +135,9 @@ if ( ! function_exists( 'bonipress_render_users_of_rank' ) ) :
 			'wrap'    => 'div',
 			'col'     => 1,
 			'nothing' => 'Keine Benutzer mit diesem Rang gefunden',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'order'   => 'DESC'
-		), $atts, BONIPRESS_SLUG . '_users_of_rank' ) );
+		), $atts, BONIPS_SLUG . '_users_of_rank' ) );
 
 		// Rank ID required
 		if ( $rank_id === NULL )
@@ -148,7 +148,7 @@ if ( ! function_exists( 'bonipress_render_users_of_rank' ) ) :
 			return $bonipress->template_tags_general( $login );
 
 		if ( ! bonipress_point_type_exists( $ctype ) )
-			$ctype = BONIPRESS_DEFAULT_TYPE_KEY;
+			$ctype = BONIPS_DEFAULT_TYPE_KEY;
 
 		$bonipress       = bonipress( $ctype );
 
@@ -213,12 +213,12 @@ if ( ! function_exists( 'bonipress_render_users_of_all_ranks' ) ) :
 		extract( shortcode_atts( array(
 			'login'     => '',
 			'number'    => 10,
-			'ctype'     => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'     => BONIPS_DEFAULT_TYPE_KEY,
 			'show_logo' => 1,
 			'logo_size' => 'post-thumbnail',
 			'wrap'      => 'div',
 			'nothing'   => 'Keine Benutzer mit diesem Rang gefunden'
-		), $atts, BONIPRESS_SLUG . '_users_of_all_ranks' ) );
+		), $atts, BONIPS_SLUG . '_users_of_all_ranks' ) );
 
 		// Prep
 		$bonipress    = bonipress();
@@ -285,9 +285,9 @@ if ( ! function_exists( 'bonipress_render_rank_list' ) ) :
 
 		$atts      = shortcode_atts( array(
 			'order' => 'DESC',
-			'ctype' => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype' => BONIPS_DEFAULT_TYPE_KEY,
 			'wrap'  => 'div'
-		), $atts, BONIPRESS_SLUG . '_list_ranks' );
+		), $atts, BONIPS_SLUG . '_list_ranks' );
 
 		extract( $atts );
 

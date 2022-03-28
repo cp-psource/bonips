@@ -19,10 +19,10 @@ if ( ! function_exists( 'bonipress_render_shortcode_send' ) ) :
 			'to'     => '',
 			'log'    => '',
 			'ref'    => 'gift',
-			'type'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'   => BONIPS_DEFAULT_TYPE_KEY,
 			'class'  => 'button button-primary btn btn-primary',
 			'reload' => 0
-		), $atts, BONIPRESS_SLUG . '_send' ) );
+		), $atts, BONIPS_SLUG . '_send' ) );
 
 		if ( ! bonipress_point_type_exists( $type ) ) return 'Point type not found.';
 
@@ -66,7 +66,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_send' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_send', 'bonipress_render_shortcode_send' );
+add_shortcode( BONIPS_SLUG . '_send', 'bonipress_render_shortcode_send' );
 
 /**
  * boniPRESS Send Points Ajax
@@ -84,7 +84,7 @@ if ( ! function_exists( 'bonipress_shortcode_send_points_ajax' ) ) :
 		if ( bonipress_force_singular_session( $user_id, 'bonipress-last-send' ) )
 			wp_send_json( 'error' );
 
-		$point_type    = BONIPRESS_DEFAULT_TYPE_KEY;
+		$point_type    = BONIPS_DEFAULT_TYPE_KEY;
 		if ( isset( $_POST['type'] ) )
 			$point_type = sanitize_text_field( $_POST['type'] );
 

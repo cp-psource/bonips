@@ -11,7 +11,7 @@ if ( ! class_exists( 'boniPRESS_Espresso_Gateway' ) ) :
 
 		public $label       = '';
 		public $core        = NULL;
-		public $bonipress_type = BONIPRESS_DEFAULT_TYPE_KEY;
+		public $bonipress_type = BONIPS_DEFAULT_TYPE_KEY;
 		public $prefs       = array();
 		public $update      = false;
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'boniPRESS_Espresso_Gateway' ) ) :
 					'payment'  => $this->label . ' ' . __( 'Payments', 'bonipress' ),
 					'button'   => __( 'Pay Now', 'bonipress' )
 				),
-				'type'     => BONIPRESS_DEFAULT_TYPE_KEY,
+				'type'     => BONIPS_DEFAULT_TYPE_KEY,
 				'rate'     => 100,
 				'share'    => 0,
 				'log'      => __( 'Payment for Event Registration', 'bonipress' ),

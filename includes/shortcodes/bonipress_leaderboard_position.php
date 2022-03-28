@@ -13,14 +13,14 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderbaord_position' ) ) :
 
 		$args = shortcode_atts( array(
 			'user_id'   => 'current',
-			'ctype'     => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'     => BONIPS_DEFAULT_TYPE_KEY,
 			'type'      => '',
 			'based_on'  => 'balance',
 			'total'     => 0,
 			'missing'   => '-',
 			'suffix'    => 0,
 			'timeframe' => ''
-		), $atts, BONIPRESS_SLUG . '_leaderboard_position' );
+		), $atts, BONIPS_SLUG . '_leaderboard_position' );
 
 		// Get the user ID we need a position for
 		$user_id     = bonipress_get_user_id( $args['user_id'] );
@@ -42,4 +42,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_leaderbaord_position' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_leaderboard_position', 'bonipress_render_shortcode_leaderbaord_position' );
+add_shortcode( BONIPS_SLUG . '_leaderboard_position', 'bonipress_render_shortcode_leaderbaord_position' );

@@ -18,8 +18,8 @@ if ( ! function_exists( 'bonipress_render_shortcode_my_balance' ) ) :
 			'balance_el' => 'div',
 			'wrapper'    => 1,
 			'formatted'  => 1,
-			'type'       => BONIPRESS_DEFAULT_TYPE_KEY
-		), $atts, BONIPRESS_SLUG . '_my_balance' ) );
+			'type'       => BONIPS_DEFAULT_TYPE_KEY
+		), $atts, BONIPS_SLUG . '_my_balance' ) );
 
 		$output = '';
 
@@ -32,7 +32,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_my_balance' ) ) :
 
 		// Make sure we have a valid point type
 		if ( ! bonipress_point_type_exists( $type ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 
 		// Get the users boniPRESS account object
 		$account = bonipress_get_account( $user_id );
@@ -76,4 +76,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_my_balance' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_my_balance', 'bonipress_render_shortcode_my_balance' );
+add_shortcode( BONIPS_SLUG . '_my_balance', 'bonipress_render_shortcode_my_balance' );

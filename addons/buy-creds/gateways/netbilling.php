@@ -28,7 +28,7 @@ if ( ! class_exists( 'boniPRESS_NETbilling' ) ) :
 			parent::__construct( array(
 				'id'               => 'netbilling',
 				'label'            => 'NETbilling',
-				'gateway_logo_url' => plugins_url( 'assets/images/netbilling.png', BONIPRESS_PURCHASE ),
+				'gateway_logo_url' => plugins_url( 'assets/images/netbilling.png', BONIPS_PURCHASE ),
 				'defaults'         => array(
 					'sandbox'          => 0,
 					'account'          => '',

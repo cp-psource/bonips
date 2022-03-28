@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Settings_Module', array(
 				'module_name' => 'general',
@@ -22,7 +22,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 					'page_title'  => __( 'Einstellungen', 'bonipress' ),
 					'page_header' => __( 'Einstellungen', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG . '-settings',
+				'screen_id'   => BONIPS_SLUG . '-settings',
 				'accordion'   => true,
 				'menu_pos'    => 998
 			), $type );
@@ -83,7 +83,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 			global $wpdb, $bonipress_log_table;
 
 			// If we only have one point type we truncate the log
-			if ( count( $this->point_types ) == 1 && $type == BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( count( $this->point_types ) == 1 && $type == BONIPS_DEFAULT_TYPE_KEY )
 				$wpdb->query( "TRUNCATE TABLE {$bonipress_log_table};" );
 
 			// Else we want to delete the selected point types only
@@ -212,7 +212,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 			set_transient( 'bonipress-export-raw', apply_filters( 'bonipress_export_raw', $array ), 3000 );
 
 			// Response
-			wp_send_json_success( admin_url( 'admin.php?page=' . BONIPRESS_SLUG . '-settings&do=export' ) );
+			wp_send_json_success( admin_url( 'admin.php?page=' . BONIPS_SLUG . '-settings&do=export' ) );
 
 		}
 
@@ -290,7 +290,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 
 			// Send the good news
 			wp_send_json_success( array(
-				'url'   => esc_url( add_query_arg( array( 'page' => BONIPRESS_SLUG . '-settings', 'open-tab' => 0 ), admin_url( 'admin.php' ) ) ),
+				'url'   => esc_url( add_query_arg( array( 'page' => BONIPS_SLUG . '-settings', 'open-tab' => 0 ), admin_url( 'admin.php' ) ) ),
 				'label' => __( 'Protokoll aktualisiert', 'bonipress' )
 			) );
 
@@ -490,7 +490,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 						echo '>' . $i . ' - 0.' . str_pad( '0', $i, '0' ) . '</option>';
 					}
 
-					$url = add_query_arg( array( 'page' => BONIPRESS_SLUG . '-settings', 'open-tab' => 0 ), admin_url( 'admin.php' ) );
+					$url = add_query_arg( array( 'page' => BONIPS_SLUG . '-settings', 'open-tab' => 0 ), admin_url( 'admin.php' ) );
 
 ?>
 </select>
@@ -521,7 +521,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 
 ?>
 <div class="wrap bonipress-metabox" id="boniPRESS-wrap">
-	<h1><?php _e( 'Einstellungen', 'bonipress' ); if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-dokumentation/" target="_blank" class="page-title-action"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Einstellungen', 'bonipress' ); if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-dokumentation/" target="_blank" class="page-title-action"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
 
 	<?php $this->update_notice(); ?>
 
@@ -718,7 +718,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 
 <?php
 
-			if ( isset( $this->bonipress_type ) && $this->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) :
+			if ( isset( $this->bonipress_type ) && $this->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) :
 
 ?>
 			<h4><span class="dashicons dashicons-star-filled static"></span><label><?php _e( 'Punkttypen', 'bonipress' ); ?></label></h4>
@@ -729,7 +729,7 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 
 					foreach ( $this->point_types as $type => $label ) {
 
-						if ( $type == BONIPRESS_DEFAULT_TYPE_KEY ) {
+						if ( $type == BONIPS_DEFAULT_TYPE_KEY ) {
 
 ?>
 				<div class="row">
@@ -897,10 +897,10 @@ if ( ! class_exists( 'boniPRESS_Settings_Module' ) ) :
 
 			$new_data = array();
 
-			if ( $this->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $this->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) {
 				if ( isset( $post['types'] ) ) {
 
-					$types = array( BONIPRESS_DEFAULT_TYPE_KEY => bonipress_label() );
+					$types = array( BONIPS_DEFAULT_TYPE_KEY => bonipress_label() );
 					foreach ( $post['types'] as $item => $data ) {
 
 						// Make sure it is not marked as deleted

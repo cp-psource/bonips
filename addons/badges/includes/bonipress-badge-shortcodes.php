@@ -12,10 +12,10 @@ if ( ! function_exists( 'bonipress_render_my_badges' ) ) :
 
 		extract( shortcode_atts( array(
 			'show'     => 'earned',
-			'width'    => BONIPRESS_BADGE_WIDTH,
-			'height'   => BONIPRESS_BADGE_HEIGHT,
+			'width'    => BONIPS_BADGE_WIDTH,
+			'height'   => BONIPS_BADGE_HEIGHT,
 			'user_id'  => 'current'
-		), $atts, BONIPRESS_SLUG . '_my_badges' ) );
+		), $atts, BONIPS_SLUG . '_my_badges' ) );
 
 		if ( ! is_user_logged_in() && $user_id == 'current' )
 			return $content;
@@ -93,9 +93,9 @@ if ( ! function_exists( 'bonipress_render_badges' ) ) :
 	function bonipress_render_badges( $atts, $template = '' ) {
 
 		extract( shortcode_atts( array(
-			'width'  => BONIPRESS_BADGE_WIDTH,
-			'height' => BONIPRESS_BADGE_HEIGHT
-		), $atts, BONIPRESS_SLUG . '_badges' ) );
+			'width'  => BONIPS_BADGE_WIDTH,
+			'height' => BONIPS_BADGE_HEIGHT
+		), $atts, BONIPS_SLUG . '_badges' ) );
 
 		$all_badges = bonipress_get_badge_ids();
 

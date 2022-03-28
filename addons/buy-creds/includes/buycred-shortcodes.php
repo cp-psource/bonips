@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * Shortcode: bonipress_buy
@@ -14,12 +14,12 @@ if ( ! function_exists( 'bonipress_render_buy_points' ) ) :
 
 		extract( shortcode_atts( array(
 			'gateway' => '',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'amount'  => '',
 			'gift_to' => '',
 			'class'   => 'bonipress-buy-link btn btn-primary btn-lg',
 			'login'   => $settings['login']
-		), $atts, BONIPRESS_SLUG . '_buy' ) );
+		), $atts, BONIPS_SLUG . '_buy' ) );
 
 		$bonipress = bonipress( $ctype );
 
@@ -101,7 +101,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 		extract( shortcode_atts( array(
 			'button'   => __( 'Kaufe jetzt', 'bonipress' ),
 			'gateway'  => '',
-			'ctype'    => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'    => BONIPS_DEFAULT_TYPE_KEY,
 			'amount'   => '',
 			'excluded' => '',
 			'maxed'    => '',
@@ -109,7 +109,7 @@ if ( ! function_exists( 'bonipress_render_buy_form_points' ) ) :
 			'e_rate'   => '',
 			'gift_by'  => __( 'Benutzername', 'bonipress' ),
 			'inline'   => 0
-		), $atts, BONIPRESS_SLUG . '_buy_form' ) );
+		), $atts, BONIPS_SLUG . '_buy_form' ) );
 
 		// If we are not logged in
 		if ( ! is_user_logged_in() ) return $content;
@@ -329,10 +329,10 @@ if ( ! function_exists( 'bonipress_render_pending_purchases' ) ) :
 		if ( ! is_user_logged_in() ) return $content;
 
 		extract( shortcode_atts( array(
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'pay_now' => __( 'Pay Now', 'bonipress' ),
 			'cancel'  => __( 'Cancel', 'bonipress' )
-		), $atts, BONIPRESS_SLUG . '_buy_pending' ) );
+		), $atts, BONIPS_SLUG . '_buy_pending' ) );
 
 		$user_id = get_current_user_id();
 		$pending = buycred_get_users_pending_payments( $user_id, $ctype );

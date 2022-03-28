@@ -41,7 +41,7 @@ if ( ! function_exists( 'bonipress_init_woo_gateway' ) ) :
 				else {
 					$this->bonipress_type = $this->get_option( 'point_type' );
 					if ( ! bonipress_point_type_exists( $this->bonipress_type ) )
-						$this->bonipress_type = BONIPRESS_DEFAULT_TYPE_KEY;
+						$this->bonipress_type = BONIPS_DEFAULT_TYPE_KEY;
 				}
 
 				$this->bonipress                    = bonipress( $this->bonipress_type );
@@ -129,7 +129,7 @@ if ( ! function_exists( 'bonipress_init_woo_gateway' ) ) :
 						'type'        => 'select',
 						'label'       => __( 'Select the point type users can use to pay.', 'bonipress' ),
 						'options'     => $bonipress_types,
-						'default'     => BONIPRESS_DEFAULT_TYPE_KEY
+						'default'     => BONIPS_DEFAULT_TYPE_KEY
 					);
 
 					$exchange_desc = $this->bonipress->template_tags_general( __( 'How much is 1 %_singular% worth in %currency%?', 'bonipress' ) );
@@ -520,7 +520,7 @@ if ( ! function_exists( 'bonipress_woo_available_gateways' ) ) :
 		if ( ! isset( $gateways['bonipress'] ) ) return $gateways;
 
 		// Easy override
-		if ( defined( 'SHOW_BONIPRESS_IN_WOOCOMMERCE' ) && SHOW_BONIPRESS_IN_WOOCOMMERCE ) return $gateways;
+		if ( defined( 'SHOW_BONIPS_IN_WOOCOMMERCE' ) && SHOW_BONIPS_IN_WOOCOMMERCE ) return $gateways;
 
 		// Check if we are logged in
 		if ( ! is_user_logged_in() ) {
@@ -533,7 +533,7 @@ if ( ! function_exists( 'bonipress_woo_available_gateways' ) ) :
 
 		$point_type = $gateways['bonipress']->get_option( 'point_type' );
 		if ( ! bonipress_point_type_exists( $point_type ) )
-			$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 		// Get boniPRESS
 		$bonipress     = bonipress( $point_type );
@@ -584,7 +584,7 @@ if ( ! function_exists( 'bonipress_woo_add_currency' ) ) :
 		if ( ! empty( $point_types ) ) {
 			foreach ( $point_types as $type_id => $label ) {
 
-				if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $type_id == BONIPS_DEFAULT_TYPE_KEY )
 					$type_id = 'MYC';
 
 				$currencies[ $type_id ] = $label;
@@ -618,7 +618,7 @@ if ( ! function_exists( 'bonipress_woo_currency_symbol' ) ) :
 				elseif ( ! empty( $bonipress->before ) )
 					$symbol = $bonipress->before;
 
-				if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $type_id == BONIPS_DEFAULT_TYPE_KEY )
 					$type_id = 'MYC';
 
 				$currency_symbols[ $type_id ] = $symbol;
@@ -762,7 +762,7 @@ if ( ! function_exists( 'bonipress_woo_after_order_total' ) ) :
 		
 		$point_type         = $available_gateways['bonipress']->get_option( 'point_type' );
 		if ( $point_type === NULL )
-			$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 		$bonipress             = bonipress( $point_type );
 		$user_id            = get_current_user_id();

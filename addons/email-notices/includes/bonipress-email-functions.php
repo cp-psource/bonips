@@ -108,7 +108,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_email_triggers' ) ) :
-	function bonipress_get_email_triggers( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $force = false ) {
+	function bonipress_get_email_triggers( $point_type = BONIPS_DEFAULT_TYPE_KEY, $force = false ) {
 
 		$generic_events = array(
 			'any'          => array(),
@@ -146,7 +146,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_add_email_trigger' ) ) :
-	function bonipress_add_email_trigger( $event_type = '', $instance = '', $notice_id = false, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_add_email_trigger( $event_type = '', $instance = '', $notice_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$event_type = sanitize_key( $event_type );
 		$instance   = sanitize_key( $instance );
@@ -195,7 +195,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_delete_email_trigger' ) ) :
-	function bonipress_delete_email_trigger( $notice_id = false, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_delete_email_trigger( $notice_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$notice_id  = absint( $notice_id );
 		$point_type = sanitize_key( $point_type );
@@ -298,7 +298,7 @@ if ( ! function_exists( 'bonipress_get_triggered_emails' ) ) :
 			'entry'   => '',
 			'ref_id'  => 0,
 			'data'    => '',
-			'type'    => BONIPRESS_DEFAULT_TYPE_KEY
+			'type'    => BONIPS_DEFAULT_TYPE_KEY
 		), $bonipress_event ) );
 
 		$notices  = array();
@@ -405,7 +405,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_event_emails' ) ) :
-	function bonipress_get_event_emails( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $event_type = '', $instance = '' ) {
+	function bonipress_get_event_emails( $point_type = BONIPS_DEFAULT_TYPE_KEY, $event_type = '', $instance = '' ) {
 
 		$triggers = bonipress_get_email_triggers( $point_type );
 		$notices  = array();
@@ -428,7 +428,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_send_new_email' ) ) :
-	function bonipress_send_new_email( $notice_id = false, $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_send_new_email( $notice_id = false, $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $notice_id === false || get_post_status ( $notice_id ) !== 'publish' ) return false;
 

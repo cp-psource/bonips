@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Addons_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Addons_Module', array(
 				'module_name' => 'addons',
@@ -25,7 +25,7 @@ if ( ! class_exists( 'boniPRESS_Addons_Module' ) ) :
 					'menu'        => __( 'Erweiterungen', 'bonipress' ),
 					'page_title'  => __( 'Erweiterungen', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG . '-addons',
+				'screen_id'   => BONIPS_SLUG . '-addons',
 				'accordion'   => true,
 				'menu_pos'    => 30
 			), $type );
@@ -76,7 +76,7 @@ if ( ! class_exists( 'boniPRESS_Addons_Module' ) ) :
 
 					bonipress_update_option( 'bonipress_pref_addons', $new_settings );
 
-					$url = add_query_arg( array( 'page' => BONIPRESS_SLUG . '-addons', 'activated' => $result ), admin_url( 'admin.php' ) );
+					$url = add_query_arg( array( 'page' => BONIPS_SLUG . '-addons', 'activated' => $result ), admin_url( 'admin.php' ) );
 
 					wp_safe_redirect( $url );
 					exit;
@@ -339,7 +339,7 @@ if ( ! class_exists( 'boniPRESS_Addons_Module' ) ) :
 .theme-browser .theme:hover a.more-details, .theme-browser .theme:hover a.more-details:hover { text-decoration: none; }
 </style>
 <div class="wrap" id="boniPRESS-wrap">
-	<h1><?php _e( 'Erweiterungen', 'bonipress' ); if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-erweiterungen-uebersicht/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Erweiterungen', 'bonipress' ); if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-erweiterungen-uebersicht/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
 <?php
 
 			// Messages
@@ -408,7 +408,7 @@ if ( ! class_exists( 'boniPRESS_Addons_Module' ) ) :
 
 				}
 
-				if ( BONIPRESS_SHOW_PREMIUM_ADDONS ) echo '<div class="theme add-new-theme"><a href="https://n3rds.work/shop/artikel/category/bonipress-erweiterungen/" target="_blank"><div class="theme-screenshot"><span></span></div><h2 class="theme-name">Weitere Erweiterungen hinzufügen</h2></a></div><br class="clear" />';
+				if ( BONIPS_SHOW_PREMIUM_ADDONS ) echo '<div class="theme add-new-theme"><a href="https://n3rds.work/shop/artikel/category/bonipress-erweiterungen/" target="_blank"><div class="theme-screenshot"><span></span></div><h2 class="theme-name">Weitere Erweiterungen hinzufügen</h2></a></div><br class="clear" />';
 
 			}
 
@@ -456,7 +456,7 @@ if ( ! function_exists( 'get_bonipress_addon_activation_url' ) ) :
 		if ( $addon_id === NULL ) return '#';
 
 		$args = array(
-			'page'         => BONIPRESS_SLUG . '-addons',
+			'page'         => BONIPS_SLUG . '-addons',
 			'addon_id'     => $addon_id,
 			'addon_action' => ( ( $deactivate === false ) ? 'activate' : 'deactivate' ),
 			'_token'       => wp_create_nonce( 'bonipress-activate-deactivate-addon' )

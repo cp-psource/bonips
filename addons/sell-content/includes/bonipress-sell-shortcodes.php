@@ -117,7 +117,7 @@ if ( ! function_exists( 'bonipress_render_sell_count' ) ) :
 		extract( shortcode_atts( array(
 			'wrapper' => '',
 			'post_id' => NULL
-		), $atts, BONIPRESS_SLUG . '_content_sale_count' ) );
+		), $atts, BONIPS_SLUG . '_content_sale_count' ) );
 
 		if ( $post_id === NULL )
 			$post_id = bonipress_sell_content_post_id();
@@ -151,7 +151,7 @@ if ( ! function_exists( 'bonipress_render_sell_buyer_count' ) ) :
 		extract( shortcode_atts( array(
 			'wrapper' => '',
 			'post_id' => NULL
-		), $atts, BONIPRESS_SLUG . '_content_buyer_count' ) );
+		), $atts, BONIPS_SLUG . '_content_buyer_count' ) );
 
 		if ( $post_id === NULL )
 			$post_id = bonipress_sell_content_post_id();
@@ -187,7 +187,7 @@ if ( ! function_exists( 'bonipress_render_sell_history' ) ) :
 			'nothing' => 'No purchases found',
 			'ctype'   => NULL,
 			'order'   => 'DESC'
-		), $atts, BONIPRESS_SLUG . '_sales_history' ) );
+		), $atts, BONIPS_SLUG . '_sales_history' ) );
 
 		// Not logged in
 		if ( ! is_user_logged_in() && $user_id == 'current' )
@@ -302,7 +302,7 @@ if ( ! function_exists( 'bonipress_render_sell_buyer_avatars' ) ) :
 			'use_email' => 0,
 			'default'   => '',
 			'alt'       => ''
-		), $atts, BONIPRESS_SLUG . '_content_buyer_avatars' ) );
+		), $atts, BONIPS_SLUG . '_content_buyer_avatars' ) );
 
 		if ( $post_id === NULL )
 			$post_id = bonipress_sell_content_post_id();

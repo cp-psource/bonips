@@ -16,7 +16,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Log_Module', array(
 				'module_name' => 'log',
@@ -24,7 +24,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 					'menu'        => __( 'Protokoll', 'bonipress' ),
 					'page_title'  => __( 'Protokoll', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG,
+				'screen_id'   => BONIPS_SLUG,
 				'cap'         => 'editor',
 				'accordion'   => true,
 				'register'    => false,
@@ -72,8 +72,8 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 			add_action( 'admin_notices',               array( $this, 'admin_notices' ) );
 			add_action( 'bonipress_delete_point_type',    array( $this, 'delete_point_type' ) );
 
-			$screen_id = 'toplevel_page_' . BONIPRESS_SLUG;
-			if ( $this->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			$screen_id = 'toplevel_page_' . BONIPS_SLUG;
+			if ( $this->bonipress_type != BONIPS_DEFAULT_TYPE_KEY )
 				$screen_id .= '_' . $this->bonipress_type;
 
 			$this->set_columns();
@@ -389,7 +389,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 
 			$screen = get_current_screen();
 
-			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPRESS_SLUG ) ) ) != 'toplevel_page_' . BONIPRESS_SLUG ) return;
+			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPS_SLUG ) ) ) != 'toplevel_page_' . BONIPS_SLUG ) return;
 
 			if ( isset( $_GET['deleted'] ) && isset( $_GET['ctype'] ) && $_GET['ctype'] == $this->bonipress_type )
 				echo '<div id="message" class="updated notice is-dismissible"><p>' . sprintf( _n( '1 Eintrag gelöscht', '%d Einträge gelöscht', absint( $_GET['deleted'] ), 'bonipress' ), absint( $_GET['deleted'] ) ) . '</p><button type="button" class="notice-dismiss"></button></div>';
@@ -417,7 +417,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 			$screen = get_current_screen();
 
 			// "My Verlauf" screen and not Log archive
-			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPRESS_SLUG ) ) ) != 'toplevel_page_' . BONIPRESS_SLUG ) {
+			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPS_SLUG ) ) ) != 'toplevel_page_' . BONIPS_SLUG ) {
 
 				do_action( 'bonipress_log_my_admin_actions', $this->bonipress_type );
 				return;
@@ -487,9 +487,9 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 				if ( $deleted > 0 ) {
 
 					if ( $this->is_main_type )
-						$url = add_query_arg( array( 'page' => BONIPRESS_SLUG, 'ctype' => $this->bonipress_type ), admin_url( 'admin.php' ) );
+						$url = add_query_arg( array( 'page' => BONIPS_SLUG, 'ctype' => $this->bonipress_type ), admin_url( 'admin.php' ) );
 					else
-						$url = add_query_arg( array( 'page' => BONIPRESS_SLUG . '_' . $this->bonipress_type, 'ctype' => $this->bonipress_type ), admin_url( 'admin.php' ) );
+						$url = add_query_arg( array( 'page' => BONIPS_SLUG . '_' . $this->bonipress_type, 'ctype' => $this->bonipress_type ), admin_url( 'admin.php' ) );
 
 					$url = add_query_arg( 'deleted', $deleted, $url );
 					wp_safe_redirect( $url );
@@ -529,7 +529,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 
 			$screen        = get_current_screen();
 
-			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPRESS_SLUG ) ) ) != 'toplevel_page_' . BONIPRESS_SLUG ) return;
+			if ( substr( $screen->id, 0, ( 14 + strlen( BONIPS_SLUG ) ) ) != 'toplevel_page_' . BONIPS_SLUG ) return;
 
 			$references    = bonipress_get_all_references();
 			$js_references = array();
@@ -631,7 +631,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 
 ?>
 <div class="wrap" id="boniPRESS-wrap">
-	<h1><?php _e( 'Protokoll', 'bonipress' ); if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-protokoll/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Protokoll', 'bonipress' ); if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-protokoll/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
 <?php
 
 			// This requirement is only checked on activation. If the library is disabled
@@ -640,7 +640,7 @@ if ( ! class_exists( 'boniPRESS_Log_Module' ) ) :
 			// Points for clicking on links
 			// Exchange Shortcode
 			$extensions = get_loaded_extensions();
-			if ( ! in_array( 'mcrypt', $extensions ) && ! defined( 'BONIPRESS_DISABLE_PROTECTION' ) )
+			if ( ! in_array( 'mcrypt', $extensions ) && ! defined( 'BONIPS_DISABLE_PROTECTION' ) )
 				echo '<div id="message" class="error below-h2"><p>' . __( 'Warnung. Die erforderliche Mcrypt PHP Library ist auf diesem Server nicht installiert! Bestimmte Hooks und Shortcodes funktionieren nicht richtig!', 'bonipress' ) . '</p></div>';
 
 			// Filter by dates

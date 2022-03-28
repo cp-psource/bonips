@@ -12,15 +12,15 @@ if ( ! function_exists( 'bonipress_render_shortcode_total_points' ) ) :
 	function bonipress_render_shortcode_total_points( $atts ) {
 
 		extract( shortcode_atts( array(
-			'type'      => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'      => BONIPS_DEFAULT_TYPE_KEY,
 			'ref'       => '',
 			'ref_id'    => '',
 			'user_id'   => 'current',
 			'formatted' => 1
-		), $atts, BONIPRESS_SLUG . '_total_points' ) );
+		), $atts, BONIPS_SLUG . '_total_points' ) );
 
 		if ( ! bonipress_point_type_exists( $type ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 
 		$user_id = bonipress_get_user_id( $user_id );
 		$bonipress  = bonipress( $type );
@@ -88,4 +88,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_total_points' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_total_points', 'bonipress_render_shortcode_total_points' );
+add_shortcode( BONIPS_SLUG . '_total_points', 'bonipress_render_shortcode_total_points' );

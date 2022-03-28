@@ -38,7 +38,7 @@ function bonipress_load_badgeos_hook() {
 		/**
 		 * Construct
 		 */
-		public function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'badgeos',
@@ -117,9 +117,9 @@ function bonipress_load_badgeos_hook() {
 			// Setup is needed
 			if ( ! isset( $this->prefs[ $post->post_type ] ) ) {
 
-				$page = BONIPRESS_SLUG . '-hooks';
+				$page = BONIPS_SLUG . '-hooks';
 				if ( ! $this->is_main_type )
-					$page = BONIPRESS_SLUG . '_' . $this->bonipress_type . '-hooks';
+					$page = BONIPS_SLUG . '_' . $this->bonipress_type . '-hooks';
 
 				echo '<p>' . sprintf( __( 'Please setup your <a href="%s">default settings</a> before using this feature.', 'bonipress' ), admin_url( 'admin.php?page=' . $page ) ) . '</p>';
 				return;

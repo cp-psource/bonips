@@ -16,11 +16,11 @@ if ( ! function_exists( 'bonipress_render_shortcode_show_if' ) ) :
 			'rank'     => -1,
 			'ref'      => '',
 			'count'    => -1,
-			'ctype'    => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'    => BONIPS_DEFAULT_TYPE_KEY,
 			'visitors' => '',
 			'comp'     => 'AND',
 			'user_id'  => 'current'
-		), $atts, BONIPRESS_SLUG . '_show_if' ) );
+		), $atts, BONIPS_SLUG . '_show_if' ) );
 
 		// Visitors
 		if ( ! is_user_logged_in() ) {
@@ -67,7 +67,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_show_if' ) ) :
 		}
 
 		// Reference related requirement
-		if ( BONIPRESS_ENABLE_LOGGING && strlen( $ref ) > 0 ) {
+		if ( BONIPS_ENABLE_LOGGING && strlen( $ref ) > 0 ) {
 
 			$ref_count = bonipress_count_ref_instances( $ref, $user_id, $ctype );
 
@@ -119,4 +119,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_show_if' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_show_if', 'bonipress_render_shortcode_show_if' );
+add_shortcode( BONIPS_SLUG . '_show_if', 'bonipress_render_shortcode_show_if' );

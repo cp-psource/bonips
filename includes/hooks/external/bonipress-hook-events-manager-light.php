@@ -38,7 +38,7 @@ function bonipress_load_events_manager_light_hook() {
 		/**
 		 * Construct
 		 */
-		function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'eventsmanager',

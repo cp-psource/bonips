@@ -50,7 +50,7 @@ function bonipress_load_buddypress_profile_hook() {
 		/**
 		 * Construct
 		 */
-		public function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'hook_bp_profile',
@@ -989,7 +989,7 @@ function bonipress_load_buddypress_groups_hook() {
 		/**
 		 * Construct
 		 */
-		function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'hook_bp_groups',

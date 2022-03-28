@@ -19,7 +19,7 @@ if ( ! function_exists( 'bonipress_render_chart_circulation' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_circulation' ) );
+		), $atts, BONIPS_SLUG . '_chart_circulation' ) );
 
 		// Make sure we request a chart type that we support
 		$type  = ( ! in_array( $type, array( 'pie', 'doughnut', 'line', 'bar', 'radar', 'polarArea' ) ) ) ? 'pie' : $type;
@@ -56,7 +56,7 @@ if ( ! function_exists( 'bonipress_render_chart_gain_vs_loss' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'pie',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'title'   => '',
 			'animate' => 1,
 			'bezier'  => 1,
@@ -66,7 +66,7 @@ if ( ! function_exists( 'bonipress_render_chart_gain_vs_loss' ) ) :
 			'width'   => '',
 			'gains'   => '',
 			'losses'  => ''
-		), $atts, BONIPRESS_SLUG . '_chart_gain_loss' ) );
+		), $atts, BONIPS_SLUG . '_chart_gain_loss' ) );
 
 		// Make sure we request a chart type that we support
 		$type  = ( ! in_array( $type, array( 'pie', 'doughnut', 'line', 'bar', 'polarArea' ) ) ) ? 'pie' : $type;
@@ -110,7 +110,7 @@ if ( ! function_exists( 'bonipress_render_chart_history' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'line',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'period'  => 'days',
 			'number'  => 10,
 			'order'   => 'DESC',
@@ -121,7 +121,7 @@ if ( ! function_exists( 'bonipress_render_chart_history' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_history' ) );
+		), $atts, BONIPS_SLUG . '_chart_history' ) );
 
 		// Make sure we request a chart type that we support
 		$type  = ( ! in_array( $type, array( 'line', 'bar' ) ) ) ? 'line' : $type;
@@ -158,7 +158,7 @@ if ( ! function_exists( 'bonipress_render_chart_top_balances' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'bar',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'number'  => 10,
 			'order'   => 'DESC',
 			'title'   => '',
@@ -168,7 +168,7 @@ if ( ! function_exists( 'bonipress_render_chart_top_balances' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_top_balances' ) );
+		), $atts, BONIPS_SLUG . '_chart_top_balances' ) );
 
 		// Make sure we request a chart type that we support
 		$type  = ( ! in_array( $type, array( 'pie', 'doughnut', 'line', 'bar', 'radar', 'polarArea' ) ) ) ? 'bar' : $type;
@@ -205,7 +205,7 @@ if ( ! function_exists( 'bonipress_render_chart_top_instances' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'bar',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'number'  => 10,
 			'order'   => 'DESC',
 			'title'   => '',
@@ -215,7 +215,7 @@ if ( ! function_exists( 'bonipress_render_chart_top_instances' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_top_instances' ) );
+		), $atts, BONIPS_SLUG . '_chart_top_instances' ) );
 
 		// Make sure we request a chart type that we support
 		$type  = ( ! in_array( $type, array( 'pie', 'doughnut', 'line', 'bar', 'radar', 'polarArea' ) ) ) ? 'pie' : $type;
@@ -252,7 +252,7 @@ if ( ! function_exists( 'bonipress_render_chart_balance_history' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'line',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'user'    => 'current',
 			'period'  => 'days',
 			'length'  => 10,
@@ -264,7 +264,7 @@ if ( ! function_exists( 'bonipress_render_chart_balance_history' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_balance_history' ) );
+		), $atts, BONIPS_SLUG . '_chart_balance_history' ) );
 
 		if ( $user == 'current' && ! is_user_logged_in() ) return $no_data;
 
@@ -305,7 +305,7 @@ if ( ! function_exists( 'bonipress_render_chart_instance_history' ) ) :
 
 		extract( shortcode_atts( array(
 			'type'    => 'line',
-			'ctype'   => BONIPRESS_DEFAULT_TYPE_KEY,
+			'ctype'   => BONIPS_DEFAULT_TYPE_KEY,
 			'ref'     => '',
 			'period'  => 'days',
 			'number'  => 10,
@@ -317,7 +317,7 @@ if ( ! function_exists( 'bonipress_render_chart_instance_history' ) ) :
 			'legend'  => 1,
 			'height'  => '',
 			'width'   => ''
-		), $atts, BONIPRESS_SLUG . '_chart_instance_history' ) );
+		), $atts, BONIPS_SLUG . '_chart_instance_history' ) );
 
 		if ( empty( $ref ) ) return $no_data;
 

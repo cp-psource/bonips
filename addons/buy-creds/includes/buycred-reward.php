@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * boniPRESS_buyCRED_Module class
@@ -43,13 +43,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward' ) ) :
 		 */
 		public function register_assets() {
 
-			wp_enqueue_style( 'buycred-admin-style', plugins_url( 'assets/css/admin-style.css', BONIPRESS_PURCHASE ), array(), BONIPRESS_PURCHASE_VERSION, 'all' );
-			wp_enqueue_script( 'buycred-admin-script', plugins_url( 'assets/js/admin-script.js', BONIPRESS_PURCHASE ), array( 'jquery' ), BONIPRESS_PURCHASE_VERSION, 'all' );
+			wp_enqueue_style( 'buycred-admin-style', plugins_url( 'assets/css/admin-style.css', BONIPS_PURCHASE ), array(), BONIPS_PURCHASE_VERSION, 'all' );
+			wp_enqueue_script( 'buycred-admin-script', plugins_url( 'assets/js/admin-script.js', BONIPS_PURCHASE ), array( 'jquery' ), BONIPS_PURCHASE_VERSION, 'all' );
 
 		}
 
 		public function load_buycred_reward_hook() {
-			require_once BONIPRESS_BUYCRED_INCLUDES_DIR . 'buycred-reward-hook.php';
+			require_once BONIPS_BUYCRED_INCLUDES_DIR . 'buycred-reward-hook.php';
 		}
 
 		public function register_buycred_reward_hook( $installed ) {

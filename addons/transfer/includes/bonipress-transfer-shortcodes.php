@@ -29,7 +29,7 @@ if ( ! function_exists( 'bonipress_transfer_render' ) ) :
 			'amount_label'    => __( 'Betrag', 'bonipress' ),
 			'balance_label'   => __( 'Guthaben', 'bonipress' ),
 			'message_label'   => __( 'Nachricht', 'bonipress' )
-		), $atts, BONIPRESS_SLUG . '_transfer' );
+		), $atts, BONIPS_SLUG . '_transfer' );
 
 		// Prep
 		$bonipress_do_transfer = false;

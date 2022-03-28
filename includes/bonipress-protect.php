@@ -112,7 +112,7 @@ endif;
 if ( ! function_exists( 'bonipress_protect' ) ) :
 	function bonipress_protect() {
 
-		if ( ! class_exists( 'boniPRESS_Protect' ) || BONIPRESS_DISABLE_PROTECTION ) return false;
+		if ( ! class_exists( 'boniPRESS_Protect' ) || BONIPS_DISABLE_PROTECTION ) return false;
 
 		global $bonipress_protect;
 

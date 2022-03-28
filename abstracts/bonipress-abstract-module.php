@@ -58,7 +58,7 @@ if ( ! class_exists( 'boniPRESS_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $module_id = '', $args = array(), $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $module_id = '', $args = array(), $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			// Module ID is required
 			if ( empty( $module_id ) ) wp_die( 'boniPRESS_Module() Fehler. Eine Modul-ID ist erforderlich!' );
@@ -71,7 +71,7 @@ if ( ! class_exists( 'boniPRESS_Module' ) ) :
 				$this->bonipress_type   = $this->core->cred_id;
 			}
 
-			if ( $this->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $this->bonipress_type != BONIPS_DEFAULT_TYPE_KEY )
 				$this->is_main_type = false;
 
 			$this->point_types = bonipress_get_types();
@@ -394,7 +394,7 @@ if ( ! class_exists( 'boniPRESS_Module' ) ) :
 			if ( ! empty( $this->labels ) && ! empty( $this->screen_id ) ) {
 
 				// Menu Slug
-				$menu_slug  = ( ! $this->is_main_type ) ? BONIPRESS_SLUG . '_' . $this->bonipress_type : BONIPRESS_SLUG;
+				$menu_slug  = ( ! $this->is_main_type ) ? BONIPS_SLUG . '_' . $this->bonipress_type : BONIPS_SLUG;
 				$label_menu = $label_title = 'Surprise';
 
 				// Capability
@@ -679,7 +679,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 		 */
 		public function get_settings_url( $module = '' ) {
 
-			$variables = array( 'page' => BONIPRESS_SLUG . '-settings' );
+			$variables = array( 'page' => BONIPS_SLUG . '-settings' );
 			if ( ! empty( $module ) )
 				$variables['open-tab'] = $module;
 

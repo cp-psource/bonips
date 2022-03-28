@@ -14,7 +14,7 @@ if ( ! class_exists( 'boniPRESS_Hooks_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Hooks_Module', array(
 				'module_name' => 'hooks',
@@ -29,7 +29,7 @@ if ( ! class_exists( 'boniPRESS_Hooks_Module' ) ) :
 					'page_title'  => __( 'Hooks', 'bonipress' ),
 					'page_header' => __( 'Hooks', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG . '-hooks',
+				'screen_id'   => BONIPS_SLUG . '-hooks',
 				'accordion'   => false,
 				'menu_pos'    => 20
 			), $type );
@@ -284,7 +284,7 @@ if ( ! class_exists( 'boniPRESS_Hooks_Module' ) ) :
 .form .radio { margin-bottom: 12px; }
 </style>
 <div class="wrap">
-	<h1><?php _e( 'Hooks', 'bonipress' ); if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-hooks-einrichten/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Hooks', 'bonipress' ); if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-hooks-einrichten/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
 	<div class="widget-liquid-left">
 		<div id="widgets-left">
 			<div id="available-widgets" class="widgets-holder-wrap">
@@ -330,7 +330,7 @@ if ( ! class_exists( 'boniPRESS_Hooks_Module' ) ) :
 									<input type="hidden" name="add_new" class="add_new" value="single" />
 									<div class="widget-control-actions">
 										<div class="alignleft">
-											<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?> | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
+											<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?> | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
 										</div>
 										<div class="alignright">
 											<input type="submit" name="savewidget" id="widget-bonipress-hook-<?php echo $key; ?>-__i__-savewidget" class="button button-primary widget-control-save right" value="<?php _e( 'Speichern', 'bonipress' ); ?>" />
@@ -446,7 +446,7 @@ jQuery(function($) {
 							<input type="hidden" name="add_new" class="add_new" value="single" />
 							<div class="widget-control-actions">
 								<div class="alignleft">
-									<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?>  | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
+									<a class="widget-control-remove" href="#remove"><?php _e( 'Löschen', 'bonipress' ); ?></a> | <a class="widget-control-close" href="#close"><?php _e( 'Schließen', 'bonipress' ); ?></a><?php if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' && array_key_exists( 'documentation', $data ) && ! empty( $data['documentation'] ) ) : ?>  | <a class="hook-documentation" href="<?php echo esc_url( $data['documentation'] ); ?>" target="_blank">Hook Dokumentation</a><?php endif; ?>
 								</div>
 								<div class="alignright">
 									<input type="submit" name="savewidget" id="widget-bonipress-hook-<?php echo $key; ?>-__i__-savewidget" class="button button-primary widget-control-save right" value="<?php _e( 'Speichern', 'bonipress' ); ?>" />
@@ -579,10 +579,10 @@ jQuery(function($) {
 			if ( isset( $_POST['bonipress_pref_hooks'] ) || isset($_POST[ 'bonipress_pref_hooks_' . $ctype ]) ) {
 
 				// Get hook settings
-				if ( $ctype == BONIPRESS_DEFAULT_TYPE_KEY && array_key_exists( $hook_id, $_POST['bonipress_pref_hooks']['hook_prefs'] ) )
+				if ( $ctype == BONIPS_DEFAULT_TYPE_KEY && array_key_exists( $hook_id, $_POST['bonipress_pref_hooks']['hook_prefs'] ) )
 					$hook_prefs = $_POST['bonipress_pref_hooks']['hook_prefs'][ $hook_id ];
 
-				elseif ( $ctype != BONIPRESS_DEFAULT_TYPE_KEY && array_key_exists( $hook_id, $_POST[ 'bonipress_pref_hooks_' . $ctype ]['hook_prefs'] ) )
+				elseif ( $ctype != BONIPS_DEFAULT_TYPE_KEY && array_key_exists( $hook_id, $_POST[ 'bonipress_pref_hooks_' . $ctype ]['hook_prefs'] ) )
 					$hook_prefs = $_POST[ 'bonipress_pref_hooks_' . $ctype ]['hook_prefs'][ $hook_id ];
 
 				if ( $hook_prefs === false ) die;

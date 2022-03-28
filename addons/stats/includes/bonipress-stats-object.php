@@ -245,7 +245,7 @@ if ( ! class_exists( 'boniPRESS_Chart' ) ) :
 
 			global $bonipress_charts;
 
-			return apply_filters( 'bonipress_chart_generate_element_id', BONIPRESS_SLUG . '-chart' . count( $bonipress_charts ), $this );
+			return apply_filters( 'bonipress_chart_generate_element_id', BONIPS_SLUG . '-chart' . count( $bonipress_charts ), $this );
 
 		}
 
@@ -370,7 +370,7 @@ if ( ! class_exists( 'boniPRESS_Chart' ) ) :
 						}
 
 						elseif ( $row->type == 'amount' ) {
-							$label = ( $this->multi_type ) ? __( 'Amount', 'bonipress' ) : $this->point_types[ BONIPRESS_DEFAULT_TYPE_KEY ]->color['positive'];
+							$label = ( $this->multi_type ) ? __( 'Amount', 'bonipress' ) : $this->point_types[ BONIPS_DEFAULT_TYPE_KEY ]->color['positive'];
 						}
 
 						elseif ( $row->type == 'reference' ) {
@@ -383,7 +383,7 @@ if ( ! class_exists( 'boniPRESS_Chart' ) ) :
 
 						$dataset->data[]            = $value;
 						$dataset->labels[]          = $label;
-						$dataset->backgroundColor[] = ( ( $type != 'radar' ) ? $color : ( ( BONIPRESS_STATS_COLOR_TYPE == 'hex' ) ? bonipress_hex_to_rgb( $color, true, '0.6' ) : $color ) );
+						$dataset->backgroundColor[] = ( ( $type != 'radar' ) ? $color : ( ( BONIPS_STATS_COLOR_TYPE == 'hex' ) ? bonipress_hex_to_rgb( $color, true, '0.6' ) : $color ) );
 
 						if ( in_array( $type, array( 'line', 'bar', 'radar' ) ) ) {
 
@@ -405,7 +405,7 @@ if ( ! class_exists( 'boniPRESS_Chart' ) ) :
 
 				$element_id    = $this->generate_element_id();
 				$element_style = $this->get_canvas_styling();
-				$output        = '<div class="chart-container ' . BONIPRESS_SLUG . '-chart-container"><canvas class="' . BONIPRESS_SLUG . '-chart-canvas" ' . $element_style . ' id="' . $element_id . '"></canvas></div>';
+				$output        = '<div class="chart-container ' . BONIPS_SLUG . '-chart-container"><canvas class="' . BONIPS_SLUG . '-chart-canvas" ' . $element_style . ' id="' . $element_id . '"></canvas></div>';
 
 				$bonipress_charts[ $element_id ] = $chart;
 

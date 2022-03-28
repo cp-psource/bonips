@@ -16,7 +16,7 @@ if ( ! class_exists( 'boniPRESS_Banking_Service_Interest' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $service_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $service_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'interest',

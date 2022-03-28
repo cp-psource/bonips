@@ -230,7 +230,7 @@ if ( ! class_exists( 'boniPRESS_Notifications_Module' ) ) :
 			</div>
 		</div>
 	</div>
-	<?php if ( BONIPRESS_SHOW_PREMIUM_ADDONS ) : ?>
+	<?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?>
 	<hr />
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -85,10 +85,10 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 			$rank_id = absint( $rank_id );
 			if ( $rank_id === 0 ) return;
 
-			if ( bonipress_get_post_type( $rank_id ) != BONIPRESS_RANK_KEY ) return;
+			if ( bonipress_get_post_type( $rank_id ) != BONIPS_RANK_KEY ) return;
 
-			$this->image_width  = BONIPRESS_RANK_WIDTH;
-			$this->image_height = BONIPRESS_RANK_HEIGHT;
+			$this->image_width  = BONIPS_RANK_WIDTH;
+			$this->image_height = BONIPS_RANK_HEIGHT;
 
 			$this->populate( $rank_id );
 
@@ -114,7 +114,7 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 
 			$point_type       = bonipress_get_post_meta( $this->post_id, 'ctype', true );
 			if ( ! bonipress_point_type_exists( $point_type ) )
-				$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			$this->point_type = new boniPRESS_Point_Type( $point_type );
 
@@ -134,7 +134,7 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 			$user_id    = absint( $user_id );
 			$post_type  = $this->point_type->cred_id;
 
-			$users_rank = bonipress_get_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $post_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $post_type : '' ), true );
+			$users_rank = bonipress_get_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $post_type != BONIPS_DEFAULT_TYPE_KEY ) ? $post_type : '' ), true );
 
 			$has_rank   = false;
 			if ( $users_rank != '' && absint( $users_rank ) === $this->post_id )
@@ -161,7 +161,7 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 
 			$value      = apply_filters( 'bonipress_rank_user_value', $this->post_id, $user_id, $this );
 
-			return bonipress_update_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), $value );
+			return bonipress_update_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), $value );
 
 		}
 
@@ -179,7 +179,7 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 
 			$post_type      = $this->point_type->cred_id;
 			$balance_format = esc_sql( $this->point_type->sql_format );
-			$rank_key       = bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
+			$rank_key       = bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
 
 			$balance_key    = bonipress_get_meta_key( $point_type );
 			if ( bonipress_rank_based_on_total( $point_type ) )
@@ -215,11 +215,11 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 			$post_type  = $this->point_type->cred_id;
 
 			$results    = true;
-			$users_rank = bonipress_get_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $post_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $post_type : '' ), true );
+			$users_rank = bonipress_get_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $post_type != BONIPS_DEFAULT_TYPE_KEY ) ? $post_type : '' ), true );
 
 			if ( $users_rank != '' ) {
 
-				$results = bonipress_delete_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $post_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $post_type : '' ) );
+				$results = bonipress_delete_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $post_type != BONIPS_DEFAULT_TYPE_KEY ) ? $post_type : '' ) );
 
 				$this->count--;
 
@@ -247,7 +247,7 @@ if ( ! class_exists( 'boniPRESS_Rank' ) ) :
 			// Delete connections
 			$wpdb->delete(
 				$wpdb->usermeta,
-				array( 'meta_key' => bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $post_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $post_type : '' ) ), 'meta_value' => $this->post_id ),
+				array( 'meta_key' => bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $post_type != BONIPS_DEFAULT_TYPE_KEY ) ? $post_type : '' ) ), 'meta_value' => $this->post_id ),
 				array( '%s', '%d' )
 			);
 

@@ -24,7 +24,7 @@ if ( ! class_exists( 'boniPRESS_Importer_CubePoints' ) ) :
 		 */
 		public function __construct() {
 
-			$this->import_page   = BONIPRESS_SLUG . '-import-cp';
+			$this->import_page   = BONIPS_SLUG . '-import-cp';
 			$this->delimiter     = empty( $_POST['delimiter'] ) ? ',' : (string) strip_tags( trim( $_POST['delimiter'] ) );
 			$this->documentation = 'http://codex.bonipress.me/chapter-ii/import-data/import-cubepoints/';
 
@@ -106,7 +106,7 @@ if ( ! class_exists( 'boniPRESS_Importer_CubePoints' ) ) :
 			$show_greet = true;
 			$loop       = 0;
 
-			if ( ! bonipress_point_type_exists( $point_type ) ) $point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			if ( ! bonipress_point_type_exists( $point_type ) ) $point_type = BONIPS_DEFAULT_TYPE_KEY;
 			$bonipress     = bonipress( $type );
 
 			// Import Log
@@ -303,7 +303,7 @@ if ( ! class_exists( 'boniPRESS_Importer_CubePoints' ) ) :
 		public function header() {
 
 			$label = __( 'Import CubePoints', 'bonipress' );
-			if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' )
+			if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' )
 				$label .= ' <a href="' . $this->documentation . '" target="_blank" class="page-title-action">' . __( 'Documentation', 'bonipress' ) . '</a>';
 
 			echo '<div class="wrap"><h1>' . $label . '</h1>';
@@ -358,7 +358,7 @@ if ( ! class_exists( 'boniPRESS_Importer_CubePoints' ) ) :
 				</th>
 				<td>
 
-					<?php bonipress_types_select_from_dropdown( 'type', 'bonipress-type', BONIPRESS_DEFAULT_TYPE_KEY ); ?>
+					<?php bonipress_types_select_from_dropdown( 'type', 'bonipress-type', BONIPS_DEFAULT_TYPE_KEY ); ?>
 
 				</td>
 			</tr>

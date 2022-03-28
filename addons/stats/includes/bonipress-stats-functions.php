@@ -18,7 +18,7 @@ if ( ! function_exists( 'bonipress_get_color_sets' ) ) :
 		) );
 
 		// Use HEX colors
-		if ( BONIPRESS_STATS_COLOR_TYPE == 'hex' ) {
+		if ( BONIPS_STATS_COLOR_TYPE == 'hex' ) {
 
 			foreach ( $color_sets as $row => $setup ) {
 
@@ -30,7 +30,7 @@ if ( ! function_exists( 'bonipress_get_color_sets' ) ) :
 		}
 
 		// Use RGB colors
-		elseif ( BONIPRESS_STATS_COLOR_TYPE == 'rgb' ) {
+		elseif ( BONIPS_STATS_COLOR_TYPE == 'rgb' ) {
 
 			foreach ( $color_sets as $row => $setup ) {
 
@@ -424,7 +424,7 @@ if ( ! function_exists( 'bonipress_maybe_clear_stats_data' ) ) :
 		$settings   = bonipress_get_addon_settings( 'stats' );
 
 		$now        = current_time( 'timestamp' );
-		$last_clear = bonipress_get_option( BONIPRESS_SLUG . '-last-clear-stats', 0 );
+		$last_clear = bonipress_get_option( BONIPS_SLUG . '-last-clear-stats', 0 );
 
 		$clear_data = true;
 		if ( $settings['caching'] !== 'off' ) {
@@ -513,7 +513,7 @@ if ( ! function_exists( 'bonipress_delete_stats_data' ) ) :
 
 		$settings  = bonipress_get_addon_settings( 'stats' );
 		$table     = bonipress_get_db_column( 'options' );
-		$data_keys = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM {$table} WHERE option_name LIKE %s;", BONIPRESS_SLUG . '-stats-%' ) );
+		$data_keys = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM {$table} WHERE option_name LIKE %s;", BONIPS_SLUG . '-stats-%' ) );
 
 		// Most of the data is stored in the options table
 		if ( ! empty( $data_keys ) ) {
@@ -524,7 +524,7 @@ if ( ! function_exists( 'bonipress_delete_stats_data' ) ) :
 		}
 
 		if ( $settings['caching'] !== 'off' )
-			bonipress_update_option( BONIPRESS_SLUG . '-last-clear-stats', current_time( 'timestamp' ) );
+			bonipress_update_option( BONIPS_SLUG . '-last-clear-stats', current_time( 'timestamp' ) );
 
 		do_action( 'bonipress_delete_stats_data', $data_keys, $force );
 
@@ -570,7 +570,7 @@ endif;
 if ( ! function_exists( 'bonipress_get_circulation_data' ) ) :
 	function bonipress_get_circulation_data() {
 
-		$cache = bonipress_get_option( BONIPRESS_SLUG . '-stats-circulation', false );
+		$cache = bonipress_get_option( BONIPS_SLUG . '-stats-circulation', false );
 
 		if ( $cache === false ) {
 
@@ -584,7 +584,7 @@ if ( ! function_exists( 'bonipress_get_circulation_data' ) ) :
 
 			$cache = array( $data );
 
-			bonipress_update_option( BONIPRESS_SLUG . '-stats-circulation', $cache );
+			bonipress_update_option( BONIPS_SLUG . '-stats-circulation', $cache );
 
 		}
 
@@ -601,9 +601,9 @@ endif;
 if ( ! function_exists( 'bonipress_get_gains_vs_losses_data' ) ) :
 	function bonipress_get_gains_vs_losses_data( $point_type = '' ) {
 
-		if ( ! BONIPRESS_ENABLE_LOGGING ) return array();
+		if ( ! BONIPS_ENABLE_LOGGING ) return array();
 
-		$cache = bonipress_get_option( BONIPRESS_SLUG . '-stats-gains-vs-losses' . $point_type, false );
+		$cache = bonipress_get_option( BONIPS_SLUG . '-stats-gains-vs-losses' . $point_type, false );
 
 		if ( $cache === false ) {
 
@@ -613,7 +613,7 @@ if ( ! function_exists( 'bonipress_get_gains_vs_losses_data' ) ) :
 
 			$where        = '';
 			$point_colors = bonipress_get_type_color();
-			$colors       = $point_colors[ BONIPRESS_DEFAULT_TYPE_KEY ];
+			$colors       = $point_colors[ BONIPS_DEFAULT_TYPE_KEY ];
 
 			if ( $point_type != '' && bonipress_point_type_exists( $point_type ) ) {
 
@@ -624,7 +624,7 @@ if ( ! function_exists( 'bonipress_get_gains_vs_losses_data' ) ) :
 			}
 			else {
 
-				$type_object = new boniPRESS_Point_Type( BONIPRESS_DEFAULT_TYPE_KEY );
+				$type_object = new boniPRESS_Point_Type( BONIPS_DEFAULT_TYPE_KEY );
 
 			}
 
@@ -648,7 +648,7 @@ if ( ! function_exists( 'bonipress_get_gains_vs_losses_data' ) ) :
 
 			$cache        = array( $data );
 
-			bonipress_update_option( BONIPRESS_SLUG . '-stats-gains-vs-losses', $cache );
+			bonipress_update_option( BONIPS_SLUG . '-stats-gains-vs-losses', $cache );
 
 		}
 
@@ -663,9 +663,9 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_top_balances_data' ) ) :
-	function bonipress_get_top_balances_data( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $number = 10, $order = 'DESC' ) {
+	function bonipress_get_top_balances_data( $point_type = BONIPS_DEFAULT_TYPE_KEY, $number = 10, $order = 'DESC' ) {
 
-		$stats_key = BONIPRESS_SLUG . '-stats-' . md5( 'balances' . $point_type . $number . $order );
+		$stats_key = BONIPS_SLUG . '-stats-' . md5( 'balances' . $point_type . $number . $order );
 		$cache     = bonipress_get_option( $stats_key, false );
 
 		if ( $cache === false ) {
@@ -698,9 +698,9 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_top_instances_data' ) ) :
-	function bonipress_get_top_instances_data( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $number = 10, $order = 'DESC' ) {
+	function bonipress_get_top_instances_data( $point_type = BONIPS_DEFAULT_TYPE_KEY, $number = 10, $order = 'DESC' ) {
 
-		$stats_key = BONIPRESS_SLUG . '-stats-' . md5( 'instances' . $point_type . $number . $order );
+		$stats_key = BONIPS_SLUG . '-stats-' . md5( 'instances' . $point_type . $number . $order );
 		$cache     = bonipress_get_option( $stats_key, false );
 
 		if ( $cache === false ) {
@@ -732,9 +732,9 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_history_data' ) ) :
-	function bonipress_get_history_data( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
+	function bonipress_get_history_data( $point_type = BONIPS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
 
-		$stats_key = BONIPRESS_SLUG . '-stats-' . md5( $point_type . $period . $number . $order );
+		$stats_key = BONIPS_SLUG . '-stats-' . md5( $point_type . $period . $number . $order );
 		$cache     = bonipress_get_option( $stats_key, false );
 
 		if ( $cache === false ) {
@@ -809,7 +809,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_users_history_data' ) ) :
-	function bonipress_get_users_history_data( $user_id = 0, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
+	function bonipress_get_users_history_data( $user_id = 0, $point_type = BONIPS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
 
 		if ( absint( $user_id ) === 0 ) return array();
 
@@ -889,9 +889,9 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_ref_history_data' ) ) :
-	function bonipress_get_ref_history_data( $reference = '', $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
+	function bonipress_get_ref_history_data( $reference = '', $point_type = BONIPS_DEFAULT_TYPE_KEY, $period = 'days', $number = 10, $order = 'DESC' ) {
 
-		$stats_key = BONIPRESS_SLUG . '-stats-' . md5( $reference . $point_type . $period . $number . $order );
+		$stats_key = BONIPS_SLUG . '-stats-' . md5( $reference . $point_type . $period . $number . $order );
 		$cache     = bonipress_get_option( $stats_key, false );
 
 		if ( $cache === false ) {

@@ -87,13 +87,13 @@ if ( ! class_exists( 'boniPRESS_Statistics_Widget' ) ) :
 		 */
 		function action_buttons() {
 
-			$screen_id = BONIPRESS_SLUG;
+			$screen_id = BONIPS_SLUG;
 			$buttons   = array();
 
 			if ( $this->args['ctypes'] != 'all' ) {
 
 				$this->args['ctypes'] = str_replace( 'view_', '', $this->args['ctypes'] );
-				if ( $this->args['ctypes'] != BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $this->args['ctypes'] != BONIPS_DEFAULT_TYPE_KEY )
 					$screen_id .= '_' . $this->args['ctypes'];
 
 				$url = add_query_arg( array( 'page' => $screen_id ), admin_url( 'admin.php' ) );
@@ -162,7 +162,7 @@ if ( ! class_exists( 'boniPRESS_Statistics_Widget' ) ) :
 				else {
 
 					// Default type - always available under $this->core
-					if ( $selected_type == BONIPRESS_DEFAULT_TYPE_KEY )
+					if ( $selected_type == BONIPS_DEFAULT_TYPE_KEY )
 						$result = $this->core->format_number( $value );
 
 					// Custom type

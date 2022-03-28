@@ -90,7 +90,7 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 
 				$coupon_id = 0;
 				$coupon    = bonipress_get_coupon_post( $coupon_id );
-				if ( $coupon !== NULL && $coupon->post_type == BONIPRESS_COUPON_KEY ) {
+				if ( $coupon !== NULL && $coupon->post_type == BONIPS_COUPON_KEY ) {
 					$coupon_id   = $coupon->ID;
 					$coupon_code = $coupon->post_title;
 				}
@@ -101,7 +101,7 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 			else {
 
 				$coupon_id = absint( $coupon_id );
-				if ( bonipress_get_post_type( $coupon_id ) != BONIPRESS_COUPON_KEY )
+				if ( bonipress_get_post_type( $coupon_id ) != BONIPS_COUPON_KEY )
 					$coupon_id = 0;
 
 			}
@@ -137,13 +137,13 @@ if ( ! class_exists( 'boniPRESS_Coupon' ) ) :
 			$this->used              = $this->get_usage_count();
 
 			if ( ! bonipress_point_type_exists( $this->point_type ) )
-				$this->point_type        = BONIPRESS_DEFAULT_TYPE_KEY;
+				$this->point_type        = BONIPS_DEFAULT_TYPE_KEY;
 
 			if ( ! bonipress_point_type_exists( $this->requires_min_type ) )
-				$this->requires_min_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$this->requires_min_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			if ( ! bonipress_point_type_exists( $this->requires_max_type ) )
-				$this->requires_max_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$this->requires_max_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			$this->expires           = bonipress_get_coupon_expire_date( $this->post_id );
 			$this->expires_unix      = false;

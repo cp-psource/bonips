@@ -11,8 +11,8 @@ define( 'boniPRESS_COUPONS_DIR',     boniPRESS_ADDONS_DIR . 'coupons/' );
 define( 'boniPRESS_COUPONS_VERSION', '1.3' );
 
 // Coupon Key
-if ( ! defined( 'BONIPRESS_COUPON_KEY' ) )
-	define( 'BONIPRESS_COUPON_KEY', 'bonipress_coupon' );
+if ( ! defined( 'BONIPS_COUPON_KEY' ) )
+	define( 'BONIPS_COUPON_KEY', 'bonipress_coupon' );
 
 require_once boniPRESS_COUPONS_DIR . 'includes/bonipress-coupon-functions.php';
 require_once boniPRESS_COUPONS_DIR . 'includes/bonipress-coupon-object.php';
@@ -61,7 +61,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			$this->register_coupons();
 
-			add_shortcode( BONIPRESS_SLUG . '_load_coupon', 'bonipress_render_shortcode_load_coupon' );
+			add_shortcode( BONIPS_SLUG . '_load_coupon', 'bonipress_render_shortcode_load_coupon' );
 
 			add_action( 'bonipress_add_menu',       array( $this, 'add_to_menu' ), $this->menu_pos );
 			add_action( 'admin_notices',         array( $this, 'warn_bad_expiration' ), $this->menu_pos );
@@ -87,10 +87,10 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			add_action( 'admin_head-post-new.php', array( $this, 'edit_coupons_style' ) );
 			add_action( 'admin_head-edit.php',     array( $this, 'coupon_style' ) );
 
-			add_filter( 'manage_' . BONIPRESS_COUPON_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ) );
-			add_action( 'manage_' . BONIPRESS_COUPON_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
-			add_filter( 'bulk_actions-edit-' . BONIPRESS_COUPON_KEY,               array( $this, 'bulk_actions' ) );
-			add_action( 'save_post_' . BONIPRESS_COUPON_KEY,                       array( $this, 'save_coupon' ), 10, 2 );
+			add_filter( 'manage_' . BONIPS_COUPON_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ) );
+			add_action( 'manage_' . BONIPS_COUPON_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
+			add_filter( 'bulk_actions-edit-' . BONIPS_COUPON_KEY,               array( $this, 'bulk_actions' ) );
+			add_action( 'save_post_' . BONIPS_COUPON_KEY,                       array( $this, 'save_coupon' ), 10, 2 );
 
 		}
 
@@ -132,7 +132,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				'register_meta_box_cb' => array( $this, 'add_metaboxes' )
 			);
 
-			register_post_type( BONIPRESS_COUPON_KEY, apply_filters( 'bonipress_register_coupons', $args ) );
+			register_post_type( BONIPS_COUPON_KEY, apply_filters( 'bonipress_register_coupons', $args ) );
 
 		}
 
@@ -143,7 +143,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 		 */
 		public function post_updated_messages( $messages ) {
 
-			$messages[ BONIPRESS_COUPON_KEY ] = array(
+			$messages[ BONIPS_COUPON_KEY ] = array(
 				0  => '',
 				1  => __( 'Gutschein aktualisiert.', 'bonipress' ),
 				2  => __( 'Gutschein aktualisiert.', 'bonipress' ),
@@ -173,11 +173,11 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			if ( bonipress_override_settings() && ! bonipress_is_main_site() ) return;
 
 			add_submenu_page(
-				BONIPRESS_SLUG,
+				BONIPS_SLUG,
 				__( 'Gutscheine', 'bonipress' ),
 				__( 'Gutscheine', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
-				'edit.php?post_type=' . BONIPRESS_COUPON_KEY
+				'edit.php?post_type=' . BONIPS_COUPON_KEY
 			);
 
 		}
@@ -191,11 +191,11 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			global $pagenow;
 
-			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_COUPON_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
-				return BONIPRESS_SLUG;
+			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_COUPON_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
+				return BONIPS_SLUG;
 
-			if ( $pagenow == 'post-new.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_COUPON_KEY )
-				return BONIPRESS_SLUG;
+			if ( $pagenow == 'post-new.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_COUPON_KEY )
+				return BONIPS_SLUG;
 
 			return $parent;
 
@@ -210,15 +210,15 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			global $pagenow;
 
-			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_COUPON_KEY ) {
+			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_COUPON_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_COUPON_KEY;
+				return 'edit.php?post_type=' . BONIPS_COUPON_KEY;
 			
 			}
 
-			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && get_post_type( $_GET['post'] ) == BONIPRESS_COUPON_KEY ) {
+			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && get_post_type( $_GET['post'] ) == BONIPS_COUPON_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_COUPON_KEY;
+				return 'edit.php?post_type=' . BONIPS_COUPON_KEY;
 
 			}
 
@@ -235,7 +235,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			global $post_type;
 
-			if ( $post_type == BONIPRESS_COUPON_KEY )
+			if ( $post_type == BONIPS_COUPON_KEY )
 				return __( 'Gutscheincode', 'bonipress' );
 
 			return $title;
@@ -293,9 +293,9 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 					else {
 
 						$set_type = $coupon->point_type;
-						$page     = BONIPRESS_SLUG;
+						$page     = BONIPS_SLUG;
 
-						if ( $set_type != BONIPRESS_DEFAULT_TYPE_KEY && array_key_exists( $set_type, $this->point_types ) )
+						if ( $set_type != BONIPS_DEFAULT_TYPE_KEY && array_key_exists( $set_type, $this->point_types ) )
 							$page .= '_' . $set_type;
 
 						$url      = add_query_arg( array( 'page' => $page, 'ref' => 'coupon', 'ref_id' => $post_id ), admin_url( 'admin.php' ) );
@@ -368,7 +368,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 		 */
 		public function adjust_row_actions( $actions, $post ) {
 
-			if ( $post->post_type == BONIPRESS_COUPON_KEY ) {
+			if ( $post->post_type == BONIPS_COUPON_KEY ) {
 				unset( $actions['inline hide-if-no-js'] );
 				unset( $actions['view'] );
 			}
@@ -386,15 +386,15 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 
 			global $post_type;
 
-			if ( $post_type !== BONIPRESS_COUPON_KEY ) return;
+			if ( $post_type !== BONIPS_COUPON_KEY ) return;
 
 			wp_enqueue_style( 'bonipress-bootstrap-grid' );
 			wp_enqueue_style( 'bonipress-forms' );
 
-			add_filter( 'postbox_classes_' . BONIPRESS_COUPON_KEY . '_bonipress-coupon-setup',        array( $this, 'metabox_classes' ) );
-			add_filter( 'postbox_classes_' . BONIPRESS_COUPON_KEY . '_bonipress-coupon-limits',       array( $this, 'metabox_classes' ) );
-			add_filter( 'postbox_classes_' . BONIPRESS_COUPON_KEY . '_bonipress-coupon-requirements', array( $this, 'metabox_classes' ) );
-			add_filter( 'postbox_classes_' . BONIPRESS_COUPON_KEY . '_bonipress-coupon-usage',        array( $this, 'metabox_classes' ) );
+			add_filter( 'postbox_classes_' . BONIPS_COUPON_KEY . '_bonipress-coupon-setup',        array( $this, 'metabox_classes' ) );
+			add_filter( 'postbox_classes_' . BONIPS_COUPON_KEY . '_bonipress-coupon-limits',       array( $this, 'metabox_classes' ) );
+			add_filter( 'postbox_classes_' . BONIPS_COUPON_KEY . '_bonipress-coupon-requirements', array( $this, 'metabox_classes' ) );
+			add_filter( 'postbox_classes_' . BONIPS_COUPON_KEY . '_bonipress-coupon-usage',        array( $this, 'metabox_classes' ) );
 
 			echo '<style type="text/css">#misc-publishing-actions #visibility { display: none; }</style>';
 
@@ -418,7 +418,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				'bonipress-coupon-setup',
 				__( 'Gutschein-Einrichtung', 'bonipress' ),
 				array( $this, 'metabox_coupon_setup' ),
-				BONIPRESS_COUPON_KEY,
+				BONIPS_COUPON_KEY,
 				'normal',
 				'core'
 			);
@@ -427,7 +427,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				'bonipress-coupon-limits',
 				__( 'Gutscheinlimits', 'bonipress' ),
 				array( $this, 'metabox_coupon_limits' ),
-				BONIPRESS_COUPON_KEY,
+				BONIPS_COUPON_KEY,
 				'normal',
 				'core'
 			);
@@ -436,7 +436,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				'bonipress-coupon-requirements',
 				__( 'Gutscheinanforderungen', 'bonipress' ),
 				array( $this, 'bonipress_coupon_requirements' ),
-				BONIPRESS_COUPON_KEY,
+				BONIPS_COUPON_KEY,
 				'side',
 				'core'
 			);
@@ -446,7 +446,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 					'bonipress-coupon-usage',
 					__( 'Coupon-Nutzung', 'bonipress' ),
 					array( $this, 'bonipress_coupon_usage' ),
-					BONIPRESS_COUPON_KEY,
+					BONIPS_COUPON_KEY,
 					'side',
 					'core'
 				);
@@ -461,7 +461,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 		 */
 		public function warn_bad_expiration() {
 
-			if ( isset( $_GET['post'] ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' && get_post_type( absint( $_GET['post'] ) ) == BONIPRESS_COUPON_KEY ) {
+			if ( isset( $_GET['post'] ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' && get_post_type( absint( $_GET['post'] ) ) == BONIPS_COUPON_KEY ) {
 
 				$post_id            = absint( $_GET['post'] );
 				$expiration_warning = bonipress_get_post_meta( $post_id, '_warning_bad_expiration', true );
@@ -513,7 +513,7 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 				<?php else : ?>
 
 					<p class="form-control-static"><?php echo $bonipress->plural(); ?></p>
-					<input type="hidden" name="bonipress_coupon[type]" value="<?php echo BONIPRESS_DEFAULT_TYPE_KEY; ?>" />
+					<input type="hidden" name="bonipress_coupon[type]" value="<?php echo BONIPS_DEFAULT_TYPE_KEY; ?>" />
 
 				<?php endif; ?>
 			</div>
@@ -627,9 +627,9 @@ if ( ! class_exists( 'boniPRESS_Coupons_Module' ) ) :
 			else {
 
 				$set_type = bonipress_get_post_meta( $post->ID, 'type', true );
-				$page     = BONIPRESS_SLUG;
+				$page     = BONIPS_SLUG;
 
-				if ( $set_type != BONIPRESS_DEFAULT_TYPE_KEY && array_key_exists( $set_type, $this->point_types ) )
+				if ( $set_type != BONIPS_DEFAULT_TYPE_KEY && array_key_exists( $set_type, $this->point_types ) )
 					$page .= '_' . $set_type;
 
 				$url = add_query_arg( array( 'page' => $page, 'ref' => 'coupon', 'data' => $post->post_title ), admin_url( 'admin.php' ) );

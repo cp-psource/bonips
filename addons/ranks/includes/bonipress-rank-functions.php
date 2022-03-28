@@ -13,7 +13,7 @@ if ( ! function_exists( 'bonipress_have_ranks' ) ) :
 
 		$have_ranks = false;
 		$total      = 0;
-		foreach ( wp_count_posts( BONIPRESS_RANK_KEY ) as $status => $count ) {
+		foreach ( wp_count_posts( BONIPS_RANK_KEY ) as $status => $count ) {
 			$total += $count;
 		}
 
@@ -35,12 +35,12 @@ endif;
 if ( ! function_exists( 'bonipress_get_published_ranks_count' ) ) :
 	function bonipress_get_published_ranks_count( $point_type = NULL ) {
 
-		$count = wp_count_posts( BONIPRESS_RANK_KEY )->publish;
+		$count = wp_count_posts( BONIPS_RANK_KEY )->publish;
 
 		if ( $point_type === NULL ) {
 
 			$cache_key  = 'ranks-published-count-' . $point_type;
-			$count      = wp_cache_get( $cache_key, BONIPRESS_SLUG );
+			$count      = wp_cache_get( $cache_key, BONIPS_SLUG );
 
 			if ( $count === false ) {
 
@@ -56,10 +56,10 @@ if ( ! function_exists( 'bonipress_get_published_ranks_count' ) ) :
 
 				}
 
-				$count      = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$posts} ranks {$type_filter} WHERE ranks.post_type = %s AND ranks.post_status = 'publish';", BONIPRESS_RANK_KEY ) );
+				$count      = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$posts} ranks {$type_filter} WHERE ranks.post_type = %s AND ranks.post_status = 'publish';", BONIPS_RANK_KEY ) );
 				if ( $count === NULL ) $count = 0;
 
-				wp_cache_set( $cache_key, $count, BONIPRESS_SLUG );
+				wp_cache_set( $cache_key, $count, BONIPS_SLUG );
 
 			}
 
@@ -83,13 +83,13 @@ if ( ! function_exists( 'bonipress_get_rank_object_id' ) ) :
 
 		$rank_id = false;
 
-		if ( absint( $identifier ) !== 0 && bonipress_get_post_type( absint( $identifier ) ) == BONIPRESS_RANK_KEY )
+		if ( absint( $identifier ) !== 0 && bonipress_get_post_type( absint( $identifier ) ) == BONIPS_RANK_KEY )
 			$rank_id = absint( $identifier );
 
 		else {
 
-			$rank = bonipress_get_page_by_title( $identifier, OBJECT, BONIPRESS_RANK_KEY );
-			if ( isset( $rank->post_type ) && $rank->post_type === BONIPRESS_RANK_KEY )
+			$rank = bonipress_get_page_by_title( $identifier, OBJECT, BONIPS_RANK_KEY );
+			if ( isset( $rank->post_type ) && $rank->post_type === BONIPS_RANK_KEY )
 				$rank_id = $rank->ID;
 
 		}
@@ -222,7 +222,7 @@ if ( ! function_exists( 'bonipress_count_users_with_rank' ) ) :
 
 			global $wpdb;
 
-			$user_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT( user_id ) FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value = %d;", bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) ), $rank_id ) );
+			$user_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT( user_id ) FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value = %d;", bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) ), $rank_id ) );
 
 			if ( $user_count === NULL ) $user_count = 0;
 
@@ -242,7 +242,7 @@ endif;
  * @version 1.0.1
  */
 if ( ! function_exists( 'bonipress_get_users_rank_id' ) ) :
-	function bonipress_get_users_rank_id( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_rank_id( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $user_id === NULL )
 			$user_id = get_current_user_id();
@@ -254,7 +254,7 @@ if ( ! function_exists( 'bonipress_get_users_rank_id' ) ) :
 		if ( isset( $account_object->ranks ) && $account_object->balance[ $point_type ] !== false && $account_object->balance[ $point_type ]->rank !== false )
 			return $account_object->balance[ $point_type ]->rank->post_id;
 
-		$rank_id        = bonipress_get_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
+		$rank_id        = bonipress_get_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
 
 		if ( $rank_id == '' ) {
 
@@ -280,7 +280,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_save_users_rank' ) ) :
-	function bonipress_save_users_rank( $user_id = NULL, $rank_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_save_users_rank( $user_id = NULL, $rank_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $user_id === NULL || $rank_id === NULL ) return false;
 
@@ -290,7 +290,7 @@ if ( ! function_exists( 'bonipress_save_users_rank' ) ) :
 
 		global $bonipress_current_account;
 
-		bonipress_update_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), $rank_id );
+		bonipress_update_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), $rank_id );
 
 		if ( isset( $bonipress_current_account->ranks ) && $bonipress_current_account->balance[ $point_type ] !== false )
 			$bonipress_current_account->balance[ $point_type ]->rank = new boniPRESS_Rank( $rank_id );
@@ -307,7 +307,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_get_my_rank' ) ) :
-	function bonipress_get_my_rank( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_my_rank( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( ! is_user_logged_in() ) return;
 
@@ -328,7 +328,7 @@ endif;
  * @version 1.7
  */
 if ( ! function_exists( 'bonipress_get_users_rank' ) ) :
-	function bonipress_get_users_rank( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_rank( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$rank           = false;
 
@@ -341,7 +341,7 @@ if ( ! function_exists( 'bonipress_get_users_rank' ) ) :
 			return $account_object->balance[ $point_type ]->rank;
 
 		// Get users rank
-		$rank_id = bonipress_get_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
+		$rank_id = bonipress_get_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
 
 		// No rank, try to assign one
 		if ( $rank_id == '' ) {
@@ -374,7 +374,7 @@ endif;
  * @version 1.7
  */
 if ( ! function_exists( 'bonipress_find_users_rank' ) ) :
-	function bonipress_find_users_rank( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $act = true ) {
+	function bonipress_find_users_rank( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY, $act = true ) {
 
 		if ( bonipress_manual_ranks() ) return false;
 
@@ -395,7 +395,7 @@ if ( ! function_exists( 'bonipress_find_users_rank' ) ) :
 		}
 
 		else {
-			$current_rank_id = bonipress_get_user_meta( $user_id, BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
+			$current_rank_id = bonipress_get_user_meta( $user_id, BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ), true );
 			$current_rank    = ( $current_rank_id != '' ) ? bonipress_get_rank( $current_rank_id ) : false;
 		}
 
@@ -426,7 +426,7 @@ if ( ! function_exists( 'bonipress_find_users_rank' ) ) :
 			WHERE ranks.post_type = %s 
 				AND ranks.post_status = 'publish'
 				AND {$balance_format} BETWEEN min.meta_value AND max.meta_value
-			LIMIT 0,1;", $point_type, BONIPRESS_RANK_KEY, $balance ) );
+			LIMIT 0,1;", $point_type, BONIPS_RANK_KEY, $balance ) );
 
 
 		if ( isset( $results->rank_id ) )
@@ -471,14 +471,14 @@ endif;
  * @version 1.7
  */
 if ( ! function_exists( 'bonipress_assign_ranks' ) ) :
-	function bonipress_assign_ranks( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_assign_ranks( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( bonipress_manual_ranks() ) return 0;
 
 		global $wpdb;
 
 		$type_object    = new boniPRESS_Point_Type( $point_type );
-		$rank_key       = bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
+		$rank_key       = bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
 
 		$balance_key    = bonipress_get_meta_key( $point_type );
 		$bonipress      = bonipress( $point_type );
@@ -525,10 +525,10 @@ endif;
  * @version 1.6
  */
 if ( ! function_exists( 'bonipress_get_ranks' ) ) :
-	function bonipress_get_ranks( $status = 'publish', $number = '-1', $order = 'DESC', $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_ranks( $status = 'publish', $number = '-1', $order = 'DESC', $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$cache_key = 'ranks-published-' . $point_type;
-		$ranks     = wp_cache_get( $cache_key, BONIPRESS_SLUG );
+		$ranks     = wp_cache_get( $cache_key, BONIPS_SLUG );
 		$results   = array();
 
 		if ( $ranks === false ) {
@@ -549,7 +549,7 @@ if ( ! function_exists( 'bonipress_get_ranks' ) ) :
 				WHERE ranks.post_type = %s 
 					AND ranks.post_status = %s 
 					AND ctype.meta_value = %s
-				ORDER BY min.meta_value+0 {$order} {$limit};", BONIPRESS_RANK_KEY, $status, $point_type ) );
+				ORDER BY min.meta_value+0 {$order} {$limit};", BONIPS_RANK_KEY, $status, $point_type ) );
 
 			if ( ! empty( $rank_ids ) ) {
 
@@ -558,7 +558,7 @@ if ( ! function_exists( 'bonipress_get_ranks' ) ) :
 
 			}
 
-			wp_cache_set( $cache_key, $results, BONIPRESS_SLUG );
+			wp_cache_set( $cache_key, $results, BONIPS_SLUG );
 
 		} else {
 			$results = $ranks;
@@ -581,7 +581,7 @@ endif;
  * @version 1.6
  */
 if ( ! function_exists( 'bonipress_get_users_of_rank' ) ) :
-	function bonipress_get_users_of_rank( $rank_identifier = NULL, $number = 25, $order = 'DESC', $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_of_rank( $rank_identifier = NULL, $number = 25, $order = 'DESC', $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$rank_id       = bonipress_get_rank_object_id( $rank_identifier );
 		if ( $rank_id === false || ! bonipress_point_type_exists( $point_type ) ) return false;
@@ -589,13 +589,13 @@ if ( ! function_exists( 'bonipress_get_users_of_rank' ) ) :
 		$number        = ( $number > 25 || $number < 0 ) ? 25 : absint( $number );
 		$order         = ( ! in_array( $order, array( 'ASC', 'DESC' ) ) ) ? 'DESC' : $order;
 		$cache_key     = 'ranks-users-' . $rank_id;
-		$users         = wp_cache_get( $cache_key, BONIPRESS_SLUG );
+		$users         = wp_cache_get( $cache_key, BONIPS_SLUG );
 
 		if ( $users === false ) {
 
 			global $wpdb;
 
-			$rank_meta_key = bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
+			$rank_meta_key = bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) );
 			$balance_key   = bonipress_get_meta_key( $point_type );
 
 			$posts         = bonipress_get_db_column( 'posts' );
@@ -610,7 +610,7 @@ if ( ! function_exists( 'bonipress_get_users_of_rank' ) ) :
 				WHERE rank.meta_value = %d 
 				ORDER BY creds.meta_value+0 DESC LIMIT 25;", $rank_meta_key, $balance_key, $rank_id ) );
 
-			wp_cache_set( $cache_key, $users, BONIPRESS_SLUG );
+			wp_cache_set( $cache_key, $users, BONIPS_SLUG );
 
 		}
 
@@ -629,7 +629,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_manual_ranks' ) ) :
-	function bonipress_manual_ranks( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_manual_ranks( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$prefs  = bonipress_get_addon_settings( 'rank', $point_type );
 
@@ -650,7 +650,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_rank_based_on_total' ) ) :
-	function bonipress_rank_based_on_total( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_rank_based_on_total( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$prefs  = bonipress_get_addon_settings( 'rank', $point_type );
 
@@ -670,7 +670,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_show_rank_in_buddypress' ) ) :
-	function bonipress_show_rank_in_buddypress( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_show_rank_in_buddypress( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$prefs  = bonipress_get_addon_settings( 'rank', $point_type );
 
@@ -690,7 +690,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_show_rank_in_psforum' ) ) :
-	function bonipress_show_rank_in_psforum( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_show_rank_in_psforum( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$prefs  = bonipress_get_addon_settings( 'rank', $point_type );
 

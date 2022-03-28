@@ -72,7 +72,7 @@ if ( ! class_exists( 'boniPRESS_Badge_Secondary' ) ) :
 		public function admin_header() {
 			$screen = get_current_screen();
 
-			if ( $screen->id == BONIPRESS_BADGE_KEY ):?>
+			if ( $screen->id == BONIPS_BADGE_KEY ):?>
 		    <script type="text/javascript">
 		    	var bonipress_badge_link_click = '<div class="form-group"><input type="text" name="{{element_name}}" data-row="{{reqlevel}}" class="form-control specific" /></div>';
 

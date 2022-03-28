@@ -17,7 +17,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_load_coupon' ) ) :
 			'label'       => 'Gutschein',
 			'button'      => 'Gutschein anwenden',
 			'placeholder' => ''
-		), $atts, BONIPRESS_SLUG . '_load_coupon' ) );
+		), $atts, BONIPS_SLUG . '_load_coupon' ) );
 
 		$bonipress = bonipress();
 		if ( ! isset( $bonipress->coupons ) )

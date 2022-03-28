@@ -13,14 +13,14 @@ if ( ! function_exists( 'bonipress_render_shortcode_total_since' ) ) :
 		extract( shortcode_atts( array(
 			'from'      => 'today',
 			'until'     => 'now',
-			'type'      => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'      => BONIPS_DEFAULT_TYPE_KEY,
 			'ref'       => '',
 			'user_id'   => 'current',
 			'formatted' => 1
-		), $atts, BONIPRESS_SLUG . '_total_since' ) );
+		), $atts, BONIPS_SLUG . '_total_since' ) );
 
 		if ( ! bonipress_point_type_exists( $type ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 
 		if ( $ref == '' ) $ref = NULL;
 
@@ -35,4 +35,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_total_since' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_total_since', 'bonipress_render_shortcode_total_since' );
+add_shortcode( BONIPS_SLUG . '_total_since', 'bonipress_render_shortcode_total_since' );

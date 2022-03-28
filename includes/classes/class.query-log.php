@@ -36,13 +36,13 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 		 */
 		public function __construct( $args = array(), $array = false ) {
 
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return false;
+			if ( ! BONIPS_ENABLE_LOGGING ) return false;
 
 			$this->now        = current_time( 'timestamp' );
 			$this->references = bonipress_get_all_references();
 
 			$this->core                             = bonipress();
-			$this->types[ BONIPRESS_DEFAULT_TYPE_KEY ] = $this->core;
+			$this->types[ BONIPS_DEFAULT_TYPE_KEY ] = $this->core;
 
 			// Parse and validate the given args
 			$this->parse_args( $args );
@@ -263,7 +263,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			$defaults        = array(
 				'entry_id'      => NULL,
 				'user_id'       => NULL,
-				'ctype'         => BONIPRESS_DEFAULT_TYPE_KEY,
+				'ctype'         => BONIPS_DEFAULT_TYPE_KEY,
 				'time'          => NULL,
 				'ref'           => NULL,
 				'ref_id'        => NULL,
@@ -941,12 +941,12 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			if ( ! $this->args['cache_results'] ) return;
 
 			// Save cache key so we can clear it when needed
-			$cache_keys      = bonipress_get_option( BONIPRESS_SLUG . '-cache-keys', array() );
+			$cache_keys      = bonipress_get_option( BONIPS_SLUG . '-cache-keys', array() );
 			if ( empty( $cache_keys ) || ( ! empty( $cache_keys ) && ! in_array( $this->cache_key, $cache_keys ) ) ) {
 
 				$cache_keys[] = $this->cache_key;
 
-				bonipress_update_option( BONIPRESS_SLUG . '-cache-keys', $cache_keys );
+				bonipress_update_option( BONIPS_SLUG . '-cache-keys', $cache_keys );
 
 			}
 
@@ -963,11 +963,11 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 			$key          = $this->cache_key;
 
 			// Object caching we will always do
-			$object_cache = wp_cache_get( $key, BONIPRESS_SLUG );
+			$object_cache = wp_cache_get( $key, BONIPS_SLUG );
 			if ( $object_cache !== false && is_array( $object_cache ) ) {
 
 				if ( ! $this->args['cache_results'] )
-					wp_cache_delete( $key, BONIPRESS_SLUG );
+					wp_cache_delete( $key, BONIPS_SLUG );
 
 				else $data = $object_cache;
 
@@ -986,7 +986,7 @@ if ( ! class_exists( 'boniPRESS_Query_Log' ) ) :
 
 			if ( ! $this->args['cache_results'] ) return;
 
-			wp_cache_set( $this->cache_key, $data, BONIPRESS_SLUG );
+			wp_cache_set( $this->cache_key, $data, BONIPS_SLUG );
 
 			do_action( 'bonipress_cache_log', $data, $this );
 
@@ -2139,9 +2139,9 @@ endif;
  * @version 1.4.1
  */
 if ( ! function_exists( 'bonipress_get_total_by_time' ) ) :
-	function bonipress_get_total_by_time( $from = 'today', $to = 'now', $ref = NULL, $user_id = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_total_by_time( $from = 'today', $to = 'now', $ref = NULL, $user_id = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
-		if ( ! BONIPRESS_ENABLE_LOGGING ) return 0;
+		if ( ! BONIPS_ENABLE_LOGGING ) return 0;
 
 		global $wpdb, $bonipress_log_table;
 
@@ -2230,10 +2230,10 @@ endif;
  * @version 1.4
  */
 if ( ! function_exists( 'bonipress_get_users_total' ) ) :
-	function bonipress_get_users_total( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_total( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$total_balance = 0;
-		if ( ! BONIPRESS_ENABLE_TOTAL_BALANCE || $user_id === NULL || absint( $user_id ) === 0 ) return $total_balance;
+		if ( ! BONIPS_ENABLE_TOTAL_BALANCE || $user_id === NULL || absint( $user_id ) === 0 ) return $total_balance;
 
 		$user_id    = absint( $user_id );
 		$point_type = sanitize_key( $point_type );
@@ -2258,12 +2258,12 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_query_users_total' ) ) :
-	function bonipress_query_users_total( $user_id, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_query_users_total( $user_id, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
-		if ( ! BONIPRESS_ENABLE_LOGGING || ! BONIPRESS_ENABLE_TOTAL_BALANCE ) return 0;
+		if ( ! BONIPS_ENABLE_LOGGING || ! BONIPS_ENABLE_TOTAL_BALANCE ) return 0;
 
 		if ( ! bonipress_point_type_exists( $point_type ) )
-			$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 		global $wpdb, $bonipress_log_table;
 
@@ -2524,7 +2524,7 @@ endif;
  * @version 1.1.1
  */
 if ( ! function_exists( 'bonipress_count_all_ref_instances' ) ) :
-	function bonipress_count_all_ref_instances( $number = 5, $order = 'DESC', $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_count_all_ref_instances( $number = 5, $order = 'DESC', $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		global $wpdb, $bonipress_log_table;
 
@@ -2577,7 +2577,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_count_ref_instances' ) ) :
-	function bonipress_count_ref_instances( $reference = '', $user_id = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_count_ref_instances( $reference = '', $user_id = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $reference == '' ) return 0;
 
@@ -2612,7 +2612,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_count_ref_id_instances' ) ) :
-	function bonipress_count_ref_id_instances( $reference = '', $ref_id = NULL, $user_id = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_count_ref_id_instances( $reference = '', $ref_id = NULL, $user_id = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $reference == '' || $ref_id === NULL ) return 0;
 
@@ -2644,7 +2644,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_users_reference_count' ) ) :
-	function bonipress_get_users_reference_count( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_reference_count( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $user_id === NULL ) return false;
 
@@ -2677,7 +2677,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_get_users_reference_sum' ) ) :
-	function bonipress_get_users_reference_sum( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $force = false ) {
+	function bonipress_get_users_reference_sum( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY, $force = false ) {
 
 		if ( $user_id === NULL ) return false;
 
@@ -2813,10 +2813,10 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_users_history' ) ) :
-	function bonipress_get_users_history( $user_id = false, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $orderby = 'time', $order = 'DESC', $force = false ) {
+	function bonipress_get_users_history( $user_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY, $orderby = 'time', $order = 'DESC', $force = false ) {
 
 		$history = array();
-		if ( ! BONIPRESS_ENABLE_LOGGING || $user_id === false || absint( $user_id ) === 0 || ! bonipress_point_type_exists( $point_type ) ) return $history;
+		if ( ! BONIPS_ENABLE_LOGGING || $user_id === false || absint( $user_id ) === 0 || ! bonipress_point_type_exists( $point_type ) ) return $history;
 
 		$history = bonipress_get_user_meta( $user_id, $point_type, '_history', true );
 		if ( $history == '' || $force ) {
@@ -2832,7 +2832,7 @@ if ( ! function_exists( 'bonipress_get_users_history' ) ) :
 			if ( ! empty( $query ) ) {
 				foreach ( $query as $result ) {
 
-					$extra = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT ref_id FROM {$bonipress_log_table} WHERE user_id = %d AND ref = %s AND ctype = %s ORDER BY time {$order} LIMIT %d;", $user_id, $result->reference, $point_type, BONIPRESS_MAX_HISTORY_SIZE ) );
+					$extra = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT ref_id FROM {$bonipress_log_table} WHERE user_id = %d AND ref = %s AND ctype = %s ORDER BY time {$order} LIMIT %d;", $user_id, $result->reference, $point_type, BONIPS_MAX_HISTORY_SIZE ) );
 
 					$result->reference_ids         = $extra;
 					$history[ $result->reference ] = $result;
@@ -2855,7 +2855,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_update_users_history' ) ) :
-	function bonipress_update_users_history( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $reference = '', $ref_id = 0, $amount = 0 ) {
+	function bonipress_update_users_history( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY, $reference = '', $ref_id = 0, $amount = 0 ) {
 
 		global $bonipress_current_account;
 

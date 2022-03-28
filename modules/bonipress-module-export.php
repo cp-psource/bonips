@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Export_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Export_Module', array(
 				'module_name' => 'export',

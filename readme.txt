@@ -37,6 +37,10 @@ Halte Dich mit unserem [Newsletter](https://n3rds.work/webmasterservice-n3rdswor
 
 == ChangeLog ==
 
+= 1.8.9 =  DerN3rd =
+
+* Fix PhP Error register_post_type
+
 = 1.8.8 =
 
 * Erstes öffentliches Release

@@ -59,7 +59,7 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 
 			// WordPress check
 			$wp_version = $GLOBALS['wp_version'];
-			if ( version_compare( $wp_version, '4.0', '<' ) && BONIPRESS_FOR_OLDER_WP === false )
+			if ( version_compare( $wp_version, '4.0', '<' ) && BONIPS_FOR_OLDER_WP === false )
 				$message[] = __( 'boniPRESS requires WordPress 4.0 or higher. Version detected:', 'bonipress' ) . ' ' . $wp_version;
 
 			// PHP check
@@ -210,9 +210,9 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 				'bonipress_ref_hook_counter',
 				'bonipress_espresso_gateway_prefs',
 				'bonipress_eventsmanager_gateway_prefs',
-				BONIPRESS_SLUG . '-cache-stats-keys',
-				BONIPRESS_SLUG . '-cache-leaderboard-keys',
-				BONIPRESS_SLUG . '-last-clear-stats'
+				BONIPS_SLUG . '-cache-stats-keys',
+				BONIPS_SLUG . '-cache-leaderboard-keys',
+				BONIPS_SLUG . '-last-clear-stats'
 			);
 
 			foreach ( $bonipress_types as $type => $label ) {
@@ -287,21 +287,21 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 				}
 			}
 
-			if ( ! defined( 'BONIPRESS_RANK_KEY' ) ) define( 'BONIPRESS_RANK_KEY', 'bonipress_rank' );
-			if ( ! defined( 'BONIPRESS_BADGE_KEY' ) ) define( 'BONIPRESS_BADGE_KEY', 'bonipress_badge' );
+			if ( ! defined( 'BONIPS_RANK_KEY' ) ) define( 'BONIPS_RANK_KEY', 'bonipress_rank' );
+			if ( ! defined( 'BONIPS_BADGE_KEY' ) ) define( 'BONIPS_BADGE_KEY', 'bonipress_badge' );
 
 			// Delete user meta
 			// 'meta_key' => true (exact key) / false (use LIKE)
 			$bonipress_usermeta_to_delete = array(
-				BONIPRESS_RANK_KEY                => true,
+				BONIPS_RANK_KEY                => true,
 				'bonipress-last-send'             => true,
 				'bonipress-last-linkclick'        => true,
 				'bonipress-last-transfer'         => true,
 				'bonipress_affiliate_link'        => true,
 				'bonipress_email_unsubscriptions' => true,
 				'bonipress_transactions'          => true,
-				BONIPRESS_BADGE_KEY . '%'         => false,
-				BONIPRESS_RANK_KEY . '%'          => false,
+				BONIPS_BADGE_KEY . '%'         => false,
+				BONIPS_RANK_KEY . '%'          => false,
 				'bonipress_epp_%'                 => false,
 				'bonipress_payments_%'            => false,
 				'bonipress_comment_limit_post_%'  => false,
@@ -309,7 +309,7 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 				'bonipress-last-clear-stats'      => true
 			);
 
-			if ( BONIPRESS_UNINSTALL_CREDS ) {
+			if ( BONIPS_UNINSTALL_CREDS ) {
 
 				foreach ( $bonipress_types as $type => $label ) {
 
@@ -340,10 +340,10 @@ if ( ! class_exists( 'boniPRESS_Install' ) ) :
 			}
 
 			// Delete log table
-			if ( BONIPRESS_UNINSTALL_LOG ) {
+			if ( BONIPS_UNINSTALL_LOG ) {
 
-				if ( defined( 'BONIPRESS_LOG_TABLE' ) )
-					$table_name = BONIPRESS_LOG_TABLE;
+				if ( defined( 'BONIPS_LOG_TABLE' ) )
+					$table_name = BONIPS_LOG_TABLE;
 
 				else {
 

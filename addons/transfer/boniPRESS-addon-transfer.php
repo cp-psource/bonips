@@ -32,7 +32,7 @@ if ( ! class_exists( 'boniPRESS_Transfer_Module' ) ) :
 			parent::__construct( 'boniPRESS_Transfer_Module', array(
 				'module_name' => 'transfers',
 				'defaults'    => array(
-					'types'      => array( BONIPRESS_DEFAULT_TYPE_KEY ),
+					'types'      => array( BONIPS_DEFAULT_TYPE_KEY ),
 					'logs'       => array(
 						'sending'   => 'Transfer of %plural% to %display_name%',
 						'receiving' => 'Transfer of %plural% from %display_name%'
@@ -76,7 +76,7 @@ if ( ! class_exists( 'boniPRESS_Transfer_Module' ) ) :
 			add_action( 'bonipress_front_enqueue',        array( $this, 'register_script' ), 30 );
 
 			// Register Shortcode
-			add_shortcode( BONIPRESS_SLUG . '_transfer',  'bonipress_transfer_render' );
+			add_shortcode( BONIPS_SLUG . '_transfer',  'bonipress_transfer_render' );
 
 			// Potentially load script
 			add_action( 'wp_footer',                   array( $this, 'maybe_load_script' ) );
@@ -297,7 +297,7 @@ if ( ! class_exists( 'boniPRESS_Transfer_Module' ) ) :
 				<?php else : ?>
 
 				<p class="form-control-static"><?php echo $this->core->plural(); ?></p>
-				<input type="hidden" name="bonipress_pref_core[transfers][types][]" value="<?php echo BONIPRESS_DEFAULT_TYPE_KEY; ?>" />
+				<input type="hidden" name="bonipress_pref_core[transfers][types][]" value="<?php echo BONIPS_DEFAULT_TYPE_KEY; ?>" />
 
 				<?php endif; ?>
 
@@ -461,7 +461,7 @@ if ( ! class_exists( 'boniPRESS_Transfer_Module' ) ) :
 ?>
 		</div>
 	</div>
-	<?php if ( BONIPRESS_SHOW_PREMIUM_ADDONS ) : ?>
+	<?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?>
 	<hr />
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

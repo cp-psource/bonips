@@ -24,7 +24,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Balances' ) ) :
 		 */
 		public function __construct() {
 
-			$this->import_page   = BONIPRESS_SLUG . '-import-balance';
+			$this->import_page   = BONIPS_SLUG . '-import-balance';
 			$this->delimiter     = empty( $_POST['delimiter'] ) ? ',' : (string) strip_tags( trim( $_POST['delimiter'] ) );
 			$this->documentation = 'http://codex.bonipress.me/chapter-ii/import-data/importing-balances/';
 
@@ -188,7 +188,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Balances' ) ) :
 							if ( $point_type != '' )
 								$log_entry = $point_type;
 
-							$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+							$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 						}
 
@@ -243,7 +243,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Balances' ) ) :
 		public function header() {
 
 			$label = __( 'Import Balances', 'bonipress' );
-			if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' )
+			if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' )
 				$label .= ' <a href="' . $this->documentation . '" target="_blank" class="page-title-action">' . __( 'Documentation', 'bonipress' ) . '</a>';
 
 			echo '<div class="wrap"><h1>' . $label . '</h1>';

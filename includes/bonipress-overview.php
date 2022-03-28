@@ -87,8 +87,8 @@ div.overview-module-wrap div.bonipress-type .overview .section strong { padding:
 
 				$bonipress       = bonipress( $point_type );
 
-				$page         = BONIPRESS_SLUG;
-				if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY )
+				$page         = BONIPS_SLUG;
+				if ( $point_type != BONIPS_DEFAULT_TYPE_KEY )
 					$page .= '_' . $point_type;
 
 				$url          = admin_url( 'admin.php?page=' . $page );

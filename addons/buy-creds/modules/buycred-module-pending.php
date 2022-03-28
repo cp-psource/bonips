@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * buyCRED_Pending_Payments class
@@ -12,7 +12,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'buyCRED_Pending_Payments', array(
 				'module_name' => 'pending_payments',
@@ -46,7 +46,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 
 			$this->register_pending_payments();
 
-			add_shortcode( BONIPRESS_SLUG . '_buy_pending', 'bonipress_render_pending_purchases' );
+			add_shortcode( BONIPS_SLUG . '_buy_pending', 'bonipress_render_pending_purchases' );
 
 			add_action( 'bonipress_pre_process_buycred', array( $this, 'intercept_cancellations' ) );
 
@@ -88,7 +88,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		 */
 		public function pending_transitions( $new_status, $old_status, $post ) {
 
-			if ( $post->post_status == BONIPRESS_BUY_KEY ) {
+			if ( $post->post_status == BONIPS_BUY_KEY ) {
 
 				bonipress_delete_user_meta( $post->post_author, 'buycred_pending_payments' );
 
@@ -112,10 +112,10 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 			add_action( 'admin_head-edit.php',                        array( $this, 'pending_payments_style' ) );
 			add_filter( 'post_updated_messages',                      array( $this, 'post_updated_messages' ) );
 
-			add_filter( 'manage_' . BONIPRESS_BUY_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ) );
-			add_action( 'manage_' . BONIPRESS_BUY_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
-			add_filter( 'bulk_actions-edit-' . BONIPRESS_BUY_KEY,               array( $this, 'bulk_actions' ) );
-			add_action( 'save_post_' . BONIPRESS_BUY_KEY,                       array( $this, 'save_pending_payment' ), 10, 2 );
+			add_filter( 'manage_' . BONIPS_BUY_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ) );
+			add_action( 'manage_' . BONIPS_BUY_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
+			add_filter( 'bulk_actions-edit-' . BONIPS_BUY_KEY,               array( $this, 'bulk_actions' ) );
+			add_action( 'save_post_' . BONIPS_BUY_KEY,                       array( $this, 'save_pending_payment' ), 10, 2 );
 
 			// Intercept payment completions
 			if ( isset( $_GET['credit'] ) && isset( $_GET['token'] ) && wp_verify_nonce( $_GET['token'], 'buycred-payout-pending' ) ) {
@@ -179,7 +179,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 				'publicly_queryable'   => false,
 				'register_meta_box_cb' => array( $this, 'add_metaboxes' )
 			);
-			register_post_type( BONIPRESS_BUY_KEY, apply_filters( 'bonipress_setup_pending_payment', $args ) );
+			register_post_type( BONIPS_BUY_KEY, apply_filters( 'bonipress_setup_pending_payment', $args ) );
 
 		}
 
@@ -190,7 +190,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		 */
 		public function post_updated_messages( $messages ) {
 
-			$messages[ BONIPRESS_BUY_KEY ] = array(
+			$messages[ BONIPS_BUY_KEY ] = array(
 				0 => '',
 				1 => __( 'Zahlung aktualisiert.', 'bonipress' ),
 				2 => __( 'Zahlung aktualisiert.', 'bonipress' ),
@@ -226,7 +226,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		 */
 		public function admin_notices() {
 
-			if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_BUY_KEY && isset( $_GET['credited'] ) ) {
+			if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_BUY_KEY && isset( $_GET['credited'] ) ) {
 
 				if ( $_GET['credited'] == 1 )
 					echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'Ausstehende Zahlung wurde dem Konto erfolgreich gutgeschrieben.', 'bonipress' ) . '</p><button type="button" class="notice-dismiss"></button></div>';
@@ -246,11 +246,11 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		public function add_to_menu() {
 
 			add_submenu_page(
-				BONIPRESS_SLUG,
+				BONIPS_SLUG,
 				__( 'Ausstehende Zahlungen', 'bonipress' ),
 				__( 'Ausstehende Zahlungen', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
-				'edit.php?post_type=' . BONIPRESS_BUY_KEY
+				'edit.php?post_type=' . BONIPS_BUY_KEY
 			);
 
 		}
@@ -264,8 +264,8 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 
 			global $pagenow;
 
-			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_BUY_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
-				return BONIPRESS_SLUG;
+			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_BUY_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
+				return BONIPS_SLUG;
 
 			return $parent;
 
@@ -280,15 +280,15 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 
 			global $pagenow;
 
-			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_BUY_KEY ) {
+			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_BUY_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_BUY_KEY;
+				return 'edit.php?post_type=' . BONIPS_BUY_KEY;
 			
 			}
 
-			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_BUY_KEY ) {
+			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_BUY_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_BUY_KEY;
+				return 'edit.php?post_type=' . BONIPS_BUY_KEY;
 
 			}
 
@@ -399,7 +399,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 		 */
 		public function adjust_row_actions( $actions, $post ) {
 
-			if ( $post->post_type == BONIPRESS_BUY_KEY && $post->post_status != 'trash' ) {
+			if ( $post->post_type == BONIPS_BUY_KEY && $post->post_status != 'trash' ) {
 
 				unset( $actions['inline hide-if-no-js'] );
 
@@ -426,7 +426,7 @@ if ( ! class_exists( 'buyCRED_Pending_Payments' ) ) :
 
 			global $post_type;
 
-			if ( $post_type !== BONIPRESS_BUY_KEY ) return;
+			if ( $post_type !== BONIPS_BUY_KEY ) return;
 
 			wp_enqueue_style( 'bonipress-bootstrap-grid' );
 			wp_enqueue_style( 'bonipress-forms' );
@@ -458,7 +458,7 @@ jQuery(function($){
 
 			global $post_type;
 
-			if ( $post_type !== BONIPRESS_BUY_KEY ) return;
+			if ( $post_type !== BONIPS_BUY_KEY ) return;
 
 ?>
 <script type="text/javascript">
@@ -485,30 +485,30 @@ jQuery(function($){
 				'buycred-pending-payment',
 				__( 'Ausstehende Zahlung', 'bonipress' ),
 				array( $this, 'metabox_pending_payment' ),
-				BONIPRESS_BUY_KEY,
+				BONIPS_BUY_KEY,
 				'normal',
 				'high'
 			);
 
-			if ( BONIPRESS_BUY_PENDING_COMMENTS )
+			if ( BONIPS_BUY_PENDING_COMMENTS )
 				add_meta_box(
 					'buycred-pending-comments',
 					__( 'Verlauf', 'bonipress' ),
 					array( $this, 'metabox_pending_comments' ),
-					BONIPRESS_BUY_KEY,
+					BONIPS_BUY_KEY,
 					'normal',
 					'default'
 				);
 
-			remove_meta_box( 'commentstatusdiv', BONIPRESS_BUY_KEY, 'normal' );
-			remove_meta_box( 'commentsdiv', BONIPRESS_BUY_KEY, 'normal' );
+			remove_meta_box( 'commentstatusdiv', BONIPS_BUY_KEY, 'normal' );
+			remove_meta_box( 'commentsdiv', BONIPS_BUY_KEY, 'normal' );
 
-			remove_meta_box( 'submitdiv', BONIPRESS_BUY_KEY, 'side' );
+			remove_meta_box( 'submitdiv', BONIPS_BUY_KEY, 'side' );
 			add_meta_box(
 				'submitdiv',
 				__( 'Aktionen', 'bonipress' ),
 				array( $this, 'metabox_pending_actions' ),
-				BONIPRESS_BUY_KEY,
+				BONIPS_BUY_KEY,
 				'side',
 				'high'
 			);

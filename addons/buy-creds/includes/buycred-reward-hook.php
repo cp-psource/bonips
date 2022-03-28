@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * boniPRESS_Addons_Module class
@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'buycred_reward',
@@ -208,7 +208,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Reward_Hook' ) ) :
 
 			$hook_prefs_key = 'bonipress_pref_hooks';
 
-			if ( $type != BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $type != BONIPS_DEFAULT_TYPE_KEY ) {
 				$hook_prefs_key = 'bonipress_pref_hooks_'.$type;
 			}
 

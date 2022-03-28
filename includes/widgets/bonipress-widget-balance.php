@@ -34,7 +34,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Balance' ) ) :
 
 			// Make sure we always have a type set
 			if ( ! isset( $instance['type'] ) || $instance['type'] == '' )
-				$instance['type'] = BONIPRESS_DEFAULT_TYPE_KEY;
+				$instance['type'] = BONIPS_DEFAULT_TYPE_KEY;
 
 			// If we are logged in
 			if ( is_user_logged_in() ) {
@@ -63,7 +63,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Balance' ) ) :
 				echo '<div class="boniPRESS-balance ' . esc_attr( $instance['type'] ) . '">' . do_shortcode( $layout ) . '</div>';
 
 				// If we want to include history
-				if ( BONIPRESS_ENABLE_LOGGING && $instance['show_history'] ) {
+				if ( BONIPS_ENABLE_LOGGING && $instance['show_history'] ) {
 
 					echo '<div class="boniPRESS-widget-history">';
 
@@ -152,7 +152,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Balance' ) ) :
 
 			// Defaults
 			$title          = isset( $instance['title'] )          ? $instance['title']          : 'Mein Wallet';
-			$type           = isset( $instance['type'] )           ? $instance['type']           : BONIPRESS_DEFAULT_TYPE_KEY;
+			$type           = isset( $instance['type'] )           ? $instance['type']           : BONIPS_DEFAULT_TYPE_KEY;
 			$cred_format    = isset( $instance['cred_format'] )    ? $instance['cred_format']    : '%cred_f%';
 			$show_history   = isset( $instance['show_history'] )   ? $instance['show_history']   : 0;
 			$history_title  = isset( $instance['history_title'] )  ? $instance['history_title']  : '%plural% Verläufe';
@@ -193,7 +193,7 @@ div.bonipress-hidden.ex-field { display: block; }
 	<textarea name="<?php echo esc_attr( $this->get_field_name( 'cred_format' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'cred_format' ) ); ?>" rows="3" cols="20" class="widefat"><?php echo esc_attr( $cred_format ); ?></textarea>
 	<small><?php echo $bonipress->available_template_tags( array( 'general', 'amount', 'user' ) ); ?></small>
 </p>
-<?php if ( BONIPRESS_ENABLE_LOGGING ) : ?>
+<?php if ( BONIPS_ENABLE_LOGGING ) : ?>
 <!-- Verlauf -->
 <p class="boniPRESS-widget-field">
 	<label for="<?php echo esc_attr( $this->get_field_id( 'show_history' ) ); ?>"><input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_history' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'show_history' ) ); ?>" value="1"<?php checked( $show_history, 1 ); ?> class="checkbox" /> <?php _e( 'Verlauf einbeziehen', 'bonipress' ); ?></label>

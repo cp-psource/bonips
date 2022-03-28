@@ -10,11 +10,11 @@ if ( ! function_exists( 'bonipress_render_affiliate_link' ) ) :
 	function bonipress_render_affiliate_link( $atts, $content = '' ) {
 
 		extract( shortcode_atts( array(
-			'type' => BONIPRESS_DEFAULT_TYPE_KEY
-		), $atts, BONIPRESS_SLUG . '_affiliate_link' ) );
+			'type' => BONIPS_DEFAULT_TYPE_KEY
+		), $atts, BONIPS_SLUG . '_affiliate_link' ) );
 
 		return apply_filters( 'bonipress_affiliate_link_' . $type, '', $atts, $content );
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_affiliate_link', 'bonipress_render_affiliate_link' );
+add_shortcode( BONIPS_SLUG . '_affiliate_link', 'bonipress_render_affiliate_link' );

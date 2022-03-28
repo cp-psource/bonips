@@ -38,7 +38,7 @@ if ( ! class_exists( 'boniPRESS_Widget_Wallet' ) ) :
 			if ( is_user_logged_in() ) {
 
 				if ( ! isset( $instance['types'] ) || empty( $instance['types'] ) )
-					$instance['types'] = array( BONIPRESS_DEFAULT_TYPE_KEY );
+					$instance['types'] = array( BONIPS_DEFAULT_TYPE_KEY );
 
 				// Get Current Users Account Object
 				$account = bonipress_get_account();

@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 			parent::__construct( array(
 				'id'               => 'paypal-standard',
 				'label'            => 'PayPal',
-				'gateway_logo_url' => plugins_url( 'assets/images/paypal.png', BONIPRESS_PURCHASE ),
+				'gateway_logo_url' => plugins_url( 'assets/images/paypal.png', BONIPS_PURCHASE ),
 				'defaults'         => array(
 					'sandbox'          => 0,
 					'currency'         => '',
@@ -79,7 +79,7 @@ if ( ! class_exists( 'boniPRESS_PayPal_Standard' ) ) :
 				curl_setopt( $call, CURLOPT_RETURNTRANSFER, 1 );
 				curl_setopt( $call, CURLOPT_POSTFIELDS, $request );
 				curl_setopt( $call, CURLOPT_SSL_VERIFYPEER, 1 );
-				curl_setopt( $call, CURLOPT_CAINFO, BONIPRESS_PURCHASE_DIR . '/cacert.pem' );
+				curl_setopt( $call, CURLOPT_CAINFO, BONIPS_PURCHASE_DIR . '/cacert.pem' );
 				curl_setopt( $call, CURLOPT_SSL_VERIFYHOST, 2 );
 				curl_setopt( $call, CURLOPT_FRESH_CONNECT, 1 );
 				curl_setopt( $call, CURLOPT_FORBID_REUSE, 1 );

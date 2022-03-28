@@ -18,7 +18,7 @@ if ( ! class_exists( 'boniPRESS_Service' ) ) :
 
 		// Multipoint types
 		public $is_main_type = true;
-		public $bonipress_type  = BONIPRESS_DEFAULT_TYPE_KEY;
+		public $bonipress_type  = BONIPS_DEFAULT_TYPE_KEY;
 
 		// Service Prefs
 		public $prefs        = array();
@@ -27,7 +27,7 @@ if ( ! class_exists( 'boniPRESS_Service' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $args = array(), $service_prefs = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $args = array(), $service_prefs = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( ! empty( $args ) ) {
 				foreach ( $args as $key => $value ) {
@@ -39,7 +39,7 @@ if ( ! class_exists( 'boniPRESS_Service' ) ) :
 			$this->core        = bonipress( $type );
 			$this->bonipress_type = $type;
 
-			if ( $this->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $this->bonipress_type != BONIPS_DEFAULT_TYPE_KEY )
 				$this->is_main_type = false;
 
 			// Prep settings

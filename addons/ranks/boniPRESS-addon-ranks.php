@@ -11,16 +11,16 @@ define( 'boniPRESS_RANKS_DIR',     boniPRESS_ADDONS_DIR . 'ranks/' );
 define( 'boniPRESS_RANKS_VERSION', '1.6' );
 
 // Rank key
-if ( ! defined( 'BONIPRESS_RANK_KEY' ) )
-	define( 'BONIPRESS_RANK_KEY', 'bonipress_rank' );
+if ( ! defined( 'BONIPS_RANK_KEY' ) )
+	define( 'BONIPS_RANK_KEY', 'bonipress_rank' );
 
 // Default badge width
-if ( ! defined( 'BONIPRESS_RANK_WIDTH' ) )
-	define( 'BONIPRESS_RANK_WIDTH', 250 );
+if ( ! defined( 'BONIPS_RANK_WIDTH' ) )
+	define( 'BONIPS_RANK_WIDTH', 250 );
 
 // Default badge height
-if ( ! defined( 'BONIPRESS_RANK_HEIGHT' ) )
-	define( 'BONIPRESS_RANK_HEIGHT', 250 );
+if ( ! defined( 'BONIPS_RANK_HEIGHT' ) )
+	define( 'BONIPS_RANK_HEIGHT', 250 );
 
 require_once boniPRESS_RANKS_DIR . 'includes/bonipress-rank-functions.php';
 require_once boniPRESS_RANKS_DIR . 'includes/bonipress-rank-object.php';
@@ -48,7 +48,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					'manual'      => 0,
 					'public'      => 0,
 					'base'        => 'current',
-					'slug'        => BONIPRESS_RANK_KEY,
+					'slug'        => BONIPS_RANK_KEY,
 					'bb_location' => 'top',
 					'bb_template' => 'Rank: %rank_title%',
 					'bp_location' => '',
@@ -143,11 +143,11 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 
 			// Shortcodes
-			add_shortcode( BONIPRESS_SLUG . '_my_rank',            'bonipress_render_my_rank' );
-			add_shortcode( BONIPRESS_SLUG . '_my_ranks',           'bonipress_render_my_ranks' );
-			add_shortcode( BONIPRESS_SLUG . '_users_of_rank',      'bonipress_render_users_of_rank' );
-			add_shortcode( BONIPRESS_SLUG . '_users_of_all_ranks', 'bonipress_render_users_of_all_ranks' );
-			add_shortcode( BONIPRESS_SLUG . '_list_ranks',         'bonipress_render_rank_list' );
+			add_shortcode( BONIPS_SLUG . '_my_rank',            'bonipress_render_my_rank' );
+			add_shortcode( BONIPS_SLUG . '_my_ranks',           'bonipress_render_my_ranks' );
+			add_shortcode( BONIPS_SLUG . '_users_of_rank',      'bonipress_render_users_of_rank' );
+			add_shortcode( BONIPS_SLUG . '_users_of_all_ranks', 'bonipress_render_users_of_all_ranks' );
+			add_shortcode( BONIPS_SLUG . '_list_ranks',         'bonipress_render_rank_list' );
 
 			// Admin Management items
 			add_action( 'wp_ajax_bonipress-calc-totals',               array( $this, 'calculate_totals' ) );
@@ -179,9 +179,9 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			add_action( 'personal_options_update',            array( $this, 'save_manual_rank' ), 50 );
 			add_action( 'edit_user_profile_update',           array( $this, 'save_manual_rank' ), 50 );
 
-			add_filter( 'manage_' . BONIPRESS_RANK_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ), 50 );
-			add_action( 'manage_' . BONIPRESS_RANK_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
-			add_action( 'save_post_' . BONIPRESS_RANK_KEY,                       array( $this, 'save_rank' ), 10, 2 );
+			add_filter( 'manage_' . BONIPS_RANK_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ), 50 );
+			add_action( 'manage_' . BONIPS_RANK_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
+			add_action( 'save_post_' . BONIPS_RANK_KEY,                       array( $this, 'save_rank' ), 10, 2 );
 
 		}
 
@@ -195,7 +195,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			$manual_mode = false;
 			$point_type = 'bonipress_pref_core';
 
-			if ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $type_id != BONIPS_DEFAULT_TYPE_KEY ) {
 				$point_type = 'bonipress_pref_core_' . $type_id;
 			}
 
@@ -245,7 +245,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function register_ranks() {
 
-			if ( isset( $_GET['ctype'] ) && array_key_exists( $_GET['ctype'], $this->point_types ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_RANK_KEY )
+			if ( isset( $_GET['ctype'] ) && array_key_exists( $_GET['ctype'], $this->point_types ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_RANK_KEY )
 				$name = sprintf( __( 'Ränge für %s', 'bonipress' ), $this->point_types[ $_GET['ctype'] ] );
 			else
 				$name = __( 'Ranks', 'bonipress' );
@@ -300,7 +300,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			if ( $this->rank['public'] && ! empty( $this->rank['slug'] ) )
 				$args['rewrite'] = array( 'slug' => $this->rank['slug'] );
 
-			register_post_type( BONIPRESS_RANK_KEY, apply_filters( 'bonipress_register_ranks', $args, $this ) );
+			register_post_type( BONIPS_RANK_KEY, apply_filters( 'bonipress_register_ranks', $args, $this ) );
 
 		}
 
@@ -375,7 +375,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function post_updated_messages( $messages ) {
 
-			$messages[ BONIPRESS_RANK_KEY ] = array(
+			$messages[ BONIPS_RANK_KEY ] = array(
 				0 => '',
 				1 => __( 'Rang aktualisiert.', 'bonipress' ),
 				2 => __( 'Rang aktualisiert.', 'bonipress' ),
@@ -402,13 +402,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			global $post;
 
-			if ( $path == 'post-new.php?post_type=' . BONIPRESS_RANK_KEY ) {
+			if ( $path == 'post-new.php?post_type=' . BONIPS_RANK_KEY ) {
 
 				if ( isset( $_GET['ctype'] ) )
-					return get_site_url( $blog_id, 'wp-admin/', 'admin' ) . 'post-new.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . ( ( isset( $_GET['ctype'] ) ) ? $_GET['ctype'] : BONIPRESS_DEFAULT_TYPE_KEY );
+					return get_site_url( $blog_id, 'wp-admin/', 'admin' ) . 'post-new.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . ( ( isset( $_GET['ctype'] ) ) ? $_GET['ctype'] : BONIPS_DEFAULT_TYPE_KEY );
 
-				elseif ( isset( $post->post_type ) && $post->post_type == BONIPRESS_RANK_KEY && bonipress_get_post_meta( $post->ID, 'ctype', true ) != '' )
-					return get_site_url( $blog_id, 'wp-admin/', 'admin' ) . 'post-new.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . bonipress_get_post_meta( $post->ID, 'ctype', true );
+				elseif ( isset( $post->post_type ) && $post->post_type == BONIPS_RANK_KEY && bonipress_get_post_meta( $post->ID, 'ctype', true ) != '' )
+					return get_site_url( $blog_id, 'wp-admin/', 'admin' ) . 'post-new.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . bonipress_get_post_meta( $post->ID, 'ctype', true );
 
 			}
 
@@ -431,14 +431,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			foreach ( $this->point_types as $type_id => $label ) {
 
-				$menu_slug = ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY ) ? BONIPRESS_SLUG . '_' . $type_id : BONIPRESS_SLUG;
+				$menu_slug = ( $type_id != BONIPS_DEFAULT_TYPE_KEY ) ? BONIPS_SLUG . '_' . $type_id : BONIPS_SLUG;
 
 				add_submenu_page(
 					$menu_slug,
 					__( 'Ränge', 'bonipress' ),
 					__( 'Ränge', 'bonipress' ),
 					$capability,
-					'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . $type_id
+					'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . $type_id
 				);
 
 			}
@@ -455,28 +455,28 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			global $pagenow;
 
 			// When listing ranks, we need to indicate that we are under the appropriate point type menu
-			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_RANK_KEY ) {
+			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_RANK_KEY ) {
 			
-				if ( isset( $_GET['ctype'] ) && sanitize_key( $_GET['ctype'] ) != BONIPRESS_DEFAULT_TYPE_KEY )
-					return BONIPRESS_SLUG . '_' . sanitize_key( $_GET['ctype'] );
+				if ( isset( $_GET['ctype'] ) && sanitize_key( $_GET['ctype'] ) != BONIPS_DEFAULT_TYPE_KEY )
+					return BONIPS_SLUG . '_' . sanitize_key( $_GET['ctype'] );
 
-				return BONIPRESS_SLUG;
+				return BONIPS_SLUG;
 			
 			}
 
 			// When editing a rank, we need to indicate that we are under the appropriate point type menu
-			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_RANK_KEY ) {
+			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_RANK_KEY ) {
 
-				if ( isset( $_GET['ctype'] ) && $_GET['ctype'] != BONIPRESS_DEFAULT_TYPE_KEY )
-					return BONIPRESS_SLUG . '_' . sanitize_key( $_GET['ctype'] );
+				if ( isset( $_GET['ctype'] ) && $_GET['ctype'] != BONIPS_DEFAULT_TYPE_KEY )
+					return BONIPS_SLUG . '_' . sanitize_key( $_GET['ctype'] );
 
 				$point_type = bonipress_get_post_meta( $_GET['post'], 'ctype', true );
 				$point_type = sanitize_key( $point_type );
 
-				if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY )
-					return BONIPRESS_SLUG . '_' . $point_type;
+				if ( $point_type != BONIPS_DEFAULT_TYPE_KEY )
+					return BONIPS_SLUG . '_' . $point_type;
 
-				return BONIPRESS_SLUG;
+				return BONIPS_SLUG;
 
 			}
 
@@ -494,28 +494,28 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			global $pagenow;
 
 			// When listing ranks, we need to highlight the "Ranks" submenu to indicate where we are
-			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_RANK_KEY ) {
+			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_RANK_KEY ) {
 
 				if ( isset( $_GET['ctype'] ) )
-					return 'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . $_GET['ctype'];
+					return 'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . $_GET['ctype'];
 
-				return 'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . BONIPRESS_DEFAULT_TYPE_KEY;
+				return 'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . BONIPS_DEFAULT_TYPE_KEY;
 			
 			}
 
 			// When editing a rank, we need to highlight the "Ranks" submenu to indicate where we are
-			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_RANK_KEY ) {
+			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_RANK_KEY ) {
 
 				if ( isset( $_GET['ctype'] ) )
-					return 'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . $_GET['ctype'];
+					return 'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . $_GET['ctype'];
 
 				$point_type = bonipress_get_post_meta( $_GET['post'], 'ctype', true );
 				$point_type = sanitize_key( $point_type );
 
-				if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY )
-					return 'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . $point_type;
+				if ( $point_type != BONIPS_DEFAULT_TYPE_KEY )
+					return 'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . $point_type;
 
-				return 'edit.php?post_type=' . BONIPRESS_RANK_KEY . '&ctype=' . BONIPRESS_DEFAULT_TYPE_KEY;
+				return 'edit.php?post_type=' . BONIPS_RANK_KEY . '&ctype=' . BONIPS_DEFAULT_TYPE_KEY;
 
 			}
 
@@ -530,7 +530,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function exclude_ranks( $excludes ) {
 
-			$excludes[] = BONIPRESS_RANK_KEY;
+			$excludes[] = BONIPS_RANK_KEY;
 			return $excludes;
 
 		}
@@ -545,7 +545,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			// Security
 			check_ajax_referer( 'bonipress-calc-totals', 'token' );
 
-			$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type = BONIPS_DEFAULT_TYPE_KEY;
 			if ( isset( $_POST['ctype'] ) && bonipress_point_type_exists( sanitize_key( $_POST['ctype'] ) ) )
 				$point_type = sanitize_key( $_POST['ctype'] );
 
@@ -618,12 +618,12 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			global $bonipress_ranks;
 
 			// Only ranks please
-			if ( $post->post_type != BONIPRESS_RANK_KEY ) return;
+			if ( $post->post_type != BONIPS_RANK_KEY ) return;
 
 			$point_type = bonipress_get_post_meta( $post->ID, 'ctype', true );
 			if ( $point_type == '' ) {
 
-				$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_type = BONIPS_DEFAULT_TYPE_KEY;
 				bonipress_update_post_meta( $post->ID, 'ctype', $point_type );
 
 			}
@@ -633,8 +633,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			// Publishing or trashing of ranks
 			if ( ( $new_status == 'publish' && $old_status != 'publish' ) || ( $new_status == 'trash' && $old_status != 'trash' ) ) {
 
-				wp_cache_delete( 'ranks-published-' . $point_type, BONIPRESS_SLUG );
-				wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPRESS_SLUG );
+				wp_cache_delete( 'ranks-published-' . $point_type, BONIPS_SLUG );
+				wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPS_SLUG );
 
 				bonipress_assign_ranks( $point_type );
 
@@ -656,7 +656,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			foreach ( $this->point_types as $type_id => $label ) {
 
-				if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY ) continue;
+				if ( $type_id == BONIPS_DEFAULT_TYPE_KEY ) continue;
 				$tags[] = 'rank_' . $type_id;
 				$tags[] = 'rank_logo_' . $type_id;
 
@@ -681,7 +681,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			if ( ! isset( $user->ID ) ) {
 				foreach ( $this->point_types as $type_id => $label ) {
 
-					if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY ) {
+					if ( $type_id == BONIPS_DEFAULT_TYPE_KEY ) {
 						$content = str_replace( '%rank%',      '', $content );
 						$content = str_replace( '%rank_logo%', '', $content );
 					}
@@ -702,7 +702,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					$rank_id = bonipress_get_users_rank_id( $user->ID, $type_id );
 					if ( $rank_id === false ) {
 
-						if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY ) {
+						if ( $type_id == BONIPS_DEFAULT_TYPE_KEY ) {
 							$content = str_replace( '%rank%',      '', $content );
 							$content = str_replace( '%rank_logo%', '', $content );
 						}
@@ -714,7 +714,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					}
 					else {
 
-						if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY ) {
+						if ( $type_id == BONIPS_DEFAULT_TYPE_KEY ) {
 							$content = str_replace( '%rank%',      bonipress_get_the_title( $rank_id ), $content );
 							$content = str_replace( '%rank_logo%', bonipress_get_rank_logo( $rank_id ), $content );
 						}
@@ -957,7 +957,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				// Construct a new post
 				$rank                = array();
 				$rank['post_title']  = 'Newbie';
-				$rank['post_type']   = BONIPRESS_RANK_KEY;
+				$rank['post_type']   = BONIPS_RANK_KEY;
 				$rank['post_status'] = 'publish';
 
 				// Insert new rank post
@@ -966,7 +966,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				// Update min and max values
 				bonipress_update_post_meta( $rank_id, 'bonipress_rank_min', 0 );
 				bonipress_update_post_meta( $rank_id, 'bonipress_rank_max', 9999999 );
-				bonipress_update_post_meta( $rank_id, 'ctype',           BONIPRESS_DEFAULT_TYPE_KEY );
+				bonipress_update_post_meta( $rank_id, 'ctype',           BONIPS_DEFAULT_TYPE_KEY );
 
 				$bonipress_ranks = 1;
 				bonipress_assign_ranks();
@@ -1074,10 +1074,10 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 						elseif ( $rank === false ) {
 
 							$end     = '';
-							if ( $type_key != BONIPRESS_DEFAULT_TYPE_KEY )
+							if ( $type_key != BONIPS_DEFAULT_TYPE_KEY )
 								$end = $type_key;
 
-							bonipress_delete_user_meta( $user_id, BONIPRESS_RANK_KEY, $end );
+							bonipress_delete_user_meta( $user_id, BONIPS_RANK_KEY, $end );
 
 						}
 
@@ -1121,7 +1121,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			);
 
 			// Ranks List Page
-			if ( strpos( 'edit-' . BONIPRESS_RANK_KEY, $screen->id ) > -1 ) {
+			if ( strpos( 'edit-' . BONIPS_RANK_KEY, $screen->id ) > -1 ) {
 
 				wp_enqueue_style( 'bonipress-admin' );
 
@@ -1141,13 +1141,13 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 
 			// Edit Rank Page
-			if ( strpos( BONIPRESS_RANK_KEY, $screen->id ) > -1 ) {
+			if ( strpos( BONIPS_RANK_KEY, $screen->id ) > -1 ) {
 
 				wp_dequeue_script( 'autosave' );
 				wp_enqueue_style( 'bonipress-bootstrap-grid' );
 				wp_enqueue_style( 'bonipress-forms' );
 
-				add_filter( 'postbox_classes_' . BONIPRESS_RANK_KEY . '_bonipress-rank-setup', array( $this, 'metabox_classes' ) );
+				add_filter( 'postbox_classes_' . BONIPS_RANK_KEY . '_bonipress-rank-setup', array( $this, 'metabox_classes' ) );
 
 ?>
 <style type="text/css">
@@ -1192,14 +1192,14 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			if ( ! is_admin() ) {
 
 				// Only applicable on the post archive page (if used) and only for the main query
-				if ( ! is_post_type_archive( BONIPRESS_RANK_KEY ) || ! $query->is_main_query() ) return;
+				if ( ! is_post_type_archive( BONIPS_RANK_KEY ) || ! $query->is_main_query() ) return;
 
 				// By default we want to only show ranks for the main point type
 				if ( ! isset( $_GET['ctype'] ) ) {
 					$query->set( 'meta_query', array(
 						array(
 							'key'     => 'ctype',
-							'value'   => BONIPRESS_DEFAULT_TYPE_KEY,
+							'value'   => BONIPS_DEFAULT_TYPE_KEY,
 							'compare' => '='
 						)
 					) );
@@ -1222,7 +1222,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			else {
 
 				// Only applicable when we are quering ranks
-				if ( ! isset( $query->query['post_type'] ) || $query->query['post_type'] != BONIPRESS_RANK_KEY ) return;
+				if ( ! isset( $query->query['post_type'] ) || $query->query['post_type'] != BONIPS_RANK_KEY ) return;
 
 				// If ctype is set, filter ranks according to it's value
 				if ( isset( $_GET['ctype'] ) && array_key_exists( $_GET['ctype'], $this->point_types ) ) {
@@ -1280,7 +1280,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			$type = bonipress_get_post_meta( $post_id, 'ctype', true );
 			if ( $type == '' )
-				$type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$type = BONIPS_DEFAULT_TYPE_KEY;
 
 			// Rank Logo (thumbnail)
 			if ( $column_name == 'bonipress-rank-logo' ) {
@@ -1296,7 +1296,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			elseif ( $column_name == 'bonipress-rank-req' ) {
 
 				$bonipress = $this->core;
-				if ( $type != BONIPRESS_DEFAULT_TYPE_KEY )
+				if ( $type != BONIPS_DEFAULT_TYPE_KEY )
 					$bonipress = bonipress( $type );
 
 				$min = bonipress_get_post_meta( $post_id, 'bonipress_rank_min', true );
@@ -1339,7 +1339,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		 */
 		public function adjust_row_actions( $actions, $post ) {
 
-			if ( $post->post_type == BONIPRESS_RANK_KEY ) {
+			if ( $post->post_type == BONIPS_RANK_KEY ) {
 				unset( $actions['inline hide-if-no-js'] );
 
 				if ( ! $this->rank['public'] )
@@ -1358,7 +1358,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 		public function enter_title_here( $title ) {
 
 			global $post_type;
-			if ( $post_type == BONIPRESS_RANK_KEY )
+			if ( $post_type == BONIPS_RANK_KEY )
 				return __( 'Rangtitel', 'bonipress' );
 
 			return $title;
@@ -1376,7 +1376,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 				'bonipress-rank-setup',
 				__( 'Rang einrichten', 'bonipress' ),
 				array( $this, 'rank_settings' ),
-				BONIPRESS_RANK_KEY,
+				BONIPS_RANK_KEY,
 				'normal',
 				'high'
 			);
@@ -1393,7 +1393,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			// Get type
 			$type = bonipress_get_post_meta( $post->ID, 'ctype', true );
 			if ( $type == '' ) {
-				$type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$type = BONIPS_DEFAULT_TYPE_KEY;
 				bonipress_update_post_meta( $post->ID, 'ctype', $type );
 			}
 
@@ -1403,7 +1403,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			// Load the appropriate type object
 			$bonipress = $this->core;
-			if ( $type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $type != BONIPS_DEFAULT_TYPE_KEY )
 				$bonipress = bonipress( $type );
 
 			$rank = bonipress_get_rank( $post->ID );
@@ -1441,7 +1441,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 					<div class="form-group">
 						<label for="bonipress-rank-point-type"><?php _e( 'Punkttyp', 'bonipress' ); ?></label>
 						<p class="form-control-static"><?php echo $bonipress->plural(); ?></p>
-						<input type="hidden" name="bonipress_rank[ctype]" value="<?php echo BONIPRESS_DEFAULT_TYPE_KEY; ?>" />
+						<input type="hidden" name="bonipress_rank[ctype]" value="<?php echo BONIPS_DEFAULT_TYPE_KEY; ?>" />
 					</div>
 
 					<?php endif; ?>
@@ -1495,7 +1495,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			$point_type = sanitize_key( $_POST['bonipress_rank']['ctype'] );
 			if ( ! array_key_exists( $point_type, $this->point_types ) )
-				$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			bonipress_update_post_meta( $post_id, 'ctype', $point_type );
 
@@ -1513,8 +1513,8 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 			}
 
 			// Delete caches
-			wp_cache_delete( 'ranks-published-' . $point_type, BONIPRESS_SLUG );
-			wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPRESS_SLUG );
+			wp_cache_delete( 'ranks-published-' . $point_type, BONIPS_SLUG );
+			wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPS_SLUG );
 
 			if ( ! $this->is_manual_mode() )
 				bonipress_assign_ranks( $point_type );
@@ -1530,7 +1530,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 
 			$prefs             = $this->rank;
 			$this->add_to_core = true;
-			if ( $bonipress->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $bonipress->bonipress_type != BONIPS_DEFAULT_TYPE_KEY ) {
 
 				if ( ! isset( $bonipress->rank ) )
 					$prefs = $this->default_prefs;
@@ -1550,7 +1550,7 @@ if ( ! class_exists( 'boniPRESS_Ranks_Module' ) ) :
 <h4><span class="dashicons dashicons-admin-plugins static"></span><?php _e( 'Ränge', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
-	<?php if ( $bonipress->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) : ?>
+	<?php if ( $bonipress->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) : ?>
 
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -1841,11 +1841,11 @@ jQuery(function($){
 			if ( $count == 0 || $count === false )
 				$reset_block = true;
 
-			$rank_meta_key = BONIPRESS_RANK_KEY;
+			$rank_meta_key = BONIPS_RANK_KEY;
 			if ( $this->core->is_multisite && $GLOBALS['blog_id'] > 1 && ! $this->core->use_master_template )
 				$rank_meta_key .= '_' . $GLOBALS['blog_id'];
 
-			if ( $bonipress->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $bonipress->bonipress_type != BONIPS_DEFAULT_TYPE_KEY )
 				$rank_meta_key .= $bonipress->bonipress_type;
 
 ?>
@@ -1880,11 +1880,11 @@ jQuery(function($){
 			global $wpdb;
 
 			if ( ! array_key_exists( $point_type, $this->point_types ) )
-				$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			$wpdb->delete(
 				$wpdb->usermeta,
-				array( 'meta_key' => bonipress_get_meta_key( BONIPRESS_RANK_KEY, ( ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) ) ),
+				array( 'meta_key' => bonipress_get_meta_key( BONIPS_RANK_KEY, ( ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) ? $point_type : '' ) ) ),
 				array( '%s' )
 			);
 
@@ -1901,7 +1901,7 @@ jQuery(function($){
 			check_ajax_referer( 'bonipress-management-actions-roles', 'token' );
 
 			// Define type
-			$point_type     = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type     = BONIPS_DEFAULT_TYPE_KEY;
 			if ( isset( $_POST['ctype'] ) && array_key_exists( sanitize_key( $_POST['ctype'] ), $this->point_types ) )
 				$point_type = sanitize_key( $_POST['ctype'] );
 
@@ -1912,7 +1912,7 @@ jQuery(function($){
 			$postmeta_table = bonipress_get_db_column( 'postmeta' );
 
 			// First get the ids of all existing ranks
-			$rank_key       = BONIPRESS_RANK_KEY;
+			$rank_key       = BONIPS_RANK_KEY;
 			$rank_ids       = $wpdb->get_col( $wpdb->prepare( "
 				SELECT DISTINCT ranks.ID 
 				FROM {$posts_table} ranks 
@@ -1955,8 +1955,8 @@ jQuery(function($){
 			}
 
 			// Delete caches
-			wp_cache_delete( 'ranks-published-' . $point_type, BONIPRESS_SLUG );
-			wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPRESS_SLUG );
+			wp_cache_delete( 'ranks-published-' . $point_type, BONIPS_SLUG );
+			wp_cache_delete( 'ranks-published-count-' . $point_type, BONIPS_SLUG );
 
 			wp_send_json( array( 'status' => 'OK', 'rows' => $rows ) );
 
@@ -1971,7 +1971,7 @@ jQuery(function($){
 
 			check_ajax_referer( 'bonipress-management-actions-roles', 'token' );
 
-			$point_type     = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type     = BONIPS_DEFAULT_TYPE_KEY;
 			if ( isset( $_POST['ctype'] ) && array_key_exists( sanitize_key( $_POST['ctype'] ), $this->point_types ) )
 				$point_type = sanitize_key( $_POST['ctype'] );
 

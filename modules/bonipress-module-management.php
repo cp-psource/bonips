@@ -16,7 +16,7 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Management_Module', array(
 				'module_name' => 'management',
@@ -86,8 +86,8 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 			$custom_ref      = sanitize_key( $submitted['custom'] );
 			$entry           = wp_kses_post( $submitted['entry'] );
 
-			if ( ! bonipress_point_type_exists( $type ) || $type == BONIPRESS_DEFAULT_TYPE_KEY ) {
-				$type   = BONIPRESS_DEFAULT_TYPE_KEY;
+			if ( ! bonipress_point_type_exists( $type ) || $type == BONIPS_DEFAULT_TYPE_KEY ) {
+				$type   = BONIPS_DEFAULT_TYPE_KEY;
 				$bonipress = $this->core;
 			}
 			else {
@@ -208,7 +208,7 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 			$type    = sanitize_key( $_POST['type'] );
 
 			if ( ! bonipress_point_type_exists( $type ) )
-				$type = BONIPRESS_DEFAULT_TYPE_KEY;
+				$type = BONIPS_DEFAULT_TYPE_KEY;
 
 			$ledger  = new boniPRESS_Query_Log( array(
 				'user_id' => $user_id,
@@ -270,8 +270,8 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 
 			if ( $ledger->num_rows > 5 ) {
 
-				$page = BONIPRESS_SLUG;
-				if ( $type != BONIPRESS_DEFAULT_TYPE_KEY )
+				$page = BONIPS_SLUG;
+				if ( $type != BONIPS_DEFAULT_TYPE_KEY )
 					$page .= '_' . $type;
 
 ?>
@@ -310,7 +310,7 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 						'ajaxurl'     => admin_url( 'admin-ajax.php' ),
 						'token'       => wp_create_nonce( 'bonipress-editor-token' ),
 						'ledgertoken' => wp_create_nonce( 'bonipress-get-ledger' ),
-						'defaulttype' => BONIPRESS_DEFAULT_TYPE_KEY,
+						'defaulttype' => BONIPS_DEFAULT_TYPE_KEY,
 						'title'       => esc_attr__( 'Benutzerguthaben bearbeiten', 'bonipress' ),
 						'close'       => esc_attr__( 'Schließen', 'bonipress' ),
 						'working'     => esc_attr__( 'Wird verarbeitet...', 'bonipress' ),
@@ -348,12 +348,12 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 			global $bonipress_types;
 
 			if ( count( $bonipress_types ) == 1 )
-				$columns[ BONIPRESS_DEFAULT_TYPE_KEY ] = $this->core->plural();
+				$columns[ BONIPS_DEFAULT_TYPE_KEY ] = $this->core->plural();
 
 			else {
 
 				foreach ( $bonipress_types as $type => $label ) {
-					if ( $type == BONIPRESS_DEFAULT_TYPE_KEY ) $label = $this->core->plural();
+					if ( $type == BONIPS_DEFAULT_TYPE_KEY ) $label = $this->core->plural();
 					$columns[ $type ] = $label;
 				}
 
@@ -373,7 +373,7 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 			$bonipress_types = bonipress_get_types();
 
 			if ( count( $bonipress_types ) == 1 )
-				$columns[ BONIPRESS_DEFAULT_TYPE_KEY ] = BONIPRESS_DEFAULT_TYPE_KEY;
+				$columns[ BONIPS_DEFAULT_TYPE_KEY ] = BONIPS_DEFAULT_TYPE_KEY;
 
 			else {
 				foreach ( $bonipress_types as $type => $label )
@@ -464,8 +464,8 @@ if ( ! class_exists( 'boniPRESS_Management_Module' ) ) :
 
 			$balance  = apply_filters( 'bonipress_users_balance_column', $balance, $user_id, $column_name );
 
-			$page     = BONIPRESS_SLUG;
-			if ( $column_name != BONIPRESS_DEFAULT_TYPE_KEY )
+			$page     = BONIPS_SLUG;
+			if ( $column_name != BONIPS_DEFAULT_TYPE_KEY )
 				$page .= '_' . $column_name;
 
 			// Row actions

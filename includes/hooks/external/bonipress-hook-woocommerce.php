@@ -429,7 +429,7 @@ function bonipress_load_woocommerce_hook() {
 		/**
 		 * Construct
 		 */
-		public function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'wooreview',

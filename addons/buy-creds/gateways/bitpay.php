@@ -55,7 +55,7 @@ if ( ! class_exists( 'boniPRESS_Bitpay' ) ) :
 			parent::__construct( array(
 				'id'               => 'bitpay',
 				'label'            => 'Bitpay',
-				'gateway_logo_url' => plugins_url( 'assets/images/bitpay.png', BONIPRESS_PURCHASE ),
+				'gateway_logo_url' => plugins_url( 'assets/images/bitpay.png', BONIPS_PURCHASE ),
 				'defaults'         => array(
 					'sandbox'          => 0,
 					'api_public'       => '',

@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Hook_Click_Links' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( array(
 				'id'       => 'link_click',

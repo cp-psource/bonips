@@ -138,8 +138,8 @@ if ( ! class_exists( 'boniPRESS_Stats_Widget_Daily_Loses' ) ) :
 					else
 						$label = ucfirst( str_replace( '_', ' ', $item->ref ) );
 
-					$page_id = BONIPRESS_SLUG;
-					if ( $item->type != BONIPRESS_DEFAULT_TYPE_KEY )
+					$page_id = BONIPS_SLUG;
+					if ( $item->type != BONIPS_DEFAULT_TYPE_KEY )
 						$page_id .= '_' . $item->type;
 
 					$base_url = admin_url( 'admin.php' );

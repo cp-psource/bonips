@@ -20,7 +20,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_exchange' ) ) :
 			'rate'   => 1,
 			'min'    => 1,
 			'button' => 'Exchange'
-		), $atts, BONIPRESS_SLUG . '_exchange' ) );
+		), $atts, BONIPS_SLUG . '_exchange' ) );
 
 		if ( $from == '' || $to == '' ) return '';
 
@@ -96,7 +96,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_exchange' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_exchange', 'bonipress_render_shortcode_exchange' );
+add_shortcode( BONIPS_SLUG . '_exchange', 'bonipress_render_shortcode_exchange' );
 
 /**
  * Catch Exchange

@@ -162,7 +162,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			$valid                = true;
 
 			$this->point_type     = $this->get_point_type();
-			if ( $this->point_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $this->point_type != BONIPS_DEFAULT_TYPE_KEY )
 				$this->core = bonipress( $this->point_type );
 
 			$this->buycred_limit  = bonipress_get_buycred_sale_setup( $this->point_type );
@@ -570,7 +570,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 			if ( ! isset( $this->prefs['exchange'] ) ) return;
 
 			$content     = '';
-			$point_types = array( BONIPRESS_DEFAULT_TYPE_KEY );
+			$point_types = array( BONIPS_DEFAULT_TYPE_KEY );
 
 			if ( isset( $this->buycred['types'] ) )
 				$point_types = (array) $this->buycred['types'];
@@ -858,7 +858,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 */
 		public function get_point_type() {
 
-			$point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			if ( isset( $_REQUEST['ctype'] ) ) {
 
@@ -877,7 +877,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 		 * @since 1.3.2
 		 * @version 1.2
 		 */
-		public function get_cost( $amount = 0, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $raw = false, $custom_rate = 0 ) {
+		public function get_cost( $amount = 0, $point_type = BONIPS_DEFAULT_TYPE_KEY, $raw = false, $custom_rate = 0 ) {
 
 			if(isset($_REQUEST['er_random']) && !empty($_REQUEST['er_random'])){
 				$custom_rate=base64_decode($_REQUEST['er_random']);
@@ -1196,7 +1196,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 	<meta name="robots" content="noindex, nofollow" />
 	<?php if ( $reload ) echo '<meta http-equiv="refresh" content="2;url=' . $reload . '" />'; ?>
 
-	<link rel="stylesheet" href="<?php echo plugins_url( 'assets/css/gateway.css', BONIPRESS_PURCHASE ); ?>" type="text/css" media="all" />
+	<link rel="stylesheet" href="<?php echo plugins_url( 'assets/css/gateway.css', BONIPS_PURCHASE ); ?>" type="text/css" media="all" />
 	<link rel="stylesheet" href="<?php echo plugins_url( 'assets/css/bootstrap-grid.css', boniPRESS_THIS ); ?>" type="text/css" media="all" />
 	<link rel="stylesheet" href="<?php echo plugins_url( 'assets/css/bonipress-forms.css', boniPRESS_THIS ); ?>" type="text/css" media="all" />
 	<?php do_action( 'bonipress_buycred_page_header', $title, $reload, $this->id ); ?>
@@ -1485,7 +1485,7 @@ if ( ! class_exists( 'boniPRESS_Payment_Gateway' ) ) :
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<form name="bonipress_<?php echo $id; ?>_request" class="form text-center" action="<?php echo $location; ?>" method="post" id="redirect-form">
 			<?php foreach ( $hidden_fields as $name => $value ) echo '<input type="hidden" name="' . $name . '" value="' . $value . '" />' . "\n"; ?>
-			<img src="<?php echo plugins_url( 'assets/images/loading.gif', BONIPRESS_PURCHASE ); ?>" alt="Loading" />
+			<img src="<?php echo plugins_url( 'assets/images/loading.gif', BONIPS_PURCHASE ); ?>" alt="Loading" />
 			<noscript><input type="submit" name="submit-form" value="<?php printf( __( 'Weiter zu %s', 'bonipress' ), $this->label ); ?>" /></noscript>
 			<p id="manual-continue"><a href="javascript:void(0);" onclick="document.bonipress_<?php echo $id; ?>_request.submit();return false;"><?php _e( 'Klicke hier, wenn Du nicht automatisch weitergeleitet wirst', 'bonipress' ); ?></a></p>
 		</form>

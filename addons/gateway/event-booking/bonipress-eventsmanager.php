@@ -11,7 +11,7 @@ if ( ! class_exists( 'boniPRESS_Events_Manager_Gateway' ) && defined( 'EM_VERSIO
 
 		public $label        = '';
 		public $prefs        = NULL;
-		public $bonipress_type  = BONIPRESS_DEFAULT_TYPE_KEY;
+		public $bonipress_type  = BONIPS_DEFAULT_TYPE_KEY;
 		public $core         = NULL;
 		public $booking_cols = 0;
 
@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_Events_Manager_Gateway' ) && defined( 'EM_VERSIO
 			// Default settings
 			$defaults = array(
 				'setup'    => 'off',
-				'type'     => BONIPRESS_DEFAULT_TYPE_KEY,
+				'type'     => BONIPS_DEFAULT_TYPE_KEY,
 				'rate'     => 100,
 				'share'    => 0,
 				'log'      => array(

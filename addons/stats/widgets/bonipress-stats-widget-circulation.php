@@ -215,8 +215,8 @@ if ( ! class_exists( 'boniPRESS_Stats_Widget_Circulation' ) ) :
 						<td class="rowtitle"><?php echo $this->ctypes[ $type_id ]; ?></td>
 <?php
 
-				$page_id = BONIPRESS_SLUG;
-				if ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY )
+				$page_id = BONIPS_SLUG;
+				if ( $type_id != BONIPS_DEFAULT_TYPE_KEY )
 					$page_id .= '_' . $type_id;
 
 				$base_url = add_query_arg( array( 'page' => $page_id ), admin_url( 'admin.php' ) );
@@ -346,8 +346,8 @@ jQuery(function($) {
 					<td class="rowtitle"><?php echo $this->ctypes[ $type_id ]; ?></td>
 <?php
 
-				$page_id = BONIPRESS_SLUG;
-				if ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY )
+				$page_id = BONIPS_SLUG;
+				if ( $type_id != BONIPS_DEFAULT_TYPE_KEY )
 					$page_id .= '_' . $type_id;
 
 				$base_url = add_query_arg( array( 'page' => $page_id ), admin_url( 'admin.php' ) );

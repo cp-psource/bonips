@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_Skrill' ) ) :
 			parent::__construct( array(
 				'id'               => 'skrill',
 				'label'            => 'Skrill Payment',
-				'gateway_logo_url' => plugins_url( 'assets/images/skrill.png', BONIPRESS_PURCHASE ),
+				'gateway_logo_url' => plugins_url( 'assets/images/skrill.png', BONIPS_PURCHASE ),
 				'defaults' => array(
 					'sandbox'           => 0,
 					'currency'          => '',

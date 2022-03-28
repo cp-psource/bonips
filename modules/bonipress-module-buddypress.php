@@ -15,7 +15,7 @@ if ( ! class_exists( 'boniPRESS_BuddyPress_Module' ) ) :
 		/**
 		 * Constructor
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_BuddyPress', array(
 				'module_name' => 'buddypress',
@@ -55,7 +55,7 @@ if ( ! class_exists( 'boniPRESS_BuddyPress_Module' ) ) :
 
 			add_filter( 'logout_url', array( $this, 'adjust_logout' ), 99, 2 );
 
-			$this->selected_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$this->selected_type = BONIPS_DEFAULT_TYPE_KEY;
 			if ( isset( $_GET['show-ctype'] ) ) {
 				$selected = sanitize_text_field( $_GET['show-ctype'] );
 				if ( array_key_exists( $selected, $this->point_types ) )
@@ -241,7 +241,7 @@ if ( ! class_exists( 'boniPRESS_BuddyPress_Module' ) ) :
 			) );
 
 			$ctype    = '/';
-			if ( $this->selected_type != BONIPRESS_DEFAULT_TYPE_KEY )
+			if ( $this->selected_type != BONIPS_DEFAULT_TYPE_KEY )
 				$ctype .= esc_url( add_query_arg( array( 'show-ctype' => $this->selected_type ) ) );
 
 			// "All" is default
@@ -324,7 +324,7 @@ if ( ! class_exists( 'boniPRESS_BuddyPress_Module' ) ) :
 			global $bp;
 
 			$bonipress_types = bonipress_get_types();
-			$type         = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type         = BONIPS_DEFAULT_TYPE_KEY;
 			if ( isset( $_REQUEST['show-ctype'] ) && array_key_exists( $_REQUEST['show-ctype'], $bonipress_types ) )
 				$type = $_REQUEST['show-ctype'];
 

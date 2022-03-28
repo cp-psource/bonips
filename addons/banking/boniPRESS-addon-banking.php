@@ -30,7 +30,7 @@ if ( ! class_exists( 'boniPRESS_Banking_Module' ) ) :
 		/**
 		 * Constructor
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Banking_Module', array(
 				'module_name' => 'banking',
@@ -45,7 +45,7 @@ if ( ! class_exists( 'boniPRESS_Banking_Module' ) ) :
 					'page_title'  => __( 'Banking', 'bonipress' ),
 					'page_header' => __( 'Banking', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG . '-banking',
+				'screen_id'   => BONIPS_SLUG . '-banking',
 				'accordion'   => true,
 				'menu_pos'    => 60
 			), $type );

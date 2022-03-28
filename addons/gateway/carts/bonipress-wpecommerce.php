@@ -18,7 +18,7 @@ if ( ! function_exists( 'bonipress_init_wpecom_construct_gateway' ) ) :
 
 		$bonipress_wpecom_settings = shortcode_atts( array(
 			'log'       => __( 'Payment for Order: #%order_id%', 'bonipress' ),
-			'type'      => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'      => BONIPS_DEFAULT_TYPE_KEY,
 			'share'     => 0,
 			'share_log' => __( 'Store sale', 'bonipress' ),
 			'rate'      => 1,
@@ -45,7 +45,7 @@ if ( ! function_exists( 'bonipress_init_wpecom_construct_gateway' ) ) :
 
 			public $core        = '';
 			public $prefs       = array();
-			public $bonipress_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			public $bonipress_type = BONIPS_DEFAULT_TYPE_KEY;
 
 			/**
 			 * Construct
@@ -55,7 +55,7 @@ if ( ! function_exists( 'bonipress_init_wpecom_construct_gateway' ) ) :
 				global $bonipress_wpecom_settings;
 
 				$this->prefs = $bonipress_wpecom_settings;
-				$type        = BONIPRESS_DEFAULT_TYPE_KEY;
+				$type        = BONIPS_DEFAULT_TYPE_KEY;
 				if ( isset( $bonipress_wpecom_settings['type'] ) )
 					$type = $bonipress_wpecom_settings['type'];
 
@@ -158,14 +158,14 @@ if ( ! function_exists( 'bonipress_init_wpecom_construct_gateway' ) ) :
 
 			var $prefs          = array();
 			var $core           = '';
-			var $bonipress_type    = BONIPRESS_DEFAULT_TYPE_KEY;
+			var $bonipress_type    = BONIPS_DEFAULT_TYPE_KEY;
 			var $cost           = 0;
 			var $transaction_id = '';
 
 			/**
 			 * Construct
 			 */
-			function __construct( $purchase_id = NULL, $is_receiving = false, $prefs = NULL, $bonipress = NULL, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+			function __construct( $purchase_id = NULL, $is_receiving = false, $prefs = NULL, $bonipress = NULL, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 				parent::__construct( $purchase_id, $is_receiving );
 				$this->prefs       = $prefs;
@@ -231,7 +231,7 @@ if ( ! function_exists( 'bonipress_init_wpecom_construct_gateway' ) ) :
 
 				// Prep for payment
 				$this->user_id        = $user_id;
-				$this->transaction_id = strtoupper( BONIPRESS_SLUG ) . $user_id . time();
+				$this->transaction_id = strtoupper( BONIPS_SLUG ) . $user_id . time();
 
 			}
 
@@ -342,7 +342,7 @@ if ( ! function_exists( 'bonipress_wpecom_gateway_settings' ) ) :
 		global $wpdb, $bonipress_wpecom_settings;
 
 		if ( ! isset( $bonipress_wpecom_settings['type'] ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 		else
 			$type = $bonipress_wpecom_settings['type'];
 

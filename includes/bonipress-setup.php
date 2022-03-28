@@ -45,9 +45,9 @@ if ( ! class_exists( 'boniPRESS_Setup' ) ) :
 		public function admin_notice() {
 
 			$screen = get_current_screen();
-			if ( $screen->id == 'plugins_page_' . BONIPRESS_SLUG . '-setup' || ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) || ! bonipress_is_admin() ) return;
+			if ( $screen->id == 'plugins_page_' . BONIPS_SLUG . '-setup' || ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) || ! bonipress_is_admin() ) return;
 
-			echo '<div class="info notice notice-info"><p>' . sprintf( __( '%s braucht Deine Aufmerksamkeit.', 'bonipress' ), bonipress_label() ) . ' <a href="' . admin_url( 'plugins.php?page=' . BONIPRESS_SLUG . '-setup' ) . '">' . __( 'Ersteinrichtung', 'bonipress' ) . '</a></p></div>';
+			echo '<div class="info notice notice-info"><p>' . sprintf( __( '%s braucht Deine Aufmerksamkeit.', 'bonipress' ), bonipress_label() ) . ' <a href="' . admin_url( 'plugins.php?page=' . BONIPS_SLUG . '-setup' ) . '">' . __( 'Ersteinrichtung', 'bonipress' ) . '</a></p></div>';
 
 		}
 
@@ -63,7 +63,7 @@ if ( ! class_exists( 'boniPRESS_Setup' ) ) :
 				__( 'BoniPress Setup', 'bonipress' ),
 				__( 'BoniPress Setup', 'bonipress' ),
 				'manage_options',
-				BONIPRESS_SLUG . '-setup',
+				BONIPS_SLUG . '-setup',
 				array( $this, 'setup_page' )
 			);
 
@@ -131,14 +131,14 @@ pre { margin: 0 0 12px 0; padding: 10px; background-color: #dedede; }
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<h3><?php _e( 'Ändere den Standardpunkttypschlüssel', 'bonipress' ); ?></h3>
-					<pre>define( 'BONIPRESS_DEFAULT_TYPE_KEY', 'yourkey' );</pre>
-					<p><span class="description"><?php _e( 'Du kannst den zum Speichern des Standardpunkttyps verwendeten Metaschlüssel mithilfe der Konstante BONIPRESS_DEFAULT_TYPE_KEY ändern. Kopiere den obigen Code in Deine zu verwendende Datei wp-config.php.', 'bonipress' ); ?></span></p>
+					<pre>define( 'BONIPS_DEFAULT_TYPE_KEY', 'yourkey' );</pre>
+					<p><span class="description"><?php _e( 'Du kannst den zum Speichern des Standardpunkttyps verwendeten Metaschlüssel mithilfe der Konstante BONIPS_DEFAULT_TYPE_KEY ändern. Kopiere den obigen Code in Deine zu verwendende Datei wp-config.php.', 'bonipress' ); ?></span></p>
 					<p><span class="description"><?php _e( 'Wenn Du den Standard-Metaschlüssel ändern möchtest, solltest Du dies tun, bevor Du mit diesem Setup fortfährst!', 'bonipress' ); ?></span></p>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<h3><?php _e( 'Whitelabel', 'bonipress' ); ?></h3>
-					<pre>define( 'BONIPRESS_DEFAULT_LABEL', 'SuperPoints' );</pre>
-					<p><span class="description"><?php _e( 'Du kannst boniPRESS mit der Konstante BONIPRESS_DEFAULT_LABEL neu beschriften. Kopiere den obigen Code zur Verwendung in Deine Datei wp-config.php.', 'bonipress' ); ?></span></p>
+					<pre>define( 'BONIPS_DEFAULT_LABEL', 'SuperPoints' );</pre>
+					<p><span class="description"><?php _e( 'Du kannst boniPRESS mit der Konstante BONIPS_DEFAULT_LABEL neu beschriften. Kopiere den obigen Code zur Verwendung in Deine Datei wp-config.php.', 'bonipress' ); ?></span></p>
 				</div>
 			</div>
 
@@ -165,17 +165,17 @@ pre { margin: 0 0 12px 0; padding: 10px; background-color: #dedede; }
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<h3><?php _e( 'Hooks aktivieren', 'bonipress' ); ?></h3>
 				<p><span class="description"><?php _e( 'Wenn Du Deinen Benutzern Punkte für die automatische Interaktion mit Deiner Webseite geben möchtest, solltest Du als Nächstes die Hooks aktivieren und einrichten, die Du verwenden möchtest.', 'bonipress' ); ?></span></p>
-				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPRESS_SLUG . '-hooks' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Hooks einrichten', 'bonipress' ); ?></a></p>
+				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPS_SLUG . '-hooks' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Hooks einrichten', 'bonipress' ); ?></a></p>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<h3><?php _e( 'Erweiterungen', 'bonipress' ); ?></h3>
 				<p><span class="description"><?php _e( 'Wenn Du erweiterte Funktionen wie Überweisungen, Punktekäufe usw. verwenden möchtest, solltest Du als Nächstes Deine Add-Ons aktivieren und einrichten.', 'bonipress' ); ?></span></p>
-				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPRESS_SLUG . '-addons' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Add-Ons einrichten', 'bonipress' ); ?></a></p>
+				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPS_SLUG . '-addons' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Add-Ons einrichten', 'bonipress' ); ?></a></p>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<h3><?php _e( 'Adjust Settings', 'bonipress' ); ?></h3>
 				<p><span class="description"><?php _e( 'Wenn Du weitere Änderungen an Deinen Einstellungen vornehmen oder neue Punkttypen hinzufügen musst, kannst Du die Einstellungen Deines Standardpunkttyps aufrufen.', 'bonipress' ); ?></span></p>
-				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPRESS_SLUG . '-settings' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Einstellungen anzeigen', 'bonipress' ); ?></a></p>
+				<p><a href="<?php echo esc_url( add_query_arg( array( 'page' => BONIPS_SLUG . '-settings' ), admin_url( 'admin.php' ) ) ); ?>" class="button button-secondary"><?php _e( 'Einstellungen anzeigen', 'bonipress' ); ?></a></p>
 			</div>
 		</div>
 	</div>

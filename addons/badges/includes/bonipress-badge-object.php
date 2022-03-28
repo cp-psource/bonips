@@ -41,18 +41,18 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 
 			parent::__construct();
 
-			if ( is_object( $object ) && isset( $object->post_type ) && $object->post_type == BONIPRESS_BADGE_KEY )
+			if ( is_object( $object ) && isset( $object->post_type ) && $object->post_type == BONIPS_BADGE_KEY )
 				$this->post_id = $object->ID;
 
-			elseif ( is_numeric( $object ) && bonipress_get_post_type( $object ) == BONIPRESS_BADGE_KEY )
+			elseif ( is_numeric( $object ) && bonipress_get_post_type( $object ) == BONIPS_BADGE_KEY )
 				$this->post_id = absint( $object );
 
 			else return false;
 
-			$this->image_width   = BONIPRESS_BADGE_WIDTH;
-			$this->image_height  = BONIPRESS_BADGE_HEIGHT;
+			$this->image_width   = BONIPS_BADGE_WIDTH;
+			$this->image_height  = BONIPS_BADGE_HEIGHT;
 
-			$this->user_meta_key = BONIPRESS_BADGE_KEY . $this->post_id;
+			$this->user_meta_key = BONIPS_BADGE_KEY . $this->post_id;
 
 			if ( $level_id !== NULL ) $this->level_id = absint( $level_id );
 
@@ -246,7 +246,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 				foreach ( $base_requirements as $requirement_id => $requirement ) {
 
 					if ( $requirement['type'] == '' )
-						$requirement['type'] = BONIPRESS_DEFAULT_TYPE_KEY;
+						$requirement['type'] = BONIPS_DEFAULT_TYPE_KEY;
 
 					$bonipress = bonipress( $requirement['type'] );
 					if ( $bonipress->exclude_user( $user_id ) ) continue;
@@ -482,7 +482,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 
 					$requirement         = $this->levels[0]['requires'][0];
 					$having              = ( $requirement['by'] != 'count' ) ? 'SUM( creds )' : 'COUNT( id )';
-					$requirement['type'] = ( $requirement['type'] == '' ) ? BONIPRESS_DEFAULT_TYPE_KEY : $requirement['type'];
+					$requirement['type'] = ( $requirement['type'] == '' ) ? BONIPS_DEFAULT_TYPE_KEY : $requirement['type'];
 
 					$results             = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT user_id, {$having} as total FROM {$bonipress_log_table} WHERE ctype = %s AND ref = %s GROUP BY user_id HAVING {$having} >= %f;", $requirement['type'], $requirement['reference'], $requirement['amount'] ) );
 
@@ -523,7 +523,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 							foreach ( $level_setup['requires'] as $requirement_id => $requirement ) {
 
 								$having              = ( $requirement['by'] != 'count' ) ? 'SUM( creds )' : 'COUNT( id )';
-								$requirement['type'] = ( $requirement['type'] == '' ) ? BONIPRESS_DEFAULT_TYPE_KEY : $requirement['type'];
+								$requirement['type'] = ( $requirement['type'] == '' ) ? BONIPS_DEFAULT_TYPE_KEY : $requirement['type'];
 
 								$level_user_ids[ $requirement_id ] = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT user_id FROM {$bonipress_log_table} WHERE ctype = %s AND ref = %s GROUP BY user_id HAVING {$having} >= %f;", $requirement['type'], $requirement['reference'], $requirement['amount'] ) );
 
@@ -716,7 +716,7 @@ if ( ! class_exists( 'boniPRESS_Badge' ) ) :
 			$image_width  = ( $this->image_width !== false ) ? ' width="' . esc_attr( $this->image_width ) . '"' : '';
 			$image_height = ( $this->image_height !== false ) ? ' height="' . esc_attr( $this->image_height ) . '"' : '';
 
-			$html         = '<img src="' . esc_url( $image_url ) . '" class="' . BONIPRESS_SLUG . '-badge-image badge-level' . esc_attr( $level ) . '" title="' . esc_attr( $this->title ) . '" alt="' . esc_attr( $this->title ) . '"' . $image_width . $image_height . ' />';
+			$html         = '<img src="' . esc_url( $image_url ) . '" class="' . BONIPS_SLUG . '-badge-image badge-level' . esc_attr( $level ) . '" title="' . esc_attr( $this->title ) . '" alt="' . esc_attr( $this->title ) . '"' . $image_width . $image_height . ' />';
 
 			return apply_filters( 'bonipress_badge_image', $html, $image, $this );
 

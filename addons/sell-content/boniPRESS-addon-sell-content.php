@@ -1,19 +1,19 @@
 <?php
 /**
  * Addon: Sell Content
- * Addon URI: http://codex.bonipress.me/chapter-iii/sell-content/
+ * Addon URI: https://n3rds.work/docs/bonipress-erweiterungen-inhalt-verkaufen/
  * Version: 2.0.1
  */
 if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 
 define( 'boniPRESS_SELL',              __FILE__ );
 define( 'boniPRESS_SELL_VERSION',      '1.5' );
-define( 'BONIPRESS_SELL_DIR',          boniPRESS_ADDONS_DIR . 'sell-content/' );
-define( 'BONIPRESS_SELL_ASSETS_DIR',   BONIPRESS_SELL_DIR . 'assets/' );
-define( 'BONIPRESS_SELL_INCLUDES_DIR', BONIPRESS_SELL_DIR . 'includes/' );
+define( 'BONIPS_SELL_DIR',          boniPRESS_ADDONS_DIR . 'sell-content/' );
+define( 'BONIPS_SELL_ASSETS_DIR',   BONIPS_SELL_DIR . 'assets/' );
+define( 'BONIPS_SELL_INCLUDES_DIR', BONIPS_SELL_DIR . 'includes/' );
 
-require_once BONIPRESS_SELL_INCLUDES_DIR . 'bonipress-sell-functions.php';
-require_once BONIPRESS_SELL_INCLUDES_DIR . 'bonipress-sell-shortcodes.php';
+require_once BONIPS_SELL_INCLUDES_DIR . 'bonipress-sell-functions.php';
+require_once BONIPS_SELL_INCLUDES_DIR . 'bonipress-sell-shortcodes.php';
 
 /**
  * boniPRESS_Sell_Content_Module class
@@ -38,7 +38,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 				'defaults'    => array(
 					'post_types'  => 'post,page',
 						'filters'     => array(),
-					'type'        => array( BONIPRESS_DEFAULT_TYPE_KEY ),
+					'type'        => array( BONIPS_DEFAULT_TYPE_KEY ),
 					'reload'      => 0,
 					'working'     => 'Processing ...',
 					'templates'   => array(
@@ -73,12 +73,12 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 			add_action( 'template_redirect',               array( $this, 'template_redirect' ), 99990 );
 
 			// Register shortcodes
-			add_shortcode( BONIPRESS_SLUG . '_sell_this',             'bonipress_render_sell_this' );
-			add_shortcode( BONIPRESS_SLUG . '_sell_this_ajax',        'bonipress_render_sell_this_ajax' );
-			add_shortcode( BONIPRESS_SLUG . '_sales_history',         'bonipress_render_sell_history' );
-			add_shortcode( BONIPRESS_SLUG . '_content_sale_count',    'bonipress_render_sell_count' );
-			add_shortcode( BONIPRESS_SLUG . '_content_buyer_count',   'bonipress_render_sell_buyer_count' );
-			add_shortcode( BONIPRESS_SLUG . '_content_buyer_avatars', 'bonipress_render_sell_buyer_avatars' );
+			add_shortcode( BONIPS_SLUG . '_sell_this',             'bonipress_render_sell_this' );
+			add_shortcode( BONIPS_SLUG . '_sell_this_ajax',        'bonipress_render_sell_this_ajax' );
+			add_shortcode( BONIPS_SLUG . '_sales_history',         'bonipress_render_sell_history' );
+			add_shortcode( BONIPS_SLUG . '_content_sale_count',    'bonipress_render_sell_count' );
+			add_shortcode( BONIPS_SLUG . '_content_buyer_count',   'bonipress_render_sell_buyer_count' );
+			add_shortcode( BONIPS_SLUG . '_content_buyer_avatars', 'bonipress_render_sell_buyer_avatars' );
 
 			// Setup Script
 			add_action( 'bonipress_register_assets',          array( $this, 'register_assets' ) );
@@ -1041,7 +1041,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 
 			}
 			if ( empty( $point_types ) )
-				$point_types[] = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_types[] = BONIPS_DEFAULT_TYPE_KEY;
 
 			$new_data['sell_content']['type'] = $point_types;
 
@@ -1155,7 +1155,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 					$bonipress     = bonipress( $point_type );
 
 					$suffix = '_' . $point_type;
-					if ( $point_type == BONIPRESS_DEFAULT_TYPE_KEY )
+					if ( $point_type == BONIPS_DEFAULT_TYPE_KEY )
 						$suffix = '';
 
 					$sale_setup = (array) bonipress_get_post_meta( $post->ID, 'boniPRESS_sell_content' . $suffix );
@@ -1269,7 +1269,7 @@ if ( ! class_exists( 'boniPRESS_Sell_Content_Module' ) ) :
 							$new_setup['expire'] = absint( sanitize_text_field( $submission['expire'] ) );
 
 						$suffix = '_' . $point_type;
-						if ( $point_type == BONIPRESS_DEFAULT_TYPE_KEY )
+						if ( $point_type == BONIPS_DEFAULT_TYPE_KEY )
 							$suffix = '';
 
 						bonipress_update_post_meta( $post_id, 'boniPRESS_sell_content' . $suffix, $new_setup );

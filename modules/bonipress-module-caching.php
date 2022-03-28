@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Caching_Module', array(
 				'module_name' => 'caching',
@@ -36,7 +36,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		 */
 		public function load() {
 
-			if ( $this->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $this->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) {
 
 				add_filter( 'bonipress_get_cached_log',         array( $this, 'get_log' ), 10, 2 );
 				add_action( 'bonipress_cache_log',              array( $this, 'cache_log' ), 10, 2 );
@@ -60,7 +60,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		 */
 		public function module_admin_init() {
 
-			$action_hook = ( $this->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) ? '' : $this->bonipress_type;
+			$action_hook = ( $this->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) ? '' : $this->bonipress_type;
 
 			add_action( 'bonipress_after_management_prefs' . $action_hook, array( $this, 'after_general_settings' ), 10 );
 			add_filter( 'bonipress_save_core_prefs' . $action_hook,        array( $this, 'sanitize_extra_settings' ), 10, 3 );
@@ -134,7 +134,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		 * @since 1.8
 		 * @version 1.0
 		 */
-		public function balance_change( $user_id, $current_balance, $amount, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function balance_change( $user_id, $current_balance, $amount, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( $this->caching['history'] == 'event' && $point_type == $this->bonipress_type ) {
 
@@ -216,14 +216,14 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 
 			if ( $cache_type == '' ) return false;
 
-			$cache_id   = ( $cache_type == 'history' ) ? BONIPRESS_SLUG . '-cache-keys' : BONIPRESS_SLUG . '-cache-leaderboard-keys';
+			$cache_id   = ( $cache_type == 'history' ) ? BONIPS_SLUG . '-cache-keys' : BONIPS_SLUG . '-cache-leaderboard-keys';
 			$cache_id   = apply_filters( 'bonipress_get_cache_id', $cache_id, $cache_type, $this );
 
 			$cache_keys = bonipress_get_option( $cache_id, array() );
 			if ( empty( $cache_keys ) ) {
 
 				foreach ( $cache_keys as $key )
-					wp_cache_delete( $key, BONIPRESS_SLUG );
+					wp_cache_delete( $key, BONIPS_SLUG );
 
 				foreach ( $cache_keys as $key )
 					delete_transient( $key );
@@ -251,7 +251,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 <h4><span class="dashicons dashicons-admin-tools static"></span><?php _e( 'Optimierung', 'bonipress' ); ?></h4>
 <div class="body" style="display:none;">
 
-	<?php if ( $this->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) : ?>
+	<?php if ( $this->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) : ?>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -294,7 +294,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( 'auto-delete' ); ?>"><?php _e( 'Protokolleinträge automatisch löschen', 'bonipress' ); ?></label>
-				<?php if ( ! BONIPRESS_ENABLE_LOGGING ) : ?>
+				<?php if ( ! BONIPS_ENABLE_LOGGING ) : ?>
 				<p><span class="description"><?php _e( 'Protokoll deaktiviert', 'bonipress' ); ?></span></p>
 				<?php else : ?>
 				<input type="text" name="<?php echo $this->field_name( array( 'caching', 'autodelete' ) ); ?>" id="<?php echo $this->field_id( 'auto-delete' ); ?>" value="<?php echo esc_attr( $this->caching['autodelete'] ); ?>" placeholder="days" class="form-control" />
@@ -308,7 +308,7 @@ if ( ! class_exists( 'boniPRESS_Caching_Module' ) ) :
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( 'auto-delete' ); ?>"><?php _e( 'Protokolleinträge automatisch löschen', 'bonipress' ); ?></label>
-				<?php if ( ! BONIPRESS_ENABLE_LOGGING ) : ?>
+				<?php if ( ! BONIPS_ENABLE_LOGGING ) : ?>
 				<p><span class="description"><?php _e( 'Protokoll deaktiviert', 'bonipress' ); ?></span></p>
 				<?php else : ?>
 				<input type="text" name="<?php echo $this->field_name( array( 'caching', 'autodelete' ) ); ?>" id="<?php echo $this->field_id( 'auto-delete' ); ?>" value="<?php echo esc_attr( $this->caching['autodelete'] ); ?>" placeholder="days" class="form-control" />

@@ -12,14 +12,14 @@ if ( ! function_exists( 'bonipress_render_shortcode_hook_table' ) ) :
 	function bonipress_render_shortcode_hook_table( $atts ) {
 
 		extract( shortcode_atts( array(
-			'type'    => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'    => BONIPS_DEFAULT_TYPE_KEY,
 			'gains'   => 1,
 			'user'    => '-user-',
 			'post'    => '-post-',
 			'comment' => '-comment-',
 			'amount'  => '',
 			'nothing' => __( 'No instances found for this point type', 'bonipress' )
-		), $atts, BONIPRESS_SLUG . '_hook_table' ) );
+		), $atts, BONIPS_SLUG . '_hook_table' ) );
 
 		if ( ! bonipress_point_type_exists( $type ) ) return __( 'Point type not found.', 'bonipress' );
 
@@ -27,7 +27,7 @@ if ( ! function_exists( 'bonipress_render_shortcode_hook_table' ) ) :
 		$id         = str_replace( '_', '-', $type );
 		$prefs_key  = apply_filters( 'bonipress_option_id', 'bonipress_pref_hooks' );
 
-		if ( $type != BONIPRESS_DEFAULT_TYPE_KEY )
+		if ( $type != BONIPS_DEFAULT_TYPE_KEY )
 			$prefs_key .= '_' . $type;
 
 		$applicable = array();
@@ -157,4 +157,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_hook_table' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_hook_table', 'bonipress_render_shortcode_hook_table' );
+add_shortcode( BONIPS_SLUG . '_hook_table', 'bonipress_render_shortcode_hook_table' );

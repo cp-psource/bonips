@@ -145,7 +145,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 
 			if ( $settings === false )
 				$settings = array(
-					'types'      => array( BONIPRESS_DEFAULT_TYPE_KEY ),
+					'types'      => array( BONIPS_DEFAULT_TYPE_KEY ),
 					'logs'       => array(
 						'sending'   => 'Übertragung von %plural% an %display_name%',
 						'receiving' => 'Übertragung von %plural% von %display_name%'
@@ -488,7 +488,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 		 * @since 1.8
 		 * @version 1.0
 		 */
-		public function get_transfer_limit_desc( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function get_transfer_limit_desc( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$description = __( 'Kein Limit', 'bonipress' );
 			if ( ! empty( $this->limits ) && array_key_exists( $point_type, $this->limits ) ) {
@@ -580,7 +580,7 @@ if ( ! class_exists( 'boniPRESS_Transfer' ) ) :
 				'token'        => NULL,
 				'recipient_id' => NULL,
 				'user_id'      => 'current',
-				'ctype'        => BONIPRESS_DEFAULT_TYPE_KEY,
+				'ctype'        => BONIPS_DEFAULT_TYPE_KEY,
 				'amount'       => NULL,
 				'reference'    => 'transfer',
 				'message'      => isset( $posted['message'] ) ? $posted['message'] : ''

@@ -20,21 +20,21 @@ if ( ! function_exists( 'bonipress_render_shortcode_history' ) ) :
 			'show_user'  => 0,
 			'show_nav'   => 1,
 			'login'      => '',
-			'type'       => BONIPRESS_DEFAULT_TYPE_KEY,
+			'type'       => BONIPS_DEFAULT_TYPE_KEY,
 			'pagination' => 10,
 			'inlinenav'  => 0
-		), $atts, BONIPRESS_SLUG . '_history' ) );
+		), $atts, BONIPS_SLUG . '_history' ) );
 
 		// If we are not logged in
 		if ( ! is_user_logged_in() && $login != '' )
 			return $login . $content;
 
-		if ( ! BONIPRESS_ENABLE_LOGGING ) return '';
+		if ( ! BONIPS_ENABLE_LOGGING ) return '';
 
 		$user_id = bonipress_get_user_id( $user_id );
 
 		if ( ! bonipress_point_type_exists( $type ) )
-			$type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$type = BONIPS_DEFAULT_TYPE_KEY;
 
 		$args    = array( 'ctype' => $type );
 
@@ -84,4 +84,4 @@ if ( ! function_exists( 'bonipress_render_shortcode_history' ) ) :
 
 	}
 endif;
-add_shortcode( BONIPRESS_SLUG . '_history', 'bonipress_render_shortcode_history' );
+add_shortcode( BONIPS_SLUG . '_history', 'bonipress_render_shortcode_history' );

@@ -23,7 +23,7 @@ if ( ! class_exists( 'boniPRESS_Zombaio' ) ) :
 			parent::__construct( array(
 				'id'               => 'zombaio',
 				'label'            => 'Zombaio',
-				'gateway_logo_url' => plugins_url( 'assets/images/zombaio.png', BONIPRESS_PURCHASE ),
+				'gateway_logo_url' => plugins_url( 'assets/images/zombaio.png', BONIPS_PURCHASE ),
 				'defaults'         => array(
 					'sandbox'          => 0,
 					'site_id'          => '',

@@ -60,10 +60,10 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		 * @since 1.0
 		 * @version 1.8
 		 */
-		public function __construct( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			// The point type key
-			$this->default_cred_id     = BONIPRESS_DEFAULT_TYPE_KEY;
+			$this->default_cred_id     = BONIPS_DEFAULT_TYPE_KEY;
 			$this->cred_id             = ( ( ! is_string( $point_type ) || sanitize_key( $point_type ) == '' || $point_type === NULL ) ? $this->default_cred_id : $point_type );
 			$this->is_main_type        = ( ( $this->cred_id == $this->default_cred_id ) ? true : false );
 
@@ -100,7 +100,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		public function defaults() {
 
 			return array(
-				'cred_id'   => BONIPRESS_DEFAULT_TYPE_KEY,
+				'cred_id'   => BONIPS_DEFAULT_TYPE_KEY,
 				'format'      => array(
 					'type'        => 'bigint',
 					'decimals'    => 0,
@@ -178,8 +178,8 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 					wp_cache_set('bonipress_log_table_name', $table_name);
 				}
 
-			if ( defined( 'BONIPRESS_LOG_TABLE' ) )
-				$table_name = BONIPRESS_LOG_TABLE;
+			if ( defined( 'BONIPS_LOG_TABLE' ) )
+				$table_name = BONIPS_LOG_TABLE;
 
 			return $table_name;
 
@@ -1208,7 +1208,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			if ( $user_id === 0 ) return $total_balance;
 
 			// Feature needs to be enabled
-			if ( BONIPRESS_ENABLE_TOTAL_BALANCE ) {
+			if ( BONIPS_ENABLE_TOTAL_BALANCE ) {
 
 				global $bonipress_types, $bonipress_current_account;
 
@@ -1292,7 +1292,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		 */
 		public function update_users_total_balance( $user_id = NULL, $amount = 0, $point_type = NULL ) {
 
-			if ( ! BONIPRESS_ENABLE_TOTAL_BALANCE || ! BONIPRESS_ENABLE_LOGGING || $amount == 0 ) return $amount;
+			if ( ! BONIPS_ENABLE_TOTAL_BALANCE || ! BONIPS_ENABLE_LOGGING || $amount == 0 ) return $amount;
 
 			global $bonipress_current_account;
 
@@ -1366,7 +1366,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		public function set_users_total_balance( $user_id = NULL, $new_balance = NULL ) {
 
 			// Minimum Requirements: User id and amount can not be null
-			if ( $user_id === NULL || $new_balance === NULL || ! BONIPRESS_ENABLE_TOTAL_BALANCE || ! BONIPRESS_ENABLE_LOGGING ) return false;
+			if ( $user_id === NULL || $new_balance === NULL || ! BONIPS_ENABLE_TOTAL_BALANCE || ! BONIPS_ENABLE_LOGGING ) return false;
 
 			global $bonipress_current_account;
 
@@ -1395,7 +1395,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		 * @param $cred (int|float), required number of creds to give or deduct from the given user.
 		 * @param $ref_id (int), optional array of reference IDs allowing the use of content specific keywords in the log entry
 		 * @param $data (object|array|string|int), optional extra data to save in the log. Note that arrays gets serialized!
-		 * @param $type (string), optional point name, defaults to BONIPRESS_DEFAULT_TYPE_KEY
+		 * @param $type (string), optional point name, defaults to BONIPS_DEFAULT_TYPE_KEY
 		 * @returns boolean true on success or false on fail
 		 * @since 0.1
 		 * @version 1.7
@@ -1446,7 +1446,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 				$this->update_users_balance( (int) $run_this['user_id'], $run_this['amount'], $run_this['type'] );
 
 				// Update total balance (if enabled)
-				if ( BONIPRESS_ENABLE_TOTAL_BALANCE && BONIPRESS_ENABLE_LOGGING && ( $run_this['amount'] > 0 || ( $run_this['amount'] < 0 && $run_this['ref'] == 'manual' ) ) ) {
+				if ( BONIPS_ENABLE_TOTAL_BALANCE && BONIPS_ENABLE_LOGGING && ( $run_this['amount'] > 0 || ( $run_this['amount'] < 0 && $run_this['ref'] == 'manual' ) ) ) {
 
 					$is_update_total_balance = apply_filters( 'bonipress_update_total_balance', true, $run_this );
 
@@ -1493,7 +1493,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			bonipress_update_users_history( $user_id, $type, $ref, $ref_id, $amount );
 
 			// Option to disable logging
-			if ( BONIPRESS_ENABLE_LOGGING ) {
+			if ( BONIPS_ENABLE_LOGGING ) {
 
 				global $wpdb, $bonipress_types;
 
@@ -1525,7 +1525,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 
 				$insert_id = $wpdb->insert_id;
 
-				wp_cache_delete( 'bonipress_references' . $type, BONIPRESS_SLUG );
+				wp_cache_delete( 'bonipress_references' . $type, BONIPS_SLUG );
 
 				delete_transient( 'bonipress_log_entries' );
 
@@ -1550,7 +1550,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 			if ( $entry_id === NULL || empty( $data ) || empty( $prep ) ) return false;
 
 			// If logging is disabled, pretend we did the job
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return true;
+			if ( ! BONIPS_ENABLE_LOGGING ) return true;
 
 			global $wpdb;
 
@@ -1581,7 +1581,7 @@ if ( ! class_exists( 'boniPRESS_Settings' ) ) :
 		function has_entry( $reference = NULL, $ref_id = NULL, $user_id = NULL, $data = NULL, $type = NULL ) {
 
 			$has_entry = false;
-			if ( ! BONIPRESS_ENABLE_LOGGING ) return $has_entry;
+			if ( ! BONIPS_ENABLE_LOGGING ) return $has_entry;
 
 			global $bonipress_current_account;
 
@@ -1652,7 +1652,7 @@ if ( ! function_exists( 'bonipress_label' ) ) :
 		global $bonipress_label;
 
 		if ( $bonipress_label === NULL )
-			$bonipress_label = apply_filters( 'bonipress_label', BONIPRESS_DEFAULT_LABEL );
+			$bonipress_label = apply_filters( 'bonipress_label', BONIPS_DEFAULT_LABEL );
 
 		$name = $bonipress_label;
 		if ( $trim )
@@ -1671,12 +1671,12 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress' ) ) :
-	function bonipress( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		global $bonipress, $current_bonipress;
 
 		// Custom point type
-		if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY ) {
+		if ( $point_type != BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( isset( $current_bonipress->cred_id ) && $current_bonipress->cred_id === $point_type )
 				return $current_bonipress;
@@ -1853,13 +1853,13 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_get_addon_settings' ) ) :
-	function bonipress_get_addon_settings( $addon = '', $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_addon_settings( $addon = '', $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$settings  = false;
 		$main_type = bonipress();
 
 		$bonipress    = $main_type;
-		if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY )
+		if ( $point_type != BONIPS_DEFAULT_TYPE_KEY )
 			$bonipress = bonipress( $point_type );
 
 		if ( $addon != '' ) {
@@ -1936,7 +1936,7 @@ if ( ! function_exists( 'maybe_install_bonipress_table' ) ) :
 	function maybe_install_bonipress_table() {
 
 		// No need to check this if we have disabled logging. Prevent this from being used using AJAX
-		if ( ! BONIPRESS_ENABLE_LOGGING || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || apply_filters( 'bonipress_maybe_install_db', true ) === false ) return;
+		if ( ! BONIPS_ENABLE_LOGGING || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || apply_filters( 'bonipress_maybe_install_db', true ) === false ) return;
 
 		global $wpdb, $bonipress_log_table;
 
@@ -1961,7 +1961,7 @@ endif;
 if ( ! function_exists( 'bonipress_install_log' ) ) :
 	function bonipress_install_log( $decimals = NULL, $force = false ) {
 
-		if ( ! BONIPRESS_ENABLE_LOGGING ) return true;
+		if ( ! BONIPS_ENABLE_LOGGING ) return true;
 		$bonipress = bonipress();
 
 		if ( ! $force ) {
@@ -2043,13 +2043,13 @@ if ( ! function_exists( 'get_bonipress_post_types' ) ) :
 		$post_type_keys   = array( 'bonipress_badge', 'buycred_payment' );
 
 		// Badges
-		$post_type_keys[] = ( defined( 'BONIPRESS_BADGE_KEY' ) ) ? BONIPRESS_BADGE_KEY : 'bonipress_badge';
+		$post_type_keys[] = ( defined( 'BONIPS_BADGE_KEY' ) ) ? BONIPS_BADGE_KEY : 'bonipress_badge';
 
 		// Coupons
-		$post_type_keys[] = ( defined( 'BONIPRESS_COUPON_KEY' ) ) ? BONIPRESS_COUPON_KEY : 'bonipress_coupon';
+		$post_type_keys[] = ( defined( 'BONIPS_COUPON_KEY' ) ) ? BONIPS_COUPON_KEY : 'bonipress_coupon';
 
 		// Ranks
-		$post_type_keys[] = ( defined( 'BONIPRESS_RANK_KEY' ) ) ? BONIPRESS_RANK_KEY : 'bonipress_rank';
+		$post_type_keys[] = ( defined( 'BONIPS_RANK_KEY' ) ) ? BONIPS_RANK_KEY : 'bonipress_rank';
 
 		return apply_filters( 'bonipress_post_types', $post_type_keys );
 
@@ -2350,13 +2350,13 @@ if ( ! function_exists( 'bonipress_get_types' ) ) :
 
 			$types = array();
 
-			$available_types = bonipress_get_option( 'bonipress_types', array( BONIPRESS_DEFAULT_TYPE_KEY => bonipress_label() ) );
+			$available_types = bonipress_get_option( 'bonipress_types', array( BONIPS_DEFAULT_TYPE_KEY => bonipress_label() ) );
 			if ( count( $available_types ) > 1 ) {
 
 				foreach ( $available_types as $type => $label ) {
 
-					if ( $type == BONIPRESS_DEFAULT_TYPE_KEY )
-						$label   = bonipress_get_point_type_name( BONIPRESS_DEFAULT_TYPE_KEY, false );
+					if ( $type == BONIPS_DEFAULT_TYPE_KEY )
+						$label   = bonipress_get_point_type_name( BONIPS_DEFAULT_TYPE_KEY, false );
 
 					$types[ $type ] = $label;
 
@@ -2366,7 +2366,7 @@ if ( ! function_exists( 'bonipress_get_types' ) ) :
 			else {
 
 				if ( $name_first )
-					$available_types[ BONIPRESS_DEFAULT_TYPE_KEY ] = bonipress_get_point_type_name( BONIPRESS_DEFAULT_TYPE_KEY, false );
+					$available_types[ BONIPS_DEFAULT_TYPE_KEY ] = bonipress_get_point_type_name( BONIPS_DEFAULT_TYPE_KEY, false );
 
 				$types = $available_types;
 
@@ -2385,7 +2385,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_point_type' ) ) :
-	function bonipress_get_point_type( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_point_type( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$point_type = sanitize_key( $point_type );
 
@@ -2432,14 +2432,14 @@ if ( ! function_exists( 'bonipress_get_usable_types' ) ) :
 				$types = bonipress_get_types();
 
 				if ( count( $types ) == 1 && ! $bonipress->exclude_user( $user_id ) )
-					$usable[] = BONIPRESS_DEFAULT_TYPE_KEY;
+					$usable[] = BONIPS_DEFAULT_TYPE_KEY;
 
 				else {
 
 					foreach ( $types as $type_id => $type ) {
 
-						if ( $type_id == BONIPRESS_DEFAULT_TYPE_KEY && ! $bonipress->exclude_user( $user_id ) )
-							$usable[] = BONIPRESS_DEFAULT_TYPE_KEY;
+						if ( $type_id == BONIPS_DEFAULT_TYPE_KEY && ! $bonipress->exclude_user( $user_id ) )
+							$usable[] = BONIPS_DEFAULT_TYPE_KEY;
 
 						else {
 
@@ -2509,7 +2509,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_get_point_type_name' ) ) :
-	function bonipress_get_point_type_name( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $singular = true ) {
+	function bonipress_get_point_type_name( $point_type = BONIPS_DEFAULT_TYPE_KEY, $singular = true ) {
 
 		$bonipress = bonipress( $point_type );
 
@@ -2541,7 +2541,7 @@ if ( ! function_exists( 'bonipress_types_select_from_dropdown' ) ) :
 
 			foreach ( $types as $type => $label ) {
 
-				if ( $type == BONIPRESS_DEFAULT_TYPE_KEY ) {
+				if ( $type == BONIPS_DEFAULT_TYPE_KEY ) {
 					$_bonipress = bonipress( $type );
 					$label   = $_bonipress->plural();
 				}
@@ -3097,7 +3097,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_is_admin' ) ) :
-	function bonipress_is_admin( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_is_admin( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress = bonipress( $point_type );
 
@@ -3117,7 +3117,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_exclude_user' ) ) :
-	function bonipress_exclude_user( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_exclude_user( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress = bonipress( $point_type );
 
@@ -3134,7 +3134,7 @@ endif;
  * @version 1.1
  */ 
 if ( ! function_exists( 'bonipress_get_users_balance' ) ) :
-	function bonipress_get_users_balance( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_balance( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress = bonipress( $point_type );
 
@@ -3146,7 +3146,7 @@ if ( ! function_exists( 'bonipress_get_users_balance' ) ) :
 endif;
 // Depreciated
 if ( ! function_exists( 'bonipress_get_users_cred' ) ) :
-	function bonipress_get_users_cred( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_cred( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		return bonipress_get_users_balance( $user_id, $point_type );
 
@@ -3159,7 +3159,7 @@ endif;
  * @version 1.0
  */ 
 if ( ! function_exists( 'bonipress_get_users_total_balance' ) ) :
-	function bonipress_get_users_total_balance( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_total_balance( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress = bonipress( $point_type );
 
@@ -3180,7 +3180,7 @@ endif;
  * @version 1.3
  */
 if ( ! function_exists( 'bonipress_display_users_balance' ) ) :
-	function bonipress_display_users_balance( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_display_users_balance( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress  = bonipress( $point_type );
 
@@ -3194,7 +3194,7 @@ if ( ! function_exists( 'bonipress_display_users_balance' ) ) :
 endif;
 // Depreciated
 if ( ! function_exists( 'bonipress_get_users_fcred' ) ) :
-	function bonipress_get_users_fcred( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_users_fcred( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		return bonipress_display_users_balance( $user_id, $point_type );
 
@@ -3207,7 +3207,7 @@ endif;
  * @version 1.1
  */ 
 if ( ! function_exists( 'bonipress_display_users_total_balance' ) ) :
-	function bonipress_display_users_total_balance( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_display_users_total_balance( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$bonipress  = bonipress( $point_type );
 
@@ -3226,7 +3226,7 @@ endif;
  * @version 1.2
  */
 if ( ! function_exists( 'bonipress_format_number' ) ) :
-	function bonipress_format_number( $value = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_format_number( $value = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $value === NULL || ! is_numeric( $value ) ) return $value;
 
@@ -3243,7 +3243,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_format_points' ) ) :
-	function bonipress_format_points( $value = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_format_points( $value = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $value === NULL || ! is_numeric( $value ) ) return $value;
 
@@ -3255,7 +3255,7 @@ if ( ! function_exists( 'bonipress_format_points' ) ) :
 endif;
 // Depreciated
 if ( ! function_exists( 'bonipress_format_creds' ) ) :
-	function bonipress_format_creds( $value = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_format_creds( $value = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		return bonipress_format_points( $value, $point_type );
 
@@ -3277,7 +3277,7 @@ endif;
  * @version 1.3
  */
 if ( ! function_exists( 'bonipress_add' ) ) :
-	function bonipress_add( $ref = '', $user_id = '', $amount = '', $entry = '', $ref_id = '', $data = '', $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_add( $ref = '', $user_id = '', $amount = '', $entry = '', $ref_id = '', $data = '', $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		// $ref, $user_id and $cred is required
 		if ( $ref == '' || $user_id == '' || $amount == '' ) return false;
@@ -3297,7 +3297,7 @@ endif;
  * @version 1.1.1
  */
 if ( ! function_exists( 'bonipress_subtract' ) ) :
-	function bonipress_subtract( $ref = '', $user_id = '', $amount = '', $entry = '', $ref_id = '', $data = '', $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_subtract( $ref = '', $user_id = '', $amount = '', $entry = '', $ref_id = '', $data = '', $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		if ( $ref == '' || $user_id == '' || $amount == '' ) return false;
 		if ( $amount > 0 ) $amount = 0 - $amount;
@@ -3586,7 +3586,7 @@ endif;
  * @version 1.1
  */
 if ( ! function_exists( 'bonipress_force_singular_session' ) ) :
-	function bonipress_force_singular_session( $user_id = NULL, $key = NULL, $timelimit = BONIPRESS_MIN_TIME_LIMIT ) {
+	function bonipress_force_singular_session( $user_id = NULL, $key = NULL, $timelimit = BONIPS_MIN_TIME_LIMIT ) {
 
 		$force      = false;
 		$time       = time();

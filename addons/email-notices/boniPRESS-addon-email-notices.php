@@ -12,8 +12,8 @@ define( 'boniPRESS_EMAIL_DIR',     boniPRESS_ADDONS_DIR . 'email-notices/' );
 define( 'boniPRESS_EMAIL_VERSION', '1.4' );
 
 // Coupon Key
-if ( ! defined( 'BONIPRESS_EMAIL_KEY' ) )
-	define( 'BONIPRESS_EMAIL_KEY', 'bonipress_email_notice' );
+if ( ! defined( 'BONIPS_EMAIL_KEY' ) )
+	define( 'BONIPS_EMAIL_KEY', 'bonipress_email_notice' );
 
 // Includes
 require_once boniPRESS_EMAIL_DIR . 'includes/bonipress-email-functions.php';
@@ -79,7 +79,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			add_action( 'bonipress_send_email_notices',     'bonipress_email_notice_cron_job' );
 
-			add_shortcode( BONIPRESS_SLUG . '_email_subscriptions', 'bonipress_render_email_subscriptions' );
+			add_shortcode( BONIPS_SLUG . '_email_subscriptions', 'bonipress_render_email_subscriptions' );
 
 			add_action( 'bonipress_admin_enqueue',          array( $this, 'enqueue_scripts' ), $this->menu_pos );
 			add_action( 'bonipress_add_menu',               array( $this, 'add_to_menu' ), $this->menu_pos );
@@ -106,9 +106,9 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			add_filter( 'user_can_richedit',     array( $this, 'disable_richedit' ) );
 			add_filter( 'default_content',       array( $this, 'default_content' ) );
 
-			add_filter( 'manage_' . BONIPRESS_EMAIL_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ), 50 );
-			add_action( 'manage_' . BONIPRESS_EMAIL_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
-			add_action( 'save_post_' . BONIPRESS_EMAIL_KEY,                       array( $this, 'save_email_notice' ), 10, 2 );
+			add_filter( 'manage_' . BONIPS_EMAIL_KEY . '_posts_columns',       array( $this, 'adjust_column_headers' ), 50 );
+			add_action( 'manage_' . BONIPS_EMAIL_KEY . '_posts_custom_column', array( $this, 'adjust_column_content' ), 10, 2 );
+			add_action( 'save_post_' . BONIPS_EMAIL_KEY,                       array( $this, 'save_email_notice' ), 10, 2 );
 
 		}
 
@@ -171,7 +171,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'register_meta_box_cb' => array( $this, 'add_metaboxes' )
 			);
 
-			register_post_type( BONIPRESS_EMAIL_KEY, apply_filters( 'bonipress_register_emailnotices', $args ) );
+			register_post_type( BONIPS_EMAIL_KEY, apply_filters( 'bonipress_register_emailnotices', $args ) );
 
 		}
 
@@ -245,7 +245,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 		 */
 		public function post_updated_messages( $messages ) {
 
-			$messages[ BONIPRESS_EMAIL_KEY ] = array(
+			$messages[ BONIPS_EMAIL_KEY ] = array(
 				0  => '',
 				1  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
 				2  => __( 'E-Mail-Benachrichtigung aktualisiert.', 'bonipress' ),
@@ -275,11 +275,11 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 			if ( bonipress_override_settings() && ! bonipress_is_main_site() ) return;
 
 			add_submenu_page(
-				BONIPRESS_SLUG,
+				BONIPS_SLUG,
 				__( 'E-Mail Benachrichtigungen', 'bonipress' ),
 				__( 'E-Mail Benachrichtigungen', 'bonipress' ),
 				$this->core->get_point_editor_capability(),
-				'edit.php?post_type=' . BONIPRESS_EMAIL_KEY
+				'edit.php?post_type=' . BONIPS_EMAIL_KEY
 			);
 
 		}
@@ -293,11 +293,11 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			global $pagenow;
 
-			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_EMAIL_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
-				return BONIPRESS_SLUG;
+			if ( isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_EMAIL_KEY && isset( $_GET['action'] ) && $_GET['action'] == 'edit' )
+				return BONIPS_SLUG;
 
-			if ( $pagenow == 'post-new.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_EMAIL_KEY )
-				return BONIPRESS_SLUG;
+			if ( $pagenow == 'post-new.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_EMAIL_KEY )
+				return BONIPS_SLUG;
 
 			return $parent;
 
@@ -312,15 +312,15 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			global $pagenow;
 
-			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPRESS_EMAIL_KEY ) {
+			if ( ( $pagenow == 'edit.php' || $pagenow == 'post-new.php' ) && isset( $_GET['post_type'] ) && $_GET['post_type'] == BONIPS_EMAIL_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_EMAIL_KEY;
+				return 'edit.php?post_type=' . BONIPS_EMAIL_KEY;
 			
 			}
 
-			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPRESS_EMAIL_KEY ) {
+			elseif ( $pagenow == 'post.php' && isset( $_GET['post'] ) && bonipress_get_post_type( $_GET['post'] ) == BONIPS_EMAIL_KEY ) {
 
-				return 'edit.php?post_type=' . BONIPRESS_EMAIL_KEY;
+				return 'edit.php?post_type=' . BONIPS_EMAIL_KEY;
 
 			}
 
@@ -337,7 +337,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			global $post_type;
 
-			if ( $post_type == BONIPRESS_EMAIL_KEY )
+			if ( $post_type == BONIPS_EMAIL_KEY )
 				return __( 'E-Mail Betreff', 'bonipress' );
 
 			return $title;
@@ -459,7 +459,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 		 */
 		public function adjust_row_actions( $actions, $post ) {
 
-			if ( $post->post_type == BONIPRESS_EMAIL_KEY ) {
+			if ( $post->post_type == BONIPS_EMAIL_KEY ) {
 				unset( $actions['inline hide-if-no-js'] );
 				unset( $actions['view'] );
 			}
@@ -479,7 +479,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'bonipress-email-setup',
 				__( 'Email Trigger', 'bonipress' ),
 				array( $this, 'metabox_email_setup' ),
-				BONIPRESS_EMAIL_KEY,
+				BONIPS_EMAIL_KEY,
 				'side',
 				'high'
 			);
@@ -488,7 +488,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'bonipress-email-tags',
 				__( 'Verfügbare Vorlagen-Tags', 'bonipress' ),
 				array( $this, 'metabox_template_tags' ),
-				BONIPRESS_EMAIL_KEY,
+				BONIPS_EMAIL_KEY,
 				'normal',
 				'core'
 			);
@@ -497,7 +497,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 				'bonipress-email-details',
 				__( 'Email Details', 'bonipress' ),
 				array( $this, 'metabox_email_details' ),
-				BONIPRESS_EMAIL_KEY,
+				BONIPS_EMAIL_KEY,
 				'normal',
 				'high'
 			);
@@ -513,11 +513,11 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			$screen = get_current_screen();
 			// Commonly used
-			if ( $screen->id == 'edit-' . BONIPRESS_EMAIL_KEY || $screen->id == BONIPRESS_EMAIL_KEY )
+			if ( $screen->id == 'edit-' . BONIPS_EMAIL_KEY || $screen->id == BONIPS_EMAIL_KEY )
 				wp_enqueue_style( 'bonipress-admin' );
 
 			// Edit Email Notice Styling
-			if ( $screen->id == BONIPRESS_EMAIL_KEY ) {
+			if ( $screen->id == BONIPS_EMAIL_KEY ) {
 
 				wp_enqueue_style( 'bonipress-email-edit-notice' );
 				wp_enqueue_style( 'bonipress-bootstrap-grid' );
@@ -525,14 +525,14 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 				wp_enqueue_script( 'bonipress-edit-email', plugins_url( 'assets/js/edit-email.js', boniPRESS_EMAIL ), array( 'jquery' ), boniPRESS_EMAIL_VERSION, true );
 
-				add_filter( 'postbox_classes_' . BONIPRESS_EMAIL_KEY . '_bonipress-email-setup',   array( $this, 'metabox_classes' ) );
-				add_filter( 'postbox_classes_' . BONIPRESS_EMAIL_KEY . '_bonipress-email-tags',    array( $this, 'metabox_classes' ) );
-				add_filter( 'postbox_classes_' . BONIPRESS_EMAIL_KEY . '_bonipress-email-details', array( $this, 'metabox_classes' ) );
+				add_filter( 'postbox_classes_' . BONIPS_EMAIL_KEY . '_bonipress-email-setup',   array( $this, 'metabox_classes' ) );
+				add_filter( 'postbox_classes_' . BONIPS_EMAIL_KEY . '_bonipress-email-tags',    array( $this, 'metabox_classes' ) );
+				add_filter( 'postbox_classes_' . BONIPS_EMAIL_KEY . '_bonipress-email-details', array( $this, 'metabox_classes' ) );
 
 			}
 
 			// Email Notice List Styling
-			elseif ( $screen->id == 'edit-' . BONIPRESS_EMAIL_KEY )
+			elseif ( $screen->id == 'edit-' . BONIPS_EMAIL_KEY )
 				wp_enqueue_style( 'bonipress-email-notices' );
 
 		}
@@ -545,7 +545,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 		public function admin_header() {
 
 			$screen = get_current_screen();
-			if ( $screen->id == BONIPRESS_EMAIL_KEY && $this->emailnotices['use_html'] === false ) {
+			if ( $screen->id == BONIPS_EMAIL_KEY && $this->emailnotices['use_html'] === false ) {
 				remove_action( 'media_buttons', 'media_buttons' );
 				echo '<style type="text/css">#ed_toolbar { display: none !important; }</style>';
 			}
@@ -561,7 +561,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			global $post;
 
-			if ( isset( $post->post_type ) && $post->post_type == BONIPRESS_EMAIL_KEY && $this->emailnotices['use_html'] === false )
+			if ( isset( $post->post_type ) && $post->post_type == BONIPS_EMAIL_KEY && $this->emailnotices['use_html'] === false )
 				return false;
 
 			return $default;
@@ -577,7 +577,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 
 			global $post_type;
 
-			if ( $post_type == BONIPRESS_EMAIL_KEY && !empty( $this->emailnotices['content'] ) )
+			if ( $post_type == BONIPS_EMAIL_KEY && !empty( $this->emailnotices['content'] ) )
 				$content = $this->emailnotices['content'];
 
 			return $content;
@@ -668,7 +668,7 @@ if ( ! class_exists( 'boniPRESS_Email_Notice_Module' ) ) :
 ?>
 
 				<p class="form-control-static"><?php echo $this->core->plural(); ?></p>
-				<input type="hidden" name="bonipress_email[ctype][]" id="bonipress-email-ctype" value="<?php echo BONIPRESS_DEFAULT_TYPE_KEY; ?>" />
+				<input type="hidden" name="bonipress_email[ctype][]" id="bonipress-email-ctype" value="<?php echo BONIPS_DEFAULT_TYPE_KEY; ?>" />
 <?php
 
 			}

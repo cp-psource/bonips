@@ -51,7 +51,7 @@ if ( ! class_exists( 'boniPRESS_Network_Module' ) ) :
 		 */
 		public function module_init() {
 
-			if ( BONIPRESS_ENABLE_LOGGING && ! bonipress_is_main_site() ) {
+			if ( BONIPS_ENABLE_LOGGING && ! bonipress_is_main_site() ) {
 
 				/**
 				 * In situations where we are enforcing our main sites settings on all blogs and
@@ -107,7 +107,7 @@ if ( ! class_exists( 'boniPRESS_Network_Module' ) ) :
 			$screen = get_current_screen();
 			if ( $screen->id == 'sites-network' ) {
 
-				echo '<style type="text/css">th#' . BONIPRESS_SLUG . ' { width: 15%; }</style>';
+				echo '<style type="text/css">th#' . BONIPS_SLUG . ' { width: 15%; }</style>';
 
 			}
 
@@ -120,8 +120,8 @@ if ( ! class_exists( 'boniPRESS_Network_Module' ) ) :
 		 */
 		public function site_column_headers( $columns ) {
 
-			if ( ! array_key_exists( BONIPRESS_SLUG, $columns ) )
-				$columns[ BONIPRESS_SLUG ] = bonipress_label();
+			if ( ! array_key_exists( BONIPS_SLUG, $columns ) )
+				$columns[ BONIPS_SLUG ] = bonipress_label();
 
 			return $columns;
 
@@ -134,7 +134,7 @@ if ( ! class_exists( 'boniPRESS_Network_Module' ) ) :
 		 */
 		public function site_column_content( $column_name, $blog_id ) {
 
-			if ( $column_name == BONIPRESS_SLUG ) {
+			if ( $column_name == BONIPS_SLUG ) {
 
 				if ( bonipress_is_site_blocked( $blog_id ) ) {
 
@@ -177,17 +177,17 @@ if ( ! class_exists( 'boniPRESS_Network_Module' ) ) :
 				$name,
 				$name,
 				'manage_network_options',
-				BONIPRESS_SLUG . '-network',
+				BONIPS_SLUG . '-network',
 				'',
 				'dashicons-star-filled'
 			);
 
 			$pages[] = add_submenu_page(
-				BONIPRESS_SLUG . '-network',
+				BONIPS_SLUG . '-network',
 				__( 'Netzwerkeinstellungen', 'bonipress' ),
 				__( 'Netzwerkeinstellungen', 'bonipress' ),
 				'manage_network_options',
-				BONIPRESS_SLUG . '-network',
+				BONIPS_SLUG . '-network',
 				array( $this, 'admin_page_settings' )
 			);
 
@@ -238,7 +238,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 
 ?>
 <div class="wrap bonipress-metabox" id="boniPRESS-wrap">
-	<h1><?php printf( __( '%s Netzwerk', 'bonipress' ), $name ); ?><?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-multisite/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
+	<h1><?php printf( __( '%s Netzwerk', 'bonipress' ), $name ); ?><?php if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' ) : ?> <a href="https://n3rds.work/docs/bonipress-multisite/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a><?php endif; ?></h1>
 <?php
 
 			if ( wp_is_large_network() ) {

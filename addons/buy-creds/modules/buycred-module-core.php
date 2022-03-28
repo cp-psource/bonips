@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * boniPRESS_buyCRED_Module class
@@ -14,7 +14,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_BuyCRED_Module', array(
 				'module_name' => 'gateways',
@@ -29,13 +29,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 					'page_title'  => __( 'Zahlungs-Gateways', 'bonipress' ),
 					'page_header' => __( 'Zahlungs-Gateways', 'bonipress' )
 				),
-				'screen_id'   => BONIPRESS_SLUG . '-gateways',
+				'screen_id'   => BONIPS_SLUG . '-gateways',
 				'accordion'   => true,
 				'add_to_core' => true,
 				'menu_pos'    => 70
 			), $type );
 
-			$this->bonipress_type = BONIPRESS_DEFAULT_TYPE_KEY;
+			$this->bonipress_type = BONIPS_DEFAULT_TYPE_KEY;
 
 		}
 
@@ -74,8 +74,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		public function module_init() {
 
 			// Add shortcodes first
-			add_shortcode( BONIPRESS_SLUG . '_buy',      'bonipress_render_buy_points' );
-			add_shortcode( BONIPRESS_SLUG . '_buy_form', 'bonipress_render_buy_form_points' );
+			add_shortcode( BONIPS_SLUG . '_buy',      'bonipress_render_buy_points' );
+			add_shortcode( BONIPS_SLUG . '_buy_form', 'bonipress_render_buy_form_points' );
 
 			$this->setup_instance();
 
@@ -90,8 +90,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 		 */
 		public function register_assets() {
 
-			wp_register_style( 'buycred-checkout', plugins_url( 'assets/css/checkout.css', BONIPRESS_PURCHASE ), array(), BONIPRESS_PURCHASE_VERSION, 'all' );
-			wp_register_script( 'buycred-checkout', plugins_url( 'assets/js/checkout.js', BONIPRESS_PURCHASE ), array( 'jquery' ), BONIPRESS_PURCHASE_VERSION, 'all' );
+			wp_register_style( 'buycred-checkout', plugins_url( 'assets/css/checkout.css', BONIPS_PURCHASE ), array(), BONIPS_PURCHASE_VERSION, 'all' );
+			wp_register_script( 'buycred-checkout', plugins_url( 'assets/js/checkout.js', BONIPS_PURCHASE ), array( 'jquery' ), BONIPS_PURCHASE_VERSION, 'all' );
 
 		}
 
@@ -264,8 +264,8 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 			if ( $buycred_instance->checkout ) {
 
-				return BONIPRESS_BUYCRED_TEMPLATES_DIR . 'buycred-checkout.php';
-				$override = bonipress_locate_template( 'buycred-checkout.php', BONIPRESS_SLUG, BONIPRESS_BUYCRED_TEMPLATES_DIR );
+				return BONIPS_BUYCRED_TEMPLATES_DIR . 'buycred-checkout.php';
+				$override = bonipress_locate_template( 'buycred-checkout.php', BONIPS_SLUG, BONIPS_BUYCRED_TEMPLATES_DIR );
 				if ( ! $override )
 					$template = $override;
 
@@ -439,13 +439,13 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
 						<label for="<?php echo $this->field_id( 'checkout-full' ); ?>">
-							<img src="<?php echo plugins_url( 'assets/images/checkout-full.png', BONIPRESS_PURCHASE ); ?>" alt="" style="max-width: 100%; height: auto;" />
+							<img src="<?php echo plugins_url( 'assets/images/checkout-full.png', BONIPS_PURCHASE ); ?>" alt="" style="max-width: 100%; height: auto;" />
 							<input type="radio" name="<?php echo $this->field_name( 'checkout' ); ?>"<?php checked( $settings['checkout'], 'page' ); ?> id="<?php echo $this->field_id( 'checkout-full' ); ?>" value="page" /> Full Page
 						</label>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
 						<label for="<?php echo $this->field_id( 'checkout-popup' ); ?>">
-							<img src="<?php echo plugins_url( 'assets/images/checkout-popup.png', BONIPRESS_PURCHASE ); ?>" alt="" style="max-width: 100%; height: auto;" />
+							<img src="<?php echo plugins_url( 'assets/images/checkout-popup.png', BONIPS_PURCHASE ); ?>" alt="" style="max-width: 100%; height: auto;" />
 							<input type="radio" name="<?php echo $this->field_name( 'checkout' ); ?>"<?php checked( $settings['checkout'], 'popup' ); ?> id="<?php echo $this->field_id( 'checkout-popup' ); ?>" value="popup" /> Popup
 						</label>
 					</div>
@@ -612,7 +612,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			}
 
 			if ( empty( $point_types ) )
-				$point_types[] = BONIPRESS_DEFAULT_TYPE_KEY;
+				$point_types[] = BONIPS_DEFAULT_TYPE_KEY;
 
 			$new_data['buy_creds']['types']               = $point_types;
 
@@ -667,19 +667,19 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 			if ( isset( $this->core->buy_creds['custom_log'] ) && $this->core->buy_creds['custom_log'] ) {
 
 				$pages       = array();
-				$point_types = ( isset( $this->core->buy_creds['types'] ) && ! empty( $this->core->buy_creds['types'] ) ) ? $this->core->buy_creds['types'] : array( BONIPRESS_DEFAULT_TYPE_KEY );
+				$point_types = ( isset( $this->core->buy_creds['types'] ) && ! empty( $this->core->buy_creds['types'] ) ) ? $this->core->buy_creds['types'] : array( BONIPS_DEFAULT_TYPE_KEY );
 
 				foreach ( $point_types as $type_id ) {
 
 					$bonipress    = bonipress( $type_id );
-					$menu_slug = ( $type_id != BONIPRESS_DEFAULT_TYPE_KEY ) ? BONIPRESS_SLUG . '_' . $type_id : BONIPRESS_SLUG;
+					$menu_slug = ( $type_id != BONIPS_DEFAULT_TYPE_KEY ) ? BONIPS_SLUG . '_' . $type_id : BONIPS_SLUG;
 
 					$pages[]   = add_submenu_page(
 						$menu_slug,
 						__( 'buyBONI Kaufprotokoll', 'bonipress' ),
 						__( 'Kaufprotokoll', 'bonipress' ),
 						$bonipress->get_point_editor_capability(),
-						BONIPRESS_SLUG . '-purchases-' . $type_id,
+						BONIPS_SLUG . '-purchases-' . $type_id,
 						array( $this, 'purchase_log_page' )
 					);
 
@@ -778,7 +778,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 						<?php endif; ?>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="text-align: right;">
-						<?php if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' && $has_documentation ) : ?>
+						<?php if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' && $has_documentation ) : ?>
 						<div class="form-group">
 							<div>&nbsp;</div>
 							<a href="<?php echo $has_documentation; ?>" target="_blank"><?php _e( 'Dokumentation', 'bonipress' ); ?></a>
@@ -802,7 +802,7 @@ if ( ! class_exists( 'boniPRESS_buyCRED_Module' ) ) :
 
 		<?php do_action( 'bonipress_after_buycreds_page', $this ); ?>
 
-		<p><?php submit_button( __( 'Update Einstellungen', 'bonipress' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPRESS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://n3rds.work/shop/artikel/category/bonipress-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
+		<p><?php submit_button( __( 'Update Einstellungen', 'bonipress' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://n3rds.work/shop/artikel/category/bonipress-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
 
 	</form>
 
@@ -858,7 +858,7 @@ jQuery(function($) {
 
 			if ( empty( $this->purchase_log ) ) return;
 
-			$meta_key = 'bonipress_payments_' . str_replace( BONIPRESS_SLUG . '-purchases-', '', $_GET['page'] );
+			$meta_key = 'bonipress_payments_' . str_replace( BONIPS_SLUG . '-purchases-', '', $_GET['page'] );
 
 			if ( isset( $_REQUEST['wp_screen_options']['option'] ) && isset( $_REQUEST['wp_screen_options']['value'] ) ) {
 			
@@ -891,7 +891,7 @@ jQuery(function($) {
 			$installed            = $this->get();
 
 			$bonipress               = $this->core;
-			if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY && bonipress_point_type_exists( $point_type ) )
+			if ( $point_type != BONIPS_DEFAULT_TYPE_KEY && bonipress_point_type_exists( $point_type ) )
 				$bonipress = bonipress( $point_type );
 
 			// Security (incase the user has setup different capabilities to manage this particular point type)
@@ -901,7 +901,7 @@ jQuery(function($) {
 			$references           = bonipress_get_buycred_gateway_refs( $point_type );
 
 			$search_args          = bonipress_get_search_args();
-			$filter_url           = admin_url( 'admin.php?page=' . BONIPRESS_SLUG . '-purchases-' . $point_type );
+			$filter_url           = admin_url( 'admin.php?page=' . BONIPS_SLUG . '-purchases-' . $point_type );
 
 			$per_page             = bonipress_get_user_meta( $this->current_user_id, 'bonipress_payments_' . $point_type, '', true );
 			if ( empty( $per_page ) || $per_page < 1 ) $per_page = 10;

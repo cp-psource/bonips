@@ -12,7 +12,7 @@ if ( ! class_exists( 'boniPRESS_Hook_View_Contents' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $hook_prefs, $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $hook_prefs, $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$defaults = array(
 				'post'    => array(

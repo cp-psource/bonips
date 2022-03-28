@@ -9,7 +9,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
 if ( ! function_exists( 'bonipress_get_badge' ) ) :
 	function bonipress_get_badge( $badge_id = NULL, $level = NULL ) {
 
-		if ( absint( $badge_id ) === 0 || bonipress_get_post_type( $badge_id ) != BONIPRESS_BADGE_KEY ) return false;
+		if ( absint( $badge_id ) === 0 || bonipress_get_post_type( $badge_id ) != BONIPS_BADGE_KEY ) return false;
 
 		global $bonipress_badge;
 
@@ -38,7 +38,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_badge_references' ) ) :
-	function bonipress_get_badge_references( $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $force = false ) {
+	function bonipress_get_badge_references( $point_type = BONIPS_DEFAULT_TYPE_KEY, $force = false ) {
 
 		$references = bonipress_get_option( 'bonipress-badge-refs-' . $point_type );
 		if ( ! is_array( $references ) || empty( $references ) || $force ) {
@@ -158,7 +158,7 @@ if ( ! function_exists( 'bonipress_get_badge_levels' ) ) :
 						'compare'       => 'AND',
 						'requires'      => array(),
 						'reward'        => array(
-							'type'   => BONIPRESS_DEFAULT_TYPE_KEY,
+							'type'   => BONIPS_DEFAULT_TYPE_KEY,
 							'amount' => 0,
 							'log'    => ''
 						)
@@ -194,14 +194,14 @@ if ( ! function_exists( 'bonipress_get_badge_levels' ) ) :
 				'compare'       => 'AND',
 				'requires'      => array(
 					0 => array(
-						'type'      => BONIPRESS_DEFAULT_TYPE_KEY,
+						'type'      => BONIPS_DEFAULT_TYPE_KEY,
 						'reference' => '',
 						'amount'    => '',
 						'by'        => ''
 					)
 				),
 				'reward'        => array(
-					'type'   => BONIPRESS_DEFAULT_TYPE_KEY,
+					'type'   => BONIPS_DEFAULT_TYPE_KEY,
 					'amount' => 0,
 					'log'    => ''
 				)
@@ -238,7 +238,7 @@ if ( ! function_exists( 'bonipress_display_badge_requirement' ) ) :
 			foreach ( $levels[0]['requires'] as $requirement_row => $requirement ) {
 
 				if ( $requirement['type'] == '' )
-					$requirement['type'] = BONIPRESS_DEFAULT_TYPE_KEY;
+					$requirement['type'] = BONIPS_DEFAULT_TYPE_KEY;
 
 				if ( ! array_key_exists( $requirement['type'], $point_types ) )
 					continue;
@@ -363,7 +363,7 @@ endif;
  * @version 1.4
  */
 if ( ! function_exists( 'bonipress_ref_has_badge' ) ) :
-	function bonipress_ref_has_badge( $reference = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_ref_has_badge( $reference = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$badge_ids        = array();
 		if ( $reference === NULL || strlen( $reference ) == 0 || ! bonipress_point_type_exists( $point_type ) ) return $badge_ids;
@@ -577,19 +577,19 @@ if ( ! function_exists( 'bonipress_get_users_badges' ) ) :
 		if ( bonipress_is_current_account( $user_id ) && isset( $bonipress_current_account->badge_ids ) && $force == false )
 			return $bonipress_current_account->badge_ids;
 
-		$badge_ids = bonipress_get_user_meta( $user_id, BONIPRESS_BADGE_KEY . '_ids', '', true );
+		$badge_ids = bonipress_get_user_meta( $user_id, BONIPS_BADGE_KEY . '_ids', '', true );
 		if ( !isset($badge_ids) || $badge_ids == '' || $force ) {
 
 			global $wpdb;
 
 			$badge_ids = array();
-			$query     = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->usermeta} WHERE user_id = %d AND meta_key LIKE %s", $user_id, bonipress_get_meta_key( BONIPRESS_BADGE_KEY ) . '%' ) );
+			$query     = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->usermeta} WHERE user_id = %d AND meta_key LIKE %s", $user_id, bonipress_get_meta_key( BONIPS_BADGE_KEY ) . '%' ) );
 
 			if ( ! empty( $query ) ) {
 
 				foreach ( $query as $badge ) {
 
-					$badge_id = str_replace( BONIPRESS_BADGE_KEY, '', $badge->meta_key );
+					$badge_id = str_replace( BONIPS_BADGE_KEY, '', $badge->meta_key );
 					if ( $badge_id == '' ) continue;
 				
 					$badge_id = absint( $badge_id );
@@ -598,7 +598,7 @@ if ( ! function_exists( 'bonipress_get_users_badges' ) ) :
 
 				}
 
-				bonipress_update_user_meta( $user_id, BONIPRESS_BADGE_KEY . '_ids', '', $badge_ids );
+				bonipress_update_user_meta( $user_id, BONIPS_BADGE_KEY . '_ids', '', $badge_ids );
 
 			}
 
@@ -627,7 +627,7 @@ endif;
  * @version 1.3.2
  */
 if ( ! function_exists( 'bonipress_display_users_badges' ) ) :
-	function bonipress_display_users_badges( $user_id = NULL, $width = BONIPRESS_BADGE_WIDTH, $height = BONIPRESS_BADGE_HEIGHT ) {
+	function bonipress_display_users_badges( $user_id = NULL, $width = BONIPS_BADGE_WIDTH, $height = BONIPS_BADGE_HEIGHT ) {
 
 		$user_id = absint( $user_id );
 		if ( $user_id === 0 ) return;
@@ -678,7 +678,7 @@ endif;
 if ( ! function_exists( 'bonipress_get_badge_ids' ) ) :
 	function bonipress_get_badge_ids() {
 
-		$badge_ids = wp_cache_get( 'badge_ids', BONIPRESS_SLUG );
+		$badge_ids = wp_cache_get( 'badge_ids', BONIPS_SLUG );
 		if ( $badge_ids !== false && is_array( $badge_ids ) ) return $badge_ids;
 
 		global $wpdb;
@@ -689,9 +689,9 @@ if ( ! function_exists( 'bonipress_get_badge_ids' ) ) :
 			FROM {$table} 
 			WHERE post_type = %s 
 			AND post_status = 'publish' 
-			ORDER BY post_date ASC;", BONIPRESS_BADGE_KEY ) );
+			ORDER BY post_date ASC;", BONIPS_BADGE_KEY ) );
 
-		wp_cache_set( 'badge_ids', $badge_ids, BONIPRESS_SLUG );
+		wp_cache_set( 'badge_ids', $badge_ids, BONIPS_SLUG );
 
 		return apply_filters( 'bonipress_get_badge_ids', $badge_ids );
 

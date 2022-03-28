@@ -89,7 +89,7 @@ if ( ! class_exists( 'boniPRESS_Account' ) ) :
 		/**
 		 * Get a users balance object
 		 */
-		public function get_balance( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function get_balance( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( ! empty( $this->balance ) && array_key_exists( $point_type, $this->balance ) )
 				$balance = $this->balance[ $point_type ];
@@ -132,7 +132,7 @@ if ( ! class_exists( 'boniPRESS_Balance' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct();
 
@@ -151,7 +151,7 @@ if ( ! class_exists( 'boniPRESS_Balance' ) ) :
 		/**
 		 * Populate this object
 		 */
-		protected function populate( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		protected function populate( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$bonipress = bonipress( $point_type );
 
@@ -219,7 +219,7 @@ if ( ! class_exists( 'boniPRESS_Point_Type' ) ) :
 		/**
 		 * Construct
 		 */
-		function __construct( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		function __construct( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$point_type   = sanitize_key( $point_type );
 
@@ -230,7 +230,7 @@ if ( ! class_exists( 'boniPRESS_Point_Type' ) ) :
 		/**
 		 * Populate this object
 		 */
-		protected function populate( $type_id = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		protected function populate( $type_id = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$bonipress = bonipress( $type_id );
 
@@ -353,7 +353,7 @@ if ( ! class_exists( 'boniPRESS_History' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct();
 
@@ -370,7 +370,7 @@ if ( ! class_exists( 'boniPRESS_History' ) ) :
 		/**
 		 * Populate this object
 		 */
-		protected function populate( $user_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		protected function populate( $user_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$this->data = bonipress_get_users_history( $user_id, $point_type );
 			if ( ! empty( $this->data ) ) {

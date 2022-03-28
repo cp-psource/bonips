@@ -11,8 +11,8 @@ define( 'boniPRESS_STATS',             __FILE__ );
 define( 'boniPRESS_STATS_DIR',         boniPRESS_ADDONS_DIR . 'stats/' );
 
 // Acceptable values: hex, rgb or rgba
-if ( ! defined( 'BONIPRESS_STATS_COLOR_TYPE' ) )
-	define( 'BONIPRESS_STATS_COLOR_TYPE', 'hex' );
+if ( ! defined( 'BONIPS_STATS_COLOR_TYPE' ) )
+	define( 'BONIPS_STATS_COLOR_TYPE', 'hex' );
 
 require_once boniPRESS_STATS_DIR . 'includes/bonipress-stats-functions.php';
 require_once boniPRESS_STATS_DIR . 'includes/bonipress-stats-object.php';
@@ -31,7 +31,7 @@ if ( ! class_exists( 'boniPRESS_Stats_Module' ) ) :
 		/**
 		 * Construct
 		 */
-		public function __construct( $type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function __construct( $type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			parent::__construct( 'boniPRESS_Stats_Module', array(
 				'module_name' => 'stats',
@@ -99,15 +99,15 @@ if ( ! class_exists( 'boniPRESS_Stats_Module' ) ) :
 		 */
 		public function register_shortcodes() {
 
-			add_shortcode( BONIPRESS_SLUG . '_chart_circulation',      'bonipress_render_chart_circulation' );
-			add_shortcode( BONIPRESS_SLUG . '_chart_gain_loss',        'bonipress_render_chart_gain_vs_loss' );
+			add_shortcode( BONIPS_SLUG . '_chart_circulation',      'bonipress_render_chart_circulation' );
+			add_shortcode( BONIPS_SLUG . '_chart_gain_loss',        'bonipress_render_chart_gain_vs_loss' );
 
-			add_shortcode( BONIPRESS_SLUG . '_chart_history',          'bonipress_render_chart_history' );
-			add_shortcode( BONIPRESS_SLUG . '_chart_balance_history',  'bonipress_render_chart_balance_history' );
-			add_shortcode( BONIPRESS_SLUG . '_chart_instance_history', 'bonipress_render_chart_instance_history' );
+			add_shortcode( BONIPS_SLUG . '_chart_history',          'bonipress_render_chart_history' );
+			add_shortcode( BONIPS_SLUG . '_chart_balance_history',  'bonipress_render_chart_balance_history' );
+			add_shortcode( BONIPS_SLUG . '_chart_instance_history', 'bonipress_render_chart_instance_history' );
 
-			add_shortcode( BONIPRESS_SLUG . '_chart_top_balances',     'bonipress_render_chart_top_balances' );
-			add_shortcode( BONIPRESS_SLUG . '_chart_top_instances',    'bonipress_render_chart_top_instances' );
+			add_shortcode( BONIPS_SLUG . '_chart_top_balances',     'bonipress_render_chart_top_balances' );
+			add_shortcode( BONIPS_SLUG . '_chart_top_instances',    'bonipress_render_chart_top_instances' );
 
 		}
 
@@ -276,7 +276,7 @@ if ( ! class_exists( 'boniPRESS_Stats_Module' ) ) :
 						$values[] = $set->value;
 				}
 
-				echo '<span class="' . BONIPRESS_SLUG . '-stats-bar" data-type="' . $point_type . '" data-positive="' . $color['positive'] . '" data-negative="' . $color['negative'] . '" style="display: none;">' . implode( ',', $values ) . '</span>';
+				echo '<span class="' . BONIPS_SLUG . '-stats-bar" data-type="' . $point_type . '" data-positive="' . $color['positive'] . '" data-negative="' . $color['negative'] . '" style="display: none;">' . implode( ',', $values ) . '</span>';
 
 			}
 
@@ -293,7 +293,7 @@ if ( ! class_exists( 'boniPRESS_Stats_Module' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( 'span.<?php echo BONIPRESS_SLUG; ?>-stats-bar' ).each(function(index,item){
+	$( 'span.<?php echo BONIPS_SLUG; ?>-stats-bar' ).each(function(index,item){
 
 		var barchart      = $(this);
 		var positivecolor = barchart.data( 'positive' );
@@ -341,7 +341,7 @@ jQuery(function($){
 
 			$prefs             = $this->stats;
 			$this->add_to_core = true;
-			if ( $bonipress->bonipress_type != BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $bonipress->bonipress_type != BONIPS_DEFAULT_TYPE_KEY ) {
 
 				if ( ! isset( $bonipress->stats ) )
 					$prefs = $this->default_prefs;
@@ -369,7 +369,7 @@ jQuery(function($){
 
 					<div class="form-group">
 						<label for="<?php echo $this->field_id( 'color_positive' ); ?>"><?php _e( 'Positive Values', 'bonipress' ); ?></label>
-						<input type="text" name="<?php echo $this->field_name( 'color_positive' ); ?>" id="<?php echo $this->field_id( 'color_positive' ); ?>" value="<?php echo esc_attr( $prefs['color_positive'] ); ?>" class="form-control <?php if ( BONIPRESS_STATS_COLOR_TYPE == 'hex' ) echo ' wp-color-picker-field" data-default-color="#dedede'; ?>" />
+						<input type="text" name="<?php echo $this->field_name( 'color_positive' ); ?>" id="<?php echo $this->field_id( 'color_positive' ); ?>" value="<?php echo esc_attr( $prefs['color_positive'] ); ?>" class="form-control <?php if ( BONIPS_STATS_COLOR_TYPE == 'hex' ) echo ' wp-color-picker-field" data-default-color="#dedede'; ?>" />
 					</div>
 
 				</div>
@@ -377,7 +377,7 @@ jQuery(function($){
 
 					<div class="form-group">
 						<label for="<?php echo $this->field_id( 'color_negative' ); ?>"><?php _e( 'Negative Values', 'bonipress' ); ?></label>
-						<input type="text" name="<?php echo $this->field_name( 'color_negative' ); ?>" id="<?php echo $this->field_id( 'color_negative' ); ?>" value="<?php echo esc_attr( $prefs['color_negative'] ); ?>" class="form-control <?php if ( BONIPRESS_STATS_COLOR_TYPE == 'hex' ) echo ' wp-color-picker-field" data-default-color="#dedede'; ?>" />
+						<input type="text" name="<?php echo $this->field_name( 'color_negative' ); ?>" id="<?php echo $this->field_id( 'color_negative' ); ?>" value="<?php echo esc_attr( $prefs['color_negative'] ); ?>" class="form-control <?php if ( BONIPS_STATS_COLOR_TYPE == 'hex' ) echo ' wp-color-picker-field" data-default-color="#dedede'; ?>" />
 					</div>
 
 				</div>
@@ -388,7 +388,7 @@ jQuery(function($){
 
 <?php
 
-			if ( $bonipress->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) :
+			if ( $bonipress->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) :
 
 				$cache_options = bonipress_get_stats_cache_times();
 
@@ -437,7 +437,7 @@ jQuery(function($){
 		</div>
 	</div>
 
-<?php if ( BONIPRESS_STATS_COLOR_TYPE == 'hex' ) : ?>
+<?php if ( BONIPS_STATS_COLOR_TYPE == 'hex' ) : ?>
 <script type="text/javascript">
 jQuery(document).ready(function($){
 
@@ -471,7 +471,7 @@ jQuery(document).ready(function($){
 
 			bonipress_update_option( 'bonipress-point-colors', $colors );
 
-			if ( $core->bonipress_type == BONIPRESS_DEFAULT_TYPE_KEY ) {
+			if ( $core->bonipress_type == BONIPS_DEFAULT_TYPE_KEY ) {
 
 				$new_data['stats']['animate'] = ( array_key_exists( 'animate', $data['stats'] ) ? 1 : 0 );
 				$new_data['stats']['bezier']  = ( array_key_exists( 'bezier', $data['stats'] ) ? 1 : 0 );

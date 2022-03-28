@@ -8,7 +8,7 @@ if ( ! defined( 'boniPRESS_VERSION' ) ) exit;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_banking_addon_settings' ) ) :
-	function bonipress_get_banking_addon_settings( $service = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_banking_addon_settings( $service = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$default = array(
 			'active'        => array(),
@@ -17,7 +17,7 @@ if ( ! function_exists( 'bonipress_get_banking_addon_settings' ) ) :
 		);
 
 		$option_id = 'bonipress_pref_bank';
-		if ( $point_type != BONIPRESS_DEFAULT_TYPE_KEY )
+		if ( $point_type != BONIPS_DEFAULT_TYPE_KEY )
 			$option_id .= '_' . $point_type;
 
 		$settings = bonipress_get_option( $option_id, $default );
@@ -193,7 +193,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_recurring_payout_schedules' ) ) :
-	function bonipress_get_recurring_payout_schedules( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_recurring_payout_schedules( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$schedules = bonipress_get_option( 'bonipress-recurring-schedule-' . $point_type, array() );
 		$defaults  = bonipress_get_recurring_payout_defaults();
@@ -251,7 +251,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_recurring_payout' ) ) :
-	function bonipress_get_recurring_payout( $schedule_id = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_recurring_payout( $schedule_id = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$result    = false;
 		$schedules = bonipress_get_recurring_payout_schedules( $point_type );
@@ -270,7 +270,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_add_new_recurring_payout' ) ) :
-	function bonipress_add_new_recurring_payout( $new_id = '', $schedule_setup = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_add_new_recurring_payout( $new_id = '', $schedule_setup = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$default        = bonipress_get_recurring_payout_defaults();
 		$new_id         = sanitize_key( $new_id );
@@ -330,7 +330,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_update_recurring_payout' ) ) :
-	function bonipress_update_recurring_payout( $schedule_id = '', $schedule_setup = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_update_recurring_payout( $schedule_id = '', $schedule_setup = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$result = false;
 		$setup  = bonipress_get_recurring_payout( $schedule_id, $point_type );
@@ -358,7 +358,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_delete_recurring_payout' ) ) :
-	function bonipress_delete_recurring_payout( $id_to_remove = NULL, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_delete_recurring_payout( $id_to_remove = NULL, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$result    = false;
 		$schedules = bonipress_get_recurring_payout_schedules( $point_type );

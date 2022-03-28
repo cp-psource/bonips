@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'BONIPRESS_PURCHASE' ) ) exit;
+if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 
 /**
  * Get buyCRED Setup
@@ -10,7 +10,7 @@ if ( ! function_exists( 'bonipress_get_buycred_settings' ) ) :
 	function bonipress_get_buycred_settings() {
 
 		$defaults = array(
-			'types'      => array( BONIPRESS_DEFAULT_TYPE_KEY ),
+			'types'      => array( BONIPS_DEFAULT_TYPE_KEY ),
 			'checkout'   => 'page',
 			'log'        => '%plural% purchase',
 			'login'      => __( 'Bitte melde Dich an, um %_plural% zu kaufen', 'bonipress' ),
@@ -137,7 +137,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_buycred_sale_setup' ) ) :
-	function bonipress_get_buycred_sale_setup( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_buycred_sale_setup( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$defaults = array(
 			'min'  => '',
@@ -159,7 +159,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_buycred_gateway_refs' ) ) :
-	function bonipress_get_buycred_gateway_refs( $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_get_buycred_gateway_refs( $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$references = array(
 			'buy_creds_with_paypal_standard',
@@ -211,7 +211,7 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_user_can_buycred' ) ) :
-	function bonipress_user_can_buycred( $user_id = 0, $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+	function bonipress_user_can_buycred( $user_id = 0, $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 		$can_buy  = false;
 		$total    = 0;
@@ -231,7 +231,7 @@ if ( ! function_exists( 'bonipress_user_can_buycred' ) ) :
 
 		// Incase we are enforcing a maximum we need to check how much we already purchased this period
 		// So we can see how much is left on the limit
-		if ( BONIPRESS_ENABLE_LOGGING && $setup['time'] != '' && $setup['max'] != '' && $setup['max'] > 0 ) {
+		if ( BONIPS_ENABLE_LOGGING && $setup['time'] != '' && $setup['max'] != '' && $setup['max'] > 0 ) {
 
 			$maximum = $bonipress->number( $setup['max'] );
 
@@ -279,11 +279,11 @@ endif;
  * @version 1.0
  */
 if ( ! function_exists( 'bonipress_get_users_total_purchase' ) ) :
-	function bonipress_get_users_total_purchase( $user_id = false, $point_type = BONIPRESS_DEFAULT_TYPE_KEY, $timeframe = 'all' ) {
+	function bonipress_get_users_total_purchase( $user_id = false, $point_type = BONIPS_DEFAULT_TYPE_KEY, $timeframe = 'all' ) {
 
 		$from              = 0;
 		$total             = 0;
-		if ( ! BONIPRESS_ENABLE_LOGGING ) return $total;
+		if ( ! BONIPS_ENABLE_LOGGING ) return $total;
 
 		$user_id           = absint( $user_id );
 		if ( $user_id === 0 || ! bonipress_point_type_exists( $point_type ) ) return $total;
@@ -450,7 +450,7 @@ endif;
 if ( ! function_exists( 'buycred_add_pending_comment' ) ) :
 	function buycred_add_pending_comment( $payment_id = NULL, $comment = NULL, $time = NULL ) {
 
-		if ( ! BONIPRESS_BUY_PENDING_COMMENTS ) return true;
+		if ( ! BONIPS_BUY_PENDING_COMMENTS ) return true;
 
 		$post_id = buycred_get_pending_payment_id( $payment_id );
 		if ( $post_id === false ) return false;
@@ -549,7 +549,7 @@ if ( ! function_exists( 'buycred_get_users_pending_payments' ) ) :
 				foreach ( $saved as $entry ) {
 
 					$point_type = bonipress_get_post_meta( $entry->ID, 'point_type', true );
-					if ( $point_type == '' ) $point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+					if ( $point_type == '' ) $point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 					if ( ! array_key_exists( $point_type, $pending ) )
 						$pending[ $point_type ] = array();
@@ -563,7 +563,7 @@ if ( ! function_exists( 'buycred_get_users_pending_payments' ) ) :
 			else {
 
 				if ( $point_type == '' )
-					$pending[ BONIPRESS_DEFAULT_TYPE_KEY ] = array();
+					$pending[ BONIPS_DEFAULT_TYPE_KEY ] = array();
 				else
 					$pending[ $point_type ] = array();
 

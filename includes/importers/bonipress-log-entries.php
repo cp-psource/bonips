@@ -24,7 +24,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Log_Entires' ) ) :
 		 */
 		public function __construct() {
 
-			$this->import_page   = BONIPRESS_SLUG . '-import-log';
+			$this->import_page   = BONIPS_SLUG . '-import-log';
 			$this->delimiter     = empty( $_POST['delimiter'] ) ? ',' : (string) strip_tags( trim( $_POST['delimiter'] ) );
 			$this->documentation = 'http://codex.bonipress.me/chapter-ii/import-data/importing-log-entries/';
 
@@ -180,7 +180,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Log_Entires' ) ) :
 							continue;
 						}
 
-						if ( ! bonipress_point_type_exists( $point_type ) ) $point_type = BONIPRESS_DEFAULT_TYPE_KEY;
+						if ( ! bonipress_point_type_exists( $point_type ) ) $point_type = BONIPS_DEFAULT_TYPE_KEY;
 
 						$bonipress     = bonipress( $point_type );
 						$this->time = $time;
@@ -211,7 +211,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Log_Entires' ) ) :
 
 			if ( $ran ) {
 				echo '<div class="updated notice notice-success is-dismissible"><p>' . sprintf( __( 'Import complete - A total of <strong>%d</strong> log entries were successfully imported. <strong>%d</strong> was skipped.', 'bonipress' ), $this->imported, $this->skipped ) . '</p></div>';
-				echo '<p><a href="' . admin_url( 'admin.php?page=' . BONIPRESS_SLUG ) . '" class="button button-large button-primary">' . __( 'View Log', 'bonipress' ) . '</a></p>';
+				echo '<p><a href="' . admin_url( 'admin.php?page=' . BONIPS_SLUG ) . '" class="button button-large button-primary">' . __( 'View Log', 'bonipress' ) . '</a></p>';
 			}
 
 			do_action( 'import_end' );
@@ -237,7 +237,7 @@ if ( ! class_exists( 'boniPRESS_Importer_Log_Entires' ) ) :
 		public function header() {
 
 			$label = __( 'Import Log Entries', 'bonipress' );
-			if ( BONIPRESS_DEFAULT_LABEL === 'boniPRESS' )
+			if ( BONIPS_DEFAULT_LABEL === 'boniPRESS' )
 				$label .= ' <a href="' . $this->documentation . '" target="_blank" class="page-title-action">' . __( 'Documentation', 'bonipress' ) . '</a>';
 
 			echo '<div class="wrap"><h1>' . $label . '</h1>';

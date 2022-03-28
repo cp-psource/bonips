@@ -55,7 +55,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 			$notice_id = absint( $notice_id );
 			if ( $notice_id === 0 ) return;
 
-			if ( bonipress_get_post_type( $notice_id ) != BONIPRESS_EMAIL_KEY ) return;
+			if ( bonipress_get_post_type( $notice_id ) != BONIPS_EMAIL_KEY ) return;
 
 			$this->populate( $notice_id );
 
@@ -72,7 +72,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 			$this->post          = bonipress_get_post( $this->post_id );
 
 			$this->point_types   = (array) bonipress_get_post_meta( $this->post_id, 'bonipress_email_ctype', true );
-			if ( empty( $this->point_types ) ) $this->point_types = array( BONIPRESS_DEFAULT_TYPE_KEY );
+			if ( empty( $this->point_types ) ) $this->point_types = array( BONIPS_DEFAULT_TYPE_KEY );
 
 			$this->emailnotices  = bonipress_get_addon_settings( 'emailnotices' );
 			$settings            = shortcode_atts( array(
@@ -165,7 +165,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 		 * @since 1.0
 		 * @version 1.0
 		 */
-		public function schedule( $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function schedule( $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( empty( $event ) || ! array_key_exists( 'user_id', $event ) ) return false;
 
@@ -190,7 +190,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 		 * @since 1.0
 		 * @version 1.0
 		 */
-		public function send( $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function send( $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			if ( empty( $event ) || ! array_key_exists( 'user_id', $event ) ) return false;
 
@@ -324,7 +324,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 		 * @since 1.0
 		 * @version 1.0
 		 */
-		public function get_subject( $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function get_subject( $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$subject = $this->post->post_title;
 
@@ -355,7 +355,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 		 * @since 1.0
 		 * @version 1.0
 		 */
-		public function get_body( $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function get_body( $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$content = $this->post->post_content;
 
@@ -409,7 +409,7 @@ if ( ! class_exists( 'boniPRESS_Email' ) ) :
 		 * @since 1.0
 		 * @version 1.0
 		 */
-		public function get_message( $event = array(), $point_type = BONIPRESS_DEFAULT_TYPE_KEY ) {
+		public function get_message( $event = array(), $point_type = BONIPS_DEFAULT_TYPE_KEY ) {
 
 			$message = $this->get_body( $event, $point_type );
 
