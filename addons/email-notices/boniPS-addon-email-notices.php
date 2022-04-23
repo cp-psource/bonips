@@ -646,7 +646,7 @@ if ( ! class_exists( 'boniPS_Email_Notice_Module' ) ) :
 				<div id="custom-reference-selection" style="display: <?php if ( $uses_custom ) echo 'block'; else echo 'none'; ?>;">
 					<div class="form-group">
 						<label for="bonips-email-custom-ref"><?php _e( 'Benutzerdefinierte Referenz', 'bonips' ); ?></label>
-						<input type="text" name="bonips_email[custom_reference]" placeholder="<?php _e( 'required', 'bonips' ); ?>" id="bonips-email-custom-ref" class="form-control" value="<?php echo esc_attr( $trigger ); ?>" />
+						<input type="text" name="bonips_email[custom_reference]" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" id="bonips-email-custom-ref" class="form-control" value="<?php echo esc_attr( $trigger ); ?>" />
 					</div>
 					<p class="description" style="line-height: 16px;"><?php _e( 'Dies kann entweder eine einzelne Referenz oder eine durch Kommas getrennte Liste von Referenzen sein.', 'bonips' ); ?></p>
 				</div>

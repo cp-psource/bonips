@@ -313,7 +313,7 @@ if ( ! class_exists( 'boniPS_Hook_Video_Views' ) ) :
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( 'log' ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( 'log' ); ?>" id="<?php echo $this->field_id( 'log' ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['log'] ); ?>" class="form-control" />
 			</div>
 		</div>
 	</div>
@@ -336,14 +336,14 @@ if ( ! class_exists( 'boniPS_Hook_Video_Views' ) ) :
 			<div id="<?php echo $this->field_id( array( 'logic-option-interval' ) ); ?>"<?php if ( $prefs['logic'] != 'interval' ) echo ' style="display: none;"';?>>
 				<div class="form-group">
 					<label for="<?php echo $this->field_id( 'interval' ); ?>"><?php _e( 'Intervals', 'bonips' ); ?></label>
-					<input type="text" name="<?php echo $this->field_name( 'interval' ); ?>" id="<?php echo $this->field_id( 'interval' ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['interval'] ); ?>" class="form-control" />
+					<input type="text" name="<?php echo $this->field_name( 'interval' ); ?>" id="<?php echo $this->field_id( 'interval' ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['interval'] ); ?>" class="form-control" />
 					<span class="description"><?php printf( __( 'The number of seconds a user must watch in order to get %s.', 'bonips' ), $this->core->plural() ); ?></span>
 				</div>
 			</div>
 			<div id="<?php echo $this->field_id( array( 'logic-option-full' ) ); ?>"<?php if ( $prefs['logic'] != 'full' ) echo ' style="display: none;"';?>>
 				<div class="form-group">
 					<label for="<?php echo $this->field_id( 'leniency' ); ?>"><?php _e( 'Leniency', 'bonips' ); ?></label>
-					<input type="text" name="<?php echo $this->field_name( 'leniency' ); ?>" id="<?php echo $this->field_id( 'leniency' ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leniency'] ); ?>" class="form-control" />
+					<input type="text" name="<?php echo $this->field_name( 'leniency' ); ?>" id="<?php echo $this->field_id( 'leniency' ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leniency'] ); ?>" class="form-control" />
 					<span class="description"><?php _e( 'Do not set this value to zero! A lot of thing can happen while a user watches a movie and sometimes a few seconds can drop of the counter due to buffering or play back errors.', 'bonips' ); ?></span>
 				</div>
 			</div>

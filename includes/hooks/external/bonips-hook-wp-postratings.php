@@ -205,14 +205,14 @@ function bonips_load_wp_postratings_hook() {
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'rating' => 'log' ) ); ?>"><?php _e( 'Member Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'rating' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'rating' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['rating']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'rating' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'rating' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['rating']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'rated' => 'log' ) ); ?>"><?php _e( 'Content Author Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'rated' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'rated' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['rated']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'rated' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'rated' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['rated']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>

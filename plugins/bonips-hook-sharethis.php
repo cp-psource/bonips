@@ -270,8 +270,8 @@ jQuery(function($) {
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( $service => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( $service => 'log' ) ); ?>" id="<?php echo $this->field_id( array( $service => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $this->prefs[ $service ]['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( $service => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( $service => 'log' ) ); ?>" id="<?php echo $this->field_id( array( $service => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $this->prefs[ $service ]['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ), '%service%' ); ?></span>
 			</div>
 		</div>

@@ -169,8 +169,8 @@ function bonips_load_gravity_forms_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( $form->id, 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( $form->id, 'log' ) ); ?>" id="<?php echo $this->field_id( array( $form->id, 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs[ $form->id ]['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( $form->id, 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( $form->id, 'log' ) ); ?>" id="<?php echo $this->field_id( array( $form->id, 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs[ $form->id ]['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>

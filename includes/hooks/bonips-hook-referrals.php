@@ -568,7 +568,7 @@ if ( ! class_exists( 'boniPS_Hook_Affiliate' ) ) :
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'visit' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'visit' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'visit' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'visit' => 'log' ) ); ?>" value="<?php echo esc_attr( $prefs['visit']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
@@ -595,7 +595,7 @@ if ( ! class_exists( 'boniPS_Hook_Affiliate' ) ) :
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'signup' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
+				<label for="<?php echo $this->field_id( array( 'signup' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'signup' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'signup' => 'log' ) ); ?>" value="<?php echo esc_attr( $prefs['signup']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>

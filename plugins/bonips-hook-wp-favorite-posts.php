@@ -246,14 +246,14 @@ function bonips_load_wp_favorite_posts_hook() {
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'add' => 'log' ) ); ?>"><?php _e( 'Member Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'add' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'add' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['add']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'add' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'add' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['add']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'added' => 'log' ) ); ?>"><?php _e( 'Content Author Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'added' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'added' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['added']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'added' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'added' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['added']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
@@ -271,7 +271,7 @@ function bonips_load_wp_favorite_posts_hook() {
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'remove' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'remove' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'remove' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['remove']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'remove' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'remove' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['remove']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
@@ -286,7 +286,7 @@ function bonips_load_wp_favorite_posts_hook() {
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'removed' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'removed' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'removed' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['removed']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'removed' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'removed' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['removed']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>

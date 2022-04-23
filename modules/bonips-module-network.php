@@ -288,7 +288,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<h3><?php _e( 'Central Logging', 'bonips' ); ?></h3>
+						<h3><?php _e( 'Zentrale Protokollierung', 'bonips' ); ?></h3>
 						<p><a href="https://n3rds.work/docs/bonips-multisite/" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a></p>
 						<div class="row">
 							<div class="col-xs-6">

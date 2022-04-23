@@ -13,18 +13,18 @@ function bonips_register_buddypress_hook( $installed ) {
 
 	if ( bp_is_active( 'xprofile' ) ) {
 		$installed['hook_bp_profile'] = array(
-			'title'         => __( 'BuddyPress: Members', 'bonips' ),
-			'description'   => __( 'Awards %_plural% for profile related actions.', 'bonips' ),
-			'documentation' => 'http://codex.bonips.me/hooks/buddypress-profiles/',
+			'title'         => __( 'BuddyPress: Mitglieder', 'bonips' ),
+			'description'   => __( 'Vergibt %_plural% für profilbezogene Aktionen.', 'bonips' ),
+			'documentation' => 'https://n3rds.work/docs/buddypress-profilaktionen/',
 			'callback'      => array( 'boniPS_BuddyPress_Profile' )
 		);
 	}
 
 	if ( bp_is_active( 'groups' ) ) {
 		$installed['hook_bp_groups'] = array(
-			'title'         => __( 'BuddyPress: Groups', 'bonips' ),
-			'description'   => __( 'Awards %_plural% for group related actions. Use minus to deduct %_plural% or zero to disable a specific hook.', 'bonips' ),
-			'documentation' => 'http://codex.bonips.me/hooks/buddypress-groups/',
+			'title'         => __( 'BuddyPress: Gruppen', 'bonips' ),
+			'description'   => __( 'Vergibt %_plural% für gruppenbezogene Aktionen. Verwende Minus, um %_plural% abzuziehen, oder Null, um einen bestimmten Hook zu deaktivieren.', 'bonips' ),
+			'documentation' => 'https://n3rds.work/docs/buddypress-gruppenaktionen/',
 			'callback'      => array( 'boniPS_BuddyPress_Groups' )
 		);
 	}
@@ -57,61 +57,61 @@ function bonips_load_buddypress_profile_hook() {
 				'defaults' => array(
 					'update'         => array(
 						'creds'         => 1,
-						'log'           => '%plural% for updating profile',
+						'log'           => '%plural% für das Aktualisieren des Profils',
 						'limit'         => '0/x'
 					),
 					'removed_update' => array(
 						'creds'         => 1,
-						'log'           => '%plural% for removing profile update',
+						'log'           => '%plural% für das Entfernen der Profilaktualisierung',
 						'limit'         => '0/x'
 					),
 					'avatar'         => array(
 						'creds'         => 1,
-						'log'           => '%plural% for new avatar',
+						'log'           => '%plural% für neuen Avatar',
 						'limit'         => '0/x'
 					),
 					'cover'         => array(
 						'creds'         => 1,
-						'log'           => '%plural% for new cover photo',
+						'log'           => '%plural% für neues Titelbild',
 						'limit'         => '0/x'
 					),
 					'new_friend'     => array(
 						'creds'         => 1,
-						'log'           => '%plural% for new friendship',
+						'log'           => '%plural% für neue Freundschaft',
 						'block'         => 0,
 						'limit'         => '0/x'
 					),
 					'leave_friend'   => array(
 						'creds'         => '-1',
-						'log'           => '%singular% deduction for loosing a friend',
+						'log'           => '%singular% Abzug für den Verlust eines Freundes',
 						'limit'         => '0/x'
 					),
 					'new_comment'    => array(
 						'creds'         => 1,
-						'log'           => '%plural% for new comment',
+						'log'           => '%plural% für neuen Kommentar',
 						'limit'         => '0/x'
 					),
 					'delete_comment' => array(
 						'creds'         => '-1',
-						'log'           => '%singular% deduction for comment removal'
+						'log'           => 'Abzug von %singular% für das Entfernen von Kommentaren'
 					),
 					'add_favorite'   => array(
 						'creds'         => 1,
-						'log'           => '%plural% for adding an activity to favorites',
+						'log'           => '%plural% für das Hinzufügen einer Aktivität zu den Favoriten',
 						'limit'         => '0/x'
 					),
 					'remove_favorite' => array(
 						'creds'         => '-1',
-						'log'           => '%singular% deduction for removing favorite activity'
+						'log'           => 'Abzug von %singular% für das Entfernen von Lieblingsaktivitäten'
 					),
 					'message'        => array(
 						'creds'         => 1,
-						'log'           => '%plural% for sending a message',
+						'log'           => '%plural% für das Senden einer Nachricht',
 						'limit'         => '0/x'
 					),
 					'send_gift'      => array(
 						'creds'         => 1,
-						'log'           => '%plural% for sending a gift',
+						'log'           => '%plural% für das Versenden eines Geschenks',
 						'limit'         => '0/x'
 					)
 				)
@@ -307,7 +307,7 @@ function bonips_load_buddypress_profile_hook() {
 
 			// Prevent BP from running this ajax call
 			if ( $balance < $cost ) {
-				echo apply_filters( 'bonips_bp_declined_addfriend', __( 'Insufficient Funds', 'bonips' ), $this );
+				echo apply_filters( 'bonips_bp_declined_addfriend', __( 'Unzureichende Mittel', 'bonips' ), $this );
 				exit;
 			}
 
@@ -602,7 +602,7 @@ function bonips_load_buddypress_profile_hook() {
 			$prefs = $this->prefs;
 
 			if ( ! isset( $prefs['removed_update'] ) )
-				$prefs['removed_update'] = array( 'creds' => 0, 'limit' => '0/x', 'log' => '%plural% deduction for removing profile update' );
+				$prefs['removed_update'] = array( 'creds' => 0, 'limit' => '0/x', 'log' => '%plural% Abzug für das Entfernen der Profilaktualisierung' );
 
 			$friend_block = 0;
 			if ( isset( $prefs['new_friend']['block'] ) )
@@ -610,7 +610,7 @@ function bonips_load_buddypress_profile_hook() {
 
 ?>
 <div class="hook-instance">
-	<h3><?php _e( 'New Profile Activity', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue Profilaktivität', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -626,15 +626,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'update', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'update', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'update', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['update']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'update', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'update', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'update', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['update']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Deleted Profile Activity', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gelöschte Profilaktivität', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -650,15 +650,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'removed_update', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'removed_update', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'removed_update', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['removed_update']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'removed_update', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'removed_update', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'removed_update', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['removed_update']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Profile Avatar Upload', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neuer Profil-Avatar-Upload', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -674,15 +674,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'avatar', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['avatar']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'avatar', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['avatar']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Profile Cover Upload', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neues Profilcover hochladen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -698,15 +698,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'cover', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cover']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'cover', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cover']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Friendships', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue Freundschaften', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -722,8 +722,8 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_friend', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_friend', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_friend', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_friend']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_friend', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_friend', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_friend', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_friend']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -732,14 +732,14 @@ function bonips_load_buddypress_profile_hook() {
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<div class="radio">
-					<label for="<?php echo $this->field_id( array( 'new_friend', 'block' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'new_friend', 'block' ) ); ?>"<?php checked( $friend_block, 1 ); ?> id="<?php echo $this->field_id( array( 'new_friend', 'block' ) ); ?>" value="1" /> <?php echo $this->core->template_tags_general( __( 'Users with zero balance can not add friends. Requires that you deduct %_plural% for adding a new friend.', 'bonips' ) ); ?></label>
+					<label for="<?php echo $this->field_id( array( 'new_friend', 'block' ) ); ?>"><input type="checkbox" name="<?php echo $this->field_name( array( 'new_friend', 'block' ) ); ?>"<?php checked( $friend_block, 1 ); ?> id="<?php echo $this->field_id( array( 'new_friend', 'block' ) ); ?>" value="1" /> <?php echo $this->core->template_tags_general( __( 'Benutzer mit Nullguthaben können keine Freunde hinzufügen. Erfordert, dass Du %_plural% für das Hinzufügen eines neuen Freundes abziehst.', 'bonips' ) ); ?></label>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Ending Friendships', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Freundschaften beenden', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -749,15 +749,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'leave_friend', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'leave_friend', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'leave_friend', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leave_friend']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'leave_friend', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'leave_friend', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'leave_friend', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leave_friend']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Comment', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neuer Kommentar', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -773,15 +773,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_comment', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_comment', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_comment', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_comment']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_comment', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_comment', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_comment', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_comment']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Deleted Comment', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gelöschter Kommentar', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -791,15 +791,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'delete_comment', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'delete_comment', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_comment', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_comment']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'delete_comment', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'delete_comment', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_comment', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_comment']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Favorite Activity', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Lieblingsbeschäftigung', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -815,15 +815,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'add_favorite', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'add_favorite', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'add_favorite', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['add_favorite']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'add_favorite', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'add_favorite', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'add_favorite', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['add_favorite']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Removing Favorit Activity', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Lieblingsaktivität entfernen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -833,15 +833,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'remove_favorite', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'remove_favorite', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'remove_favorite', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['remove_favorite']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'remove_favorite', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'remove_favorite', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'remove_favorite', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['remove_favorite']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Private Message', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue private Nachricht', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -857,15 +857,15 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'message', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'message', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'message', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['message']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'message', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'message', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'message', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['message']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Sending Gift', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Geschenk senden', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -881,8 +881,8 @@ function bonips_load_buddypress_profile_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'send_gift', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'send_gift', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'send_gift', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['send_gift']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'send_gift', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'send_gift', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'send_gift', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['send_gift']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -996,55 +996,55 @@ function bonips_load_buddypress_groups_hook() {
 				'defaults' => array(
 					'create'     => array(
 						'creds'     => 10,
-						'log'       => '%plural% for creating a new group',
+						'log'       => '%plural% für das Erstellen einer neuen Gruppe',
 						'min'       => 0
 					),
 					'delete'     => array(
 						'creds'     => '-10',
-						'log'       => '%singular% deduction for deleting a group'
+						'log'       => '%singular% Abzug für das Löschen einer Gruppe'
 					),
 					'new_topic'  => array(
 						'creds'     => 1,
-						'log'       => '%plural% for new group topic',
+						'log'       => '%plural% für neues Gruppenthema',
 						'limit'     => '0/x'
 					),
 					'edit_topic' => array(
 						'creds'     => 1,
-						'log'       => '%plural% for updating group topic',
+						'log'       => '%plural% für das Aktualisieren des Gruppenthemas',
 						'limit'     => '0/x'
 					),
 					'new_post'   => array(
 						'creds'     => 1,
-						'log'       => '%plural% for new group post',
+						'log'       => '%plural% für neuen Gruppenbeitrag',
 						'limit'     => '0/x'
 					),
 					'edit_post'  => array(
 						'creds'     => 1,
-						'log'       => '%plural% for updating group post',
+						'log'       => '%plural% für die Aktualisierung des Gruppenbeitrags',
 						'limit'     => '0/x'
 					),
 					'join'       => array(
 						'creds'     => 1,
-						'log'       => '%plural% for joining new group',
+						'log'       => '%plural% für den Beitritt zu einer neuen Gruppe',
 						'limit'     => '0/x'
 					),
 					'leave'      => array(
 						'creds'     => '-5',
-						'log'       => '%singular% deduction for leaving group'
+						'log'       => '%singular% Abzug für Austritt aus Gruppe'
 					),
 					'avatar'     => array(
 						'creds'     => 1,
-						'log'       => '%plural% for new group avatar',
+						'log'       => '%plural% für neuen Gruppenavatar',
 						'limit'     => '0/x'
 					),
 					'cover'      => array(
 						'creds'      => 1,
-						'log'        => '%plural% for new cover photo',
+						'log'        => '%plural% für neues Titelbild',
 						'limit'      => '0/x'
 					),
 					'comments'   => array(
 						'creds'     => 1,
-						'log'       => '%plural% for new group comment',
+						'log'       => '%plural% für neuen Gruppenkommentar',
 						'limit'     => '0/x'
 					)
 				)
@@ -1499,33 +1499,33 @@ function bonips_load_buddypress_groups_hook() {
 
 ?>
 <div class="hook-instance">
-	<h3><?php _e( 'Group Creation', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gruppenerstellung', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'create', 'creds' ) ); ?>"><?php echo $this->core->plural(); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'create', 'creds' ) ); ?>" id="<?php echo $this->field_id( array( 'create', 'creds' ) ); ?>" value="<?php echo $this->core->number( $prefs['create']['creds'] ); ?>" class="form-control" />
-				<span class="description"><?php echo $this->core->template_tags_general( __( 'If you use a negative value and the user does not have enough %_plural%, the "Create Group" button will be disabled.', 'bonips' ) ); ?></span>
+				<span class="description"><?php echo $this->core->template_tags_general( __( 'Wenn Du einen negativen Wert verwendest und der Benutzer nicht genug %_plural% hat, wird die Schaltfläche "Gruppe erstellen" deaktiviert.', 'bonips' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'create', 'min' ) ); ?>"><?php _e( 'No. of Members', 'bonips' ); ?></label>
 				<input type="text" name="<?php echo $this->field_name( array( 'create', 'min' ) ); ?>" id="<?php echo $this->field_id( array( 'create', 'min' ) ); ?>" value="<?php echo esc_attr( $prefs['create']['min'] ); ?>" class="form-control" />
-				<span class="description"><?php echo $this->core->template_tags_general( __( 'The number of members a group must gain before awarding %_plural%. Use zero to award as soon as the group is created.', 'bonips' ) ); ?></span>
+				<span class="description"><?php echo $this->core->template_tags_general( __( 'Die Anzahl der Mitglieder, die eine Gruppe gewinnen muss, bevor %_plural% vergeben werden. Verwende Null, um zu vergeben, sobald die Gruppe erstellt wurde.', 'bonips' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'create', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'create', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'create', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['create']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'create', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'create', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'create', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['create']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Group Deletions', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gruppenlöschungen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1535,15 +1535,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'delete', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'delete', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'delete', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'delete', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Group Avatar Upload', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neuer Gruppen-Avatar-Upload', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1559,15 +1559,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'avatar', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['avatar']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'avatar', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'avatar', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['avatar']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Group Cover Upload', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neues Gruppencover hochladen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1583,15 +1583,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'cover', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cover']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'cover', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cover', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cover']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Forum Topics', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue Forenthemen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1607,15 +1607,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_topic', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_topic', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_topic', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_topic']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_topic', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_topic', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_topic', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_topic']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Editing Forum Topics', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Forenthemen bearbeiten', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1631,15 +1631,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'edit_topic', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'edit_topic', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'edit_topic', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['edit_topic']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'edit_topic', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'edit_topic', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'edit_topic', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['edit_topic']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Forum Posts', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue Forumsbeiträge', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1655,15 +1655,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_post', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_post', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_post', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_post']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_post', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_post', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_post', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_post']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Editing Forum Posts', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Bearbeiten von Forenbeiträgen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1679,15 +1679,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'edit_post', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'edit_post', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'edit_post', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['edit_post']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'edit_post', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'edit_post', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'edit_post', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['edit_post']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Joining Groups', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gruppen beitreten', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1703,15 +1703,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'join', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'join', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'join', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['join']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'join', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'join', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'join', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['join']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'Leaving Groups', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Gruppen verlassen', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1721,15 +1721,15 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'leave', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'leave', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'leave', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leave']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'leave', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'leave', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'leave', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['leave']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="hook-instance">
-	<h3><?php _e( 'New Group Comments', 'bonips' ); ?></h3>
+	<h3><?php _e( 'Neue Gruppenkommentare', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
@@ -1745,8 +1745,8 @@ function bonips_load_buddypress_groups_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'comments', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'comments', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'comments', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['comments']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'comments', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'comments', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'comments', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['comments']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>

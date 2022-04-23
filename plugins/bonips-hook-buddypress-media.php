@@ -303,8 +303,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_media', 'photo_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'photo_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'photo_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['photo_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_media', 'photo_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'photo_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'photo_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['photo_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -327,8 +327,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_media', 'video_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'video_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'video_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['video_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_media', 'video_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'video_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'video_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['video_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -351,8 +351,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'new_media', 'music_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'music_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'music_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['music_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'new_media', 'music_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'new_media', 'music_log' ) ); ?>" id="<?php echo $this->field_id( array( 'new_media', 'music_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['new_media']['music_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -369,8 +369,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'delete_media', 'photo_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'photo_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'photo_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['photo_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'delete_media', 'photo_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'photo_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'photo_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['photo_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -387,8 +387,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'delete_media', 'video_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'video_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'video_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['video_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'delete_media', 'video_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'video_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'video_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['video_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -405,8 +405,8 @@ function bonips_load_buddypress_media_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'delete_media', 'music_log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'music_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'music_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['music_log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'delete_media', 'music_log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'delete_media', 'music_log' ) ); ?>" id="<?php echo $this->field_id( array( 'delete_media', 'music_log' ) ); ?>"<?php echo $photos; ?> placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['delete_media']['music_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>

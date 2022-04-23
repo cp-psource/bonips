@@ -214,8 +214,8 @@ function bonips_load_events_manager_light_hook() {
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'attend' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'attend' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'attend' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['attend']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'attend' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'attend' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'attend' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['attend']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
@@ -232,8 +232,8 @@ function bonips_load_events_manager_light_hook() {
 		</div>
 		<div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'cancel' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'cancel' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cancel' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cancel']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'cancel' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'cancel' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'cancel' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['cancel']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>

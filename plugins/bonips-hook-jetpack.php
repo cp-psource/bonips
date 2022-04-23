@@ -161,8 +161,8 @@ function bonips_load_jetpack_hook() {
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'subscribe_site' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'subscribe_site' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'subscribe_site' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['subscribe_site']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'subscribe_site' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'subscribe_site' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'subscribe_site' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['subscribe_site']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>
@@ -179,8 +179,8 @@ function bonips_load_jetpack_hook() {
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'subscribe_comment' => 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'subscribe_comment' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'subscribe_comment' => 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['subscribe_comment']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'subscribe_comment' => 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'subscribe_comment' => 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'subscribe_comment' => 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['subscribe_comment']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 			</div>
 		</div>

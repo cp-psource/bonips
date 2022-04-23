@@ -172,7 +172,7 @@ if ( ! class_exists( 'boniPS_buyCRED_Reward_Hook' ) ) :
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="form-group">
 								<label><?php _e( 'Log Template', 'bonips' ); ?></label>
-								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'log' ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $hook['log'] ); ?>" class="form-control buycred-reward-log" />
+								<input type="text" name="<?php echo $this->name( $this->bonips_type, 'log' ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $hook['log'] ); ?>" class="form-control buycred-reward-log" />
 								<span class="description"><?php echo $this->available_template_tags( array( 'general' ) ); ?></span>
 							</div>
 						</div>

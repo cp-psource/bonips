@@ -295,8 +295,8 @@ function bonips_load_affiliatewp_hook() {
 		</div>
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'signup', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'signup', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'signup', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['signup']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'signup', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'signup', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'signup', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['signup']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
@@ -322,8 +322,8 @@ function bonips_load_affiliatewp_hook() {
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
-				<label for="<?php echo $this->field_id( array( 'visits', 'log' ) ); ?>"><?php _e( 'Log template', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'visits', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'visits', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['visits']['log'] ); ?>" class="form-control" />
+				<label for="<?php echo $this->field_id( array( 'visits', 'log' ) ); ?>"><?php _e( 'Protokollvorlage', 'bonips' ); ?></label>
+				<input type="text" name="<?php echo $this->field_name( array( 'visits', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'visits', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['visits']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
@@ -367,14 +367,14 @@ function bonips_load_affiliatewp_hook() {
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'referrals', 'log' ) ); ?>"><?php _e( 'Log template - Payout', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'referrals', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'referrals', 'log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['referrals']['log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'referrals', 'log' ) ); ?>" id="<?php echo $this->field_id( array( 'referrals', 'log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['referrals']['log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="<?php echo $this->field_id( array( 'referrals', 'remove_log' ) ); ?>"><?php _e( 'Log template - Refund', 'bonips' ); ?></label>
-				<input type="text" name="<?php echo $this->field_name( array( 'referrals', 'remove_log' ) ); ?>" id="<?php echo $this->field_id( array( 'referrals', 'remove_log' ) ); ?>" placeholder="<?php _e( 'required', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['referrals']['remove_log'] ); ?>" class="form-control" />
+				<input type="text" name="<?php echo $this->field_name( array( 'referrals', 'remove_log' ) ); ?>" id="<?php echo $this->field_id( array( 'referrals', 'remove_log' ) ); ?>" placeholder="<?php _e( 'erforderlich', 'bonips' ); ?>" value="<?php echo esc_attr( $prefs['referrals']['remove_log'] ); ?>" class="form-control" />
 				<span class="description"><?php echo $this->available_template_tags( array( 'general', 'post' ) ); ?></span>
 			</div>
 		</div>
