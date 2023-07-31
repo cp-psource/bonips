@@ -3,7 +3,7 @@
  * Plugin Name: BoniPress
  * Plugin URI: https://bonips.me
  * Description: Ein adaptives Punkteverwaltungssystem für WordPress-basierte Webseiten, Basiscode von myCred.
- * Version: 1.8.7
+ * Version: 1.8.8
  * Tags: point, credit, loyalty program, engagement, reward, woocommerce rewards
  * Author: DerN3rd
  * Author URI: https://n3rds.work
@@ -26,7 +26,7 @@ if ( ! class_exists( 'boniPS_Core' ) ) :
 	final class boniPS_Core {
 
 		// Plugin Version
-		public $version             = '1.8.7';
+		public $version             = '1.8.8';
 
 		// Instnace
 		protected static $_instance = NULL;

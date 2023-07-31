@@ -131,7 +131,7 @@ if ( ! class_exists( 'boniPS_Hook_Affiliate' ) ) :
 		 * @since 1.4
 		 * @version 1.1
 		 */
-		public function shortcode_affiliate_link( $content = '', $atts ) {
+		public function shortcode_affiliate_link( $atts, $content = '' ) {
 
 			extract( shortcode_atts( array(
 				'url'     => 0,
@@ -159,7 +159,7 @@ if ( ! class_exists( 'boniPS_Hook_Affiliate' ) ) :
 		 * @since 1.4
 		 * @version 1.1
 		 */
-		public function shortcode_affiliate_id( $content = '', $atts ) {
+		public function shortcode_affiliate_id( $atts, $content = '' ) {
 
 			extract( shortcode_atts( array(
 				'user_id' => ''

@@ -402,7 +402,7 @@ if ( ! class_exists( 'boniPS_Settings' ) ) :
 		 * @since 0.1
 		 * @version 1.0
 		 */
-		public function parse_template_tags( $content = '', $log_entry ) {
+		public function parse_template_tags( $log_entry, $content = '' ) {
 
 			// Prep
 			$reference = $log_entry->ref;
@@ -3484,7 +3484,7 @@ endif;
  * @version 1.0.1
  */
 if ( ! function_exists( 'bonips_translate_limit_code' ) ) :
-	function bonips_translate_limit_code( $code = '', $id, $bonips ) {
+	function bonips_translate_limit_code( $id, $bonips, $code = '' ) {
 
 		if ( $code == '' ) return '-';
 

@@ -4,7 +4,7 @@ Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free
 Tags: point, credit, loyalty program, engagement, reward
 Requires at least: 4.8
 Tested up to: 5.6
-Stable tag: 1.8.7
+Stable tag: 1.8.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,8 @@ Halte Dich mit unserem [Newsletter](https://n3rds.work/webmasterservice-n3rdswor
 
 = 1.8.9 =  DerN3rd =
 
-* Fix PhP Error register_post_type
+* Fix: PhP Error register_post_type
+* Fix: PHP Deprecated:  Required parameter
 
 = 1.8.8 =
 
