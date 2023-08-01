@@ -295,7 +295,7 @@ if ( ! class_exists( 'boniPS_Banking_Service_Payouts' ) ) :
 		 * @since 1.7
 		 * @version 1.0
 		 */
-		public function get_eligible_users( $number = 0, $offset = 0, $setup ) {
+		public function get_eligible_users( $setup, $number = 0, $offset = 0 ) {
 
 			global $wpdb;
 
