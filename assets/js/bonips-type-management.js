@@ -160,7 +160,7 @@ jQuery(function($) {
 		/**
 		 * Export balances Modal Trigger
 		 */
-		$( '#bonips-export-users-points' ).click( function() {
+		$( '#bonips-export-users-points' ).on('click', function() {
 
 			$(this).blur();
 
@@ -253,7 +253,7 @@ jQuery(function($) {
 	/**
 	 * Key Length Indicator
 	 */
-	$( '#boniPS-remote-key' ).change(function(){
+	$( '#boniPS-remote-key' ).on('change', function(){
 		$( '#bonips-length-counter' ).text( $(this).val().length );
 	});
 
@@ -306,7 +306,7 @@ jQuery(function($) {
 	/**
 	 * Show / Hide Update Button
 	 */
-	$( '#bonips-adjust-decimal-places' ).change(function(){
+	$( '#bonips-adjust-decimal-places' ).on('change', function(){
 
 		var originaldec = $(this).data( 'org' );
 		var newvalue    = $(this).val();

@@ -103,7 +103,7 @@ jQuery(function($) {
 	/**
 	 * Edit Modal Trigger
 	 */
-	$( '.bonips-open-log-entry-editor' ).click( function() {
+	$( '.bonips-open-log-entry-editor' ).on('click', function() {
 
 		// Get the details we want to show
 		log_row_id = $(this).attr( 'data-id' );
@@ -200,7 +200,7 @@ jQuery(function($) {
 	/**
 	 * Edit AJAX Call Trigger
 	 */
-	$( '#bonips-update-log-entry' ).click( function() {
+	$( '#bonips-update-log-entry' ).on('click', function() {
 		bonips_update_log_entry( $(this).next().val(), $( 'input#bonips-new-entry' ).val(), $(this) );
 	});
 
@@ -221,7 +221,7 @@ jQuery(function($) {
 	columns = {
 		init : function() {
 			var that = this;
-			$('.hide-column-tog', '#adv-settings').click( function() {
+			$('.hide-column-tog', '#adv-settings').on('click', function() {
 				var $t = $(this), column = $t.val();
 				if ( $t.prop('checked') )
 					that.checked(column);

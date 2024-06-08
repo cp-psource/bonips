@@ -810,7 +810,7 @@ if ( ! class_exists( 'boniPS_buyCRED_Module' ) ) :
 
 <script type="text/javascript">
 jQuery(function($) {
-	$( 'select.currency' ).change(function(){
+	$( 'select.currency' ).on('change', function(){
 		var target = $(this).attr( 'data-update' );
 		$( '.' + target ).empty();
 		$( '.' + target ).text( $(this).val() );
@@ -1332,7 +1332,7 @@ jQuery(function($) {
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( '.buycred-wrapper label input.trigger-buycred' ).change(function(){
+	$( '.buycred-wrapper label input.trigger-buycred' ).on('change', function(){
 
 		if ( $(this).val().length > 0 )
 			$(this).parent().parent().parent().addClass( 'selected' );

@@ -40,7 +40,7 @@ jQuery(function($) {
 	/**
 	 * Edit Points Trigger
 	 */
-	$( '.bonips-open-points-editor' ).click( function() {
+	$( '.bonips-open-points-editor' ).on('click', function() {
 		
 		$( '#edit-bonips-balance' ).dialog( 'open' );
 		
@@ -56,7 +56,7 @@ jQuery(function($) {
 	/**
 	 * Update Balance AJAX Caller
 	 */
-	$( '#bonips-update-users-balance-submit' ).click( function() {
+	$( '#bonips-update-users-balance-submit' ).on('click', function() {
 		var button = $(this);
 		var label = button.val();
 		var current_el = $( '#edit-bonips-balance #bonips-current' );

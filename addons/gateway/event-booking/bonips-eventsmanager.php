@@ -702,7 +702,7 @@ jQuery(function($) {
 <script type="text/javascript">
 jQuery(function($){
 
-	$( 'input[name="bonips_gateway[setup]"]' ).change(function(){
+	$( 'input[name="bonips_gateway[setup]"]' ).on('change', function(){
 		if ( $(this).val() == 'multi' ) {
 			$( '#bonips-exchange-rate' ).show();
 		}

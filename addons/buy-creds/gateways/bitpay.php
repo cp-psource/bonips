@@ -431,7 +431,7 @@ jQuery(function($){
 
 	});
 
-	$( '#bitpay-pair-network' ).change(function(){
+	$( '#bitpay-pair-network' ).on('change', function(){
 
 		$( '.bitpay-link' ).hide();
 		var selectedmode = $(this).find( ':selected' );

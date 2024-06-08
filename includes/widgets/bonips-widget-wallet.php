@@ -146,7 +146,7 @@ if ( ! class_exists( 'boniPS_Widget_Wallet' ) ) :
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
 
-	$( '#<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>' ).change(function(){
+	$( '#<?php echo esc_attr( $this->get_field_id( 'show_visitors' ) ); ?>' ).on('change', function(){
 		$( '#' + $(this).attr( 'id' ) + '-details' ).toggleClass( 'ex-field' );
 	});
 

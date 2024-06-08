@@ -1773,7 +1773,7 @@ jQuery(function($){
 
 	};
 
-	$( 'input[name="<?php echo $this->field_name( 'base' ); ?>"]' ).change(function(){
+	$( 'input[name="<?php echo $this->field_name( 'base' ); ?>"]' ).on('change', function(){
 
 		var button    = $( '#bonips-update-totals' );
 		var hiddenrow = $( '#bonips-rank-based-on-wrapper' );

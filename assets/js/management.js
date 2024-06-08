@@ -107,7 +107,7 @@ jQuery(function($) {
 	/**
 	 * Export balances Modal Trigger
 	 */
-	$( '#bonips-export-users-points' ).click( function() {
+	$( '#bonips-export-users-points' ).on('click', function() {
 		$( '#export-points' ).dialog( 'open' );
 	});
 
@@ -189,7 +189,7 @@ jQuery(function($) {
 	/**
 	 * Key Length Indicator
 	 */
-	$( '#boniPS-remote-key' ).change(function(){
+	$( '#boniPS-remote-key' ).on('change', function(){
 		$( '#bonips-length-counter' ).text( $(this).val().length );
 	});
 

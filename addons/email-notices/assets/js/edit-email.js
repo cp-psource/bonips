@@ -2,7 +2,7 @@ jQuery(function($){
 
 	$(document).ready(function(){
 
-		$( 'select#bonips-email-instance' ).change(function(e){
+		$( 'select#bonips-email-instance' ).on('change', function(e){
 
 			var selectedevent = $(this).find( ':selected' );
 			console.log( selectedevent.val() );
@@ -19,7 +19,7 @@ jQuery(function($){
 
 		});
 
-		$( 'select#bonips-email-reference' ).change(function(e){
+		$( 'select#bonips-email-reference' ).on('change', function(e){
 
 			var selectedevent = $(this).find( ':selected' );
 			if ( selectedevent.val() == 'bonips_custom' ) {

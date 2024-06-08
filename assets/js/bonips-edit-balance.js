@@ -122,7 +122,7 @@ jQuery(function($) {
 		/**
 		 * Toggle Editor
 		 */
-		$( '.bonips-open-points-editor' ).click( function(e) {
+		$( '.bonips-open-points-editor' ).on('click', function(e) {
 
 			e.preventDefault();
 
@@ -156,7 +156,7 @@ jQuery(function($) {
 		/**
 		 * Toggle custom reference field
 		 */
-		boniPSReference.change(function() {
+		boniPSReference.on('change', function() {
 
 			var selectedreference = $(this).find( ':selected' );
 			if ( selectedreference === undefined ) return false;

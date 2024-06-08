@@ -362,7 +362,7 @@ if ( ! class_exists( 'boniPS_Hook_Video_Views' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#sidebar-active .toggle-hook-option' ).change(function(){
+	$( '#sidebar-active .toggle-hook-option' ).on('change', function(){
 
 		if ( $(this).val() == 'interval' ) {
 			$( '#<?php echo $this->field_id( array( 'logic-option-interval' ) ); ?>' ).show();

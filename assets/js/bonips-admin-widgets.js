@@ -25,7 +25,7 @@ wpWidgets = {
 			sidebars = $('div.widgets-sortables'),
 			isRTL = !! ( 'undefined' !== typeof isRtl && isRtl );
 
-		$('#widgets-right .sidebar-name').click( function() {
+		$('#widgets-right .sidebar-name').on('click', function() {
 			var $this = $(this),
 				$wrap = $this.closest('.widgets-holder-wrap');
 
@@ -39,12 +39,12 @@ wpWidgets = {
 			$document.triggerHandler( 'wp-pin-menu' );
 		});
 
-		$('#widgets-left .sidebar-name').click( function() {
+		$('#widgets-left .sidebar-name').on('click', function() {
 			$(this).closest('.widgets-holder-wrap').toggleClass('closed');
 			$document.triggerHandler( 'wp-pin-menu' );
 		});
 
-		$(document.body).bind('click.widgets-toggle', function(e) {
+		$(document.body).on('click.widgets-toggle', function(e) {
 			var target = $(e.target),
 				css = { 'z-index': 100 },
 				widget, inside, targetWidth, widgetWidth, margin;
@@ -318,18 +318,18 @@ wpWidgets = {
 		});
 
 		// Area Chooser
-		$( '#widgets-right .widgets-holder-wrap' ).each( function( index, element ) {
-			var $element = $( element ),
-				name = $element.find( '.sidebar-name h2' ).text(),
-				id = $element.find( '.widgets-sortables' ).attr( 'id' ),
-				li = $('<li tabindex="0">').text( $.trim( name ) );
+		$('#widgets-right .widgets-holder-wrap').each(function(index, element) {
+			var $element = $(element),
+				name = $element.find('.sidebar-name h2').text(),
+				id = $element.find('.widgets-sortables').attr('id'),
+				li = $('<li tabindex="0">').text(name.trim()); // Modern
 
-			if ( index === 0 ) {
-				li.addClass( 'widgets-chooser-selected' );
+			if (index === 0) {
+				li.addClass('widgets-chooser-selected');
 			}
 
-			selectSidebar.append( li );
-			li.data( 'sidebarId', id );
+			selectSidebar.append(li);
+			li.data('sidebarId', id);
 		});
 
 		$( '#available-widgets .widget .widget-title' ).on( 'click.widgets-chooser', function() {

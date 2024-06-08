@@ -196,7 +196,7 @@ if ( ! class_exists( 'boniPS_Bank_Transfer' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#bonips-gateway-prefs-bank-currency' ).change(function(){
+	$( '#bonips-gateway-prefs-bank-currency' ).on('change', function(){
 		$( 'span.bonips-gateway-bank-currency' ).text( $(this).val() );
 	});
 
