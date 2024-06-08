@@ -8,6 +8,11 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Export_Module' ) ) :
 	class boniPS_Export_Module extends boniPS_Module {
+		public $settings_name;
+		public $add_to_core;
+		public $accordion;
+		public $cap;
+		public $export;
 
 		/**
 		 * Construct

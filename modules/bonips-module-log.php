@@ -9,6 +9,12 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 if ( ! class_exists( 'boniPS_Log_Module' ) ) :
 	class boniPS_Log_Module extends boniPS_Module {
 
+		public $settings_name;
+		public $add_to_core;
+		public $accordion;
+		public $cap;
+		public $log;
+
 		public $user        = NULL;
 		public $screen      = NULL;
 		public $log_columns = array();

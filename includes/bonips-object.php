@@ -33,6 +33,8 @@ if ( ! class_exists( 'boniPS_Account' ) ) :
 		 */
 		public $total_balance = 0;
 
+		public $history;
+
 		/**
 		 * Construct
 		 */
@@ -128,6 +130,8 @@ if ( ! class_exists( 'boniPS_Balance' ) ) :
 		 * The point type object
 		 */
 		public $point_type  = false;
+
+		public $history;
 
 		/**
 		 * Construct

@@ -8,6 +8,13 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 	class boniPS_Addons_Module extends boniPS_Module {
+		public $settings_name;
+		public $add_to_core;
+		public $accordion;
+		public $cap;
+		public $addons;
+		public $installed;
+		public $active;
 
 		/**
 		 * Construct

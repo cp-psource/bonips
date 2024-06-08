@@ -55,6 +55,12 @@ if ( ! class_exists( 'boniPS_Module' ) ) :
 		// Pages
 		public $pages = array();
 
+		// Dynamically assigned properties
+        public $settings_name; 
+        public $add_to_core;   
+        public $accordion;     
+        public $cap;
+
 		/**
 		 * Construct
 		 */

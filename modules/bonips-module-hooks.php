@@ -8,7 +8,14 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 	class boniPS_Hooks_Module extends boniPS_Module {
-
+		public $settings_name;
+		public $add_to_core;
+		public $accordion;
+		public $cap;
+		public $hooks;
+		public $installed;
+		public $active;
+		public $hook_prefs;
 		public $setup;
 
 		/**
