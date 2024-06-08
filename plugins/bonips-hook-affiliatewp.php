@@ -14,7 +14,7 @@ function bonips_register_affiliatewp_hook( $installed ) {
 	$installed['affiliatewp'] = array(
 		'title'         => __( 'AffiliateWP', 'bonips' ),
 		'description'   => __( 'Vergibt %_plural% für Affiliate-Anmeldungen, werbende Besucher und Ladenverkaufsempfehlungen.', 'bonips' ),
-		'documentation' => 'https://n3rds.work/docs/affiliatewp-aktionen/',
+		'documentation' => 'https://github.com/cp-psource/docs/affiliatewp-aktionen/',
 		'callback'      => array( 'boniPS_AffiliateWP' )
 	);
 

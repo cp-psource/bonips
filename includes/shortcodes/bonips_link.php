@@ -10,7 +10,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * Note! Only HTML5 anchor attributes are supported and this shortcode is only
  * available if the hook is enabled!
  *
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_link/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_link/
  * @since 1.1
  * @version 1.4
  */

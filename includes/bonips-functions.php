@@ -56,6 +56,19 @@ if ( ! class_exists( 'boniPS_Settings' ) ) :
 		public $core                = array();
 
 		/**
+		 * Dynamically assigned properties
+		 */
+		public $format              = ''; 
+		public $name                = ''; 
+		public $before              = ''; 
+		public $after               = ''; 
+		public $caps                = ''; 
+		public $max                 = ''; 
+		public $exclude             = ''; 
+		public $frequency           = ''; 
+		public $delete_user         = ''; 
+
+		/**
 		 * Construct
 		 * @since 1.0
 		 * @version 1.8
@@ -747,49 +760,49 @@ if ( ! class_exists( 'boniPS_Settings' ) ) :
 			if ( in_array( 'general', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Allgemein', 'bonips' ),
-					'url'   => 'https://n3rds.work/docs/bonips-template-tags-allgemein/'
+					'url'   => 'https://github.com/cp-psource/docs/bonips-template-tags-allgemein/'
 				);
 
 			// User
 			if ( in_array( 'user', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Benutzerbezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/docs/boniprerss-benutzerbezogene-template-tags/'
+					'url'   => 'https://github.com/cp-psource/docs/boniprerss-benutzerbezogene-template-tags/'
 				);
 
 			// Post
 			if ( in_array( 'post', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Beitragsbezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/docs/bonips-beitragsbezogene-template-tags/'
+					'url'   => 'https://github.com/cp-psource/docs/bonips-beitragsbezogene-template-tags/'
 				);
 
 			// Comment
 			if ( in_array( 'comment', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Kommentar bezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/docs/bonips-kommentar-bezogen/'
+					'url'   => 'https://github.com/cp-psource/docs/bonips-kommentar-bezogen/'
 				);
 
 			// Widget
 			if ( in_array( 'widget', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Widget-bezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
+					'url'   => 'https://github.com/cp-psource/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
 				);
 
 			// Amount
 			if ( in_array( 'amount', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Betrag bezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/docs/bonips-betrag-bezogen/'
+					'url'   => 'https://github.com/cp-psource/docs/bonips-betrag-bezogen/'
 				);
 
 			// Video
 			if ( in_array( 'video', $available ) )
 				$template_tags[] = array(
 					'title' => __( 'Video bezogen', 'bonips' ),
-					'url'   => 'https://n3rds.work/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
+					'url'   => 'https://github.com/cp-psource/gruppen/psource-piestingtal-source-development-team/docs/?folder=34271'
 				);
 
 			if ( ! empty( $template_tags ) ) {

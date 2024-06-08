@@ -310,7 +310,7 @@ if ( ! class_exists( 'boniPS_Export_Module' ) ) :
 </div>
 <script type="text/javascript">
 jQuery(function($) {
-	$( '.toggle-exporter' ).click(function(){
+	$( '.toggle-exporter' ).on('click', function(){
 		$( '#export-log-history' ).toggle();
 	});
 });
@@ -357,7 +357,7 @@ jQuery(function($) {
 </div>
 <script type="text/javascript">
 jQuery(function($) {
-	$( '.toggle-exporter' ).click(function(){
+	$( '.toggle-exporter' ).on('click', function(){
 		$( '#export-log-history' ).toggle();
 	});
 });
@@ -428,7 +428,7 @@ jQuery(function($) {
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><span class="description"><?php echo str_replace( 'bonips_history', '<a href="https://n3rds.work/docs/bonips-shortcodes-bonips_history/" target="_blank">bonips_history</a>', __( 'Wenn aktiviert, können Benutzer nur ihre eigenen Protokolleinträge exportieren! Export-Tools sind überall dort verfügbar, wo Du den Shortcode bonips_history oder im Benutzerprofil verwendest.', 'bonips' ) ); ?></span></p>
+			<p><span class="description"><?php echo str_replace( 'bonips_history', '<a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_history/" target="_blank">bonips_history</a>', __( 'Wenn aktiviert, können Benutzer nur ihre eigenen Protokolleinträge exportieren! Export-Tools sind überall dort verfügbar, wo Du den Shortcode bonips_history oder im Benutzerprofil verwendest.', 'bonips' ) ); ?></span></p>
 		</div>
 	</div>
 

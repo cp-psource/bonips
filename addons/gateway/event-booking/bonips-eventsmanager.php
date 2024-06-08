@@ -509,12 +509,12 @@ if ( ! class_exists( 'boniPS_Events_Manager_Gateway' ) && defined( 'EM_VERSION' 
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( 'a.bonips-show-pay' ).click(function() {
+	$( 'a.bonips-show-pay' ).on('click', function() {
 		var box = $(this).attr( 'data-booking' );
 		$( 'tr#bonips-payment-' + box ).toggle();
 	});
 
-	$( 'input.bonips-pay' ).click(function() {
+	$( 'input.bonips-pay' ).on('click', function() {
 
 		var button  = $(this);
 		var label   = button.val();

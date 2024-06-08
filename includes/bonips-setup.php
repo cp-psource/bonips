@@ -183,7 +183,7 @@ pre { margin: 0 0 12px 0; padding: 10px; background-color: #dedede; }
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( '#toggle-advanced-options' ).click(function(){
+	$( '#toggle-advanced-options' ).on('click', function(){
 
 		var hidelabel = $(this).data( 'hide' );
 		var showlabel = $(this).data( 'show' );

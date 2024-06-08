@@ -4,7 +4,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 /**
  * BoniPress Shortcode: my_balance
  * Gibt das aktuelle Benutzerguthaben zurück.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_my_balance/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_my_balance/
  * @contributor DerN3rd
  * @since 1.0.9
  * @version 1.2.1
@@ -81,7 +81,7 @@ endif;
 /**
  * BoniPress Shortcode: bonips_history
  * Returns the points history.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_history/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_history/
  * @since 1.0.9
  * @version 1.1.1
  */
@@ -135,7 +135,7 @@ endif;
 
 /**
  * BoniPress Shortcode: bonips_leaderboard
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_leaderboard//
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_leaderboard//
  * @since 0.1
  * @version 1.4
  */
@@ -329,7 +329,7 @@ endif;
 
 /**
  * BoniPress Shortcode: bonips_my_ranking
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_my_ranking/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_my_ranking/
  * @since 0.1
  * @version 1.4
  */
@@ -402,7 +402,7 @@ endif;
  * when this shortcode is executed. You can insert this in page/post content
  * or in a template file. Note that users are awarded/deducted points each time
  * this shortcode exectutes!
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_give/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_give/
  * @since 1.1
  * @version 1.1.1
  */
@@ -460,7 +460,7 @@ endif;
  * Note! Only HTML5 anchor attributes are supported and this shortcode is only
  * available if the hook is enabled!
  *
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_link/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_link/
  * @since 1.1
  * @version 1.1
  */
@@ -525,7 +525,7 @@ endif;
  * BoniPress Shortcode: bonips_send
  * This shortcode allows the current user to send a pre-set amount of points
  * to a pre-set user. A simpler version of the bonips_transfer shortcode.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_send/ 
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_send/ 
  * @since 1.1
  * @version 1.0
  */
@@ -690,7 +690,7 @@ endif;
  * BoniPress Shortcode: bonips_video
  * This shortcode allows points to be given to the current user
  * for watchinga YouTube video.
- * @see https://n3rds.work/docs/bonips-shortcode-bonips_video/
+ * @see https://github.com/cp-psource/docs/bonips-shortcode-bonips_video/
  * @since 1.2
  * @version 1.1.1
  */
@@ -772,7 +772,7 @@ endif;
  * This shortcode will return either the current user or a given users
  * total balance based on either all point types or a comma seperated list
  * of types.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_total_balance/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_total_balance/
  * @since 1.4.3
  * @version 1.1
  */
@@ -839,7 +839,7 @@ endif;
  * BoniPress Shortcode: bonips_exchange
  * This shortcode will return an exchange form allowing users to
  * exchange one point type for another.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_exchange/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_exchange/
  * @since 1.5
  * @version 1.0
  */

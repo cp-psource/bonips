@@ -739,7 +739,7 @@ th#badge-users { width: 10%; }
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( 'input.bonips-badge-action-button' ).click(function(){
+	$( 'input.bonips-badge-action-button' ).on('click', function(){
 		var button = $(this);
 		var label = button.val();
 
@@ -1256,7 +1256,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 				</div>
 				<?php else : ?>
 					<input type="hidden" name="<?php echo $this->field_name( 'psforum' ); ?>" id="<?php echo $this->field_id( 'psforum' ); ?>" value="" />
-					<p><span class="description"><?php _e( '<a href="https://n3rds.work/piestingtal_source/ps-forum-plugin/" target=“_blank”>PS Forum</a>ist nicht installiert', 'bonips' ); ?></span></p>
+					<p><span class="description"><?php _e( '<a href="https://github.com/cp-psource/piestingtal_source/ps-forum-plugin/" target=“_blank”>PS Forum</a>ist nicht installiert', 'bonips' ); ?></span></p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -1265,7 +1265,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="https://n3rds.work/docs/bonips-shortcodes-bonips_my_badges/" target="_blank">[bonips_my_badges]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_badges/" target="_blank">[bonips_badges]</a></p>
+			<p><a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_my_badges/" target="_blank">[bonips_my_badges]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_badges/" target="_blank">[bonips_badges]</a></p>
 		</div>
 	</div>
 
@@ -1384,7 +1384,7 @@ var BadgeRequirement   = '<?php echo $js_requirement_clone; ?>';
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( '.badge-wrapper label input.toggle-badge' ).click(function(){
+	$( '.badge-wrapper label input.toggle-badge' ).on('click', function(){
 
 		if ( $(this).is( ':checked' ) )
 			$( '#' + $(this).attr( 'id' ) + '-wrapper' ).addClass( 'selected' );

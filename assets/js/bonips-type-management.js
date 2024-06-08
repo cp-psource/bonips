@@ -68,7 +68,7 @@ jQuery(function($) {
 	/**
 	 * Empty Log Trigger
 	 */
-	$( '#bonips-manage-action-empty-log' ).click(function(){
+	$( '#bonips-manage-action-empty-log' ).on('click', function(){
 
 		// Confirm action
 		if ( confirm( boniPSmanage.confirm_log ) )
@@ -117,7 +117,7 @@ jQuery(function($) {
 	/**
 	 * Reset Balance Trigger
 	 */
-	$( '#bonips-manage-action-reset-accounts' ).click(function(){
+	$( '#bonips-manage-action-reset-accounts' ).on('click', function(){
 
 		// Confirm action
 		if ( confirm( boniPSmanage.confirm_reset ) )
@@ -216,7 +216,7 @@ jQuery(function($) {
 	/**
 	 * Balance Export Trigger
 	 */
-	$( '#bonips-run-exporter' ).click(function(){
+	$( '#bonips-run-exporter' ).on('click', function(){
 
 		bonips_action_export_balances( $(this) );
 
@@ -246,7 +246,7 @@ jQuery(function($) {
 	/**
 	 * Generate Key Trigger
 	 */
-	$( '#bonips-generate-api-key' ).click(function(){
+	$( '#bonips-generate-api-key' ).on('click', function(){
 		bonips_generate_key();
 	});
 
@@ -321,7 +321,7 @@ jQuery(function($) {
 	/**
 	 * Update Log Decimals Trigger
 	 */
-	$( '#bonips-update-log-decimals' ).click(function(){
+	$( '#bonips-update-log-decimals' ).on('click', function(){
 
 		if ( confirm( boniPSmanage.decimals ) ) {
 			bonips_adjust_max_decimals( $(this), $(this).val(), $( '#bonips-adjust-decimal-places' ).val() );
@@ -370,7 +370,7 @@ jQuery(function($) {
 	/**
 	 * Clear Cache Trigger
 	 */
-	$( 'button.clear-type-cache-button' ).click(function(){
+	$( 'button.clear-type-cache-button' ).on('click', function(){
 
 		bonips_clear_the_cache( $(this), $(this).html() );
 

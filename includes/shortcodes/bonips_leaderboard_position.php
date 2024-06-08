@@ -3,7 +3,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * BoniPress Shortcode: bonips_leaderboard_position
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_leaderboard/_position/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_leaderboard/_position/
  * Replaces the bonips_my_ranking shortcode.
  * @since 1.7
  * @version 1.2

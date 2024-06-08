@@ -6,7 +6,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * This shortcode will return either the current user or a given users
  * total balance based on either all point types or a comma seperated list
  * of types.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_total_balance/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_total_balance/
  * @since 1.4.3
  * @version 1.3
  */

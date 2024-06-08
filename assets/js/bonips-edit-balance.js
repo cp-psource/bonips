@@ -174,7 +174,7 @@ jQuery(function($) {
 		/**
 		 * Toggle mini ledger
 		 */
-		$( 'button#load-users-bonips-history' ).click(function() {
+		$( 'button#load-users-bonips-history' ).on('click', function() {
 
 			if ( boniPSEditorLedger.hasClass( 'shown' ) ) {
 				boniPSEditorLedger.slideUp(function(){

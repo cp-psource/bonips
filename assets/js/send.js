@@ -6,7 +6,7 @@
  */
 jQuery(function($) {
 
-	$( 'button.bonips-send-points-button' ).click(function(){
+	$( 'button.bonips-send-points-button' ).on('click', function(){
 
 		var button        = $(this);
 		var originallabel = button.text();

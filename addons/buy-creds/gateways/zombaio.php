@@ -416,7 +416,7 @@ if ( ! class_exists( 'boniPS_Zombaio' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#<?php echo $this->field_id( 'dynamic' ); ?>' ).click(function(){
+	$( '#<?php echo $this->field_id( 'dynamic' ); ?>' ).on('click', function(){
 
 		if ( $(this).is( ':checked' ) )
 			$( '#zombaio-dynamic-wrapper' ).show();

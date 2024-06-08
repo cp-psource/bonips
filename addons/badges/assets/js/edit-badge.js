@@ -126,7 +126,7 @@ jQuery(function($){
 		}
 
 		// Change Requirement Compare Action
-		RequirementCompare.click(function(e){
+		RequirementCompare.on('click', function(e){
 
 			e.preventDefault();
 
@@ -174,7 +174,7 @@ jQuery(function($){
 		});
 
 		// Add New Requirement Action
-		AddNewRequirementButton.click(function(e){
+		AddNewRequirementButton.on('click', function(e){
 
 			e.preventDefault();
 
@@ -428,7 +428,7 @@ jQuery(function($){
 		});
 
 		// Add New Level Action
-		AddNewLevelButton.click(function(e){
+		AddNewLevelButton.on('click', function(e){
 
 			e.preventDefault();
 
@@ -506,7 +506,7 @@ jQuery(function($){
 		});
 
 		// Change Default Image Action
-		ChangeDefaultImageButton.click(function(e){
+		ChangeDefaultImageButton.on('click', function(e){
 
 			e.preventDefault();
 			console.log( 'Change default image button' );

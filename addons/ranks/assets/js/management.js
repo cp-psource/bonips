@@ -42,7 +42,7 @@ jQuery(function($){
 		});
 	};
 	
-	$( 'input#bonips-manage-action-reset-ranks' ).click(function(){
+	$( 'input#bonips-manage-action-reset-ranks' ).on('click', function(){
 		// Confirm action
 		if ( confirm( boniPS_Ranks.confirm_del ) ) {
 			bonips_action_delete_ranks( $(this), $(this).data( 'type' ) );
@@ -84,7 +84,7 @@ jQuery(function($){
 		});
 	};
 	
-	$( 'input#bonips-manage-action-assign-ranks' ).click(function(){
+	$( 'input#bonips-manage-action-assign-ranks' ).on('click', function(){
 		// Confirm action
 		if ( confirm( boniPS_Ranks.confirm_assign ) ) {
 			bonips_action_assign_ranks( $(this), $(this).data( 'type' ) );

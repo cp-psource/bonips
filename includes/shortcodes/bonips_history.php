@@ -4,7 +4,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 /**
  * BoniPress Shortcode: bonips_history
  * Returns the points history.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_history/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_history/
  * @since 1.0.9
  * @version 1.3.4
  */

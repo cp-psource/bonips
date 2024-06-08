@@ -1,7 +1,7 @@
 <?php
 /**
  * Addon: Ranks
- * Addon URI: https://n3rds.work/docs/bonips-erweiterungen-raenge/
+ * Addon URI: https://github.com/cp-psource/docs/bonips-erweiterungen-raenge/
  * Version: 1.6
  */
 if ( ! defined( 'boniPS_VERSION' ) ) exit;
@@ -1745,7 +1745,7 @@ if ( ! class_exists( 'boniPS_Ranks_Module' ) ) :
 	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="https://n3rds.work/docs/bonips-shortcodes-bonips_my_rank/" target="_blank">[bonips_my_rank]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_my_ranks/" target="_blank">[bonips_my_ranks]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_list_ranks/" target="_blank">[bonips_list_ranks]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_users_of_all_ranks/" target="_blank">[bonips_users_of_all_ranks]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_users_of_rank/" target="_blank">[bonips_users_of_rank]</a></p>
+			<p><a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_my_rank/" target="_blank">[bonips_my_rank]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_my_ranks/" target="_blank">[bonips_my_ranks]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_list_ranks/" target="_blank">[bonips_list_ranks]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_users_of_all_ranks/" target="_blank">[bonips_users_of_all_ranks]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_users_of_rank/" target="_blank">[bonips_users_of_rank]</a></p>
 		</div>
 	</div>
 
@@ -1789,7 +1789,7 @@ jQuery(function($){
 
 	});
 
-	$( 'input#bonips-update-totals' ).click(function(){
+	$( 'input#bonips-update-totals' ).on('click', function(){
 
 		bonips_calc( $(this), $(this).data( 'type' ) );
 

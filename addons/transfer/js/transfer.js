@@ -91,7 +91,7 @@ jQuery(function($){
 	});
 	
 	// Attempt Transfer
-	$( '.bonips-click' ).click(function(){
+	$( '.bonips-click' ).on('click', function(){
 
 		// The form
 		var the_form = $(this).parent().parent().parent();

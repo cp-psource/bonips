@@ -5,7 +5,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * BoniPress Shortcode: bonips_video
  * This shortcode allows points to be given to the current user
  * for watchinga YouTube video.
- * @see https://n3rds.work/docs/bonips-shortcode-bonips_video/
+ * @see https://github.com/cp-psource/docs/bonips-shortcode-bonips_video/
  * @since 1.2
  * @version 1.2.2
  */

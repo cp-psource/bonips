@@ -300,7 +300,7 @@ if ( ! class_exists( 'boniPS_Hook_Click_Links' ) ) :
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label><?php _e( 'Available Shortcode', 'bonips' ); ?></label>
-				<p class="form-control-static"><a href="https://n3rds.work/docs/bonips-shortcodes-bonips_link/" target="_blank">[bonips_link]</a></p>
+				<p class="form-control-static"><a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_link/" target="_blank">[bonips_link]</a></p>
 			</div>
 		</div>
 	</div>

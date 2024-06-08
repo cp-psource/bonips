@@ -3,7 +3,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * boniPS_Hook class
- * @see https://n3rds.work/docs/bonips_hook/
+ * @see https://github.com/cp-psource/docs/bonips_hook/
  * @since 0.1
  * @version 1.3.2
  */

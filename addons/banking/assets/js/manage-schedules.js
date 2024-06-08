@@ -68,7 +68,7 @@ jQuery(function($) {
 		} );
 
 		// Schedule
-		$( '#add-new-schedule' ).click(function(e){
+		$( '#add-new-schedule' ).on('click', function(e){
 
 			e.preventDefault();
 

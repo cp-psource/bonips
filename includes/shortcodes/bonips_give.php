@@ -7,7 +7,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * when this shortcode is executed. You can insert this in page/post content
  * or in a template file. Note that users are awarded/deducted points each time
  * this shortcode exectutes!
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_give/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_give/
  * @since 1.1
  * @version 1.3
  */

@@ -102,7 +102,7 @@ if ( ! function_exists( 'bonips_woo_product_metabox' ) ) :
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( '.toggle-bonips-reward' ).click(function(){
+	$( '.toggle-bonips-reward' ).on('click', function(){
 		var target = $(this).attr( 'data-id' );
 		$( '#reward-' + target ).toggle();
 	});

@@ -47,7 +47,7 @@
 			noticeWrapAll	= (!jQuery('.notice-wrap').length) ? jQuery('<div></div>').addClass('notice-wrap').appendTo('body') : jQuery('.notice-wrap');
 			noticeItemOuter	= jQuery('<div></div>').addClass('notice-item-wrapper');
 			noticeItemInner	= jQuery('<div></div>').hide().addClass('notice-item ' + options.type).appendTo(noticeWrapAll).html( options.text ).animate(options.inEffect, options.inEffectDuration).wrap(noticeItemOuter);
-			noticeItemClose	= jQuery('<div></div>').addClass('notice-item-close').prependTo(noticeItemInner).html('&times;').click(function() { jQuery.noticeRemove(noticeItemInner) });
+			noticeItemClose	= jQuery('<div></div>').addClass('notice-item-close').prependTo(noticeItemInner).html('&times;').on('click', function() { jQuery.noticeRemove(noticeItemInner) });
 			
 			// hmmmz, zucht
 			if(navigator.userAgent.match(/MSIE 6/i)) 

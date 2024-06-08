@@ -40,7 +40,7 @@ jQuery(function($) {
 		});
 	};
 	
-	$('.bonips-sell-this-button').click(function(){
+	$('.bonips-sell-this-button').on('click', function(){
 		bonips_buy_content( $(this), $(this).attr( 'value' ) );
 	});
 });

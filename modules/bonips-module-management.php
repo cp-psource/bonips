@@ -619,7 +619,7 @@ if ( ! class_exists( 'boniPS_Management_Module' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '.toggle-bonips-balance-editor a' ).click(function(e){
+	$( '.toggle-bonips-balance-editor a' ).on('click', function(e){
 
 		e.preventDefault();
 		$(this).blur();

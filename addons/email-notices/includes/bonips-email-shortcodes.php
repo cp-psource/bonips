@@ -4,7 +4,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 /**
  * BoniPress Shortcode: bonips_email_subscriptions
  * Returns a given users rank
- * @see https://n3rds.work/docs/bonips-bonips_email_subscriptions/
+ * @see https://github.com/cp-psource/docs/bonips-bonips_email_subscriptions/
  * @since 1.4.6
  * @version 1.1
  */

@@ -15,7 +15,7 @@ function bonips_register_buddypress_hook( $installed ) {
 		$installed['hook_bp_profile'] = array(
 			'title'         => __( 'BuddyPress: Mitglieder', 'bonips' ),
 			'description'   => __( 'Vergibt %_plural% für profilbezogene Aktionen.', 'bonips' ),
-			'documentation' => 'https://n3rds.work/docs/buddypress-profilaktionen/',
+			'documentation' => 'https://github.com/cp-psource/docs/buddypress-profilaktionen/',
 			'callback'      => array( 'boniPS_BuddyPress_Profile' )
 		);
 	}
@@ -24,7 +24,7 @@ function bonips_register_buddypress_hook( $installed ) {
 		$installed['hook_bp_groups'] = array(
 			'title'         => __( 'BuddyPress: Gruppen', 'bonips' ),
 			'description'   => __( 'Vergibt %_plural% für gruppenbezogene Aktionen. Verwende Minus, um %_plural% abzuziehen, oder Null, um einen bestimmten Hook zu deaktivieren.', 'bonips' ),
-			'documentation' => 'https://n3rds.work/docs/buddypress-gruppenaktionen/',
+			'documentation' => 'https://github.com/cp-psource/docs/buddypress-gruppenaktionen/',
 			'callback'      => array( 'boniPS_BuddyPress_Groups' )
 		);
 	}

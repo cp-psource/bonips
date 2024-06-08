@@ -3,7 +3,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * boniPS_Module class
- * @see https://n3rds.work/docs/bonips_module/
+ * @see https://github.com/cp-psource/docs/bonips_module/
  * @since 0.1
  * @version 1.3.5
  */

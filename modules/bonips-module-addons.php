@@ -175,10 +175,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['badges'] = array(
 				'name'        => 'Abzeichen',
 				'description' => __( 'Verleihe Deinen Benutzern Abzeichen basierend auf ihrer Interaktion mit Deiner Webseite.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-abzeichen/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-abzeichen/',
 				'version'     => '1.4',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/badges-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -187,10 +187,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['banking'] = array(
 				'name'        => 'Banking',
 				'description' => __( 'Richte wiederkehrende Auszahlungen oder Angebots-/Gebührenzinsen für Benutzerkontoguthaben ein.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-banking/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-banking/',
 				'version'     => '2.0',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/banking-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -199,10 +199,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['buy-creds'] = array(
 				'name'        => 'Kreditkauf',
 				'description' => __( 'Mit der <strong>Kreditkauf</strong> Erweiterung können Deine Benutzer Punkte mit PayPal, Skrill (Moneybookers) oder NETbilling kaufen. Mit <strong>Kreditkauf</strong> können Deine Benutzer auch Punkte für andere Mitglieder kaufen.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterung-kreditkauf/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterung-kreditkauf/',
 				'version'     => '1.5',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/buy-creds-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -211,10 +211,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['coupons'] = array(
 				'name'        => 'Gutscheine',
 				'description' => __( 'Mit der Gutschein-Erweiterung kannst Du Gutscheine erstellen, mit denen Benutzer ihren Konten Punkte hinzufügen können.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-gutscheine/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-gutscheine/',
 				'version'     => '1.4',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/coupons-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -223,10 +223,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['email-notices'] = array(
 				'name'        => 'E-Mail Benachrichtigungen',
 				'description' => __( 'Erstelle E-Mail-Benachrichtigungen für jede Art von boniPS-Instanz.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-e-mail-benachrichtigungen/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-e-mail-benachrichtigungen/',
 				'version'     => '1.4',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/email-notifications-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -235,10 +235,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['gateway'] = array(
 				'name'        => 'Gateway',
 				'description' => __( 'Lasse Deine Benutzer mit ihrem <strong>BoniPress</strong> Punkteguthaben bezahlen. Unterstützte Einkaufswagen: WooCommerce, PSeCommerce und WP E-Commerce. Unterstützte Eventbuchungen: Event Espresso und Events Manager (kostenlos&pro).', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-gateway/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-gateway/',
 				'version'     => '1.4',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/gateway-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -250,8 +250,8 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 				'addon_url'   => 'http://codex.bonips.me/chapter-iii/notifications/',
 				'version'     => '1.1.2',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
-				//'pro_url'     => 'https://n3rds.work/docs/bonips-erweiterungen-benachrichtigungen/',
+				'author_url'  => 'https://github.com/cp-psource',
+				//'pro_url'     => 'https://github.com/cp-psource/docs/bonips-erweiterungen-benachrichtigungen/',
 				'screenshot'  =>  plugins_url( 'assets/images/notifications-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -260,10 +260,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['ranks'] = array(
 				'name'        => 'Ränge',
 				'description' => __( 'Erstelle Ränge für Benutzer, die eine bestimmte Anzahl von %_plural% erreichen, mit der Option, Logos für jeden Rang hinzuzufügen.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-raenge/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-raenge/',
 				'version'     => '1.6',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/ranks-addon.png', boniPS_THIS ),
 				'requires'    => array()
 			);
@@ -272,10 +272,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['sell-content'] = array(
 				'name'        => 'Inhalt verkaufen',
 				'description' => __( 'Mit dieser Erweiterung kannst Du Beiträge, Seiten oder andere öffentliche Beitragstypen auf Deiner Webseite verkaufen. Du kannst entweder den gesamten Inhalt verkaufen oder mit unserem Shortcode Teile Deines Inhalts verkaufen, um "Teaser" anzubieten.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-inhalt-verkaufen/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-inhalt-verkaufen/',
 				'version'     => '2.0.1',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/sell-content-addon.png', boniPS_THIS ),
 				'requires'    => array( 'log' )
 			);
@@ -284,10 +284,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['stats'] = array(
 				'name'        => 'Statistiken',
 				'description' => __( 'Ermöglicht Dir den Zugriff auf Deine BoniPress-Statistiken basierend auf den Gewinnen und Verlusten Deiner Benutzer.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-stastiken/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-stastiken/',
 				'version'     => '2.0',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				'screenshot'  => plugins_url( 'assets/images/statistics-addon.png', boniPS_THIS )
 			);
 
@@ -295,10 +295,10 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 			$installed['transfer'] = array(
 				'name'        => 'Transaktionen',
 				'description' => __( 'Ermögliche Deinen Benutzern, Punkte an andere Mitglieder zu senden oder zu "spenden", indem Du entweder den Shortcode bonips_transfer oder das Widget BoniPress Transfer verwendest.', 'bonips' ),
-				'addon_url'   => 'https://n3rds.work/docs/bonips-erweiterungen-transaktionen/',
+				'addon_url'   => 'https://github.com/cp-psource/docs/bonips-erweiterungen-transaktionen/',
 				'version'     => '1.6',
 				'author'      => 'DerN3rd',
-				'author_url'  => 'https://n3rds.work',
+				'author_url'  => 'https://github.com/cp-psource',
 				//'pro_url'     => 'https://bonips.me/store/transfer-plus/',
 				'screenshot'  => plugins_url( 'assets/images/transfer-addon.png', boniPS_THIS ),
 				'requires'    => array()
@@ -339,7 +339,7 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 .theme-browser .theme:hover a.more-details, .theme-browser .theme:hover a.more-details:hover { text-decoration: none; }
 </style>
 <div class="wrap" id="boniPS-wrap">
-	<h1><?php _e( 'Erweiterungen', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://n3rds.work/docs/bonips-erweiterungen-uebersicht/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Erweiterungen', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://github.com/cp-psource/docs/bonips-erweiterungen-uebersicht/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
 <?php
 
 			// Messages
@@ -408,7 +408,7 @@ if ( ! class_exists( 'boniPS_Addons_Module' ) ) :
 
 				}
 
-				if ( BONIPS_SHOW_PREMIUM_ADDONS ) echo '<div class="theme add-new-theme"><a href="https://n3rds.work/shop/artikel/category/bonips-erweiterungen/" target="_blank"><div class="theme-screenshot"><span></span></div><h2 class="theme-name">Weitere Erweiterungen hinzufügen</h2></a></div><br class="clear" />';
+				if ( BONIPS_SHOW_PREMIUM_ADDONS ) echo '<div class="theme add-new-theme"><a href="https://github.com/cp-psource/shop/artikel/category/bonips-erweiterungen/" target="_blank"><div class="theme-screenshot"><span></span></div><h2 class="theme-name">Weitere Erweiterungen hinzufügen</h2></a></div><br class="clear" />';
 
 			}
 

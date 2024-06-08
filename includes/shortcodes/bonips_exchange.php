@@ -5,7 +5,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * BoniPress Shortcode: bonips_exchange
  * This shortcode will return an exchange form allowing users to
  * exchange one point type for another.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_exchange/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_exchange/
  * @since 1.5
  * @version 1.1
  */

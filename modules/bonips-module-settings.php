@@ -521,7 +521,7 @@ if ( ! class_exists( 'boniPS_Settings_Module' ) ) :
 
 ?>
 <div class="wrap bonips-metabox" id="boniPS-wrap">
-	<h1><?php _e( 'Einstellungen', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://n3rds.work/docs/bonips-dokumentation/" target="_blank" class="page-title-action"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Einstellungen', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://github.com/cp-psource/docs/bonips-dokumentation/" target="_blank" class="page-title-action"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
 
 	<?php $this->update_notice(); ?>
 

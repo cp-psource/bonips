@@ -10,7 +10,7 @@ jQuery(function($) {
 	/**
 	 * Click To Toggle Script
 	 */
-	$( '.click-to-toggle' ).click(function(){
+	$( '.click-to-toggle' ).on('click', function(){
 		var target = $(this).attr( 'data-toggle' );
 		$( '#' + target ).toggle();
 	});
@@ -58,7 +58,7 @@ jQuery(function($) {
 	/**
 	 * Log Entry Deletion Trigger
 	 */
-	$( '.bonips-delete-row' ).click(function(){
+	$( '.bonips-delete-row' ).on('click', function(){
 		// Require user to confirm deletion
 		if ( ! confirm( boniPSLog.messages.delete_row ) )
 			return false;

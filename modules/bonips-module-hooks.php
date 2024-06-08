@@ -75,7 +75,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['registration'] = array(
 				'title'         => __( '%plural% für Registrierungen', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für Benutzer, die Deiner Webseite beitreten.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-registrierungen/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-registrierungen/',
 				'callback'      => array( 'boniPS_Hook_Registration' )
 			);
 
@@ -83,7 +83,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['anniversary'] = array(
 				'title'         => __( '%plural% zum Jubiläum', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für jedes Jahr, in dem ein Benutzer Mitglied ist.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-jubilaeum/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-jubilaeum/',
 				'callback'      => array( 'boniPS_Hook_Anniversary' )
 			);
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['site_visit'] = array(
 				'title'         => __( '%plural% für tägliche Besuche', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für den täglichen Besuch Deiner Webseite.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-taegliche-besuche/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-taegliche-besuche/',
 				'callback'      => array( 'boniPS_Hook_Site_Visits' )
 			);
 
@@ -99,7 +99,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['view_contents'] = array(
 				'title'         => __( '%plural% für das Anzeigen von Inhalten', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für das Anzeigen von Inhalten.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-punkte-fuer-das-anzeigen-von-inhalten/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-punkte-fuer-das-anzeigen-von-inhalten/',
 				'callback'      => array( 'boniPS_Hook_View_Contents' )
 			);
 
@@ -107,7 +107,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['logging_in'] = array(
 				'title'         => __( '%plural% für Logins', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% fürs Einloggen.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-einloggen/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-einloggen/',
 				'callback'      => array( 'boniPS_Hook_Logging_In' )
 			);
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['publishing_content'] = array(
 				'title'         => __( '%plural% für veröffentlichen von Inhalten', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für das Veröffentlichen von Inhalten.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-veroeffentlichen-von-inhalten/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-veroeffentlichen-von-inhalten/',
 				'callback'      => array( 'boniPS_Hook_Publishing_Content' )
 			);
 
@@ -123,7 +123,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['deleted_content'] = array(
 				'title'         => __( '%plural% für verworfenen Inhalt', 'bonips' ),
 				'description'   => __( '%_plural% vergeben oder abziehen, wenn Inhalte in den Papierkorb verschoben werden.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-inhalte-loeschen/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-inhalte-loeschen/',
 				'callback'      => array( 'boniPS_Hook_Delete_Content' )
 			);
 
@@ -131,23 +131,23 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['comments'] = array(
 				'title'         => ( ! function_exists( 'dsq_is_installed' ) ) ? __( '%plural% für Kommentare', 'bonips' ) : __( '%plural% für Disqus Kommentare', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für Kommentare.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-kommentare/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-kommentare/',
 				'callback'      => array( 'boniPS_Hook_Comments' )
 			);
 
 			// Link Clicks
 			$installed['link_click'] = array(
 				'title'         => __( '%plural% für Klicken auf Links', 'bonips' ),
-				'description'   => str_replace( '%shortcode%', '<a href="https://n3rds.work/docs/bonips-shortcodes-bonips_link/" target="_blank">bonips_link</a>', __( 'Vergebe %_plural% für Klicks auf Links, die mit dem Shortcode %shortcode% generiert wurden.', 'bonips' ) ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-klicken-auf-links/',
+				'description'   => str_replace( '%shortcode%', '<a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_link/" target="_blank">bonips_link</a>', __( 'Vergebe %_plural% für Klicks auf Links, die mit dem Shortcode %shortcode% generiert wurden.', 'bonips' ) ),
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-klicken-auf-links/',
 				'callback'      => array( 'boniPS_Hook_Click_Links' )
 			);
 
 			// Video Views
 			$installed['video_view'] = array(
 				'title'         => __( '%plural% für Ansehen von Videos', 'bonips' ),
-				'description'   => str_replace( '%shortcode%', '<a href="https://n3rds.work/docs/bonips-shortcode-bonips_video/" target="_blank">bonips_video</a>', __( 'Vergebe %_plural% für Videos, die mit dem %shortcode% Shortcode eingebettet wurden.', 'bonips' ) ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-ansehen-von-videos/',
+				'description'   => str_replace( '%shortcode%', '<a href="https://github.com/cp-psource/docs/bonips-shortcode-bonips_video/" target="_blank">bonips_video</a>', __( 'Vergebe %_plural% für Videos, die mit dem %shortcode% Shortcode eingebettet wurden.', 'bonips' ) ),
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-ansehen-von-videos/',
 				'callback'      => array( 'boniPS_Hook_Video_Views' )
 			);
 
@@ -155,7 +155,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 			$installed['affiliate'] = array(
 				'title'         => __( '%plural% für Empfehlungen', 'bonips' ),
 				'description'   => __( 'Vergebe %_plural% für Anmeldungen oder Besucherempfehlungen.', 'bonips' ),
-				'documentation' => 'https://n3rds.work/docs/bonips-hooks-empfehlungen/',
+				'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-empfehlungen/',
 				'callback'      => array( 'boniPS_Hook_Affiliate' )
 			);
 
@@ -284,7 +284,7 @@ if ( ! class_exists( 'boniPS_Hooks_Module' ) ) :
 .form .radio { margin-bottom: 12px; }
 </style>
 <div class="wrap">
-	<h1><?php _e( 'Hooks', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://n3rds.work/docs/bonips-hooks-einrichten/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Hooks', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://github.com/cp-psource/docs/bonips-hooks-einrichten/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
 	<div class="widget-liquid-left">
 		<div id="widgets-left">
 			<div id="available-widgets" class="widgets-holder-wrap">

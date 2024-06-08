@@ -45,7 +45,7 @@
 
 	});
 
-	$( 'input.bonips-autofill' ).click(function(){
+	$( 'input.bonips-autofill' ).on('click', function(){
 
 		if ( boniPSTransfer.autofill == 'none' ) return false;
 

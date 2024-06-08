@@ -843,7 +843,7 @@ if ( ! class_exists( 'boniPS_Email_Notice_Module' ) ) :
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div><?php printf( __( 'Du kannst auch %s verwenden.', 'bonips' ), '<a href="https://n3rds.work/docs/boniprerss-benutzerbezogene-template-tags/" target="_blank">' . __( 'benutzerbezogene Template-Tags', 'bonips' ) . '</a>' ); ?></div>
+				<div><?php printf( __( 'Du kannst auch %s verwenden.', 'bonips' ), '<a href="https://github.com/cp-psource/docs/boniprerss-benutzerbezogene-template-tags/" target="_blank">' . __( 'benutzerbezogene Template-Tags', 'bonips' ) . '</a>' ); ?></div>
 			</div>
 		</div>
 	</div>
@@ -1206,7 +1206,7 @@ if ( ! class_exists( 'boniPS_Email_Notice_Module' ) ) :
 	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="https://n3rds.work/docs/bonips-bonips_email_subscriptions/" target="_blank">[bonips_email_subscriptions]</a></p>
+			<p><a href="https://github.com/cp-psource/docs/bonips-bonips_email_subscriptions/" target="_blank">[bonips_email_subscriptions]</a></p>
 		</div>
 	</div>
 

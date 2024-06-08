@@ -14,7 +14,7 @@ function bonips_register_wp_postratings_hook( $installed ) {
 	$installed['wp_postratings'] = array(
 		'title'         => __( 'Beitrags-Bewertungen', 'bonips' ),
 		'description'   => __( 'Belohnungen %_plural% für Beitrags-Bewertungen. Unterstützt die Vergabe von %_plural% sowohl an den Autor als auch an die Benutzerbewertung.', 'bonips' ),
-		'documentation' => 'https://n3rds.work/docs/bonips-hooks-von-drittanbietern/',
+		'documentation' => 'https://github.com/cp-psource/docs/bonips-hooks-von-drittanbietern/',
 		'callback'      => array( 'boniPS_WP_Postratings' )
 	);
 

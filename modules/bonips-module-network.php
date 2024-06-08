@@ -238,7 +238,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 
 ?>
 <div class="wrap bonips-metabox" id="boniPS-wrap">
-	<h1><?php printf( __( '%s Netzwerk', 'bonips' ), $name ); ?><?php if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://n3rds.work/docs/bonips-multisite/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
+	<h1><?php printf( __( '%s Netzwerk', 'bonips' ), $name ); ?><?php if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://github.com/cp-psource/docs/bonips-multisite/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
 <?php
 
 			if ( wp_is_large_network() ) {
@@ -273,7 +273,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<h3><?php _e( 'Master-Vorlage', 'bonips' ); ?></h3>
-						<p><a href="https://n3rds.work/docs/bonips-multisite/" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a></p>
+						<p><a href="https://github.com/cp-psource/docs/bonips-multisite/" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a></p>
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="form-group">
@@ -289,7 +289,7 @@ h4.ui-accordion-header:before { content: "<?php _e( 'Klicke zum Öffnen', 'bonip
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<h3><?php _e( 'Zentrale Protokollierung', 'bonips' ); ?></h3>
-						<p><a href="https://n3rds.work/docs/bonips-multisite/" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a></p>
+						<p><a href="https://github.com/cp-psource/docs/bonips-multisite/" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a></p>
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="form-group">

@@ -3,7 +3,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * Query Log
- * @see https://n3rds.work/docs/bonips-bonips_query_log/ 
+ * @see https://github.com/cp-psource/docs/bonips-bonips_query_log/ 
  * @since 0.1
  * @version 1.4.1
  */
@@ -610,7 +610,7 @@ if ( ! class_exists( 'boniPS_Query_Log' ) ) :
 </div>
 <script type="text/javascript">
 jQuery(function($) {
-	$( '.toggle-exporter' ).click(function(){
+	$( '.toggle-exporter' ).on('click', function(){
 		$( '#export-log-history' ).toggle();
 	});
 });

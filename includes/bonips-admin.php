@@ -637,7 +637,7 @@ div#edit-balance-page.wrap form#your-profile h3 { margin-top: 3em; }
 	</form>
 	<script type="text/javascript">
 jQuery(function($) {
-	$( 'a#bonips-exclude-this-user' ).click(function(){
+	$( 'a#bonips-exclude-this-user' ).on('click', function(){
 		if ( ! confirm( '<?php _e( 'Warnung! Wenn Du diesen Benutzer ausschließt, wird sein Guthaben zusammen mit allen Einträgen in Deinem Protokoll gelöscht! Das kann nicht rückgängig gemacht werden!', 'bonips' ); ?>' ) )
 			return false;
 	});

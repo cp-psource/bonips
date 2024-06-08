@@ -382,7 +382,7 @@ if ( ! class_exists( 'boniPS_Bitpay' ) ) :
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#sync-bitpay-pairing-code' ).click(function(e){
+	$( '#sync-bitpay-pairing-code' ).on('click', function(e){
 
 		e.preventDefault();
 
@@ -457,7 +457,7 @@ jQuery(function($){
 <script type="text/javascript">
 jQuery(function($){
 
-	$( '#bitpay-cancel-pair' ).click(function(e){
+	$( '#bitpay-cancel-pair' ).on('click', function(e){
 
 		e.preventDefault();
 

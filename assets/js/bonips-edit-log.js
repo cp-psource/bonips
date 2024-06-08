@@ -370,7 +370,7 @@ jQuery(function($) {
 
 	// Checkbox select in table
 	// @see http://stackoverflow.com/questions/19164816/jquery-select-all-checkboxes-in-table
-	$( '#boniPS-wrap form table thead .check-column input' ).click(function(e){
+	$( '#boniPS-wrap form table thead .check-column input' ).on('click', function(e){
 		var table= $(e.target).closest('table');
 		$('.check-column input',table).prop( 'checked',this.checked );
 	});
@@ -378,7 +378,7 @@ jQuery(function($) {
 	/**
 	 * Click To Toggle Script
 	 */
-	$( '.click-to-toggle' ).click(function(){
+	$( '.click-to-toggle' ).on('click', function(){
 
 		var target = $(this).attr( 'data-toggle' );
 		$( '#' + target ).toggle();

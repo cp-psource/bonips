@@ -20,8 +20,8 @@ function bonips_about_header() {
 <div class="wp-badge" id="bonips-badge">Version <?php echo boniPS_VERSION; ?></div>
 <h2 class="nav-tab-wrapper wp-clearfix">
 	<a class="nav-tab nav-tab-active" href="#">What&#8217;s New</a>
-	<a class="nav-tab" href="https://n3rds.work/gruppen/psource-communityhub/docs/?folder=33146" target="_blank">Dokumentation</a>
-	<a class="nav-tab" href="https://n3rds.work/shop/artikel/category/bonips-erweiterungen/" target="_blank">Shop</a>
+	<a class="nav-tab" href="https://github.com/cp-psource/gruppen/psource-communityhub/docs/?folder=33146" target="_blank">Dokumentation</a>
+	<a class="nav-tab" href="https://github.com/cp-psource/shop/artikel/category/bonips-erweiterungen/" target="_blank">Shop</a>
 </h2>
 <?php
 

@@ -631,7 +631,7 @@ if ( ! class_exists( 'boniPS_Log_Module' ) ) :
 
 ?>
 <div class="wrap" id="boniPS-wrap">
-	<h1><?php _e( 'Protokoll', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://n3rds.work/docs/bonips-protokoll/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
+	<h1><?php _e( 'Protokoll', 'bonips' ); if ( BONIPS_DEFAULT_LABEL === 'boniPS' ) : ?> <a href="https://github.com/cp-psource/docs/bonips-protokoll/" class="page-title-action" target="_blank"><?php _e( 'Dokumentation', 'bonips' ); ?></a><?php endif; ?></h1>
 <?php
 
 			// This requirement is only checked on activation. If the library is disabled

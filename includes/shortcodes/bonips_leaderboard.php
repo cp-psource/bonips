@@ -3,7 +3,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
 
 /**
  * BoniPress Shortcode: bonips_leaderboard
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_leaderboard/
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_leaderboard/
  * @since 0.1
  * @version 1.6
  */

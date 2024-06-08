@@ -118,7 +118,7 @@ if ( ! class_exists( 'boniPS_Widget_Leaderboard' ) ) :
 <p class="boniPS-widget-field">
     <label for="<?php echo esc_attr( $this->get_field_id( 'based_on' ) ); ?>"><?php _e( 'Bezogen auf', 'bonips' ); ?>:</label>
     <input id="<?php echo esc_attr( $this->get_field_id( 'based_on' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'based_on' ) ); ?>" type="text" value="<?php echo esc_attr( $based_on ); ?>" class="widefat" />
-    <small><?php _e( 'Verwende "Guthaben", um die Rangliste auf dem aktuellen Guthaben Deiner Benutzer zu basieren, oder verwende eine bestimmte Referenz.', 'bonips' ); ?> <a href="https://n3rds.work/docs/bonips-protokollreferenzen/" target="_blank"><?php _e( 'Reference Guide', 'bonips' ); ?></a></small>
+    <small><?php _e( 'Verwende "Guthaben", um die Rangliste auf dem aktuellen Guthaben Deiner Benutzer zu basieren, oder verwende eine bestimmte Referenz.', 'bonips' ); ?> <a href="https://github.com/cp-psource/docs/bonips-protokollreferenzen/" target="_blank"><?php _e( 'Reference Guide', 'bonips' ); ?></a></small>
 </p>
  
 <p class="boniPS-widget-field">

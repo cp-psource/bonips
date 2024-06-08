@@ -570,7 +570,7 @@ if ( ! class_exists( 'boniPS_buyCRED_Module' ) ) :
 	<h3 style="margin-bottom: 0;"><?php _e( 'Verfügbare Shortcodes', 'bonips' ); ?></h3>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy/" target="_blank">[bonips_buy]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy_form/" target="_blank">[bonips_buy_form]</a>, <a href="https://n3rds.work/docs/bonips-shortcodes-bonips_buy_pending/" target="_blank">[bonips_buy_pending]</a></p>
+			<p><a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_buy/" target="_blank">[bonips_buy]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_buy_form/" target="_blank">[bonips_buy_form]</a>, <a href="https://github.com/cp-psource/docs/bonips-shortcodes-bonips_buy_pending/" target="_blank">[bonips_buy_pending]</a></p>
 		</div>
 	</div>
 
@@ -802,7 +802,7 @@ if ( ! class_exists( 'boniPS_buyCRED_Module' ) ) :
 
 		<?php do_action( 'bonips_after_buycreds_page', $this ); ?>
 
-		<p><?php submit_button( __( 'Update Einstellungen', 'bonips' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://n3rds.work/shop/artikel/category/bonips-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
+		<p><?php submit_button( __( 'Update Einstellungen', 'bonips' ), 'primary large', 'submit', false ); ?> <?php if ( BONIPS_SHOW_PREMIUM_ADDONS ) : ?><a href="https://github.com/cp-psource/shop/artikel/category/bonips-erweiterungen/" class="button button-secondary button-large" target="_blank">Mehr Erweiterungen</a><?php endif; ?></p>
 
 	</form>
 

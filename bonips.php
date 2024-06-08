@@ -6,8 +6,8 @@
  * Version: 1.8.8
  * Tags: point, credit, loyalty program, engagement, reward, woocommerce rewards
  * Author: DerN3rd
- * Author URI: https://n3rds.work
- * Requires at least: WP 4.8
+ * Author URI: https://github.com/cp-psource
+ * Requires at least: WP 4.9
  * Tested up to: WP 5.1
  * Text Domain: bonips
  * Domain Path: /lang
@@ -15,12 +15,18 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-require 'psource/psource-plugin-update/psource-plugin-updater.php';
-$MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://n3rds.work//wp-update-server/?action=get_metadata&slug=bonips', 
-	__FILE__, 
-	'bonips' 
+
+require 'psource/psource-plugin-update/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/cp-psource/bonips',
+	__FILE__,
+	'bonips'
 );
+
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('master');
 
 if ( ! class_exists( 'boniPS_Core' ) ) :
 	final class boniPS_Core {

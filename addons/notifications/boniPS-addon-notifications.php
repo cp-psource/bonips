@@ -243,7 +243,7 @@ if ( ! class_exists( 'boniPS_Notifications_Module' ) ) :
 <script type="text/javascript">
 jQuery(function($) {
 
-	$( '#retore-default-notice' ).click(function(){
+	$( '#retore-default-notice' ).on('click', function(){
 		$( '#<?php echo $this->field_id( 'template' ); ?>' ).val( '<?php echo $this->default_prefs['template']; ?>' );
 	});
 

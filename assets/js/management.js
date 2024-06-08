@@ -41,7 +41,7 @@ jQuery(function($) {
 	/**
 	 * Empty Log Trigger
 	 */
-	$( 'input#bonips-manage-action-empty-log' ).click(function(){
+	$( 'input#bonips-manage-action-empty-log' ).on('click', function(){
 		// Confirm action
 		if ( confirm( boniPSmanage.confirm_log ) )
 			bonips_action_empty_log( $(this) );
@@ -82,7 +82,7 @@ jQuery(function($) {
 	/**
 	 * Reset Balance Trigger
 	 */
-	$( 'input#bonips-manage-action-reset-accounts' ).click(function(){
+	$( 'input#bonips-manage-action-reset-accounts' ).on('click', function(){
 		// Confirm action
 		if ( confirm( boniPSmanage.confirm_reset ) )
 			bonips_action_reset_balance( $(this) );
@@ -156,7 +156,7 @@ jQuery(function($) {
 	/**
 	 * Balance Export Trigger
 	 */
-	$( '#bonips-run-exporter' ).click(function(){
+	$( '#bonips-run-exporter' ).on('click', function(){
 		bonips_action_export_balances( $(this) );
 	});
 
@@ -182,7 +182,7 @@ jQuery(function($) {
 	/**
 	 * Generate Key Trigger
 	 */
-	$( '#bonips-generate-api-key' ).click(function(){
+	$( '#bonips-generate-api-key' ).on('click', function(){
 		bonips_generate_key();
 	});
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Addon: Sell Content
- * Addon URI: https://n3rds.work/docs/bonips-erweiterungen-inhalt-verkaufen/
+ * Addon URI: https://github.com/cp-psource/docs/bonips-erweiterungen-inhalt-verkaufen/
  * Version: 2.0.1
  */
 if ( ! defined( 'boniPS_VERSION' ) ) exit;
@@ -893,7 +893,7 @@ if ( ! class_exists( 'boniPS_Sell_Content_Module' ) ) :
 	var selectedposttypes  = <?php echo count( $selected_types ); ?>;
 	var selectedpointtypes = <?php echo count( $this->sell_content['type'] ); ?>;
 	
-	$( '#boniPS-wrap .bonips-check-count' ).click(function(){
+	$( '#boniPS-wrap .bonips-check-count' ).on('click', function(){
 
 		if ( $(this).is( ':checked' ) ) {
 
@@ -915,7 +915,7 @@ if ( ! class_exists( 'boniPS_Sell_Content_Module' ) ) :
 
 	});
 	
-	$( '#boniPS-wrap .bonips-check-count' ).click(function(){
+	$( '#boniPS-wrap .bonips-check-count' ).on('click', function(){
 
 		if ( $(this).is( ':checked' ) ) {
 
@@ -1207,7 +1207,7 @@ if ( ! class_exists( 'boniPS_Sell_Content_Module' ) ) :
 <script type="text/javascript">
 (function($) {
 	
-	$( '#bonips-sell-content-types .toggle-setup' ).click(function(){
+	$( '#bonips-sell-content-types .toggle-setup' ).on('click', function(){
 
 		if ( $(this).is( ':checked' ) ) {
 			$( '#bonips-sell-content-types #bonips-sell-content-' + $(this).data( 'type' ) + '-wrap' ).slideDown();

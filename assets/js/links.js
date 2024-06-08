@@ -6,7 +6,7 @@
  */
 jQuery(function($) {
 
-	$( '.bonips-points-link' ).click(function(){
+	$( '.bonips-points-link' ).on('click', function(){
 
 		var bonipslink      = $(this);
 		var linkdestination = bonipslink.attr( 'href' );

@@ -353,7 +353,7 @@ if ( ! class_exists( 'boniPS_Hook_Video_Views' ) ) :
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label><?php _e( 'Available Shortcode', 'bonips' ); ?></label>
-				<p class="form-control-static"><a href="https://n3rds.work/docs/bonips-shortcode-bonips_video/" target="_blank">[bonips_video]</a></p>
+				<p class="form-control-static"><a href="https://github.com/cp-psource/docs/bonips-shortcode-bonips_video/" target="_blank">[bonips_video]</a></p>
 			</div>
 		</div>
 	</div>

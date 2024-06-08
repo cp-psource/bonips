@@ -5,7 +5,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  * BoniPress Shortcode: bonips_send
  * This shortcode allows the current user to send a pre-set amount of points
  * to a pre-set user. A simpler version of the bonips_transfer shortcode.
- * @see https://n3rds.work/docs/bonips-shortcodes-bonips_send/ 
+ * @see https://github.com/cp-psource/docs/bonips-shortcodes-bonips_send/ 
  * @since 1.1
  * @version 1.3.1
  */
