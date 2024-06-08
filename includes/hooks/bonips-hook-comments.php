@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Comments' ) ) :
 	class boniPS_Hook_Comments extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct

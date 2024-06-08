@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Affiliate' ) ) :
 	class boniPS_Hook_Affiliate extends boniPS_Hook {
+		public $defaults;
 
 		public $ref_key  = '';
 		public $limit_by = array();

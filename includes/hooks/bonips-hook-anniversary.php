@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Anniversary' ) ) :
 	class boniPS_Hook_Anniversary extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct

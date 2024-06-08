@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Click_Links' ) ) :
 	class boniPS_Hook_Click_Links extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct

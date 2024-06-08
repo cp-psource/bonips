@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Video_Views' ) ) :
 	class boniPS_Hook_Video_Views extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct

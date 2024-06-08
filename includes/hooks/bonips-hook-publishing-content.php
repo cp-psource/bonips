@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Publishing_Content' ) ) :
 	class boniPS_Hook_Publishing_Content extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct

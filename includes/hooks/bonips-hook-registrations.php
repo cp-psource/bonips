@@ -8,6 +8,7 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_Hook_Registration' ) ) :
 	class boniPS_Hook_Registration extends boniPS_Hook {
+		public $defaults;
 
 		/**
 		 * Construct
