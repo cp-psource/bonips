@@ -26,6 +26,7 @@ if ( ! class_exists( 'boniPS_Sell_Content_Module' ) ) :
 		public $current_user_id = 0;
 		public $priority        = 10;
 		public $psf_content     = '';
+		public $sell_content;
 
 		/**
 		 * Construct

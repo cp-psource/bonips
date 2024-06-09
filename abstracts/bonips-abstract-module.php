@@ -55,11 +55,18 @@ if ( ! class_exists( 'boniPS_Module' ) ) :
 		// Pages
 		public $pages = array();
 
-		// Dynamically assigned properties
+		// Explizite Eigenschaften
         public $settings_name; 
         public $add_to_core;   
         public $accordion;     
         public $cap;
+		public $banking;       
+		public $active;        
+		public $services;      
+		public $service_prefs;
+		public $gateways;
+		public $installed;
+		public $gateway_prefs;
 
 		/**
 		 * Construct

@@ -27,6 +27,7 @@ require_once boniPS_EMAIL_DIR . 'includes/bonips-email-shortcodes.php';
  */
 if ( ! class_exists( 'boniPS_Email_Notice_Module' ) ) :
 	class boniPS_Email_Notice_Module extends boniPS_Module {
+		public $emailnotices;
 
 		/**
 		 * Construct

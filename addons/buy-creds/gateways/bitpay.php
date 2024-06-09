@@ -41,6 +41,9 @@ if ( ! class_exists( 'WC_Gateway_Bitpay' ) ) {
  */
 if ( ! class_exists( 'boniPS_Bitpay' ) ) :
 	class boniPS_Bitpay extends boniPS_Payment_Gateway {
+		public $now;
+		public $defaults;
+		public $is_ready;
 
 		/**
 		 * Construct

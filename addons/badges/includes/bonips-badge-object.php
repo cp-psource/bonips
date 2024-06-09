@@ -34,6 +34,8 @@ if ( ! class_exists( 'boniPS_Badge' ) ) :
 		public $user_id          = false;
 		public $current_level    = false;
 
+		public $compare;
+
 		/**
 		 * Construct
 		 */

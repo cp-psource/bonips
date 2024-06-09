@@ -23,6 +23,7 @@ require_once boniPS_TRANSFER_DIR . 'includes/bonips-transfer-widgets.php';
  */
 if ( ! class_exists( 'boniPS_Transfer_Module' ) ) :
 	class boniPS_Transfer_Module extends boniPS_Module {
+		public $transfers;
 
 		/**
 		 * Construct

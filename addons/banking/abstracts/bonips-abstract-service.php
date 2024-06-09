@@ -24,6 +24,10 @@ if ( ! class_exists( 'boniPS_Service' ) ) :
 		public $prefs        = array();
 		public $now          = 0;
 
+		// Explizite Eigenschaften
+		public $defaults;
+		public $log_reference;
+
 		/**
 		 * Construct
 		 */

@@ -25,6 +25,7 @@ require_once boniPS_COUPONS_DIR . 'includes/bonips-coupon-shortcodes.php';
  */
 if ( ! class_exists( 'boniPS_Coupons_Module' ) ) :
 	class boniPS_Coupons_Module extends boniPS_Module {
+		public $coupons;
 
 		/**
 		 * Construct

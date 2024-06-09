@@ -36,6 +36,7 @@ require_once boniPS_RANKS_DIR . 'includes/bonips-rank-shortcodes.php';
  */
 if ( ! class_exists( 'boniPS_Ranks_Module' ) ) :
 	class boniPS_Ranks_Module extends boniPS_Module {
+		public $rank;
 
 		/**
 		 * Construct

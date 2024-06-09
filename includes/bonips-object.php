@@ -34,6 +34,10 @@ if ( ! class_exists( 'boniPS_Account' ) ) :
 		public $total_balance = 0;
 
 		public $history;
+		public $badges;
+		public $badge_ids;
+		public $email_block;
+		public $ranks;
 
 		/**
 		 * Construct
@@ -132,6 +136,7 @@ if ( ! class_exists( 'boniPS_Balance' ) ) :
 		public $point_type  = false;
 
 		public $history;
+		public $rank;
 
 		/**
 		 * Construct

@@ -9,6 +9,8 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_PayPal_Standard' ) ) :
 	class boniPS_PayPal_Standard extends boniPS_Payment_Gateway {
+		public $now;
+		public $defaults;
 
 		/**
 		 * Construct

@@ -27,6 +27,7 @@ do_action( 'bonips_stats_load_widgets' );
  */
 if ( ! class_exists( 'boniPS_Stats_Module' ) ) :
 	class boniPS_Stats_Module extends boniPS_Module {
+		public $stats;
 
 		/**
 		 * Construct

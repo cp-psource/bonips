@@ -10,6 +10,8 @@ if ( ! defined( 'boniPS_VERSION' ) ) exit;
  */
 if ( ! class_exists( 'boniPS_NETbilling' ) ) :
 	class boniPS_NETbilling extends boniPS_Payment_Gateway {
+		public $now;
+		public $defaults;
 
 		protected $http_code = '';
 
