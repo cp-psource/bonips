@@ -9,6 +9,8 @@ if ( ! defined( 'BONIPS_PURCHASE' ) ) exit;
 if ( ! class_exists( 'boniPS_buyCRED_Reward_Hook' ) ) :
 	class boniPS_buyCRED_Reward_Hook extends boniPS_Hook {
 
+		public $defaults;
+
 		/**
 		 * Construct
 		 */
