@@ -15,6 +15,8 @@ if ( ! class_exists( 'boniPS_Network_Module' ) ) :
 		public $plug;
 		public $blog_id  = 0;
 		public $settings = array();
+		
+		private $network_enabled;
 
 		/**
 		 * Construct
